@@ -9,6 +9,7 @@ import {
     FlatList,
     TouchableOpacity
 } from "react-native";
+import { Card } from "../components/card";
 import { cards } from "./Cards";
 
 
@@ -28,20 +29,26 @@ export default function QScreen() {
             <View style={styles.container}>
                 <View style={StyleSheet.absoluteFill}>
                     <FlatList
+                        inverted
                         data={cards}
                         renderItem={({ item: card, index: i }) => {
                             return (
-                                <TouchableOpacity onPress={() => SetOpenQ(card.id)}>
-                                    <View style={[styles.card, { backgroundColor: card.color }]}   >
-                                        <Text>
-                                            {` ${card.title} ${card.likes}`}
-                                        </Text>
-                                        {openQ === card.id && <View style={{ paddingVertical: cardHeight, backgroundColor: 'red', overflow: "hidden" }}>
+                                <Card
+                                    card={card}
+                                    isSelected={openQ === card.id}
+                                    onPressCard={() => SetOpenQ(card.id)}
+                                />
+                                // <TouchableOpacity onPress={() => SetOpenQ(card.id)}>
+                                //     <View style={[styles.card, { backgroundColor: card.color }]}   >
+                                //         <Text>
+                                //             {` ${card.title} ${card.likes}`}
+                                //         </Text>
+                                //         {openQ === card.id && <View style={{ paddingVertical: cardHeight, backgroundColor: 'red', overflow: "hidden" }}>
 
-                                            <Text>{card.text}</Text>
-                                        </View>}
-                                    </View>
-                                </TouchableOpacity>
+                                //             <Text>{card.text}</Text>
+                                //         </View>}
+                                //     </View>
+                                // </TouchableOpacity>
                             )
                         }}
                     />
@@ -54,7 +61,7 @@ export default function QScreen() {
 const styles = StyleSheet.create({
     root: {
         flex: 1,
-        margin: 16
+        margin: 3
     },
     container: {
         flex: 1,
