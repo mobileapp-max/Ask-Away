@@ -7,6 +7,7 @@
 
 import * as React from "react"
 import { Image, Text, View, TouchableOpacity, TextInput, StyleSheet, TextInputComponent, TouchableWithoutFeedback } from "react-native"
+import { COLORS } from "../assets/colors"
 
 
 /**
@@ -68,7 +69,7 @@ const styles = StyleSheet.create({
     },
     box: {
         paddingVertical: 60,
-        backgroundColor: 'white',
+        backgroundColor: COLORS.white,
         marginHorizontal: -10,
         marginBottom: -10,
         borderBottomEndRadius: 25,

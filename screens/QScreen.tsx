@@ -9,6 +9,7 @@ import {
     FlatList,
     TouchableOpacity
 } from "react-native";
+import { COLORS } from "../assets/colors";
 import { Card } from "../components/card";
 import { cards } from "./Cards";
 
@@ -27,7 +28,7 @@ export default function QScreen() {
     return (
         <SafeAreaView style={styles.root}>
             <View style={styles.container}>
-                <View style={StyleSheet.absoluteFill}>
+                <View>
                     <FlatList
                         inverted
                         data={cards}
@@ -61,11 +62,13 @@ export default function QScreen() {
 const styles = StyleSheet.create({
     root: {
         flex: 1,
-        margin: 3
+        margin: 3,
+        backgroundColor: COLORS[1]
     },
     container: {
         flex: 1,
-        margin: 16
+        margin: 16,
+        backgroundColor: COLORS[1]
     },
     content: {
         height: height * 2
