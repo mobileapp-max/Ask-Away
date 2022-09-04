@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import {
     StyleSheet,
     View,
-    SafeAreaView,
     Dimensions,
     FlatList,
 } from "react-native";
@@ -11,18 +10,15 @@ import { Card } from "../components/card";
 import { cards } from "./Cards";
 import { useLazyQuery, useMutation, gql } from "@apollo/client"
 
-
-
 const cardHeight = 60;
 const cardTitle = 45;
 const cardPadding = 5;
 
 const { height } = Dimensions.get("window");
 
-
 export default function QScreen() {
 
-    const [openQ, SetOpenQ] = useState(cards[cards.length - 1].id);
+    const [openQ, setOpenQ] = useState(cards[cards.length - 1].id);
 
     const [fetchQuestions, {
         loading: questionsLoading,
@@ -41,9 +37,10 @@ export default function QScreen() {
         fetchQuestions()
     }, [])
 
-    console.log(questions)
+    console.log('questions', questions)
+
     return (
-        <SafeAreaView style={styles.root}>
+        <View style={styles.root}>
             <View style={styles.container}>
                 <View>
                     <FlatList
@@ -56,20 +53,18 @@ export default function QScreen() {
                                     isSelected={openQ === card.id}
                                     onPressCard={() => SetOpenQ(card.id)}
                                 />
-
                             )
                         }}
                     />
                 </View>
             </View>
-        </SafeAreaView>
+        </View>
     );
 }
 
 const styles = StyleSheet.create({
     root: {
         flex: 1,
-        margin: 3,
         backgroundColor: COLORS[1]
     },
     container: {
