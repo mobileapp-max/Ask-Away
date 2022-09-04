@@ -1,15 +1,5 @@
-import React, { useState } from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  Animated,
-  SafeAreaView,
-  Dimensions,
-  FlatList,
-  TouchableOpacity,
-} from "react-native";
-import { COLORS } from "../assets/colors";
+import React from "react";
+import { StyleSheet, View, Dimensions, } from "react-native";
 import TextInput from "./TextInput";
 
 
@@ -24,7 +14,7 @@ export default function AddQ() {
       <TextInput
         placeholderTextColor={"black"}
         placeholder={'Title'}
-        style={{}}
+        style={styles.input}
       />
     </View>
   );
@@ -39,6 +29,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     margin: 16,
+
     // backgroundColor: COLORS[1]
   },
   content: {
@@ -49,5 +40,12 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     padding: 14,
 
-  }
+  },
+  input: {
+    height: 40,
+    margin: 12,
+    borderWidth: 1,
+    padding: 10,
+    width: width * 0.8,
+  },
 });

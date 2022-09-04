@@ -1,17 +1,16 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
     StyleSheet,
-    Text,
     View,
-    Animated,
     SafeAreaView,
     Dimensions,
     FlatList,
-    TouchableOpacity
 } from "react-native";
 import { COLORS } from "../assets/colors";
 import { Card } from "../components/card";
 import { cards } from "./Cards";
+import { useLazyQuery, useMutation, gql } from "@apollo/client"
+
 
 
 const cardHeight = 60;
@@ -25,13 +24,31 @@ export default function QScreen() {
 
     const [openQ, SetOpenQ] = useState(cards[cards.length - 1].id);
 
+    const [fetchQuestions, {
+        loading: questionsLoading,
+        error: questionsError,
+        data: questions,
+        refetch: refetchQuestions,
+    }] = useLazyQuery(gql`query MyQuery {
+        question {
+          id
+          text
+          title
+        }
+      }`)
+
+    useEffect(() => {
+        fetchQuestions()
+    }, [])
+
+    console.log(questions)
     return (
         <SafeAreaView style={styles.root}>
             <View style={styles.container}>
                 <View>
                     <FlatList
                         inverted
-                        data={cards}
+                        data={questions}
                         renderItem={({ item: card, index: i }) => {
                             return (
                                 <Card
@@ -39,17 +56,7 @@ export default function QScreen() {
                                     isSelected={openQ === card.id}
                                     onPressCard={() => SetOpenQ(card.id)}
                                 />
-                                // <TouchableOpacity onPress={() => SetOpenQ(card.id)}>
-                                //     <View style={[styles.card, { backgroundColor: card.color }]}   >
-                                //         <Text>
-                                //             {` ${card.title} ${card.likes}`}
-                                //         </Text>
-                                //         {openQ === card.id && <View style={{ paddingVertical: cardHeight, backgroundColor: 'red', overflow: "hidden" }}>
 
-                                //             <Text>{card.text}</Text>
-                                //         </View>}
-                                //     </View>
-                                // </TouchableOpacity>
                             )
                         }}
                     />
