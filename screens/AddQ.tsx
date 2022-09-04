@@ -9,11 +9,13 @@ const { height, width } = Dimensions.get("window");
 
 export default function AddQ() {
 
+  console.log('fucking bitch ass laptop')
+
   return (
     <View style={{ ...styles.container, width }}>
       <TextInput
         placeholderTextColor={"black"}
-        placeholder={'Title'}
+        placeholder={'bitch ass laptop'}
         style={styles.input}
       />
     </View>

@@ -36,7 +36,7 @@ export default function QScreen() {
     useEffect(() => {
         fetchQuestions()
     }, [])
-
+    console.log('fucking bitch ass laptop')
     console.log('questions', questions)
 
     return (
