@@ -6,29 +6,9 @@ import TextInput from "./TextInput";
 const { height, width } = Dimensions.get("window");
 
 export default function AddQ() {
-  const [modalVisible, setModalVisible] = useState(true);
+  const [modalVisible, setModalVisible] = useState(false);
   return (
     <View style={styles.centeredView}>
-      <Modal
-        animationType="slide"
-        transparent={true}
-        visible={modalVisible}
-        onRequestClose={() => {
-          setModalVisible(modalVisible);
-        }}
-      >
-        <View style={styles.centeredView}>
-          <View style={styles.modalView}>
-            <Text style={styles.modalText}>Hello World!</Text>
-            <Pressable
-              style={[styles.button, styles.buttonClose]}
-              onPress={() => setModalVisible(!modalVisible)}
-            >
-              <Text style={styles.textStyle}>Hide Modal</Text>
-            </Pressable>
-          </View>
-        </View>
-      </Modal>
       <Pressable
         style={[styles.button, styles.buttonOpen]}
         onPress={() => setModalVisible(true)}
@@ -83,8 +63,8 @@ const styles = StyleSheet.create({
   }
 });
 
-//     <>
-//       <View style={{ ...styles.container, width }}>
+//     <Modal visible={modalVisible}>
+//       <View style={{ ...styles.container, width, align }}>
 //         <TextInput
 //           placeholderTextColor={"blue"}
 //           placeholder={'Title'}
@@ -96,7 +76,7 @@ const styles = StyleSheet.create({
 //           style={styles.input}
 //         />
 //       </View>
-//     </>
+//     </Modal>
 //   );
 // }
 
@@ -104,6 +84,7 @@ const styles = StyleSheet.create({
 //   container: {
 //     flex: 1,
 //     margin: 16,
+width: '100%'
 //   },
 //   input: {
 //     // height: 40,

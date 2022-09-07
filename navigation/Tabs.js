@@ -5,11 +5,20 @@ import ProfileScreen from "../screens/ProfileScreen";
 import QScreen from "../screens/QScreen";
 import Icon from 'react-native-vector-icons/Ionicons';
 import AddQ from '../screens/AddQ';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { MainStackScreen } from './navigation';
 // import { mdiPlusCircleOutline } from '@mdi/js'
 
-
+// const RootStack = createNativeStackNavigator();
+// const RootStackScree = () => {
+//     <RootStack.Navigator>
+//         return
+//     </RootStack.Navigator>
+// }
 
 const Tab = createBottomTabNavigator();
+
+const CreateNewPlaceholder = () => <View style={{ flex: 1, backgroundColor: 'red' }} />
 
 const CustomTabButton = ({ children, onPress }) => (
     <TouchableOpacity
@@ -34,8 +43,10 @@ const CustomTabButton = ({ children, onPress }) => (
 
 const Tabs = () => {
     return (
+        // <RootStackScree>
         <Tab.Navigator
             screenOptions={{
+                activeTintColor: "blue",
                 tabBarShowLabel: false,
                 headerShown: false,
                 tabBarStyle: {
@@ -52,13 +63,14 @@ const Tabs = () => {
 
             }}>
             {/* <Tab.Screen name="Questions" component={QScreen} /> */}
-            <Tab.Screen name="Profile" component={ProfileScreen} options={{
+
+            <Tab.Screen name="Main" component={MainStackScreen} options={{
                 tabBarIcon: ({ focused }) => (
                     <View style={{ alignItems: "center", justifyContent: 'center', top: 10 }}>
                         <Icon
                             name="ios-home"
                             size={26}
-                            color={'#e32f45'}
+                        // color={'#e32f45'}
                         />
                         <Text
                             style={{ color: focused ? '#e32f45' : '#748c94' }}>HOME</Text>
@@ -67,22 +79,45 @@ const Tabs = () => {
             }} />
             <Tab.Screen name="Profile2" component={AddQ}
                 options={{
-                    presentation: 'modal',
                     tabBarIcon: ({ focused }) => (
-                        <Icon
-                            name="pluscircleo"
-                            size={26}
-                        // color={'#e32f45'}
+                        <Image source={require('../assets/images/plus.png')}
+                            style={{
+                                top: -2,
+                                width: 80,
+                                height: 80,
+                                tintColor: 'white',
+                                alignItems: 'center',
+                                justifyContent: 'center'
+                            }}
                         />
-
                     ),
                     tabBarButton: (props) => (
                         <CustomTabButton {...props} />
                     )
                 }}
+            // listeners={() => ({
+            //     tabPress: event => {
+            //         event.preventDefault();
+            //     }
+            // })}
             />
-            <Tab.Screen name="Profile3" component={ProfileScreen} />
+            <Tab.Screen name="Profile3" component={ProfileScreen}
+                options={{
+                    tabBarIcon: ({ focused }) => (
+                        <View style={{ alignItems: "center", justifyContent: 'center', top: 10 }}>
+                            <Icon
+                                name="user"
+                                size={26}
+                                color={'#e32f45'}
+                            />
+                            <Text
+                                style={{ color: focused ? '#e32f45' : '#748c94' }}>HOME</Text>
+                        </View>
+                    )
+                }}
+            />
         </Tab.Navigator>
+        // </RootStackScree>
     )
 }
 

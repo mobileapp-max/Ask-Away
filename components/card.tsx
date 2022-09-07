@@ -19,12 +19,13 @@ export const Card = (props) => {
     const {
         card,
         isSelected,
-        onPressCard,
+        onPressUpperAreaCard,
+        onPressQuestionNavigate
     } = props
 
     return (
-        <TouchableWithoutFeedback onPress={onPressCard}>
-            <View style={[styles.card, { backgroundColor: card.color }]}   >
+        <TouchableWithoutFeedback onPress={() => onPressUpperAreaCard(card.id)}>
+            <View style={[styles.card, { backgroundColor: 'red' }]}>
                 <View style={styles.title}>
                     <Text style={styles.text}>
                         {` ${card.title}`}
@@ -34,9 +35,12 @@ export const Card = (props) => {
                     </Text>
                 </View>
                 {isSelected &&
-                    <View style={styles.box}>
-                        <Text >{card.text}</Text>
-                    </View>}
+                    <TouchableOpacity onPress={() => onPressQuestionNavigate(card)}>
+                        <View style={styles.box}>
+                            <Text >{card.text}</Text>
+                        </View>
+                    </TouchableOpacity>
+                }
             </View>
         </TouchableWithoutFeedback>
     )

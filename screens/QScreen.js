@@ -15,7 +15,8 @@ const cardPadding = 5;
 
 const { height } = Dimensions.get("window");
 
-export default function QScreen() {
+
+export default function QScreen({ navigation }) {
 
     const [openQ, setOpenQ] = useState("c82eaca0-f915-4c52-a6c7-010b731f46a2");
 
@@ -138,22 +139,28 @@ export default function QScreen() {
     // useEffect(() => {
     //     fetchQuestions()
     // }, [])
-    console.log('fucking bitch ass laptop')
-    console.log('questions', questions)
+    const onPressUpperAreaCard = (cardId) => {
+        setOpenQ(cardId)
+    }
+
+    const onPressQuestionNavigate = (incomingCard) => {
+        navigation.push('QuestionScreen', { card: incomingCard })
+    }
+
 
     return (
         <View style={styles.root}>
             <View style={styles.container}>
                 <View>
                     <FlatList
-                        inverted
                         data={questions?.data.question}
                         renderItem={({ item: card, index: i }) => {
                             return (
                                 <Card
                                     card={card}
                                     isSelected={openQ === card.id}
-                                    onPressCard={() => setOpenQ(card.id)}
+                                    onPressUpperAreaCard={onPressUpperAreaCard}
+                                    onPressQuestionNavigate={onPressQuestionNavigate}
                                 />
                             )
                         }}
