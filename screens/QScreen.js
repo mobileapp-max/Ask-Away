@@ -25,22 +25,7 @@ export default function QScreen({ navigation }) {
 
 
 
-    // const [fetchQuestions, {
-    //     loading: questionsLoading,
-    //     error: questionsError,
-    //     data: questions,
-    //     refetch: refetchQuestions,
-    // }] = useLazyQuery(gql`query MyQuery {
-    //     question {
-    //       id
-    //       text
-    //       title
-    //     }
-    //   }`)
 
-    // useEffect(() => {
-    //     fetchQuestions()
-    // }, [])
     const onPressUpperAreaCard = (cardId) => {
         setOpenQ(cardId)
     }
@@ -55,10 +40,11 @@ export default function QScreen({ navigation }) {
             <View style={styles.container}>
                 <View>
                     <FlatList
-                        data={questions?.data.question}
+                        data={questions}
                         renderItem={({ item: card, index: i }) => {
                             return (
                                 <Card
+                                    style={{ top: 20 }}
                                     card={card}
                                     isSelected={openQ === card.id}
                                     onPressUpperAreaCard={onPressUpperAreaCard}

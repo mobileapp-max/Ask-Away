@@ -15,6 +15,8 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { FontAwesome5 } from '@expo/vector-icons';
 
 import { useTheme } from 'react-native-paper';
+import { useContext } from 'react';
+import { QuestionsContext } from '../contexts/questions-context-provider';
 
 
 
@@ -22,71 +24,14 @@ import { useTheme } from 'react-native-paper';
 
 const AddQ = ({ navigation }) => {
 
-  const { height } = Dimensions.get("window");
-
+  const [title, setTitle] = useState('')
+  const [text, setText] = useState('')
   const [isHidden, setIsHidden] = useState(false)
 
-  const [data, setData] = React.useState({
-    username: '',
-    password: '',
-    check_textInputChange: false,
-    secureTextEntry: true,
-    isValidUser: true,
-    isValidPassword: true,
-  });
+  const { onPressAddQuestion } = useContext(QuestionsContext)
+  const { height } = Dimensions.get("window");
 
   const { colors } = useTheme();
-
-  // const { signIn } = React.useContext(AuthContext);
-
-  const textInputChange = (val) => {
-    if (val.trim().length >= 4) {
-      setData({
-        ...data,
-        username: val,
-        check_textInputChange: true,
-        isValidUser: true
-      });
-    } else {
-      setData({
-        ...data,
-        username: val,
-        check_textInputChange: false,
-        isValidUser: false
-      });
-    }
-  }
-
-  const handlePasswordChange = (val) => {
-    if (val.trim().length >= 8) {
-      setData({
-        ...data,
-        password: val,
-        isValidPassword: true
-      });
-    } else {
-      setData({
-        ...data,
-        password: val,
-        isValidPassword: false
-      });
-    }
-  }
-
-
-  const handleValidUser = (val) => {
-    if (val.trim().length >= 4) {
-      setData({
-        ...data,
-        isValidUser: true
-      });
-    } else {
-      setData({
-        ...data,
-        isValidUser: false
-      });
-    }
-  }
 
   return (
     <View style={styles.container}>
@@ -104,6 +49,8 @@ const AddQ = ({ navigation }) => {
         <View style={styles.action}>
 
           <TextInput
+            value={title}
+
             placeholder="Title"
             multiline={true}
             maxLength={150}
@@ -112,20 +59,16 @@ const AddQ = ({ navigation }) => {
               color: colors.text, fontSize: 30
             }]}
             autoCapitalize="words"
-            onChangeText={(val) => textInputChange(val)}
-            onEndEditing={(e) => handleValidUser(e.nativeEvent.text)}
+            onChangeText={(newTitle) => setTitle(newTitle)}
           />
 
         </View>
-        {data.isValidUser ? null :
-          <Animatable.View animation="fadeInLeft" duration={500}>
-            <Text style={styles.errorMsg}>Title must be 4 characters or longer.</Text>
-          </Animatable.View>
-        }
+
 
 
         <View style={styles.action}>
           <TextInput
+            value={text}
             placeholder={"Question (optional)"}
             multiline={true}
             numberOfLines={5}
@@ -136,6 +79,7 @@ const AddQ = ({ navigation }) => {
               color: colors.text, minHeight: height * 0.15,
             }]}
             autoCapitalize="sentences"
+            onChangeText={(newText) => setText(newText)}
           />
         </View>
 
@@ -153,7 +97,14 @@ const AddQ = ({ navigation }) => {
         <View style={styles.button}>
           <TouchableOpacity
             style={styles.signIn}
-            onPress={() => { loginHandle(data.username, data.password) }}
+            onPress={() => onPressAddQuestion({
+              question: {
+                "id": "c82eaca0-f915-4c52-a6c7-010b731f46786",
+                text,
+                title,
+                "likes": 0
+              }
+            })}
           >
             <LinearGradient
               colors={['#e32f45', 'pink']}

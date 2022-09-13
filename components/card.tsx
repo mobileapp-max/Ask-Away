@@ -21,13 +21,14 @@ export const Card = (props) => {
         card,
         isSelected,
         onPressUpperAreaCard,
-        onPressQuestionNavigate
+        onPressQuestionNavigate,
+        style = {}
     } = props
 
     return (
         <TouchableWithoutFeedback onPress={() => onPressUpperAreaCard(card.id)}>
 
-            <LinearGradient colors={['#e32f45', 'pink']} style={[styles.card, {}]}>
+            <LinearGradient colors={['#e32f45', 'pink']} style={{ ...styles.card, ...style }}>
 
                 <View style={styles.title}>
 
