@@ -18,7 +18,12 @@ const cardPadding = 5;
 const { height } = Dimensions.get("window");
 
 
-export default function QuestionScreen({ navigation }) {
+export default function QuestionScreen(props) {
+    const { navigation, route } = props
+    const { params } = route
+    const { card } = params
+
+    console.log(card)
 
     return (
         <View style={styles.root}>

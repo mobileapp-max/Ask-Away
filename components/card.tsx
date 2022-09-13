@@ -8,6 +8,7 @@
 import * as React from "react"
 import { Image, Text, View, TouchableOpacity, TextInput, StyleSheet, TextInputComponent, TouchableWithoutFeedback } from "react-native"
 import { COLORS } from "../assets/colors"
+import { LinearGradient } from "expo-linear-gradient"
 
 
 /**
@@ -25,23 +26,30 @@ export const Card = (props) => {
 
     return (
         <TouchableWithoutFeedback onPress={() => onPressUpperAreaCard(card.id)}>
-            <View style={[styles.card, { backgroundColor: 'red' }]}>
+
+            <LinearGradient colors={['#e32f45', 'pink']} style={[styles.card, {}]}>
+
                 <View style={styles.title}>
+
                     <Text style={styles.text}>
                         {` ${card.title}`}
                     </Text>
                     <Text style={styles.text}>
                         {`${card.likes}`}
                     </Text>
+
                 </View>
+
                 {isSelected &&
                     <TouchableOpacity onPress={() => onPressQuestionNavigate(card)}>
                         <View style={styles.box}>
-                            <Text >{card.text}</Text>
+                            <Text style={{ fontSize: 15 }}>{card.text}</Text>
                         </View>
                     </TouchableOpacity>
                 }
-            </View>
+            </LinearGradient>
+
+
         </TouchableWithoutFeedback>
     )
 }
@@ -55,8 +63,9 @@ const styles = StyleSheet.create({
         // backgroundColor: "yellow",
         shadowRadius: 3,
         shadowOpacity: 3,
-        shadowOffset: { width: 3, height: 3 },
-        margin: 6,
+        shadowOffset: { width: 6, height: 5 },
+        margin: 3,
+        shadowColor: 'white'
 
 
     },
@@ -64,7 +73,7 @@ const styles = StyleSheet.create({
         fontSize: 17,
         paddingVertical: 20,
         fontWeight: 'bold',
-        color: 'white'
+        color: 'white',
     },
     title: {
         flexDirection: "row",
@@ -72,11 +81,12 @@ const styles = StyleSheet.create({
 
     },
     box: {
-        paddingVertical: 60,
+        paddingVertical: 40,
         backgroundColor: COLORS.white,
         marginHorizontal: -10,
         marginBottom: -10,
         borderBottomEndRadius: 25,
         borderBottomStartRadius: 25,
+        paddingHorizontal: 10,
     }
 });
