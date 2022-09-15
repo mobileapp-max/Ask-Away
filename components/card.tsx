@@ -10,6 +10,7 @@ import { Image, Text, View, TouchableOpacity, TextInput, StyleSheet, TextInputCo
 import { COLORS } from "../assets/colors"
 import { LinearGradient } from "expo-linear-gradient"
 import ShadeColor from "../scripts/shade-color"
+import { responsiveFontSize, responsiveHeight } from "../scripts/constants"
 
 
 /**
@@ -87,8 +88,8 @@ const styles = StyleSheet.create({
 
     },
     box: {
-        paddingVertical: 40,
-        backgroundColor: COLORS.white,
+        paddingVertical: responsiveHeight(3),
+        backgroundColor: 'pink',
         marginHorizontal: -10,
         marginBottom: -10,
         borderBottomEndRadius: 25,
