@@ -44,7 +44,11 @@ export const Card = (props) => {
                         {`${card.likes}`}
                     </Text>
 
+
+
                 </View>
+
+
 
                 {isSelected &&
                     <TouchableOpacity onPress={() => onPressQuestionNavigate(card)}>
@@ -54,7 +58,9 @@ export const Card = (props) => {
                         </View>
                     </TouchableOpacity>
                 }
+
             </LinearGradient>
+
 
 
         </TouchableWithoutFeedback>
@@ -64,7 +70,7 @@ export const Card = (props) => {
 const styles = StyleSheet.create({
     card: {
         // height: cardTitle,
-        borderRadius: 25,
+        borderRadius: 15,
         // borderTopLeftRadius: 17,
         padding: 10,
         // backgroundColor: "yellow",
@@ -89,11 +95,13 @@ const styles = StyleSheet.create({
     },
     box: {
         paddingVertical: responsiveHeight(3),
-        backgroundColor: 'pink',
-        marginHorizontal: -10,
+        backgroundColor: 'white',
+        marginHorizontal: -9,
         marginBottom: -10,
-        borderBottomEndRadius: 25,
-        borderBottomStartRadius: 25,
+        borderBottomEndRadius: 15,
+        borderBottomStartRadius: 15,
         paddingHorizontal: 10,
+        top: responsiveHeight(-0.4),
+
     }
 });
