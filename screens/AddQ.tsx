@@ -17,6 +17,7 @@ import { FontAwesome5 } from '@expo/vector-icons';
 import { useTheme } from 'react-native-paper';
 import { useContext } from 'react';
 import { QuestionsContext } from '../contexts/questions-context-provider';
+import { Switch } from 'react-native-switch';
 
 
 
@@ -32,6 +33,8 @@ const AddQ = ({ navigation }) => {
   const { height } = Dimensions.get("window");
 
   const { colors } = useTheme();
+
+  const toggleSwitch = () => setIsHidden(previousState => !previousState);
 
   return (
     <View style={styles.container}>
@@ -84,15 +87,31 @@ const AddQ = ({ navigation }) => {
         </View>
 
         <View style={styles.mask}>
-          <TouchableOpacity
+          <Switch
+            value={isHidden}
+            onValueChange={toggleSwitch}
+            disabled={false}
+            activeText={'Yes'}
+            inActiveText={'No'}
+            backgroundActive={'#e32f45'}
+            backgroundInactive={'gray'}
+            circleActiveColor={'gold'}
+            circleInActiveColor={'#000000'} />
+          {/* <TouchableOpacity
             onPress={() => setIsHidden(!isHidden)}
           >
-            <FontAwesome5 name="mask" size={24} color={isHidden ? '#e32f45' : "grey"} />
-          </TouchableOpacity>
-          <Text style={{ marginLeft: 5 }}>{isHidden ? 'Anonymous' : 'Username'}</Text>
+
+
+            {isHidden ?
+              <FontAwesome5 name="mask" size={24} color={"#e32f45"} />
+              :
+              <FontAwesome5 name="user" size={24} color={'#e32f45'} />
+            }
+          </TouchableOpacity> */}
+          <Text style={{ marginLeft: 18 }}>Anonymous?</Text>
 
         </View>
-        <Text>Post Anonymously</Text>
+
 
         <View style={styles.button}>
           <TouchableOpacity

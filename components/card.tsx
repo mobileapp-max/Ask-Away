@@ -45,6 +45,7 @@ export const Card = (props) => {
                     <TouchableOpacity onPress={() => onPressQuestionNavigate(card)}>
                         <View style={styles.box}>
                             <Text style={{ fontSize: 15 }}>{card.text}</Text>
+
                         </View>
                     </TouchableOpacity>
                 }
@@ -65,7 +66,7 @@ const styles = StyleSheet.create({
         shadowRadius: 3,
         shadowOpacity: 3,
         shadowOffset: { width: 6, height: 5 },
-        margin: 3,
+
         shadowColor: 'white'
 
 

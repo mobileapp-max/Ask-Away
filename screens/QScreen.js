@@ -40,11 +40,14 @@ export default function QScreen({ navigation }) {
             <View style={styles.container}>
                 <View>
                     <FlatList
+
                         data={questions}
+                        showsVerticalScrollIndicator={false}
+                        showsHorizontalScrollIndicator={false}
                         renderItem={({ item: card, index: i }) => {
                             return (
                                 <Card
-                                    style={{ top: 20 }}
+                                    style={{ marginBottom: i === questions.length - 1 ? 250 : 0, marginTop: i === 0 ? 50 : 5 }}
                                     card={card}
                                     isSelected={openQ === card.id}
                                     onPressUpperAreaCard={onPressUpperAreaCard}
@@ -62,12 +65,16 @@ export default function QScreen({ navigation }) {
 const styles = StyleSheet.create({
     root: {
         flex: 1,
-        backgroundColor: COLORS[1]
+        backgroundColor: 'white',
     },
     container: {
         flex: 1,
-        margin: 16,
-        backgroundColor: COLORS[1]
+        marginHorizontal: 15,
+
+
+        // marginTop: 20,
+        backgroundColor: 'white',
+        // marginBottom: 130,
     },
     content: {
         height: height * 2
