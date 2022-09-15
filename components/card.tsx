@@ -9,6 +9,7 @@ import * as React from "react"
 import { Image, Text, View, TouchableOpacity, TextInput, StyleSheet, TextInputComponent, TouchableWithoutFeedback } from "react-native"
 import { COLORS } from "../assets/colors"
 import { LinearGradient } from "expo-linear-gradient"
+import ShadeColor from "../scripts/shade-color"
 
 
 /**
@@ -28,7 +29,10 @@ export const Card = (props) => {
     return (
         <TouchableWithoutFeedback onPress={() => onPressUpperAreaCard(card.id)}>
 
-            <LinearGradient colors={['#e32f45', 'pink']} style={{ ...styles.card, ...style }}>
+            <LinearGradient
+                start={[0.5, 0]}
+                colors={[ShadeColor('#e32f45', -10), ShadeColor('#e32f45', 10), ShadeColor('#e32f45', -10)]}
+                style={{ ...styles.card, ...style }}>
 
                 <View style={styles.title}>
 
@@ -63,11 +67,11 @@ const styles = StyleSheet.create({
         // borderTopLeftRadius: 17,
         padding: 10,
         // backgroundColor: "yellow",
-        shadowRadius: 3,
-        shadowOpacity: 3,
-        shadowOffset: { width: 6, height: 5 },
+        // shadowRadius: 3,
+        // shadowOpacity: 3,
+        // shadowOffset: { width: 6, height: 5 },
 
-        shadowColor: 'white'
+        // shadowColor: 'white'
 
 
     },

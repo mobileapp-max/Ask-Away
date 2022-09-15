@@ -18,6 +18,7 @@ import { useTheme } from 'react-native-paper';
 import { useContext } from 'react';
 import { QuestionsContext } from '../contexts/questions-context-provider';
 import { Switch } from 'react-native-switch';
+import { responsiveFontSize } from '../scripts/constants';
 
 
 
@@ -40,7 +41,9 @@ const AddQ = ({ navigation }) => {
     <View style={styles.container}>
       <StatusBar backgroundColor='#e32f45' barStyle="light-content" />
       <View style={styles.header}>
-        <Animatable.Text style={styles.text_header} animation='zoomInUp'>Add your question!</Animatable.Text>
+        <Animatable.Text style={styles.text_header} animation='zoomInUp'>
+          {'Add your question!'}
+        </Animatable.Text>
       </View>
       <Animatable.View
         animation="fadeInUpBig"
@@ -164,7 +167,7 @@ const styles = StyleSheet.create({
   text_header: {
     color: '#fff',
     fontWeight: 'bold',
-    fontSize: 30,
+    fontSize: responsiveFontSize(30),
     alignSelf: 'center'
   },
   text_footer: {

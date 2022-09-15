@@ -11,6 +11,7 @@ import { Card } from "../components/card";
 import { useLazyQuery, useMutation, gql } from "@apollo/client"
 import { LinearGradient } from "expo-linear-gradient";
 import { QuestionsContext } from "../contexts/questions-context-provider";
+import { responsiveHeight } from "../scripts/constants";
 
 const cardHeight = 60;
 const cardTitle = 45;
@@ -47,7 +48,7 @@ export default function QScreen({ navigation }) {
                         renderItem={({ item: card, index: i }) => {
                             return (
                                 <Card
-                                    style={{ marginBottom: i === questions.length - 1 ? 250 : 0, marginTop: i === 0 ? 50 : 5 }}
+                                    style={{ marginBottom: i === questions.length - 1 ? 250 : 0, marginTop: i === 0 ? 50 : responsiveHeight(0.8) }}
                                     card={card}
                                     isSelected={openQ === card.id}
                                     onPressUpperAreaCard={onPressUpperAreaCard}
