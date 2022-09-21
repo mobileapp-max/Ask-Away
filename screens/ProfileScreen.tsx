@@ -13,6 +13,7 @@ import * as Animatable from 'react-native-animatable';
 import { LinearGradient } from 'expo-linear-gradient';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Feather from 'react-native-vector-icons/Feather';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import { useTheme } from 'react-native-paper';
 
@@ -226,7 +227,7 @@ const ProfileScreen = ({ navigation }) => {
                     </TouchableOpacity>
 
                     <TouchableOpacity
-                        onPress={() => navigation.navigate('SignUpScreen')}
+                        onPress={() => navigation.navigate('Signup')}
                         style={[styles.signIn, {
                             borderColor: '#e32f45',
                             borderWidth: 1,

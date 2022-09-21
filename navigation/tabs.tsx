@@ -11,6 +11,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { MainStackScreen } from './navigation';
 import { useNavigation } from '@react-navigation/native';
 import { useRoute } from '@react-navigation/native';
+import { LogInStackScreen } from './logInSingUpNav'
 
 
 // import { mdiPlusCircleOutline } from '@mdi/js'
@@ -114,7 +115,7 @@ const Tabs = (props) => {
             //     }
             // })}
             />
-            <Tab.Screen name="Profile3" component={ProfileScreen}
+            <Tab.Screen name="Profile3" component={LogInStackScreen}
                 options={{
                     tabBarIcon: ({ focused }) => (
                         <View style={{ alignItems: "center", justifyContent: 'center', top: 10 }}>

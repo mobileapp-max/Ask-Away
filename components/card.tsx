@@ -41,21 +41,36 @@ export const Card = (props) => {
                     ...style
                 }}>
                 <Entypo style={{
-                    alignSelf: "flex-end", justifyContent: "space-between", alignContent: 'center', alignItems: 'center', position: 'absolute', bottom: 0, width: '53%',
+                    alignSelf: "flex-end",
+                    justifyContent: "space-between",
+                    alignContent: 'center',
+                    alignItems: 'center',
+                    position: 'absolute',
+                    bottom: 0,
+                    width: '53%',
                 }} name="chevron-down" size={24} color="white" />
                 <View style={{ flexDirection: 'row', overflow: 'visible' }}>
                     <View style={styles.title}>
                         <Text style={styles.text}>
                             {` ${card.title}`}
                         </Text>
-
-
                         <Text style={styles.text}>
                             {`${card.likes}`}
                         </Text>
 
                     </View>
-                    <TouchableOpacity style={{ alignItems: "center", justifyContent: "center", backgroundColor: '#ffc8dd', width: '10%', borderBottomRightRadius: 15, overflow: 'visible', borderBottomLeftRadius: 15, borderTopLeftRadius: 15, borderTopRightRadius: 15, top: 2 }}>
+                    <TouchableOpacity style={{
+                        alignItems: "center",
+                        justifyContent: "center",
+                        backgroundColor: '#ffc8dd',
+                        width: '10%',
+                        borderBottomRightRadius: 15,
+                        overflow: 'visible',
+                        borderBottomLeftRadius: 15,
+                        borderTopLeftRadius: 15,
+                        borderTopRightRadius: 15,
+                        top: 2
+                    }}>
 
 
                         <SimpleLineIcons name="arrow-right" size={19} color="white" />
