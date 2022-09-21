@@ -6,12 +6,15 @@
 */
 
 import * as React from "react"
-import { Image, Text, View, TouchableOpacity, TextInput, StyleSheet, TextInputComponent, TouchableWithoutFeedback } from "react-native"
+import { Image, Text, View, TouchableOpacity, TouchableWithoutFeedbackBase, TextInput, StyleSheet, TextInputComponent, TouchableWithoutFeedback } from "react-native"
 import { COLORS } from "../assets/colors"
 import { LinearGradient } from "expo-linear-gradient"
 import ShadeColor from "../scripts/shade-color"
-import { responsiveFontSize, responsiveHeight } from "../scripts/constants"
-
+import { responsiveFontSize, responsiveHeight, responsiveWidth } from "../scripts/constants"
+import { FontAwesome } from "@expo/vector-icons"
+import { SimpleLineIcons } from '@expo/vector-icons';
+import { AntDesign } from '@expo/vector-icons';
+import { Entypo } from '@expo/vector-icons';
 
 /**
  * Describe your new component here...
@@ -29,57 +32,61 @@ export const Card = (props) => {
 
     return (
         <TouchableWithoutFeedback onPress={() => onPressUpperAreaCard(card.id)}>
-
             <LinearGradient
+
                 start={[0.5, 0]}
                 colors={[ShadeColor('#e32f45', -10), ShadeColor('#e32f45', 10), ShadeColor('#e32f45', -10)]}
-                style={{ ...styles.card, ...style }}>
+                style={{
+                    ...styles.card,
+                    ...style
+                }}>
+                <Entypo style={{
+                    alignSelf: "flex-end", justifyContent: "space-between", alignContent: 'center', alignItems: 'center', position: 'absolute', bottom: 0, width: '53%',
+                }} name="chevron-down" size={24} color="white" />
+                <View style={{ flexDirection: 'row', overflow: 'visible' }}>
+                    <View style={styles.title}>
+                        <Text style={styles.text}>
+                            {` ${card.title}`}
+                        </Text>
 
-                <View style={styles.title}>
 
-                    <Text style={styles.text}>
-                        {` ${card.title}`}
-                    </Text>
-                    <Text style={styles.text}>
-                        {`${card.likes}`}
-                    </Text>
+                        <Text style={styles.text}>
+                            {`${card.likes}`}
+                        </Text>
+
+                    </View>
+                    <TouchableOpacity style={{ alignItems: "center", justifyContent: "center", backgroundColor: '#ffc8dd', width: '10%', borderBottomRightRadius: 15, overflow: 'visible', borderBottomLeftRadius: 15, borderTopLeftRadius: 15, borderTopRightRadius: 15, top: 2 }}>
 
 
+                        <SimpleLineIcons name="arrow-right" size={19} color="white" />
+
+                    </TouchableOpacity>
 
                 </View>
-
-
-
                 {isSelected &&
-                    <TouchableOpacity onPress={() => onPressQuestionNavigate(card)}>
-                        <View style={styles.box}>
-                            <Text style={{ fontSize: 15 }}>{card.text}</Text>
+                    <View style={{ flexDirection: 'row', top: 3 }}>
+                        <TouchableOpacity style={styles.box} onPress={() => onPressQuestionNavigate(card)}>
+                            <Text style={{ fontSize: 15, width: '90%' }}>
+                                {card.text}
+                            </Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={{ alignItems: "center", justifyContent: "center", backgroundColor: '#ffc8dd', width: '10%', borderBottomRightRadius: 15, borderTopRightRadius: 15, }}>
+                            <AntDesign name="pluscircleo" size={24} color='white' />
+                        </TouchableOpacity>
+                    </View>
 
-                        </View>
-                    </TouchableOpacity>
                 }
-
             </LinearGradient>
-
-
-
-        </TouchableWithoutFeedback>
+        </TouchableWithoutFeedback >
     )
 }
 
 const styles = StyleSheet.create({
     card: {
-        // height: cardTitle,
         borderRadius: 15,
-        // borderTopLeftRadius: 17,
-        padding: 10,
-        // backgroundColor: "yellow",
-        // shadowRadius: 3,
-        // shadowOpacity: 3,
-        // shadowOffset: { width: 6, height: 5 },
-
-        // shadowColor: 'white'
-
+        borderBottomWidth: 5,
+        borderLeftWidth: 1,
+        borderRightWidth: 2,
 
     },
     text: {
@@ -87,21 +94,24 @@ const styles = StyleSheet.create({
         paddingVertical: 20,
         fontWeight: 'bold',
         color: 'white',
+        paddingHorizontal: 10,
     },
     title: {
         flexDirection: "row",
-        justifyContent: 'space-between'
-
+        justifyContent: 'space-between',
+        width: '90%'
     },
     box: {
-        paddingVertical: responsiveHeight(3),
+        paddingVertical: responsiveHeight(2),
+        // marginHorizontal: 1,
         backgroundColor: 'white',
-        marginHorizontal: -9,
-        marginBottom: -10,
-        borderBottomEndRadius: 15,
+        // borderBottomEndRadius: 15,
         borderBottomStartRadius: 15,
         paddingHorizontal: 10,
-        top: responsiveHeight(-0.4),
+        // top: responsiveHeight(-0.4),
+        // zIndex: -100000000,
+        width: '90%',
+
 
     }
 });
