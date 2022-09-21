@@ -52,10 +52,11 @@ const CustomTabButton = (props) => {
     </TouchableOpacity>
 }
 
-const Tabs = () => {
+const Tabs = (props) => {
     return (
         // <RootStackScree>
         <Tab.Navigator
+
             screenOptions={{
                 activeTintColor: "gold",
                 tabBarShowLabel: false,
@@ -71,6 +72,7 @@ const Tabs = () => {
                     borderColor: 'red',
                     borderRadius: 15,
                     height: 90,
+                    top: props?.isTabsVisible ? undefined : -100,
                     ...style.shadow
                 }
 
@@ -102,7 +104,7 @@ const Tabs = () => {
                         </View>
                     ),
                     tabBarButton: (props) => {
-                        console.log('props', props);
+                        // console.log('props', props);
                         return <CustomTabButton {...props} />
                     }
                 }}

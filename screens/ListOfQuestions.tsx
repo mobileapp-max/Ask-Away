@@ -13,9 +13,6 @@ import { LinearGradient } from "expo-linear-gradient";
 import { QuestionsContext } from "../contexts/questions-context-provider";
 import { responsiveHeight } from "../scripts/constants";
 
-const cardHeight = 60;
-const cardTitle = 45;
-const cardPadding = 5;
 
 const { height } = Dimensions.get("window");
 
@@ -32,7 +29,7 @@ export default function QScreen({ navigation }) {
     }
 
     const onPressQuestionNavigate = (incomingCard) => {
-        navigation.push('QuestionScreen', { card: incomingCard })
+        navigation.push('Question', { card: incomingCard })
     }
 
 
