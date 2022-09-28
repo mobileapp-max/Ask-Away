@@ -55,7 +55,7 @@ export const Card = (props) => {
                             {` ${card.title}`}
                         </Text>
                         <Text style={styles.text}>
-                            {`${card.likes}`}
+                            {`${card?.answers_aggregate?.aggregate?.count}`}
                         </Text>
 
                     </View>

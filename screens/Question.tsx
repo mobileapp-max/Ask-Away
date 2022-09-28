@@ -29,7 +29,7 @@ export default function Question(props) {
     const { height } = Dimensions.get("window");
     const { navigation, route } = props
     const { params } = route
-    const { card } = params
+    const { question } = params
     const { questions, setIsTabsVisible } = useContext(QuestionsContext)
     const [answer, setAnswer] = useState('')
     const [answerVisible, setAnswerVisible] = useState(false)
@@ -54,13 +54,13 @@ export default function Question(props) {
                     <Ionicons
                         name='chevron-back-circle-outline' size={40} color="white" />
                 </TouchableOpacity>
-                {/* <Text style={{ color: 'red' }}>{JSON.stringify(card)}</Text> */}
-                <Text style={styles.text_header}>{card.title}</Text>
+                {/* <Text style={{ color: 'red' }}>{JSON.stringify(question)}</Text> */}
+                <Text style={styles.text_header}>{question.title}</Text>
             </View>
             <View style={styles.footer}>
                 <View style={styles.action} >
-                    <Text style={{ color: 'red', fontSize: 25 }}>{card.text}</Text>
-                    <Text style={styles.text_header}>{card.likes}</Text>
+                    <Text style={{ color: 'red', fontSize: 25 }}>{question.text}</Text>
+                    <Text style={styles.text_header}>{question.likes}</Text>
                 </View>
                 <TouchableOpacity
                     onPress={onPressAnswerQuestion}

@@ -29,7 +29,7 @@ export default function QScreen({ navigation }) {
     }
 
     const onPressQuestionNavigate = (incomingCard) => {
-        navigation.push('Question', { card: incomingCard })
+        navigation.push('Question', { question: incomingCard })
     }
 
 
