@@ -21,6 +21,8 @@ import { responsiveFontSize, responsiveHeight, responsiveWidth } from "../script
 import { Ionicons } from "@expo/vector-icons";
 import { colors } from "../scripts/constants";
 import { Entypo } from "@expo/vector-icons";
+import { AntDesign } from '@expo/vector-icons';
+import { FontAwesome } from '@expo/vector-icons';
 
 
 
@@ -62,6 +64,33 @@ export default function Question(props) {
                     <Text style={{ color: 'red', fontSize: 25 }}>{question.text}</Text>
                     <Text style={styles.text_header}>{question.likes}</Text>
                 </View>
+                <View style={{ height: '20%', paddingTop: 5 }}>
+                    <FlatList
+
+                        data={question.answers}
+                        showsVerticalScrollIndicator={false}
+                        showsHorizontalScrollIndicator={false}
+                        renderItem={({ item: card, index: i }) => {
+                            return (
+                                <View>
+
+                                    <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                                        <View style={{ backgroundColor: 'red', width: 30, height: 30, borderRadius: 20 }}></View>
+                                        <View style={{ borderColor: "red", borderWidth: 2, borderBottomRightRadius: 20, borderTopRightRadius: 8, borderTopLeftRadius: 20, borderBottomLeftRadius: 8, padding: 7, margin: 5 }}>
+                                            <Text>{card.answer}</Text>
+                                        </View>
+                                    </View>
+                                    <View style={{ flexDirection: 'row', marginLeft: 35, }}>
+                                        <FontAwesome name="mail-reply" size={24} color="black" />
+                                        <AntDesign name="dislike1" size={24} color="black" />
+                                        <AntDesign name="like1" size={24} color="black" />
+                                    </View>
+                                </View>
+                            )
+                        }}
+                    />
+                </View>
+
                 <TouchableOpacity
                     onPress={onPressAnswerQuestion}
                     style={{ alignSelf: 'center', left: responsiveWidth(3) }}>
