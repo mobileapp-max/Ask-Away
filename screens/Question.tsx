@@ -53,12 +53,25 @@ export default function Question(props) {
                     <Ionicons
                         name='chevron-back-circle-outline' size={40} color="white" />
                 </TouchableOpacity>
-                {/* <Text style={{ color: 'red' }}>{JSON.stringify(question)}</Text> */}
                 <Text style={styles.text_header}>{question.title}</Text>
+                <View style={{ right: 50, backgroundColor: 'white', borderRadius: 25, borderWidth: 2, borderColor: 'white' }}>
+                    <View style={{ backgroundColor: '#e32f45', borderRadius: 25, borderWidth: 2, borderColor: '#e32f45' }}>
+                        <View style={{ backgroundColor: 'white', borderRadius: 25, borderWidth: 2, borderColor: 'white' }}>
+
+                            <TouchableOpacity
+                                onPress={onPressAnswerQuestion}
+                                style={{ backgroundColor: '#e32f45', borderRadius: 20 }}>
+                                <Entypo
+                                    name="plus" size={28} color="white" />
+                            </TouchableOpacity>
+                        </View>
+                    </View>
+                </View>
             </View>
             <View style={styles.footer}>
                 <View style={styles.action} >
-                    <Text style={{ color: 'red', fontSize: 25 }}>{question.text}</Text>
+                    <Text style={{ color: 'red', fontSize: 20, justifyContent: 'space-between' }}>{question.text}</Text>
+
                     <Text style={styles.text_header}>{question.likes}</Text>
                 </View>
                 <View style={{ height: '50%', paddingTop: 5 }}>
@@ -74,12 +87,6 @@ export default function Question(props) {
                     />
                 </View>
 
-                <TouchableOpacity
-                    onPress={onPressAnswerQuestion}
-                    style={{ alignSelf: 'center', left: responsiveWidth(3) }}>
-                    <Entypo
-                        name="plus" size={40} color="red" />
-                </TouchableOpacity>
                 {answerVisible &&
                     <Modal
                         animationType="fade"
@@ -126,9 +133,11 @@ const styles = StyleSheet.create({
         flex: 1,
         // justifyContent: 'space-evenly',
         paddingRight: 10,
+        marginTop: 20,
         // paddingVertical: 10,
         // paddingBottom: 20,
-        flexDirection: "row"
+        flexDirection: "row",
+        alignItems: 'center'
 
     },
     footer: {
@@ -143,10 +152,12 @@ const styles = StyleSheet.create({
     text_header: {
         color: '#fff',
         fontWeight: 'bold',
-        fontSize: responsiveFontSize(30),
+        fontSize: responsiveFontSize(25),
         alignSelf: 'center',
         justifyContent: 'center',
         paddingLeft: 20,
+        width: "90%"
+
     },
     text_footer: {
         color: '#05375a',
@@ -154,10 +165,11 @@ const styles = StyleSheet.create({
     },
     action: {
         flexDirection: 'row',
-        marginTop: 10,
+        // marginTop: 5,
         borderBottomWidth: 1,
         borderBottomColor: '#f2f2f2',
         paddingBottom: 5,
+        alignItems: 'center'
     },
     actionError: {
         flexDirection: 'row',

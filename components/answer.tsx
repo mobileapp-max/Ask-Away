@@ -11,29 +11,42 @@ import { FontAwesome } from '@expo/vector-icons';
 import UseOnLayout from "../scripts/use-on-layout";
 import { Card } from "../components/card";
 
-
-
 export const Answer = (props) => {
-
 
     const {
         answer,
     } = props
 
+    const {
+        currentHeightOfView,
+        currentWidthOfView,
+        captureView
+    } = UseOnLayout()
+
     return (
-        <View style={{ backgroundColor: 'yellow' }}>
+        <View style={{}}>
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                <View style={{ backgroundColor: 'red', width: 30, height: 30, borderRadius: 20 }}></View>
-                <View style={{ borderColor: "red", borderWidth: 2, borderBottomRightRadius: 20, borderTopRightRadius: 8, borderTopLeftRadius: 20, borderBottomLeftRadius: 8, padding: 7, margin: 5 }}>
+                <TouchableOpacity style={{ backgroundColor: 'red', width: 30, height: 30, borderRadius: 20 }}></TouchableOpacity>
+                <TouchableOpacity onLayout={captureView} style={{ borderColor: "red", borderWidth: 2, borderBottomRightRadius: 20, borderTopRightRadius: 8, borderTopLeftRadius: 20, borderBottomLeftRadius: 8, padding: 10, margin: 5 }}>
                     <Text>{answer?.answer}</Text>
+                </TouchableOpacity>
+                <View style={{ alignItems: 'center' }}>
+                    <TouchableOpacity>
+                        <AntDesign style={{ marginHorizontal: 4, backgroundColor: 'white', }} name="dislike1" size={20} color="red" />
+                    </TouchableOpacity>
+                    <Text>5</Text>
+                </View>
+                <View style={{ alignItems: 'center' }}>
+                    <TouchableOpacity>
+                        <AntDesign style={{ marginHorizontal: 4, backgroundColor: 'white' }} name="like1" size={20} color="red" />
+                    </TouchableOpacity>
+                    <Text>3</Text>
                 </View>
             </View>
-            <View style={{ flexDirection: 'row', marginLeft: 35, }}>
-                <FontAwesome name="mail-reply" size={24} color="black" />
-                <AntDesign name="dislike1" size={24} color="black" />
-                <AntDesign name="like1" size={24} color="black" />
-            </View>
-        </View>
+            <TouchableOpacity style={{ flexDirection: 'row', marginLeft: currentWidthOfView, position: 'absolute', top: currentHeightOfView - 8 }}>
+                <FontAwesome style={{ marginHorizontal: 9, backgroundColor: 'white' }} name="mail-reply" size={24} color="red" />
+            </TouchableOpacity>
+        </View >
     )
 }
 
