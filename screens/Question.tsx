@@ -12,18 +12,14 @@ import {
     Alert
 
 } from "react-native";
-import { COLORS } from "../assets/colors";
-import { Card } from "../components/card";
 import { useLazyQuery, useMutation, gql } from "@apollo/client"
-import { LinearGradient } from "expo-linear-gradient";
 import { QuestionsContext } from "../contexts/questions-context-provider";
 import { responsiveFontSize, responsiveHeight, responsiveWidth } from "../scripts/constants";
 import { Ionicons } from "@expo/vector-icons";
 import { colors } from "../scripts/constants";
 import { Entypo } from "@expo/vector-icons";
 import { Answer } from "../components/answer";
-
-
+import UseOnLayout from "../scripts/use-on-layout";
 
 
 export default function Question(props) {
@@ -34,7 +30,6 @@ export default function Question(props) {
     const { questions, setIsTabsVisible } = useContext(QuestionsContext)
     const [answer, setAnswer] = useState('')
     const [answerVisible, setAnswerVisible] = useState(false)
-    const [modalVisible, setModalVisible] = useState(false);
     const onPressAnswerQuestion = () => {
         setIsTabsVisible(false)
         setAnswerVisible(!answerVisible)
@@ -43,6 +38,11 @@ export default function Question(props) {
         setIsTabsVisible(true)
         setAnswerVisible(!answerVisible)
     }
+    const {
+        currentHeightOfView,
+        currentWidthOfView,
+        captureView
+    } = UseOnLayout()
 
     return (
         <View style={styles.container}>
@@ -54,27 +54,56 @@ export default function Question(props) {
                         name='chevron-back-circle-outline' size={40} color="white" />
                 </TouchableOpacity>
                 <Text style={styles.text_header}>{question.title}</Text>
-                <View style={{ right: 50, backgroundColor: 'white', borderRadius: 25, borderWidth: 2, borderColor: 'white' }}>
-                    <View style={{ backgroundColor: '#e32f45', borderRadius: 25, borderWidth: 2, borderColor: '#e32f45' }}>
-                        <View style={{ backgroundColor: 'white', borderRadius: 25, borderWidth: 2, borderColor: 'white' }}>
 
-                            <TouchableOpacity
-                                onPress={onPressAnswerQuestion}
-                                style={{ backgroundColor: '#e32f45', borderRadius: 20 }}>
-                                <Entypo
-                                    name="plus" size={28} color="white" />
-                            </TouchableOpacity>
+            </View>
+
+            <View style={styles.footer}>
+                {question?.text ?
+                    <View style={styles.question_style}>
+                        <Text style={{
+                            color: 'red',
+                            fontSize: 18,
+                            justifyContent: 'space-between',
+                            fontWeight: 'bold'
+                        }}>
+                            {question.text}
+                        </Text>
+                        <Text style={styles.text_header}>{question.likes}</Text>
+                    </View>
+                    :
+                    <></>
+                }
+                <View style={{ height: '100%', paddingTop: 5 }}>
+
+                    <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                        <TouchableOpacity style={{ backgroundColor: 'red', width: 30, height: 30, borderRadius: 20 }}></TouchableOpacity>
+                        <View style={{ maxWidth: '85%' }}>
+                            <TextInput
+                                value={answer}
+                                placeholder={"Add your answer..."}
+                                multiline={true}
+                                numberOfLines={5}
+                                maxLength={150}
+                                placeholderTextColor="grey"
+                                secureTextEntry={false}
+                                autoCapitalize="sentences"
+                                onChangeText={(newAnswer) => setAnswer(newAnswer)}
+                                style={{ borderColor: "gold", borderWidth: 2, borderBottomRightRadius: 20, borderTopRightRadius: 8, borderTopLeftRadius: 20, borderBottomLeftRadius: 8, padding: 10, margin: 5 }}></TextInput>
+                        </View>
+
+                        <View style={{ backgroundColor: '#e32f45', borderRadius: 25, borderWidth: 1.5, borderColor: '#e32f45' }}>
+                            <View style={{ backgroundColor: 'white', borderRadius: 25, borderWidth: 1.5, borderColor: 'white' }}>
+                                <TouchableOpacity
+                                    onPress={onPressAnswerQuestion}
+                                    style={{ backgroundColor: '#e32f45', borderRadius: 20 }}>
+                                    <Entypo
+                                        name="plus" size={25} color='white' />
+                                </TouchableOpacity>
+                            </View>
                         </View>
                     </View>
-                </View>
-            </View>
-            <View style={styles.footer}>
-                <View style={styles.action} >
-                    <Text style={{ color: 'red', fontSize: 20, justifyContent: 'space-between' }}>{question.text}</Text>
 
-                    <Text style={styles.text_header}>{question.likes}</Text>
-                </View>
-                <View style={{ height: '50%', paddingTop: 5 }}>
+
                     <FlatList
                         data={question.answers}
                         showsVerticalScrollIndicator={false}
@@ -96,7 +125,7 @@ export default function Question(props) {
                         <View style={styles.centeredView}>
                             <View style={styles.modalView}>
                                 <TextInput
-                                    // style={styles.action}
+                                    // style={styles.question_style}
                                     value={answer}
                                     placeholder={"Your sassy reply"}
                                     multiline={true}
@@ -131,14 +160,10 @@ const styles = StyleSheet.create({
     },
     header: {
         flex: 1,
-        // justifyContent: 'space-evenly',
         paddingRight: 10,
         marginTop: 20,
-        // paddingVertical: 10,
-        // paddingBottom: 20,
         flexDirection: "row",
         alignItems: 'center'
-
     },
     footer: {
         flex: 7,
@@ -161,54 +186,15 @@ const styles = StyleSheet.create({
     },
     text_footer: {
         color: '#05375a',
-        fontSize: 23
+        fontSize: 23,
+        fontWeight: 'bold',
     },
-    action: {
+    question_style: {
         flexDirection: 'row',
-        // marginTop: 5,
         borderBottomWidth: 1,
         borderBottomColor: '#f2f2f2',
         paddingBottom: 5,
         alignItems: 'center'
-    },
-    actionError: {
-        flexDirection: 'row',
-        marginTop: 10,
-        borderBottomWidth: 1,
-        borderBottomColor: '#FF0000',
-        paddingBottom: 5
-    },
-    textInput: {
-        flex: 1,
-        marginTop: Platform.OS === 'ios' ? 0 : -12,
-        paddingLeft: 10,
-        color: '#05375a',
-        fontSize: 20
-    },
-    errorMsg: {
-        color: '#FF0000',
-        fontSize: 14,
-    },
-    button: {
-        alignItems: 'center',
-        marginTop: 50
-    },
-    signIn: {
-        width: '100%',
-        height: 50,
-        justifyContent: 'center',
-        alignItems: 'center',
-        borderRadius: 25
-    },
-    textSign: {
-        fontSize: 18,
-        fontWeight: 'bold'
-    },
-    mask: {
-        paddingTop: 20,
-        flexDirection: 'row',
-        alignItems: 'center',
-        paddingRight: 20,
     },
     centeredView: {
         // flex: 1,
@@ -236,9 +222,6 @@ const styles = StyleSheet.create({
         padding: 10,
         elevation: 2
     },
-    buttonOpen: {
-        backgroundColor: "#F194FF",
-    },
     buttonClose: {
         backgroundColor: "#2196F3",
     },
@@ -247,8 +230,5 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
         textAlign: "center"
     },
-    modalText: {
-        marginBottom: 15,
-        textAlign: "center"
-    }
+
 });
