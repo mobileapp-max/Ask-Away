@@ -20,6 +20,7 @@ import { colors } from "../scripts/constants";
 import { Entypo } from "@expo/vector-icons";
 import { Answer } from "../components/answer";
 import UseOnLayout from "../scripts/use-on-layout";
+import { TextInputApp } from "../components/textInputApp";
 
 
 export default function Question(props) {
@@ -75,33 +76,11 @@ export default function Question(props) {
                 }
                 <View style={{ height: '100%', paddingTop: 5 }}>
 
-                    <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                        <TouchableOpacity style={{ backgroundColor: 'red', width: 30, height: 30, borderRadius: 20 }}></TouchableOpacity>
-                        <View style={{ maxWidth: '85%' }}>
-                            <TextInput
-                                value={answer}
-                                placeholder={"Add your answer..."}
-                                multiline={true}
-                                numberOfLines={5}
-                                maxLength={150}
-                                placeholderTextColor="grey"
-                                secureTextEntry={false}
-                                autoCapitalize="sentences"
-                                onChangeText={(newAnswer) => setAnswer(newAnswer)}
-                                style={{ borderColor: "gold", borderWidth: 2, borderBottomRightRadius: 20, borderTopRightRadius: 8, borderTopLeftRadius: 20, borderBottomLeftRadius: 8, padding: 10, margin: 5 }}></TextInput>
-                        </View>
-
-                        <View style={{ backgroundColor: '#e32f45', borderRadius: 25, borderWidth: 1.5, borderColor: '#e32f45' }}>
-                            <View style={{ backgroundColor: 'white', borderRadius: 25, borderWidth: 1.5, borderColor: 'white' }}>
-                                <TouchableOpacity
-                                    onPress={onPressAnswerQuestion}
-                                    style={{ backgroundColor: '#e32f45', borderRadius: 20 }}>
-                                    <Entypo
-                                        name="plus" size={25} color='white' />
-                                </TouchableOpacity>
-                            </View>
-                        </View>
-                    </View>
+                    <TextInputApp
+                        answer={answer}
+                        setAnswer={setAnswer}
+                        onPressAnswerQuestion={onPressAnswerQuestion}
+                    />
 
 
                     <FlatList

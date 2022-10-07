@@ -78,7 +78,7 @@ const ProfileScreen = ({ navigation }) => {
     }
 
     const handleValidUser = (val) => {
-        if (val.trim().length >= 4) {
+        if (val.trim().length = 4) {
             setData({
                 ...data,
                 isValidUser: true
