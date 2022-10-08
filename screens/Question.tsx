@@ -10,22 +10,19 @@ import {
     Pressable,
     Modal,
     Alert
-
 } from "react-native";
 import { useLazyQuery, useMutation, gql } from "@apollo/client"
 import { QuestionsContext } from "../contexts/questions-context-provider";
 import { responsiveFontSize, responsiveHeight, responsiveWidth } from "../scripts/constants";
 import { Ionicons } from "@expo/vector-icons";
 import { colors } from "../scripts/constants";
-import { Entypo } from "@expo/vector-icons";
 import { Answer } from "../components/answer";
 import UseOnLayout from "../scripts/use-on-layout";
 import { TextInputApp } from "../components/textInputApp";
-
+import AppModal from "../components/appModal";
 
 export default function Question(props) {
-    const { height } = Dimensions.get("window");
-    const { navigation, route } = props
+    const { navigation, route, answer } = props
     const { params } = route
     const { question } = params
     const { questions, setIsTabsVisible } = useContext(QuestionsContext)
@@ -47,8 +44,6 @@ export default function Question(props) {
         captureView
     } = UseOnLayout()
 
-
-
     return (
         <View style={styles.container}>
             <View style={styles.header}>
@@ -59,9 +54,7 @@ export default function Question(props) {
                         name='chevron-back-circle-outline' size={40} color="white" />
                 </TouchableOpacity>
                 <Text style={styles.text_header}>{question.title}</Text>
-
             </View>
-
             <View style={styles.footer}>
                 {question?.text ?
                     <View style={styles.question_style}>
@@ -81,17 +74,17 @@ export default function Question(props) {
                 <View style={{ height: '100%', paddingTop: 5 }}>
 
                     <TextInputApp
-                        onPressAnswerQuestion={onPressAnswerQuestion}
+                    // onPressAnswerQuestion={onPressAnswerQuestion}
                     />
-
-
                     <FlatList
+
                         data={question.answers}
                         showsVerticalScrollIndicator={false}
                         showsHorizontalScrollIndicator={false}
                         renderItem={({ item: answer, index: i }) => {
                             return (
                                 <Answer
+                                    onPressAnswerQuestion={onPressAnswerQuestion}
                                     answer={answer}
                                     isAnswerOpen={openedAnswerId === answer.answer_id}
                                     setOpenedAnswerId={setOpenedAnswerId}
@@ -100,39 +93,12 @@ export default function Question(props) {
                         }}
                     />
                 </View>
-
                 {answerVisible &&
-                    <Modal
-                        animationType="fade"
-                        transparent={true}
-                        visible={answerVisible}
-                    >
-                        <View style={styles.centeredView}>
-                            <View style={styles.modalView}>
-                                <TextInput
-                                    // style={styles.question_style}
-                                    value={answer}
-                                    placeholder={"Your sassy reply"}
-                                    multiline={true}
-                                    numberOfLines={5}
-                                    maxLength={500}
-                                    placeholderTextColor="red"
-                                    secureTextEntry={false}
-                                    style={[styles.textInput, {
-                                        color: colors.text, minHeight: height * 0.15,
-                                    }]}
-                                    autoCapitalize="sentences"
-                                    onChangeText={(newAnswer) => setAnswer(newAnswer)}
-                                />
-                                <Pressable
-                                    style={[styles.button, styles.buttonClose]}
-                                    onPress={onPressHideAnswerQuestion}
-                                >
-                                    <Text style={styles.textStyle}>Hide Modal</Text>
-                                </Pressable>
-                            </View>
-                        </View>
-                    </Modal>
+                    <AppModal
+                        onPressHideAnswerQuestion={onPressHideAnswerQuestion}
+                        answerVisible={answerVisible}
+                        answer={answer}
+                    />
                 }
             </View>
         </View >

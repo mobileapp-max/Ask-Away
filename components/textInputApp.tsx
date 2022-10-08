@@ -50,7 +50,7 @@ export const TextInputApp = (props) => {
                 <View style={{ backgroundColor: '#e32f45', borderRadius: 25, borderWidth: 1.5, borderColor: '#e32f45' }}>
                     <View style={{ backgroundColor: 'white', borderRadius: 25, borderWidth: 1.5, borderColor: 'white' }}>
                         <TouchableOpacity
-                            onPress={onPressAnswerQuestion}
+                            onPress={console.log('hi')}
                             style={{ backgroundColor: '#e32f45', borderRadius: 20 }}>
                             <Entypo
                                 name="plus" size={25} color='white' />

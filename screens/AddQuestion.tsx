@@ -18,10 +18,6 @@ import { QuestionsContext } from '../contexts/questions-context-provider';
 import { Switch } from 'react-native-switch';
 import { responsiveFontSize } from '../scripts/constants';
 
-
-
-
-
 const AddQ = ({ navigation }) => {
 
   const [title, setTitle] = useState('')
