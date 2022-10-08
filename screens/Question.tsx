@@ -29,8 +29,10 @@ export default function Question(props) {
     const { params } = route
     const { question } = params
     const { questions, setIsTabsVisible } = useContext(QuestionsContext)
-    const [answer, setAnswer] = useState('')
     const [answerVisible, setAnswerVisible] = useState(false)
+    const [openedAnswerId, setOpenedAnswerId] = useState(null);
+
+
     const onPressAnswerQuestion = () => {
         setIsTabsVisible(false)
         setAnswerVisible(!answerVisible)
@@ -44,6 +46,8 @@ export default function Question(props) {
         currentWidthOfView,
         captureView
     } = UseOnLayout()
+
+
 
     return (
         <View style={styles.container}>
@@ -77,8 +81,6 @@ export default function Question(props) {
                 <View style={{ height: '100%', paddingTop: 5 }}>
 
                     <TextInputApp
-                        answer={answer}
-                        setAnswer={setAnswer}
                         onPressAnswerQuestion={onPressAnswerQuestion}
                     />
 
@@ -89,7 +91,11 @@ export default function Question(props) {
                         showsHorizontalScrollIndicator={false}
                         renderItem={({ item: answer, index: i }) => {
                             return (
-                                <Answer answer={answer} />
+                                <Answer
+                                    answer={answer}
+                                    isAnswerOpen={openedAnswerId === answer.answer_id}
+                                    setOpenedAnswerId={setOpenedAnswerId}
+                                />
                             )
                         }}
                     />
