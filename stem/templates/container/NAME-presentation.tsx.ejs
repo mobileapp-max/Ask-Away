@@ -1,0 +1,23 @@
+/*
+* This file is responsible for how your container looks.
+* Be mindful that inside storybooks you may not have access to the app's state and navigation 
+* Treat this file as a component, it should not have any logic in it.
+* All functions and values should be passed to this container via props so they can be mocked for testing.
+*/
+import * as React from "react"
+import { Text, View } from "react-native"
+import { <%= props.pascalCaseName %>Props } from "./<%= props.kebabCaseName %>-interface"
+
+
+export const Presentation = ({
+  items,
+  style
+}:<%= props.pascalCaseName %>Props) => {
+  return (
+    <View style={style}>
+      {items.map(item=>(
+        <Text style={{color:'black'}}>{item}</Text>
+      ))}
+    </View>
+  )
+}

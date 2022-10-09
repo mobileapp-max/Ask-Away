@@ -20,6 +20,7 @@ import { Answer } from "../components/answer";
 import UseOnLayout from "../scripts/use-on-layout";
 import { TextInputApp } from "../components/textInputApp";
 import AppModal from "../components/appModal";
+import { TextInputter } from "../components/text-inputter/text-inputter";
 
 export default function Question(props) {
     const { navigation, route, answer } = props
@@ -76,6 +77,7 @@ export default function Question(props) {
                     <TextInputApp
                     // onPressAnswerQuestion={onPressAnswerQuestion}
                     />
+                    <TextInputter data={[{ title: 'hey', text: 'hello' }]} />
                     <FlatList
 
                         data={question.answers}

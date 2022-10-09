@@ -1,0 +1,20 @@
+/*
+* This file is responsible for rendering your screen inside the app.
+* All functions should be defined in <%= props.kebabCaseName %>-functions so they can be exported and tested!
+* Treat this file as a container.
+*/
+
+import * as React from "react"
+import { Presentation } from "./<%= props.kebabCaseName %>-presentation"
+import { <%= props.pascalCaseName %>Props } from "./<%= props.kebabCaseName %>-interface"
+
+export const <%= props.pascalCaseName %> = (props: <%= props.pascalCaseName %>Props) => {
+  // Grab the props here!
+  const { style, navigation } = props
+
+  return (
+    <Presentation
+      navigation={navigation}
+    />
+  )
+}

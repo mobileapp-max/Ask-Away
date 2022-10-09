@@ -1,0 +1,23 @@
+/*
+* Use this file to create your container! 
+* Containers should only contain styles if absolutely necessary! Leave that to components!
+* Your container should render one or more components
+* All functions should be defined in <%= props.kebabCaseName %>-functions so they can be exported and tested!
+*/
+import * as React from "react"
+import { Text, View } from "react-native"
+import { Presentation } from "./<%= props.kebabCaseName %>-presentation"
+import { <%= props.pascalCaseName %>Props } from "./<%= props.kebabCaseName %>-interface"
+
+/**
+ * Describe your component here
+ */
+ export const <%= props.pascalCaseName %> = (props: <%= props.pascalCaseName %>Props) => {
+  // Grab the props here!
+  const { style, items } = props
+  // Do some logic
+  
+  return (
+    <Presentation {...props}/>
+  )
+}

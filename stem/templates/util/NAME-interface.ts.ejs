@@ -1,0 +1,21 @@
+/*
+* Your Util must have a TypeScript interface. Use this file to create it
+* Don't forget to add a brief JSDoc comment above all params. 
+* Make sure to include all useful information inside your comment and to use JSDoc tags where necessary (deprecation, throwables, etc.)
+*/
+
+export default interface <%= props.pascalCaseName %>Interface {
+   /*
+  * These are the arguments your util accepts
+  */
+  (
+    /**
+    * A string to do util things with
+    */
+    input?: string
+  ):
+  /**
+  * Some info about what this util returns
+  */
+  void
+}

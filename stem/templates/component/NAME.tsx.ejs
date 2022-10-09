@@ -1,0 +1,52 @@
+/*
+* Components should not contain internal state or logic! Leave that to containers or screens!
+* You may choose to use the presets file to create new variations of your component.
+* Don't forget to go add all params to your interface file!
+*/
+
+import * as React from "react"
+import { Image, Text, View, TouchableOpacity, StyleSheet } from "react-native"
+import { <%= props.pascalCaseName %>Props } from "./<%= props.kebabCaseName %>-interface"
+import { <%= props.pascalCaseName %>Presets } from "./<%= props.kebabCaseName %>-presets"
+
+/**
+ * Describe your new component here...
+ */
+ export const <%= props.pascalCaseName %> = (props: <%= props.pascalCaseName %>Props) => {
+
+  // INCOMING PROPS
+  const {
+    preset = 'default',
+    style,
+    data,
+  } = props
+
+  // PRESET VARIABLES
+  const {
+    textColor
+  } = <%= props.pascalCaseName %>Presets[preset]
+
+  return (
+    <View style={{ ...style }}>
+      <View style={{ ...<%= props.pascalCaseName %>Styles.mappedContainer }}>
+        {data?.map((item, index) => (
+          <View>
+            <Text style={{ color: textColor }}>
+              {item.title}
+            </Text>
+            <Text style={{ color: textColor }}>
+              {item.text}
+            </Text>
+          </View>
+        ))}
+      </View>
+    </View>
+  )
+}
+
+export const <%= props.pascalCaseName %>Styles = StyleSheet.create({
+  mappedContainer: {
+    borderColor: "#72FA41",
+    borderWidth: 2
+  },
+});

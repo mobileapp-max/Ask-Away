@@ -1,0 +1,29 @@
+/*
+* Reusable interfaces should be here
+* Don't forget to add a brief JSDoc comment above all params. 
+* Make sure to include all useful information inside your comment and to use JSDoc tags where necessary (deprecation, throwables, etc.)
+*/
+
+export default interface <%= props.pascalCaseName %> {
+  /**
+    * A string name
+    */
+    name?: string
+}
+
+// // Uncomment for a function-type interface
+//export default interface <%= props.pascalCaseName %>Interface {
+//   /*
+//  * These are the arguments the function accepts
+//  */
+//  (
+//    /**
+//    * A string to do function things with
+//    */
+//    input?: string
+//  ):
+//  /**
+//  * Some info about what this function returns
+//  */
+//  void
+//}

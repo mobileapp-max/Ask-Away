@@ -1,0 +1,20 @@
+/*
+* Storybooks is our way to quickly test our components in isolation.
+* Use this file to render your container with all needed props to help you test it in isolation.
+* Render one UseCase for all props that affect your container's logic
+* This should help you quickly visualize how your code affects your container.
+*/
+import * as React from "react"
+import { storiesOf } from "@storybook/react-native"
+import { StoryScreen, Story, UseCase } from "../../storybook/views"
+import { Presentation } from "./<%= props.kebabCaseName %>-presentation"
+
+storiesOf("Containers", module)
+  .addDecorator((fn) => <StoryScreen>{fn()}</StoryScreen>)
+  .add("<%= props.pascalCaseName %>", () => (
+    <Story>
+      <UseCase text="List of items" usage="Renders a list of items">
+        <Presentation> items={['one', 'two']}/>
+      </UseCase>
+    </Story>
+  ))
