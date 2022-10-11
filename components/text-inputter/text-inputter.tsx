@@ -21,12 +21,11 @@ export const TextInputter = (props: TextInputterProps) => {
 
   // INCOMING PROPS
   const {
-    preset = 'default',
     style = {},
-    data,
-    onPressAnswerQuestion,
     customPlaceholder,
   } = props
+
+
 
   const [answer, setAnswer] = useState('')
 

@@ -4,27 +4,16 @@
 * Make sure to include all useful information inside your comment and to use JSDoc tags where necessary (deprecation, throwables, etc.)
 */
 import { StyleProp, ViewStyle } from "react-native";
-import { TextInputterPresetNames } from "./text-inputter-presets";
 
 export interface TextInputterProps {
-  /**
-  * Data being shown in this component
-  */
-  data?: TextInputterData[];
   /**
   * Style override useful for padding & margin
   * @optional
   */
   style?: ViewStyle;
   /**
-  * Component preset group being used
-  * @optional
-  * @default is a string "default"
+  * 
   */
-  preset?: TextInputterPresetNames;
+  customPlaceholder?: string;
 }
 
-export type TextInputterData = {
-  title: string;
-  text: string;
-}

@@ -19,6 +19,8 @@ import { AntDesign } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
 import UseOnLayout from "../scripts/use-on-layout";
 import { TextInputApp } from "./textInputApp"
+import { TextInputter } from "./text-inputter/text-inputter";
+import { FlatList } from "react-native-gesture-handler";
 
 export const Answer = (props) => {
 
@@ -34,6 +36,8 @@ export const Answer = (props) => {
         currentWidthOfView,
         captureView
     } = UseOnLayout()
+
+
 
     return (
         <View style={{}}>
@@ -100,6 +104,7 @@ export const Answer = (props) => {
                         fontWeight: 'bold',
                         bottom: 7
                     }}>{answer?.dislike}</Text> */}
+
                 </View>
             </View>
 
@@ -120,14 +125,46 @@ export const Answer = (props) => {
                     size={24}
                     color="red" />
             </TouchableOpacity>
+
+
+
             {
                 isAnswerOpen &&
-                <TextInputApp style={{
-                    left: responsiveWidth(5),
-                    marginRight: responsiveWidth(10.5)
-                }}
+                <TextInputter
+                    style={{
+                        left: responsiveWidth(5),
+                        marginRight: responsiveWidth(10.5)
+                    }}
                     customPlaceholder={"Reply..."}
                 />
+            }
+            {
+                <View style={{
+                    left: responsiveWidth(7.5),
+                    marginRight: responsiveWidth(10.5)
+                }}>
+                    <FlatList
+                        data={answer.replies}
+                        renderItem={({ item: reply, index: i }) => {
+                            return <View
+                                style={{
+                                    flexDirection: 'row',
+                                    alignItems: 'center',
+                                    margin: 2,
+                                }}>
+                                <TouchableOpacity
+                                    style={{
+                                        backgroundColor: 'red',
+                                        width: 20,
+                                        height: 20,
+                                        borderRadius: 20,
+                                        marginRight: 5,
+                                    }} />
+                                <Text>{reply?.reply}</Text>
+                            </View>
+                        }}
+                    />
+                </View>
             }
         </View >
     )

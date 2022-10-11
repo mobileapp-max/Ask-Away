@@ -45,6 +45,7 @@ export default function Question(props) {
         captureView
     } = UseOnLayout()
 
+
     return (
         <View style={styles.container}>
             <View style={styles.header}>
@@ -74,9 +75,9 @@ export default function Question(props) {
                 }
                 <View style={{ height: '100%', paddingTop: 5 }}>
 
-                    <TextInputApp
+                    {/* <TextInputApp
                     // onPressAnswerQuestion={onPressAnswerQuestion}
-                    />
+                    /> */}
                     <TextInputter data={[{ title: 'hey', text: 'hello' }]} />
                     <FlatList
 
@@ -85,12 +86,15 @@ export default function Question(props) {
                         showsHorizontalScrollIndicator={false}
                         renderItem={({ item: answer, index: i }) => {
                             return (
-                                <Answer
-                                    onPressAnswerQuestion={onPressAnswerQuestion}
-                                    answer={answer}
-                                    isAnswerOpen={openedAnswerId === answer.answer_id}
-                                    setOpenedAnswerId={setOpenedAnswerId}
-                                />
+                                <>
+                                    <Answer
+                                        onPressAnswerQuestion={onPressAnswerQuestion}
+                                        answer={answer}
+                                        isAnswerOpen={openedAnswerId === answer.answer_id}
+                                        setOpenedAnswerId={setOpenedAnswerId}
+                                    />
+
+                                </>
                             )
                         }}
                     />
