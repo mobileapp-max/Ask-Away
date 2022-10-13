@@ -28,7 +28,9 @@ export const Answer = (props) => {
         answer,
         setOpenedAnswerId,
         isAnswerOpen,
-        onPressAnswerQuestion
+        onPressAnswerQuestion,
+        isReplyOpen,
+        setAnswerWithOpenedReplies
     } = props
 
     const {
@@ -52,9 +54,8 @@ export const Answer = (props) => {
                 />
                 <TouchableOpacity
                     onLayout={captureView}
-                    onPress={onPressAnswerQuestion}
+                    onPress={() => setAnswerWithOpenedReplies(answer.answer_id)}
                     style={{
-
                         maxWidth: '87%',
                         borderColor: "red",
                         borderWidth: 2,
@@ -104,10 +105,8 @@ export const Answer = (props) => {
                         fontWeight: 'bold',
                         bottom: 7
                     }}>{answer?.dislike}</Text> */}
-
                 </View>
             </View>
-
             <TouchableOpacity
                 onPress={() => setOpenedAnswerId(answer.answer_id)}
                 style={{
@@ -124,12 +123,16 @@ export const Answer = (props) => {
                     name="mail-reply"
                     size={24}
                     color="red" />
+                <Text style={{
+                    color: 'black',
+                    right: 23,
+                    bottom: -10,
+                    fontWeight: 'bold',
+                }}>
+                    {answer.replies_aggregate.aggregate.count}
+                </Text>
             </TouchableOpacity>
-
-
-
-            {
-                isAnswerOpen &&
+            {isAnswerOpen &&
                 <TextInputter
                     style={{
                         left: responsiveWidth(5),
@@ -138,33 +141,45 @@ export const Answer = (props) => {
                     customPlaceholder={"Reply..."}
                 />
             }
-            {
-                <View style={{
-                    left: responsiveWidth(7.5),
-                    marginRight: responsiveWidth(10.5)
-                }}>
-                    <FlatList
-                        data={answer.replies}
-                        renderItem={({ item: reply, index: i }) => {
-                            return <View
-                                style={{
-                                    flexDirection: 'row',
-                                    alignItems: 'center',
-                                    margin: 2,
-                                }}>
+            {isReplyOpen &&
+                <FlatList
+                    data={answer.replies}
+                    style={{ flexDirection: 'row' }}
+                    contentContainerStyle={{ maxWidth: '87%' }}
+                    renderItem={({ item: reply, index: i }) => {
+                        return <View
+                            style={{
+                                left: responsiveWidth(5),
+                                marginRight: responsiveWidth(3),
+                                // justifyContent: 'center'
+                            }}
+                        >
+                            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                                 <TouchableOpacity
                                     style={{
                                         backgroundColor: 'red',
-                                        width: 20,
-                                        height: 20,
+                                        width: 30,
+                                        height: 30,
                                         borderRadius: 20,
                                         marginRight: 5,
                                     }} />
-                                <Text>{reply?.reply}</Text>
+                                <View
+                                    style={{
+                                        borderColor: "gold",
+                                        borderWidth: 2,
+                                        borderBottomRightRadius: 20,
+                                        borderTopRightRadius: 8,
+                                        borderTopLeftRadius: 20,
+                                        borderBottomLeftRadius: 8,
+                                        padding: 8,
+                                        margin: 2,
+                                    }}>
+                                    <Text>{reply?.reply}</Text>
+                                </View>
                             </View>
-                        }}
-                    />
-                </View>
+                        </View>
+                    }}
+                />
             }
         </View >
     )

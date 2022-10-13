@@ -27,13 +27,18 @@ export default function Question(props) {
     const { params } = route
     const { question } = params
     const { questions, setIsTabsVisible } = useContext(QuestionsContext)
+
     const [answerVisible, setAnswerVisible] = useState(false)
     const [openedAnswerId, setOpenedAnswerId] = useState(null);
+    const [repliesVisible, setRepliesVisible] = useState(false);
+    const [answerWithOpenedReeplies, setAnswerWithOpenedReplies] = useState(null);
 
+    // const [openedAnswer, setOpenedAnswer] = useState(null);
 
     const onPressAnswerQuestion = () => {
-        setIsTabsVisible(false)
-        setAnswerVisible(!answerVisible)
+        // setIsTabsVisible(false)
+        // setAnswerVisible(!answerVisible)
+        setRepliesVisible(!repliesVisible)
     }
     const onPressHideAnswerQuestion = () => {
         setIsTabsVisible(true)
@@ -88,10 +93,13 @@ export default function Question(props) {
                             return (
                                 <>
                                     <Answer
-                                        onPressAnswerQuestion={onPressAnswerQuestion}
+                                        // onPressAnswerQuestion={onPressAnswerQuestion}
                                         answer={answer}
                                         isAnswerOpen={openedAnswerId === answer.answer_id}
                                         setOpenedAnswerId={setOpenedAnswerId}
+                                        setAnswerWithOpenedReplies={setAnswerWithOpenedReplies}
+                                        isReplyOpen={answerWithOpenedReeplies === answer.answer_id}
+
                                     />
 
                                 </>
@@ -127,8 +135,8 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         borderTopLeftRadius: 30,
         borderTopRightRadius: 30,
-        paddingHorizontal: 20,
-        paddingVertical: 30,
+        paddingHorizontal: 15,
+        paddingVertical: 20,
         flexDirection: 'column'
     },
     text_header: {
@@ -151,7 +159,7 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1,
         borderBottomColor: '#f2f2f2',
         paddingBottom: 5,
-        alignItems: 'center'
+        alignItems: 'center',
     },
     centeredView: {
         // flex: 1,
