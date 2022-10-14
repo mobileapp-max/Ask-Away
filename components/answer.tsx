@@ -63,7 +63,7 @@ export const Answer = (props) => {
                         borderTopRightRadius: 8,
                         borderTopLeftRadius: 20,
                         borderBottomLeftRadius: 8,
-                        padding: 10,
+                        padding: 8,
                         margin: 5,
                         marginBottom: 9,
                     }}>
@@ -136,10 +136,12 @@ export const Answer = (props) => {
                 <TextInputter
                     style={{
                         left: responsiveWidth(5),
-                        marginRight: responsiveWidth(10.5)
+                        marginRight: responsiveWidth(10.5),
                     }}
                     customPlaceholder={"Reply..."}
+                    questionId={answer?.question_id}
                 />
+
             }
             {isReplyOpen &&
                 <FlatList
@@ -151,7 +153,6 @@ export const Answer = (props) => {
                             style={{
                                 left: responsiveWidth(5),
                                 marginRight: responsiveWidth(3),
-                                // justifyContent: 'center'
                             }}
                         >
                             <View style={{ flexDirection: 'row', alignItems: 'center' }}>

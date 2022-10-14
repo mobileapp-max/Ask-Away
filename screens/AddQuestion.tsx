@@ -17,6 +17,7 @@ import { useContext } from 'react';
 import { QuestionsContext } from '../contexts/questions-context-provider';
 import { Switch } from 'react-native-switch';
 import { responsiveFontSize } from '../scripts/constants';
+import { COLORS } from '../assets/colors';
 
 const AddQ = ({ navigation }) => {
 
@@ -51,12 +52,13 @@ const AddQ = ({ navigation }) => {
           <TextInput
             value={title}
 
-            placeholder="Title"
+            placeholder="Title - sum up the question"
+
             multiline={true}
             maxLength={150}
-            placeholderTextColor="#666666"
+            placeholderTextColor="grey"
             style={[styles.textInput, {
-              color: colors.text, fontSize: 30
+              color: colors.text, fontSize: 25
             }]}
             autoCapitalize="words"
             onChangeText={(newTitle) => setTitle(newTitle)}
@@ -69,11 +71,11 @@ const AddQ = ({ navigation }) => {
         <View style={styles.action}>
           <TextInput
             value={text}
-            placeholder={"Question (optional)"}
+            placeholder={"Question (optional) - what'd like to be answered? "}
             multiline={true}
             numberOfLines={5}
-            maxLength={500}
-            placeholderTextColor="#666666"
+            maxLength={300}
+            placeholderTextColor='grey'
             secureTextEntry={false}
             style={[styles.textInput, {
               color: colors.text, minHeight: height * 0.15,

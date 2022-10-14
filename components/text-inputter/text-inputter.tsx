@@ -1,18 +1,12 @@
 
-import * as React from "react"
+import React, { useEffect, useState, useContext, } from "react";
 import { Image, Text, View, TouchableOpacity, TouchableWithoutFeedbackBase, TextInput, StyleSheet, TextInputComponent, TouchableWithoutFeedback } from "react-native"
-import { COLORS } from "../../assets/colors"
-import { LinearGradient } from "expo-linear-gradient"
-import ShadeColor from "../../scripts/shade-color"
 import { responsiveFontSize, responsiveHeight, responsiveWidth } from "../../scripts/constants"
-import { FontAwesome } from "@expo/vector-icons"
-import { SimpleLineIcons } from '@expo/vector-icons';
-import { AntDesign } from '@expo/vector-icons';
 import { Entypo } from '@expo/vector-icons';
-import { useState } from "react"
 import Animated, { color } from "react-native-reanimated"
 import { TextInputterProps } from "./text-inputter-interface"
-import { TextInputterPresets } from "./text-inputter-presets"
+import { QuestionsContext } from "../../contexts/questions-context-provider";
+
 
 /**
  * Describe your new component here...
@@ -23,8 +17,10 @@ export const TextInputter = (props: TextInputterProps) => {
   const {
     style = {},
     customPlaceholder,
+    questionId,
   } = props
 
+  const { onPressAddAnswer } = useContext(QuestionsContext)
 
 
   const [answer, setAnswer] = useState('')
@@ -32,7 +28,12 @@ export const TextInputter = (props: TextInputterProps) => {
   return (
     <View style={{ ...style }}>
       <View style={{ flexDirection: 'row', alignItems: 'center', }}>
-        <TouchableOpacity style={{ backgroundColor: 'red', width: 30, height: 30, borderRadius: 20 }}></TouchableOpacity>
+        <TouchableOpacity style={{
+          backgroundColor: 'red',
+          width: 30,
+          height: 30,
+          borderRadius: 20
+        }} />
         <View style={{ maxWidth: '85%' }}>
           <TextInput
             value={answer}
@@ -44,12 +45,39 @@ export const TextInputter = (props: TextInputterProps) => {
             secureTextEntry={false}
             autoCapitalize="sentences"
             onChangeText={(newAnswer) => setAnswer(newAnswer)}
-            style={{ maxWidth: responsiveWidth(70), borderColor: "gold", borderWidth: 2, borderBottomRightRadius: 20, borderTopRightRadius: 8, borderTopLeftRadius: 20, borderBottomLeftRadius: 8, padding: 10, margin: 5 }}></TextInput>
+            style={{
+              maxWidth: responsiveWidth(70),
+              borderColor: "#8B2492",
+              borderWidth: 2,
+              borderBottomRightRadius: 20,
+              borderTopRightRadius: 8,
+              borderTopLeftRadius: 20,
+              borderBottomLeftRadius: 8,
+              padding: 8,
+              margin: 5
+            }}></TextInput>
         </View>
-        <View style={{ backgroundColor: '#e32f45', borderRadius: 25, borderWidth: 1.5, borderColor: '#e32f45' }}>
-          <View style={{ backgroundColor: 'white', borderRadius: 25, borderWidth: 1.5, borderColor: 'white' }}>
+        <View style={{
+          backgroundColor: '#e32f45',
+          borderRadius: 25,
+          borderWidth: 1.5,
+          borderColor: '#e32f45'
+        }}>
+          <View style={{
+            backgroundColor: 'white',
+            borderRadius: 25,
+            borderWidth: 1.5,
+            borderColor: 'white'
+          }}>
             <TouchableOpacity
-              onPress={console.log('hi')}
+              onPress={() => onPressAddAnswer({
+                answer: {
+                  answer_id: "c82eaca0-f915-4c52-a6c7-010b731f46786",
+                  answer,
+                  currentQuestionId: questionId,
+                }
+              })}
+
               style={{ backgroundColor: '#e32f45', borderRadius: 20 }}>
               <Entypo
                 name="plus" size={25} color='white' />
@@ -58,17 +86,18 @@ export const TextInputter = (props: TextInputterProps) => {
 
         </View>
       </View>
-      {answer?.length >= 150 &&
+      {
+        answer?.length >= 150 &&
         // <Animated >
         <Text
           style={{
             left: responsiveWidth(10),
             color: 'red',
             marginBottom: responsiveHeight(0.5)
-          }}>Max length - 150</Text>
+          }}>Max characters - 300</Text>
         // </Animated>
       }
-    </View>
+    </View >
   )
 }
 

@@ -83,7 +83,9 @@ export default function Question(props) {
                     {/* <TextInputApp
                     // onPressAnswerQuestion={onPressAnswerQuestion}
                     /> */}
-                    <TextInputter data={[{ title: 'hey', text: 'hello' }]} />
+                    <TextInputter
+                        questionId={question.id}
+                    />
                     <FlatList
 
                         data={question.answers}
