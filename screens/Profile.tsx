@@ -17,6 +17,8 @@ import { responsiveHeight, responsiveWidth, responsiveFontSize } from '../script
 
 import { useTheme } from 'react-native-paper';
 import FontAwesome5 from '@expo/vector-icons/build/FontAwesome5';
+import FontAwesome from '@expo/vector-icons/build/FontAwesome';
+import { ProfileSetting } from '../components/profileSetting';
 
 // import { AuthContext } from '../components/context';
 
@@ -27,8 +29,8 @@ const Profile = ({ navigation }) => {
 
 
     return (
-        <View style={{ height: responsiveHeight(98) }}>
-            <View style={{ flex: 1.9, backgroundColor: '#e32f45' }}>
+        <View style={{ flex: 1 }}>
+            <View style={{ backgroundColor: '#e32f45', flex: 1.9 }}>
                 <Text style={{
                     fontWeight: 'bold',
                     top: responsiveWidth(11),
@@ -39,11 +41,39 @@ const Profile = ({ navigation }) => {
                     {'Profile'}
                 </Text>
             </View>
-            <View style={{ flex: 5, backgroundColor: 'white' }} />
+
+
+            <View style={{ flex: 5, backgroundColor: 'white' }}>
+                <View style={{
+                    flexDirection: 'column',
+                }}>
+                    <ProfileSetting
+                        text={'Questions'}
+                        iconName={'question-circle'}
+                    />
+                    <ProfileSetting
+                        text={'Answers'}
+                        iconName={'pencil-square'}
+                        style={{ paddingTop: 0 }}
+                    />
+                    <ProfileSetting
+                        text={'Settings'}
+                        iconName={'gears'}
+                        style={{ paddingTop: 0 }}
+                    />
+                    <ProfileSetting
+                        text={'Log Out'}
+                        iconName={'arrow-circle-o-left'}
+                        style={{ paddingTop: 0 }}
+                    />
+
+                </View>
+
+            </View>
             <View style={{
                 position: 'absolute',
                 backgroundColor: 'white',
-                width: responsiveWidth(80),
+                width: responsiveWidth(85),
                 height: responsiveHeight(25),
                 alignSelf: 'center',
                 borderRadius: 25,
@@ -80,7 +110,7 @@ const Profile = ({ navigation }) => {
 
                 }}>
                     <View style={{
-                        backgroundColor: 'red',
+                        backgroundColor: "#e32f45",
                         width: 70,
                         height: 70,
                         borderRadius: 50,
@@ -95,16 +125,6 @@ const Profile = ({ navigation }) => {
                     fontWeight: 'bold',
                     fontSize: responsiveFontSize(25),
                 }}>{'Profile Name'}</Text>
-
-            </View>
-            <View style={{
-
-                backgroundColor: 'blue',
-                // width: responsiveWidth(5),
-                height: responsiveHeight(20),
-                // position: "absolute",
-
-            }}>
 
             </View>
 

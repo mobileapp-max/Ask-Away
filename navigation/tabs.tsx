@@ -12,6 +12,7 @@ import { MainStackScreen } from './navigation';
 import { useNavigation } from '@react-navigation/native';
 import { useRoute } from '@react-navigation/native';
 import { LogInStackScreen } from './logInSingUpNav'
+import { FontAwesome } from '@expo/vector-icons';
 
 
 // import { mdiPlusCircleOutline } from '@mdi/js'
@@ -83,8 +84,8 @@ const Tabs = (props) => {
             <Tab.Screen name="Main" component={MainStackScreen} options={{
                 tabBarIcon: ({ focused }) => (
                     <View style={{ alignItems: "center", justifyContent: 'center', top: 10 }}>
-                        <AntDesign
-                            name="questioncircle"
+                        <FontAwesome
+                            name="question-circle"
                             size={40}
                             color={focused ? 'gold' : '#e32f45'}
                         />
@@ -102,6 +103,8 @@ const Tabs = (props) => {
                                 size={65}
                                 color={focused ? 'gold' : 'white'}
                             />
+
+
                         </View>
                     ),
                     tabBarButton: (props) => {
