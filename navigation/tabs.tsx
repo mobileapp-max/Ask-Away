@@ -1,5 +1,5 @@
-import React from 'react';
-import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
+import React, { useRef, useState } from 'react';
+import { StyleSheet, Text, View, Image, TouchableOpacity, Animated, } from 'react-native';
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import ProfileScreen from "../screens/ProfileScreen";
 import QScreen from "../screens/ListOfQuestions";
@@ -13,6 +13,8 @@ import { useNavigation } from '@react-navigation/native';
 import { useRoute } from '@react-navigation/native';
 import { LogInStackScreen } from './logInSingUpNav'
 import { FontAwesome } from '@expo/vector-icons';
+import { useEffect } from 'react';
+import { Easing } from 'react-native-reanimated';
 
 
 // import { mdiPlusCircleOutline } from '@mdi/js'
@@ -32,6 +34,27 @@ const CustomTabButton = (props) => {
     const children = props?.children
     const onPress = props?.onPress
     const currentScreen = props?.currentScreen
+    const startImageRotation = props?.onPress
+
+
+    const [plusSign, setplusSign] = useState(new Animated.Value(0));
+
+    const rotatePlusSign = () => {
+        Animated.timing(plusSign, {
+            toValue: 0.25,
+            duration: 500,
+            easing: Easing.linear,
+            useNativeDriver: false,
+        }).start();
+        setTimeout(() => {
+            setplusSign(new Animated.Value(0))
+        }, 500);
+    }
+
+    const onPressPlusSign = () => {
+        rotatePlusSign()
+        onPress()
+    }
 
     return <TouchableOpacity
         style={{
@@ -40,21 +63,37 @@ const CustomTabButton = (props) => {
             alignItems: 'center',
             ...style.shadow,
         }}
-        onPress={onPress}
+        onPress={onPressPlusSign}
     >
-        <View style={{
+        <Animated.View style={{
             width: 70,
             height: 70,
             borderRadius: 35,
-            backgroundColor: currentScreen === 'Profile2' ? 'gold' : '#e32f45'
+            backgroundColor: currentScreen === 'Profile2' ? 'gold' : '#e32f45',
+            transform:
+                [
+                    {
+                        rotate: plusSign.interpolate(
+                            {
+                                inputRange: [0, 1],
+                                outputRange: ['0deg', '360deg'],
+                            }
+                        )
+                    }
+                ]
 
         }}>
             {children}
-        </View>
+        </Animated.View>
     </TouchableOpacity>
 }
 
 const Tabs = (props) => {
+
+
+
+
+
     return (
         // <RootStackScree>
         <Tab.Navigator
@@ -97,15 +136,16 @@ const Tabs = (props) => {
             <Tab.Screen name="Profile2" component={AddQ}
                 options={{
                     tabBarIcon: ({ focused }) => (
-                        <View style={{ alignItems: "center", justifyContent: 'center' }}>
+
+                        <View
+                            style={{ alignItems: "center", justifyContent: 'center' }}>
                             <Entypo
                                 name="plus"
                                 size={65}
                                 color={focused ? 'gold' : 'white'}
                             />
-
-
                         </View>
+
                     ),
                     tabBarButton: (props) => {
                         // console.log('props', props);
