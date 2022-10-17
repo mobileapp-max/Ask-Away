@@ -35,7 +35,10 @@ export const Card = (props) => {
             <LinearGradient
 
                 start={[0.5, 0]}
-                colors={[ShadeColor('#e32f45', -10), ShadeColor('#e32f45', 10), ShadeColor('#e32f45', -10)]}
+                colors={[
+                    ShadeColor('#e32f45', -10),
+                    ShadeColor('#e32f45', 10),
+                    ShadeColor('#e32f45', -10)]}
                 style={{
                     ...styles.card,
                     ...style

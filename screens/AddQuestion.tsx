@@ -8,7 +8,6 @@ import {
   StyleSheet,
   Dimensions,
   StatusBar,
-  Alert
 } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -16,20 +15,17 @@ import { useTheme } from 'react-native-paper';
 import { useContext } from 'react';
 import { QuestionsContext } from '../contexts/questions-context-provider';
 import { Switch } from 'react-native-switch';
-import { responsiveFontSize } from '../scripts/constants';
-import { COLORS } from '../assets/colors';
+import { responsiveFontSize, responsiveHeight, responsiveWidth } from '../scripts/constants';
+import { CharacterLimit } from '../components/character-limit/character-limit';
 
 const AddQ = ({ navigation }) => {
 
   const [title, setTitle] = useState('')
   const [text, setText] = useState('')
   const [isHidden, setIsHidden] = useState(false)
-
   const { onPressAddQuestion } = useContext(QuestionsContext)
   const { height } = Dimensions.get("window");
-
   const { colors } = useTheme();
-
   const toggleSwitch = () => setIsHidden(previousState => !previousState);
 
   return (
@@ -44,46 +40,90 @@ const AddQ = ({ navigation }) => {
         animation="fadeInUpBig"
         style={[styles.footer, {
           backgroundColor: colors.background
-        }]}
-      >
-
-        <View style={styles.action}>
+        }]}>
+        <View style={{
+          flexDirection: 'row',
+          marginTop: 10,
+          paddingBottom: 5,
+        }}>
 
           <TextInput
             value={title}
-
-            placeholder="Title - sum up the question"
-
+            placeholder="Title..."
             multiline={true}
             maxLength={150}
-            placeholderTextColor="grey"
-            style={[styles.textInput, {
-              color: colors.text, fontSize: 25
-            }]}
+            placeholderTextColor="#C47B76"
+            style={{
+              flex: 1,
+              marginTop: Platform.OS === 'ios' ? 0 : -12,
+              padding: 10,
+              paddingTop: 15,
+              color: '#e32f45',
+              fontSize: 20,
+              // minHeight: height * 0.15,
+              backgroundColor: 'white',
+              borderBottomRightRadius: 20,
+              borderTopRightRadius: 8,
+              borderTopLeftRadius: 20,
+              borderBottomLeftRadius: 8,
+              shadowColor: "#e32f45",
+              shadowOffset: {
+                width: 0,
+                height: 10,
+              },
+              shadowOpacity: 0.25,
+              shadowRadius: 3.5,
+              elevation: 5,
+            }}
             autoCapitalize="words"
             onChangeText={(newTitle) => setTitle(newTitle)}
           />
-
         </View>
 
-
-
-        <View style={styles.action}>
+        <View style={{
+          flexDirection: 'row',
+          marginTop: 10,
+          paddingBottom: 5,
+        }}>
           <TextInput
             value={text}
-            placeholder={"Question (optional) - what'd like to be answered? "}
+            placeholder={"Question (optional)..."}
             multiline={true}
-            numberOfLines={5}
+            numberOfLines={8}
             maxLength={300}
-            placeholderTextColor='grey'
+            placeholderTextColor='#C47B76'
             secureTextEntry={false}
-            style={[styles.textInput, {
-              color: colors.text, minHeight: height * 0.15,
-            }]}
+            style={{
+              flex: 1,
+              marginTop: Platform.OS === 'ios' ? 0 : -12,
+              padding: 10,
+              paddingTop: 15,
+              color: '#e32f45',
+              fontSize: 20,
+              minHeight: responsiveHeight(15),
+              minWidth: responsiveWidth(90),
+              backgroundColor: 'white',
+              borderBottomRightRadius: 20,
+              borderTopRightRadius: 8,
+              borderTopLeftRadius: 20,
+              borderBottomLeftRadius: 8,
+              shadowColor: "#e32f45",
+              shadowOffset: {
+                width: 0,
+                height: 10,
+              },
+              shadowOpacity: 0.25,
+              shadowRadius: 3.5,
+              elevation: 5,
+            }}
             autoCapitalize="sentences"
             onChangeText={(newText) => setText(newText)}
           />
         </View>
+        {
+          text?.length >= 20 &&
+          <CharacterLimit />
+        }
 
         <View style={styles.mask}>
           <Switch
@@ -107,7 +147,7 @@ const AddQ = ({ navigation }) => {
               <FontAwesome5 name="user" size={24} color={'#e32f45'} />
             }
           </TouchableOpacity> */}
-          <Text style={{ marginLeft: 18 }}>Anonymous?</Text>
+          <Text style={{ marginLeft: 18 }}>{'Anonymous?'}</Text>
 
         </View>
 
