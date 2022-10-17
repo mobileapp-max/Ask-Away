@@ -8,13 +8,14 @@ import {
   StyleSheet,
   Dimensions,
   StatusBar,
+  ScrollView,
+  Switch,
 } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useTheme } from 'react-native-paper';
 import { useContext } from 'react';
 import { QuestionsContext } from '../contexts/questions-context-provider';
-import { Switch } from 'react-native-switch';
 import { responsiveFontSize, responsiveHeight, responsiveWidth } from '../scripts/constants';
 import { CharacterLimit } from '../components/character-limit/character-limit';
 
@@ -41,139 +42,145 @@ const AddQ = ({ navigation }) => {
         style={[styles.footer, {
           backgroundColor: colors.background
         }]}>
-        <View style={{
-          flexDirection: 'row',
-          marginTop: 10,
-          paddingBottom: 5,
+        <ScrollView style={{
+          paddingHorizontal: 20,
+          paddingVertical: 30
         }}>
+          <View style={{
+            flexDirection: 'row',
+            marginTop: 10,
+            paddingBottom: 5,
+          }}>
 
-          <TextInput
-            value={title}
-            placeholder="Title..."
-            multiline={true}
-            maxLength={150}
-            placeholderTextColor="#C47B76"
-            style={{
-              flex: 1,
-              marginTop: Platform.OS === 'ios' ? 0 : -12,
-              padding: 10,
-              paddingTop: 15,
-              color: '#e32f45',
-              fontSize: 20,
-              // minHeight: height * 0.15,
-              backgroundColor: 'white',
-              borderBottomRightRadius: 20,
-              borderTopRightRadius: 8,
-              borderTopLeftRadius: 20,
-              borderBottomLeftRadius: 8,
-              shadowColor: "#e32f45",
-              shadowOffset: {
-                width: 0,
-                height: 10,
-              },
-              shadowOpacity: 0.25,
-              shadowRadius: 3.5,
-              elevation: 5,
-            }}
-            autoCapitalize="words"
-            onChangeText={(newTitle) => setTitle(newTitle)}
-          />
-        </View>
+            <TextInput
+              value={title}
+              placeholder="Title..."
+              multiline={true}
+              maxLength={150}
+              placeholderTextColor="#C47B76"
+              style={{
+                flex: 1,
+                marginTop: Platform.OS === 'ios' ? 0 : -12,
+                padding: 10,
+                paddingTop: 15,
+                color: '#e32f45',
+                fontSize: 20,
+                // minHeight: height * 0.15,
+                backgroundColor: 'white',
+                borderBottomRightRadius: 20,
+                borderTopRightRadius: 8,
+                borderTopLeftRadius: 20,
+                borderBottomLeftRadius: 8,
+                shadowColor: "#e32f45",
+                shadowOffset: {
+                  width: 0,
+                  height: 10,
+                },
+                shadowOpacity: 0.25,
+                shadowRadius: 3.5,
+                elevation: 5,
+              }}
+              autoCapitalize="words"
+              onChangeText={(newTitle) => setTitle(newTitle)}
+            />
+          </View>
+          {
+            title?.length >= 150 &&
+            <CharacterLimit
+              errorMessage={'Max characters - 150'}
+            />
+          }
 
-        <View style={{
-          flexDirection: 'row',
-          marginTop: 10,
-          paddingBottom: 5,
-        }}>
-          <TextInput
-            value={text}
-            placeholder={"Question (optional)..."}
-            multiline={true}
-            numberOfLines={8}
-            maxLength={300}
-            placeholderTextColor='#C47B76'
-            secureTextEntry={false}
-            style={{
-              flex: 1,
-              marginTop: Platform.OS === 'ios' ? 0 : -12,
-              padding: 10,
-              paddingTop: 15,
-              color: '#e32f45',
-              fontSize: 20,
-              minHeight: responsiveHeight(15),
-              minWidth: responsiveWidth(90),
-              backgroundColor: 'white',
-              borderBottomRightRadius: 20,
-              borderTopRightRadius: 8,
-              borderTopLeftRadius: 20,
-              borderBottomLeftRadius: 8,
-              shadowColor: "#e32f45",
-              shadowOffset: {
-                width: 0,
-                height: 10,
-              },
-              shadowOpacity: 0.25,
-              shadowRadius: 3.5,
-              elevation: 5,
-            }}
-            autoCapitalize="sentences"
-            onChangeText={(newText) => setText(newText)}
-          />
-        </View>
-        {
-          text?.length >= 20 &&
-          <CharacterLimit />
-        }
+          <View style={{
+            flexDirection: 'row',
+            marginTop: 10,
+            paddingBottom: 5,
+          }}>
+            <TextInput
+              value={text}
+              placeholder={"Question (optional)..."}
+              multiline={true}
+              numberOfLines={8}
+              maxLength={300}
+              placeholderTextColor='#C47B76'
+              secureTextEntry={false}
+              style={{
+                flex: 1,
+                marginTop: Platform.OS === 'ios' ? 0 : -12,
+                padding: 10,
+                paddingTop: 15,
+                color: '#e32f45',
+                fontSize: 20,
+                minHeight: responsiveHeight(15),
+                minWidth: responsiveWidth(90),
+                backgroundColor: 'white',
+                borderBottomRightRadius: 20,
+                borderTopRightRadius: 8,
+                borderTopLeftRadius: 20,
+                borderBottomLeftRadius: 8,
+                shadowColor: "#e32f45",
+                shadowOffset: {
+                  width: 0,
+                  height: 10,
+                },
+                shadowOpacity: 0.25,
+                shadowRadius: 3.5,
+                elevation: 5,
+              }}
+              autoCapitalize="sentences"
+              onChangeText={(newText) => setText(newText)}
+            />
+          </View>
+          {
+            text?.length >= 300 &&
+            <CharacterLimit
+              errorMessage={'Max characters - 300'} />
+          }
 
-        <View style={styles.mask}>
-          <Switch
-            value={isHidden}
-            onValueChange={toggleSwitch}
-            disabled={false}
-            activeText={'Yes'}
-            inActiveText={'No'}
-            backgroundActive={'#e32f45'}
-            backgroundInactive={'gray'}
-            circleActiveColor={'gold'}
-            circleInActiveColor={'#000000'} />
-          {/* <TouchableOpacity
-            onPress={() => setIsHidden(!isHidden)}
-          >
+          <View style={styles.mask}>
+            <Switch
+              value={isHidden}
+              onValueChange={toggleSwitch}
+              disabled={false}
+              // activeText={'Anonymous'}
+              // inActiveText={'User'}
+              // backgroundActive={'#e32f45'}
+              // backgroundInactive={'gray'}
+              // circleActiveColor={'gold'}
+              // circleInActiveColor={'#000000'}
+              // style={{ width: 20, height: 200 }} 
+              ios_backgroundColor={'pink'}
+              thumbColor={isHidden ? '#e32f45' : "white"}
+              trackColor={{ false: 'green', true: "pink" }}
+            />
+            <Text style={{ marginLeft: 18 }}>{'?User/Anonymous?'}</Text>
 
-
-            {isHidden ?
-              <FontAwesome5 name="mask" size={24} color={"#e32f45"} />
-              :
-              <FontAwesome5 name="user" size={24} color={'#e32f45'} />
-            }
-          </TouchableOpacity> */}
-          <Text style={{ marginLeft: 18 }}>{'Anonymous?'}</Text>
-
-        </View>
+          </View>
 
 
-        <View style={styles.button}>
-          <TouchableOpacity
-            style={styles.signIn}
-            onPress={() => onPressAddQuestion({
-              question: {
-                "id": "c82eaca0-f915-4c52-a6c7-010b731f46786",
-                text,
-                title,
-                "likes": 0
-              }
-            })}
-          >
-            <LinearGradient
-              colors={['#e32f45', 'pink']}
+          <View style={styles.button}>
+            <TouchableOpacity
               style={styles.signIn}
+              onPress={() => onPressAddQuestion({
+                question: {
+                  "id": "c82eaca0-f915-4c52-a6c7-010b731f46786",
+                  text,
+                  title,
+                  "likes": 0
+                }
+              })}
             >
-              <Text style={[styles.textSign, {
-                color: '#fff'
-              }]}>Post Question</Text>
-            </LinearGradient>
-          </TouchableOpacity>
-        </View>
+              <LinearGradient
+                colors={['#e32f45', 'pink']}
+                style={styles.signIn}
+              >
+                <Text style={[styles.textSign, {
+                  color: '#fff'
+                }]}>Post Question</Text>
+              </LinearGradient>
+            </TouchableOpacity>
+          </View>
+        </ScrollView>
       </Animatable.View >
     </View >
   );
@@ -197,8 +204,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,
-    paddingHorizontal: 20,
-    paddingVertical: 30
+
   },
   text_header: {
     color: '#fff',

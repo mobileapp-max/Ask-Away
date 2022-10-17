@@ -21,6 +21,7 @@ export const CharacterLimit = (props: CharacterLimitProps) => {
     preset = 'default',
     style,
     data,
+    errorMessage,
   } = props
 
   // PRESET VARIABLES
@@ -31,12 +32,18 @@ export const CharacterLimit = (props: CharacterLimitProps) => {
   return (
     <>
       <Animatable.View
-        animation="bounceIn" >
+        animation="bounceIn"
+        style={{
+          paddingTop: 5,
+          ...style
+        }} >
         <Text
           style={{
             // left: responsiveWidth(10),
             color: 'red',
-          }}>{'Max characters - 300'}</Text>
+          }}>
+          {errorMessage}
+        </Text>
       </Animatable.View>
     </>
   )
