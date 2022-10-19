@@ -35,8 +35,8 @@ export const ProfileSetting = (props) => {
         }}>
             <View style={{
                 backgroundColor: "#e32f45",
-                width: responsiveWidth(15),
-                height: responsiveWidth(15),
+                width: responsiveWidth(14),
+                height: responsiveWidth(14),
                 borderRadius: 50,
                 margin: 10,
                 alignItems: 'center',
@@ -45,7 +45,7 @@ export const ProfileSetting = (props) => {
                 <FontAwesome
                     name={iconName}
                     color="white"
-                    size={43} />
+                    size={40} />
             </View>
             <Text style={{
                 fontSize: responsiveFontSize(25),

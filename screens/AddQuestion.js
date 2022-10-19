@@ -10,6 +10,7 @@ import {
   StatusBar,
   ScrollView,
   Switch,
+  TouchableWithoutFeedback,
 } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -18,6 +19,7 @@ import { useContext } from 'react';
 import { QuestionsContext } from '../contexts/questions-context-provider';
 import { responsiveFontSize, responsiveHeight, responsiveWidth } from '../scripts/constants';
 import { CharacterLimit } from '../components/character-limit/character-limit';
+import SwitchSelector from 'react-native-switch-selector';
 
 const AddQ = ({ navigation }) => {
 
@@ -28,6 +30,14 @@ const AddQ = ({ navigation }) => {
   const { height } = Dimensions.get("window");
   const { colors } = useTheme();
   const toggleSwitch = () => setIsHidden(previousState => !previousState);
+
+
+
+  const action = (value) => {
+    console.log(`Call onPress with value: ${value}`)
+
+  }
+
 
   return (
     <View style={styles.container}>
@@ -42,10 +52,47 @@ const AddQ = ({ navigation }) => {
         style={[styles.footer, {
           backgroundColor: colors.background
         }]}>
+
+
+        <SwitchSelector
+          initial={0}
+          onPress={value => console.log("")}
+          textColor={'red'}
+          selectedColor={'white'}
+          buttonColor={"#e32f45"}
+          backgroundColor={'white'}
+          // borderColor={'purple'}
+          // hasPadding
+          bold={true}
+          options={[
+            { label: "Close-Ended", value: "0", },
+            { label: "Open-Ended", value: "1", } //images.masculino = require('./path_to/assets/img/masculino.png')
+          ]}
+          testID="gender-switch-selector"
+          accessibilityLabel="gender-switch-selector"
+          style={{
+            paddingTop: 10,
+            width: responsiveWidth(90),
+            alignSelf: 'center',
+            shadowColor: "#e32f45",
+            shadowOffset: {
+              width: 0,
+              height: 10,
+            },
+            shadowOpacity: 0.25,
+            shadowRadius: 3.5,
+            elevation: 5,
+          }}
+
+        />
+
+
+
         <ScrollView style={{
           paddingHorizontal: 20,
           paddingVertical: 30
         }}>
+
           <View style={{
             flexDirection: 'row',
             marginTop: 10,
@@ -142,13 +189,6 @@ const AddQ = ({ navigation }) => {
               value={isHidden}
               onValueChange={toggleSwitch}
               disabled={false}
-              // activeText={'Anonymous'}
-              // inActiveText={'User'}
-              // backgroundActive={'#e32f45'}
-              // backgroundInactive={'gray'}
-              // circleActiveColor={'gold'}
-              // circleInActiveColor={'#000000'}
-              // style={{ width: 20, height: 200 }} 
               ios_backgroundColor={'pink'}
               thumbColor={isHidden ? '#e32f45' : "white"}
               trackColor={{ false: 'green', true: "pink" }}
@@ -176,7 +216,7 @@ const AddQ = ({ navigation }) => {
               >
                 <Text style={[styles.textSign, {
                   color: '#fff'
-                }]}>Post Question</Text>
+                }]}>{'Post Question'}</Text>
               </LinearGradient>
             </TouchableOpacity>
           </View>

@@ -67,6 +67,9 @@ const Profile = ({ navigation }) => {
                         style={{ paddingTop: 0 }}
                     />
 
+
+
+
                 </View>
 
             </View>
@@ -124,7 +127,7 @@ const Profile = ({ navigation }) => {
                     alignSelf: 'center',
                     fontWeight: 'bold',
                     fontSize: responsiveFontSize(25),
-                }}>{'Profile Name'}</Text>
+                }}>{'?Profile Name?'}</Text>
 
             </View>
 
