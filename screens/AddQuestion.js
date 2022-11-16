@@ -11,6 +11,8 @@ import {
   ScrollView,
   Switch,
   TouchableWithoutFeedback,
+  KeyboardAvoidingView,
+
 } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -32,13 +34,6 @@ const AddQ = ({ navigation }) => {
   const toggleSwitch = () => setIsHidden(previousState => !previousState);
 
 
-
-  const action = (value) => {
-    console.log(`Call onPress with value: ${value}`)
-
-  }
-
-
   return (
     <View style={styles.container}>
       <StatusBar backgroundColor='#e32f45' barStyle="light-content" />
@@ -49,177 +44,124 @@ const AddQ = ({ navigation }) => {
       </View>
       <Animatable.View
         animation="fadeInUpBig"
-        style={[styles.footer, {
-          backgroundColor: colors.background
-        }]}>
+        style={styles.footer}>
 
-
-        <SwitchSelector
-          initial={0}
-          onPress={value => console.log("")}
-          textColor={'red'}
-          selectedColor={'white'}
-          buttonColor={"#e32f45"}
-          backgroundColor={'white'}
-          // borderColor={'purple'}
-          // hasPadding
-          bold={true}
-          options={[
-            { label: "Close-Ended", value: "0", },
-            { label: "Open-Ended", value: "1", } //images.masculino = require('./path_to/assets/img/masculino.png')
-          ]}
-          testID="gender-switch-selector"
-          accessibilityLabel="gender-switch-selector"
-          style={{
-            paddingTop: 10,
-            width: responsiveWidth(90),
-            alignSelf: 'center',
-            shadowColor: "#e32f45",
-            shadowOffset: {
-              width: 0,
-              height: 10,
-            },
-            shadowOpacity: 0.25,
-            shadowRadius: 3.5,
-            elevation: 5,
-          }}
-
-        />
-
-
-
-        <ScrollView style={{
-          paddingHorizontal: 20,
-          paddingVertical: 30
-        }}>
-
-          <View style={{
-            flexDirection: 'row',
-            marginTop: 10,
-            paddingBottom: 5,
-          }}>
-
-            <TextInput
-              value={title}
-              placeholder="Title..."
-              multiline={true}
-              maxLength={150}
-              placeholderTextColor="#C47B76"
-              style={{
-                flex: 1,
-                marginTop: Platform.OS === 'ios' ? 0 : -12,
-                padding: 10,
-                paddingTop: 15,
-                color: '#e32f45',
-                fontSize: 20,
-                // minHeight: height * 0.15,
-                backgroundColor: 'white',
-                borderBottomRightRadius: 20,
-                borderTopRightRadius: 8,
-                borderTopLeftRadius: 20,
-                borderBottomLeftRadius: 8,
-                shadowColor: "#e32f45",
-                shadowOffset: {
-                  width: 0,
-                  height: 10,
-                },
-                shadowOpacity: 0.25,
-                shadowRadius: 3.5,
-                elevation: 5,
-              }}
-              autoCapitalize="words"
-              onChangeText={(newTitle) => setTitle(newTitle)}
+        <ScrollView
+          keyboardDismissMode='on-drag'
+          style={styles.scrollView}>
+          <KeyboardAvoidingView
+            behavior={Platform.OS === "ios" ? "padding" : "height"}
+          >
+            <SwitchSelector
+              initial={1}
+              onPress={value => console.log("")}
+              textColor={'red'}
+              selectedColor={'white'}
+              buttonColor={"#e32f45"}
+              backgroundColor={'white'}
+              // borderColor={'purple'}
+              // hasPadding
+              bold={true}
+              options={[
+                { label: "Close-Ended", value: "0", },
+                { label: "Open-Ended", value: "1", } //images.masculino = require('./path_to/assets/img/masculino.png')
+              ]}
+              testID="gender-switch-selector"
+              accessibilityLabel="gender-switch-selector"
+              style={styles.switchSelector}
             />
-          </View>
-          {
-            title?.length >= 150 &&
-            <CharacterLimit
-              errorMessage={'Max characters - 150'}
-            />
-          }
-
-          <View style={{
-            flexDirection: 'row',
-            marginTop: 10,
-            paddingBottom: 5,
-          }}>
-            <TextInput
-              value={text}
-              placeholder={"Question (optional)..."}
-              multiline={true}
-              numberOfLines={8}
-              maxLength={300}
-              placeholderTextColor='#C47B76'
-              secureTextEntry={false}
-              style={{
-                flex: 1,
-                marginTop: Platform.OS === 'ios' ? 0 : -12,
-                padding: 10,
-                paddingTop: 15,
-                color: '#e32f45',
-                fontSize: 20,
-                minHeight: responsiveHeight(15),
-                minWidth: responsiveWidth(90),
-                backgroundColor: 'white',
-                borderBottomRightRadius: 20,
-                borderTopRightRadius: 8,
-                borderTopLeftRadius: 20,
-                borderBottomLeftRadius: 8,
-                shadowColor: "#e32f45",
-                shadowOffset: {
-                  width: 0,
-                  height: 10,
-                },
-                shadowOpacity: 0.25,
-                shadowRadius: 3.5,
-                elevation: 5,
-              }}
-              autoCapitalize="sentences"
-              onChangeText={(newText) => setText(newText)}
-            />
-          </View>
-          {
-            text?.length >= 300 &&
-            <CharacterLimit
-              errorMessage={'Max characters - 300'} />
-          }
-
-          <View style={styles.mask}>
-            <Switch
-              value={isHidden}
-              onValueChange={toggleSwitch}
-              disabled={false}
-              ios_backgroundColor={'pink'}
-              thumbColor={isHidden ? '#e32f45' : "white"}
-              trackColor={{ false: 'green', true: "pink" }}
-            />
-            <Text style={{ marginLeft: 18 }}>{'?User/Anonymous?'}</Text>
-
-          </View>
+            <View style={{ justifyContent: 'space-between', flexDirection: 'row', paddingTop: 8, width: responsiveWidth(60), alignSelf: "center", }}><Text style={{ color: 'grey' }}>Yes or No</Text><Text style={{ color: 'grey' }}>Typed in reply</Text></View>
 
 
-          <View style={styles.button}>
-            <TouchableOpacity
-              style={styles.signIn}
-              onPress={() => onPressAddQuestion({
-                question: {
-                  "id": "c82eaca0-f915-4c52-a6c7-010b731f46786",
-                  text,
-                  title,
-                  "likes": 0
-                }
-              })}
-            >
-              <LinearGradient
-                colors={['#e32f45', 'pink']}
+
+            <View style={{
+              flexDirection: 'row',
+              marginTop: 15,
+              paddingBottom: 5,
+            }}>
+
+              <TextInput
+                value={title}
+                placeholder="Title..."
+                multiline={true}
+                maxLength={150}
+                placeholderTextColor="#C47B76"
+                style={styles.inputText}
+                autoCapitalize="words"
+                onChangeText={setTitle}
+              />
+            </View>
+            {
+              title?.length >= 150 &&
+              <CharacterLimit
+                errorMessage={'Max characters - 150'}
+              />
+            }
+
+            <View style={{
+              flexDirection: 'row',
+              marginTop: 10,
+              paddingBottom: 5,
+            }}>
+              <TextInput
+                value={text}
+                placeholder={"Question (optional)..."}
+                multiline={true}
+                numberOfLines={8}
+                maxLength={300}
+                placeholderTextColor='#C47B76'
+                secureTextEntry={false}
+                style={[
+                  styles.inputText, {
+                    minHeight: responsiveHeight(15),
+                    minWidth: responsiveWidth(90)
+                  }]}
+                autoCapitalize="sentences"
+                onChangeText={setText}
+              />
+            </View>
+            {
+              text?.length >= 300 &&
+              <CharacterLimit
+                errorMessage={'Max characters - 300'} />
+            }
+
+            <View style={styles.privacyToggleSwitch}>
+              <Switch
+                value={isHidden}
+                onValueChange={toggleSwitch}
+                disabled={false}
+                ios_backgroundColor={'pink'}
+                thumbColor={isHidden ? '#e32f45' : "white"}
+                trackColor={{ false: 'green', true: "pink" }}
+              />
+              <Text style={{ marginLeft: responsiveWidth(4) }}>{'?User/Anonymous?'}</Text>
+            </View>
+
+
+            <View style={styles.button}>
+              <TouchableOpacity
                 style={styles.signIn}
+                onPress={() => onPressAddQuestion({
+                  question: {
+                    "id": "c82eaca0-f915-4c52-a6c7-010b731f46786",
+                    text,
+                    title,
+                    "likes": 0
+                  }
+                })}
               >
-                <Text style={[styles.textSign, {
-                  color: '#fff'
-                }]}>{'Post Question'}</Text>
-              </LinearGradient>
-            </TouchableOpacity>
-          </View>
+                <LinearGradient
+                  colors={['#e32f45', 'pink']}
+                  style={styles.signIn}
+                >
+                  <Text style={[styles.textSign, {
+                    color: '#fff'
+                  }]}>{'Post Question'}</Text>
+                </LinearGradient>
+              </TouchableOpacity>
+            </View>
+          </KeyboardAvoidingView >
         </ScrollView>
       </Animatable.View >
     </View >
@@ -240,7 +182,7 @@ const styles = StyleSheet.create({
     paddingBottom: 20
   },
   footer: {
-    flex: 7,
+    flex: 9,
     backgroundColor: '#fff',
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,
@@ -277,10 +219,7 @@ const styles = StyleSheet.create({
     color: '#05375a',
     fontSize: 20
   },
-  errorMsg: {
-    color: '#FF0000',
-    fontSize: 14,
-  },
+
   button: {
     alignItems: 'center',
     marginTop: 50
@@ -296,10 +235,51 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold'
   },
-  mask: {
+  privacyToggleSwitch: {
     paddingTop: 20,
     flexDirection: 'row',
     alignItems: 'center',
     paddingRight: 20,
-  }
+  },
+  switchSelector:
+  {
+    paddingTop: 10,
+    width: responsiveWidth(90),
+    alignSelf: 'center',
+    shadowColor: "#e32f45",
+    shadowOffset: {
+      width: 0,
+      height: 10,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.5,
+    elevation: 5,
+  },
+  scrollView: {
+    paddingHorizontal: 20,
+    paddingVertical: 5
+  },
+  inputText: {
+    flex: 1,
+    marginTop: Platform.OS === 'ios' ? 0 : -12,
+    padding: 10,
+    paddingTop: 15,
+    color: '#e32f45',
+    fontSize: 20,
+    // minHeight: height * 0.15,
+    backgroundColor: 'white',
+    borderBottomRightRadius: 20,
+    borderTopRightRadius: 8,
+    borderTopLeftRadius: 20,
+    borderBottomLeftRadius: 8,
+    shadowColor: "#e32f45",
+    shadowOffset: {
+      width: 0,
+      height: 10,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.5,
+    elevation: 5,
+  },
+
 });

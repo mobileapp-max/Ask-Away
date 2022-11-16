@@ -38,7 +38,6 @@ export default function QScreen({ navigation }) {
             <View style={styles.container}>
                 <View>
                     <FlatList
-
                         data={questions}
                         showsVerticalScrollIndicator={false}
                         showsHorizontalScrollIndicator={false}

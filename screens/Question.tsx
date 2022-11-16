@@ -63,6 +63,8 @@ export default function Question(props) {
                 <Text style={styles.text_header}>{question.title}</Text>
             </View>
             <View style={styles.footer}>
+
+
                 {question?.text ?
                     <View style={styles.question_style}>
                         <Text style={{
@@ -83,11 +85,9 @@ export default function Question(props) {
                     {/* <TextInputApp
                     // onPressAnswerQuestion={onPressAnswerQuestion}
                     /> */}
-                    <TextInputter
-                        questionId={question.id}
-                    />
-                    <FlatList
 
+                    <FlatList
+                        ListHeaderComponent={() => <TextInputter questionId={question.id} />}
                         data={question.answers}
                         showsVerticalScrollIndicator={false}
                         showsHorizontalScrollIndicator={false}

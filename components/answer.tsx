@@ -123,14 +123,14 @@ export const Answer = (props) => {
                     name="mail-reply"
                     size={24}
                     color="red" />
-                <Text style={{
+                {/* <Text style={{
                     color: 'black',
                     right: 23,
                     bottom: -10,
                     fontWeight: 'bold',
                 }}>
                     {answer.replies_aggregate.aggregate.count}
-                </Text>
+                </Text> */}
             </TouchableOpacity>
             {isAnswerOpen &&
                 <TextInputter
