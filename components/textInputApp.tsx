@@ -16,7 +16,7 @@ import { SimpleLineIcons } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
 import { Entypo } from '@expo/vector-icons';
 import { useState } from "react"
-import Animated, { color } from "react-native-reanimated"
+// import Animated, { color } from "react-native-reanimated"
 
 
 export const TextInputApp = (props) => {

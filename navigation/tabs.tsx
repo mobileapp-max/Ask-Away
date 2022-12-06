@@ -11,10 +11,11 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { MainStackScreen } from './navigation';
 import { useNavigation } from '@react-navigation/native';
 import { useRoute } from '@react-navigation/native';
-import { LogInStackScreen } from './logInSingUpNav'
+import { LogInStackScreen } from './logInSignUpNav'
 import { FontAwesome } from '@expo/vector-icons';
 import { useEffect } from 'react';
-import { Easing } from 'react-native-reanimated';
+import QuestionScreen from '../screens/QuestionScreen2';
+// import { Easing } from 'react-native-reanimated';
 
 
 // import { mdiPlusCircleOutline } from '@mdi/js'
@@ -43,7 +44,7 @@ const CustomTabButton = (props) => {
         Animated.timing(plusSign, {
             toValue: 0.25,
             duration: 500,
-            easing: Easing.linear,
+            // easing: Easing.linear,
             useNativeDriver: false,
         }).start();
         setTimeout(() => {
@@ -120,7 +121,7 @@ const Tabs = (props) => {
             }}>
             {/* <Tab.Screen name="Questions" component={QScreen} /> */}
 
-            <Tab.Screen name="Main" component={MainStackScreen} options={{
+            <Tab.Screen name="Main" component={QuestionScreen} options={{
                 tabBarIcon: ({ focused }) => (
                     <View style={{ alignItems: "center", justifyContent: 'center', top: 10 }}>
                         <FontAwesome

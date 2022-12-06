@@ -3,7 +3,7 @@ import React, { useEffect, useState, useContext, } from "react";
 import { Image, Text, View, TouchableOpacity, TouchableWithoutFeedbackBase, TextInput, StyleSheet, TextInputComponent, TouchableWithoutFeedback } from "react-native"
 import { responsiveFontSize, responsiveHeight, responsiveWidth } from "../../scripts/constants"
 import { Entypo } from '@expo/vector-icons';
-import Animated, { color } from "react-native-reanimated"
+// import Animated, { color } from "react-native-reanimated"
 import { TextInputterProps } from "./text-inputter-interface"
 import { QuestionsContext } from "../../contexts/questions-context-provider";
 

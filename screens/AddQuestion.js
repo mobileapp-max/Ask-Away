@@ -22,6 +22,8 @@ import { QuestionsContext } from '../contexts/questions-context-provider';
 import { responsiveFontSize, responsiveHeight, responsiveWidth } from '../scripts/constants';
 import { CharacterLimit } from '../components/character-limit/character-limit';
 import SwitchSelector from 'react-native-switch-selector';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
+
 
 const AddQ = ({ navigation }) => {
 
@@ -31,137 +33,78 @@ const AddQ = ({ navigation }) => {
   const { onPressAddQuestion } = useContext(QuestionsContext)
   const { height } = Dimensions.get("window");
   const { colors } = useTheme();
-  const toggleSwitch = () => setIsHidden(previousState => !previousState);
-
 
   return (
     <View style={styles.container}>
       <StatusBar backgroundColor='#e32f45' barStyle="light-content" />
       <View style={styles.header}>
         <Animatable.Text style={styles.text_header} animation='zoomInUp'>
-          {'Add your question!'}
+          {'Add Question'}
         </Animatable.Text>
       </View>
       <Animatable.View
         animation="fadeInUpBig"
-        style={styles.footer}>
-
+        style={styles.footer}
+      >
         <ScrollView
           keyboardDismissMode='on-drag'
-          style={styles.scrollView}>
-          <KeyboardAvoidingView
-            behavior={Platform.OS === "ios" ? "padding" : "height"}
-          >
-            <SwitchSelector
-              initial={1}
-              onPress={value => console.log("")}
-              textColor={'red'}
-              selectedColor={'white'}
-              buttonColor={"#e32f45"}
-              backgroundColor={'white'}
-              // borderColor={'purple'}
-              // hasPadding
-              bold={true}
-              options={[
-                { label: "Close-Ended", value: "0", },
-                { label: "Open-Ended", value: "1", } //images.masculino = require('./path_to/assets/img/masculino.png')
-              ]}
-              testID="gender-switch-selector"
-              accessibilityLabel="gender-switch-selector"
-              style={styles.switchSelector}
-            />
-            <View style={{ justifyContent: 'space-between', flexDirection: 'row', paddingTop: 8, width: responsiveWidth(60), alignSelf: "center", }}><Text style={{ color: 'grey' }}>Yes or No</Text><Text style={{ color: 'grey' }}>Typed in reply</Text></View>
-
-
-
-            <View style={{
-              flexDirection: 'row',
-              marginTop: 15,
-              paddingBottom: 5,
-            }}>
-
-              <TextInput
-                value={title}
-                placeholder="Title..."
-                multiline={true}
-                maxLength={150}
-                placeholderTextColor="#C47B76"
-                style={styles.inputText}
-                autoCapitalize="words"
-                onChangeText={setTitle}
-              />
-            </View>
-            {
-              title?.length >= 150 &&
-              <CharacterLimit
-                errorMessage={'Max characters - 150'}
-              />
-            }
-
-            <View style={{
-              flexDirection: 'row',
-              marginTop: 10,
-              paddingBottom: 5,
-            }}>
-              <TextInput
-                value={text}
-                placeholder={"Question (optional)..."}
-                multiline={true}
-                numberOfLines={8}
-                maxLength={300}
-                placeholderTextColor='#C47B76'
-                secureTextEntry={false}
-                style={[
-                  styles.inputText, {
-                    minHeight: responsiveHeight(15),
-                    minWidth: responsiveWidth(90)
-                  }]}
-                autoCapitalize="sentences"
-                onChangeText={setText}
-              />
-            </View>
-            {
-              text?.length >= 300 &&
-              <CharacterLimit
-                errorMessage={'Max characters - 300'} />
-            }
-
-            <View style={styles.privacyToggleSwitch}>
-              <Switch
-                value={isHidden}
-                onValueChange={toggleSwitch}
-                disabled={false}
-                ios_backgroundColor={'pink'}
-                thumbColor={isHidden ? '#e32f45' : "white"}
-                trackColor={{ false: 'green', true: "pink" }}
-              />
-              <Text style={{ marginLeft: responsiveWidth(4) }}>{'?User/Anonymous?'}</Text>
-            </View>
-
-
-            <View style={styles.button}>
-              <TouchableOpacity
+          style={styles.scrollView}
+          behavior={Platform.OS === "ios" ? "height" : "height"}
+          keyboardVerticalOffset={responsiveWidth(400)}
+        >
+          <Text style={{
+            flex: 1,
+            marginTop: Platform.OS === 'ios' ? 0 : -12,
+            padding: 10,
+            paddingBottom: 5,
+            color: '#e32f45',
+            fontSize: responsiveFontSize(20),
+            fontWeight: 'bold'
+          }}>{'Your Yes/No question:'}
+          </Text>
+          <TextInput
+            value={text}
+            placeholder={"Type here..."}
+            multiline={true}
+            numberOfLines={8}
+            maxLength={300}
+            placeholderTextColor='#C47B76'
+            secureTextEntry={false}
+            style={[
+              styles.inputText, {
+                minHeight: responsiveHeight(15),
+                minWidth: responsiveWidth(90)
+              }]}
+            autoCapitalize="sentences"
+            onChangeText={setText}
+          />
+          {
+            text?.length >= 300 &&
+            <CharacterLimit
+              errorMessage={'Max characters - 300'} />
+          }
+          <View style={styles.button}>
+            <TouchableOpacity
+              style={styles.signIn}
+              onPress={() => onPressAddQuestion({
+                question: {
+                  "id": "c82eaca0-f915-4c52-a6c7-010b731f46786",
+                  text,
+                  title,
+                  "likes": 0
+                }
+              })}
+            >
+              <LinearGradient
+                colors={['#e32f45', 'pink']}
                 style={styles.signIn}
-                onPress={() => onPressAddQuestion({
-                  question: {
-                    "id": "c82eaca0-f915-4c52-a6c7-010b731f46786",
-                    text,
-                    title,
-                    "likes": 0
-                  }
-                })}
               >
-                <LinearGradient
-                  colors={['#e32f45', 'pink']}
-                  style={styles.signIn}
-                >
-                  <Text style={[styles.textSign, {
-                    color: '#fff'
-                  }]}>{'Post Question'}</Text>
-                </LinearGradient>
-              </TouchableOpacity>
-            </View>
-          </KeyboardAvoidingView >
+                <Text style={[styles.textSign, {
+                  color: '#fff'
+                }]}>{'Post Question'}</Text>
+              </LinearGradient>
+            </TouchableOpacity>
+          </View>
         </ScrollView>
       </Animatable.View >
     </View >
@@ -179,7 +122,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'flex-end',
     paddingHorizontal: 20,
-    paddingBottom: 20
+    paddingBottom: 20,
   },
   footer: {
     flex: 9,
@@ -194,32 +137,6 @@ const styles = StyleSheet.create({
     fontSize: responsiveFontSize(30),
     alignSelf: 'center'
   },
-  text_footer: {
-    color: '#05375a',
-    fontSize: 23
-  },
-  action: {
-    flexDirection: 'row',
-    marginTop: 10,
-    borderBottomWidth: 1,
-    borderBottomColor: '#f2f2f2',
-    paddingBottom: 5,
-  },
-  actionError: {
-    flexDirection: 'row',
-    marginTop: 10,
-    borderBottomWidth: 1,
-    borderBottomColor: '#FF0000',
-    paddingBottom: 5
-  },
-  textInput: {
-    flex: 1,
-    marginTop: Platform.OS === 'ios' ? 0 : -12,
-    paddingLeft: 10,
-    color: '#05375a',
-    fontSize: 20
-  },
-
   button: {
     alignItems: 'center',
     marginTop: 50
@@ -235,26 +152,6 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold'
   },
-  privacyToggleSwitch: {
-    paddingTop: 20,
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingRight: 20,
-  },
-  switchSelector:
-  {
-    paddingTop: 10,
-    width: responsiveWidth(90),
-    alignSelf: 'center',
-    shadowColor: "#e32f45",
-    shadowOffset: {
-      width: 0,
-      height: 10,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.5,
-    elevation: 5,
-  },
   scrollView: {
     paddingHorizontal: 20,
     paddingVertical: 5
@@ -266,6 +163,8 @@ const styles = StyleSheet.create({
     paddingTop: 15,
     color: '#e32f45',
     fontSize: 20,
+    borderWidth: 0.5,
+    borderColor: '#FAF1F0',
     // minHeight: height * 0.15,
     backgroundColor: 'white',
     borderBottomRightRadius: 20,
@@ -281,5 +180,4 @@ const styles = StyleSheet.create({
     shadowRadius: 3.5,
     elevation: 5,
   },
-
 });
