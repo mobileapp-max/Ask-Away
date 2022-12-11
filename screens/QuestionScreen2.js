@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import {
   View,
   Text,
@@ -12,6 +12,7 @@ import {
   Switch,
   TouchableWithoutFeedback,
   KeyboardAvoidingView,
+  FlatList
 
 } from 'react-native';
 import * as Animatable from 'react-native-animatable';
@@ -30,12 +31,22 @@ const QuestionScreen = ({ navigation }) => {
   const [title, setTitle] = useState('')
   const [text, setText] = useState('')
   const [isHidden, setIsHidden] = useState(false)
-  const { onPressAddQuestion } = useContext(QuestionsContext)
+  const { onPressAddQuestion, questions } = useContext(QuestionsContext)
   const { height } = Dimensions.get("window");
   const { colors } = useTheme();
   const [answerWidth, setAnswerWidth] = useState(45)
+  const [buttonPressed, setButtonPressed] = useState(false);
+  const [questionNumber, setQuestionNumber] = useState(0)
 
-
+  const questionResult = function () {
+    setAnswerWidth(questions[`${questionNumber}`]?.answer_1 / (questions[`${questionNumber}`]?.answer_1 + questions[`${questionNumber}`]?.answer_2) * 90)
+    setButtonPressed(!buttonPressed)
+  }
+  const nextQuestion = function () {
+    setQuestionNumber(questionNumber + 1)
+    setButtonPressed(false)
+    setAnswerWidth(45)
+  }
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -44,22 +55,15 @@ const QuestionScreen = ({ navigation }) => {
           {'Questions'}
         </Text>
       </View>
+
+
+
       <ScrollView>
         <View style={[
           styles.inputText, {
             minHeight: responsiveHeight(15),
             minWidth: responsiveWidth(90)
           }]}>
-          {/* <Text style={{
-            flex: 1,
-            marginTop: Platform.OS === 'ios' ? 0 : -12,
-            padding: 10,
-            paddingBottom: 5,
-            color: '#e32f45',
-            fontSize: responsiveFontSize(20),
-            fontWeight: 'bold'
-          }}>{'Your Yes/No question:'}
-          </Text> */}
           <Text
             style={{
               textAlign: 'center',
@@ -67,13 +71,25 @@ const QuestionScreen = ({ navigation }) => {
               fontSize: 20,
               paddingHorizontal: 15,
             }}
-          >{`I wish I could remember that first day, First hour, first moment of your meeting me, If bright or dim the season, it might be Summer or Winter for aught I can say; So unrecorded did it slip away, So blind was I to see and to foresee, So dull to mark the budding of my tree That would not blossom yet for man`}
+          >
+            {` ${questions[`${questionNumber}`]?.sp_question}`}
           </Text>
           <View style={{ flexDirection: 'row', justifyContent: 'space-between', }}>
-            <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center' }} ><MaterialIcons name="arrow-forward-ios" size={40} color='#e32f45' style={{ transform: [{ rotateY: '180deg' }], }} /><Text>{'Back'}</Text></TouchableOpacity>
-            <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center' }} ><Text>{'Next'}</Text><MaterialIcons name="arrow-forward-ios" size={40} color='#e32f45' /></TouchableOpacity>
+            <TouchableOpacity
+              // onPress={() => }
+              style={{ flexDirection: 'row', alignItems: 'center' }}
+            >
+              <MaterialIcons
+                name="arrow-forward-ios"
+                size={40}
+                color='#e32f45'
+                style={{ transform: [{ rotateY: '180deg' }], }} /><Text>{'Back'}</Text></TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => nextQuestion()}
+              style={{ flexDirection: 'row', alignItems: 'center' }} ><Text>{'Next'}</Text><MaterialIcons name="arrow-forward-ios" size={40} color='#e32f45' /></TouchableOpacity>
           </View>
         </View>
+
         <View style={{
           marginTop: 30,
           alignSelf: 'center',
@@ -98,7 +114,7 @@ const QuestionScreen = ({ navigation }) => {
             overflow: 'hidden',
           }}>
             <TouchableOpacity
-              onPress={() => setAnswerWidth(answerWidth + 5)}
+              onPress={() => questionResult()}
               style={{
                 backgroundColor: "#e32f45",
                 height: responsiveHeight(7),
@@ -106,9 +122,9 @@ const QuestionScreen = ({ navigation }) => {
                 justifyContent: 'center',
                 alignItems: 'center',
                 alignContent: 'center',
-              }}><Text style={{ fontWeight: 'bold', color: "white" }}>{'Yes'}</Text></TouchableOpacity>
+              }}><Text style={{ fontWeight: 'bold', color: "white" }}>{buttonPressed ? `Yes, ${Math.round(answerWidth * 1.11111)}%` : `Yes`}</Text></TouchableOpacity>
             <TouchableOpacity
-              onPress={() => setAnswerWidth(answerWidth - 5)}
+              onPress={() => questionResult()}
               style={{
                 backgroundColor: "gold",
                 height: responsiveHeight(7),
@@ -116,11 +132,11 @@ const QuestionScreen = ({ navigation }) => {
                 justifyContent: 'center',
                 alignItems: 'center',
                 alignContent: 'center'
-              }}><Text style={{ fontWeight: 'bold', color: "white" }}>{'No'}</Text></TouchableOpacity>
+              }}><Text style={{ fontWeight: 'bold', color: "white" }}>{buttonPressed ? `No, ${Math.round(100 - answerWidth * 1.11111)}%` : `No`}</Text></TouchableOpacity>
 
           </View>
         </View>
-      </ScrollView >
+      </ScrollView>
     </View >
   );
 };
