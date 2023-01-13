@@ -38,15 +38,22 @@ const QuestionScreen = ({ navigation }) => {
   const [buttonPressed, setButtonPressed] = useState(false);
   const [questionNumber, setQuestionNumber] = useState(0)
 
-  const questionResult = function () {
-    setAnswerWidth(questions[`${questionNumber}`]?.answer_1 / (questions[`${questionNumber}`]?.answer_1 + questions[`${questionNumber}`]?.answer_2) * 90)
-    setButtonPressed(!buttonPressed)
-  }
-  const nextQuestion = function () {
-    setQuestionNumber(questionNumber + 1)
-    setButtonPressed(false)
-    setAnswerWidth(45)
-  }
+  // const questionResult_1 = function () {
+  //   setAnswerWidth((questions[`${questionNumber}`]?.answer_1 + 1) / (questions[`${questionNumber}`]?.answer_1 + 1 + questions[`${questionNumber}`]?.answer_2) * 90)
+  //   setButtonPressed(true)
+  // }
+  // const questionResult_2 = function () {
+  //   setAnswerWidth(questions[`${questionNumber}`]?.answer_1 / (questions[`${questionNumber}`]?.answer_1 + questions[`${questionNumber}`]?.answer_2 + 1) * 90)
+  //   setButtonPressed(true)
+  // }
+  // const nextQuestion = function () {
+  //   setQuestionNumber(questionNumber + 1)
+  //   setButtonPressed(false)
+  //   setAnswerWidth(45)
+  // }
+
+  // console.log((questions[`${questionNumber}`]?.answer_1 + 1) / (questions[`${questionNumber}`]?.answer_1 + questions[`${questionNumber}`]?.answer_2) * 90)
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -61,18 +68,20 @@ const QuestionScreen = ({ navigation }) => {
       <ScrollView>
         <View style={[
           styles.inputText, {
-            minHeight: responsiveHeight(15),
+            minHeight: responsiveHeight(12),
             minWidth: responsiveWidth(90)
           }]}>
+
           <Text
             style={{
               textAlign: 'center',
               color: '#e32f45',
               fontSize: 20,
               paddingHorizontal: 15,
+              marginBottom: responsiveHeight(1)
             }}
           >
-            {` ${questions[`${questionNumber}`]?.sp_question}`}
+            {JSON.stringify(questions)}
           </Text>
           <View style={{ flexDirection: 'row', justifyContent: 'space-between', }}>
             <TouchableOpacity
@@ -114,7 +123,7 @@ const QuestionScreen = ({ navigation }) => {
             overflow: 'hidden',
           }}>
             <TouchableOpacity
-              onPress={() => questionResult()}
+              onPress={() => questionResult_1()}
               style={{
                 backgroundColor: "#e32f45",
                 height: responsiveHeight(7),
@@ -124,7 +133,7 @@ const QuestionScreen = ({ navigation }) => {
                 alignContent: 'center',
               }}><Text style={{ fontWeight: 'bold', color: "white" }}>{buttonPressed ? `Yes, ${Math.round(answerWidth * 1.11111)}%` : `Yes`}</Text></TouchableOpacity>
             <TouchableOpacity
-              onPress={() => questionResult()}
+              onPress={() => questionResult_2()}
               style={{
                 backgroundColor: "gold",
                 height: responsiveHeight(7),

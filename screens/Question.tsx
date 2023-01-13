@@ -11,7 +11,6 @@ import {
     Modal,
     Alert
 } from "react-native";
-import { useLazyQuery, useMutation, gql } from "@apollo/client"
 import { QuestionsContext } from "../contexts/questions-context-provider";
 import { responsiveFontSize, responsiveHeight, responsiveWidth } from "../scripts/constants";
 import { Ionicons } from "@expo/vector-icons";
