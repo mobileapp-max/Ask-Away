@@ -31,28 +31,29 @@ const QuestionScreen = ({ navigation }) => {
   const [title, setTitle] = useState('')
   const [text, setText] = useState('')
   const [isHidden, setIsHidden] = useState(false)
-  const { onPressAddQuestion, questions } = useContext(QuestionsContext)
+  const { onPressAddQuestion, questions, question } = useContext(QuestionsContext)
   const { height } = Dimensions.get("window");
   const { colors } = useTheme();
   const [answerWidth, setAnswerWidth] = useState(45)
   const [buttonPressed, setButtonPressed] = useState(false);
   const [questionNumber, setQuestionNumber] = useState(0)
 
-  // const questionResult_1 = function () {
-  //   setAnswerWidth((questions[`${questionNumber}`]?.answer_1 + 1) / (questions[`${questionNumber}`]?.answer_1 + 1 + questions[`${questionNumber}`]?.answer_2) * 90)
-  //   setButtonPressed(true)
-  // }
-  // const questionResult_2 = function () {
-  //   setAnswerWidth(questions[`${questionNumber}`]?.answer_1 / (questions[`${questionNumber}`]?.answer_1 + questions[`${questionNumber}`]?.answer_2 + 1) * 90)
-  //   setButtonPressed(true)
-  // }
-  // const nextQuestion = function () {
-  //   setQuestionNumber(questionNumber + 1)
-  //   setButtonPressed(false)
-  //   setAnswerWidth(45)
-  // }
+  const questionResult_1 = function () {
+    setAnswerWidth((question?.answer_1 + 1) / (question?.answer_1 + 1 + question?.answer_2) * 90)
+    setButtonPressed(true)
+  }
+  const questionResult_2 = function () {
+    setAnswerWidth(question?.answer_1 / (question?.answer_1 + question?.answer_2 + 1) * 90)
+    setButtonPressed(true)
+  }
+  const nextQuestion = function () {
+    setQuestionNumber(questionNumber + 1)
+    setButtonPressed(false)
+    setAnswerWidth(45)
+  }
 
-  // console.log((questions[`${questionNumber}`]?.answer_1 + 1) / (questions[`${questionNumber}`]?.answer_1 + questions[`${questionNumber}`]?.answer_2) * 90)
+  // console.log((questions?.answer_1 + 1) / (questions?.answer_1 + questions?.answer_2) * 90)
+  // console.log(question?.answer_1 + 1)
 
   return (
     <View style={styles.container}>
@@ -81,7 +82,8 @@ const QuestionScreen = ({ navigation }) => {
               marginBottom: responsiveHeight(1)
             }}
           >
-            {JSON.stringify(questions)}
+            {question?.question}
+
           </Text>
           <View style={{ flexDirection: 'row', justifyContent: 'space-between', }}>
             <TouchableOpacity
