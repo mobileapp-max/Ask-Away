@@ -25,13 +25,15 @@ import { CharacterLimit } from '../components/character-limit/character-limit';
 import SwitchSelector from 'react-native-switch-selector';
 import Icon from 'react-native-vector-icons/Ionicons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
+import { AntDesign } from '@expo/vector-icons';
+import { ResultsScale } from '../components/resultsScale';
 
 const QuestionScreen = ({ navigation }) => {
 
   const [title, setTitle] = useState('')
   const [text, setText] = useState('')
   const [isHidden, setIsHidden] = useState(false)
-  const { onPressAddQuestion, questions, question } = useContext(QuestionsContext)
+  const { onPressAddQuestion, questions, question, onPressNextQuestion } = useContext(QuestionsContext)
   const { height } = Dimensions.get("window");
   const { colors } = useTheme();
   const [answerWidth, setAnswerWidth] = useState(45)
@@ -50,6 +52,8 @@ const QuestionScreen = ({ navigation }) => {
     setQuestionNumber(questionNumber + 1)
     setButtonPressed(false)
     setAnswerWidth(45)
+    onPressNextQuestion()
+
   }
 
   // console.log((questions?.answer_1 + 1) / (questions?.answer_1 + questions?.answer_2) * 90)
@@ -67,42 +71,52 @@ const QuestionScreen = ({ navigation }) => {
 
 
       <ScrollView>
-        <View style={[
-          styles.inputText, {
-            minHeight: responsiveHeight(12),
-            minWidth: responsiveWidth(90)
-          }]}>
-
-          <Text
-            style={{
-              textAlign: 'center',
-              color: '#e32f45',
-              fontSize: 20,
-              paddingHorizontal: 15,
-              marginBottom: responsiveHeight(1)
-            }}
-          >
-            {question?.question}
-
-          </Text>
-          <View style={{ flexDirection: 'row', justifyContent: 'space-between', }}>
-            <TouchableOpacity
-              // onPress={() => }
-              style={{ flexDirection: 'row', alignItems: 'center' }}
+        <View style={{
+          ...styles.inputTextContainer,
+          height: responsiveHeight(35),
+          width: responsiveWidth(90)
+        }}>
+          <View style={{ flex: 1, alignContent: "center", alignItems: "center", justifyContent: 'center' }}>
+            <Text
+              adjustsFontSizeToFit={true}
+              // numberOfLines={10}
+              style={{
+                textAlign: 'center',
+                color: 'black',
+                fontSize: responsiveFontSize(20)
+                // paddingHorizontal: responsiveWidth(1),
+                // marginBottom: responsiveHeight(1)
+              }}
             >
-              <MaterialIcons
-                name="arrow-forward-ios"
-                size={40}
-                color='#e32f45'
-                style={{ transform: [{ rotateY: '180deg' }], }} /><Text>{'Back'}</Text></TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => nextQuestion()}
-              style={{ flexDirection: 'row', alignItems: 'center' }} ><Text>{'Next'}</Text><MaterialIcons name="arrow-forward-ios" size={40} color='#e32f45' /></TouchableOpacity>
+              {question?.question}
+
+            </Text>
+          </View>
+          <View style={{ justifyContent: "flex-end", flexDirection: 'column' }}>
+
+
+            <View style={{ flexDirection: 'row', justifyContent: 'space-between', }}>
+              <TouchableOpacity
+                // onPress={() => }
+                style={{ flexDirection: 'row', alignItems: 'center' }}
+              >
+                <AntDesign
+                  name="frown"
+                  size={30}
+                  color='#e32f45'
+
+                  style={{ margin: 3 }} /><Text>{'Report'}</Text></TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => nextQuestion()}
+                style={{ flexDirection: 'row', alignItems: 'center' }} ><Text>{'Next'}</Text><AntDesign name="caretright" size={38} color='#e32f45' /></TouchableOpacity>
+
+            </View>
           </View>
         </View>
 
+
         <View style={{
-          marginTop: 30,
+          marginTop: responsiveHeight(5),
           alignSelf: 'center',
           flexDirection: "row",
           borderRadius: 10,
@@ -117,6 +131,7 @@ const QuestionScreen = ({ navigation }) => {
           elevation: 5,
         }
         }>
+
           <View style={{
             alignSelf: 'center',
             flexDirection: "row",
@@ -125,9 +140,9 @@ const QuestionScreen = ({ navigation }) => {
             overflow: 'hidden',
           }}>
             <TouchableOpacity
-              onPress={() => questionResult_1()}
+              onPress={() => { if (buttonPressed === false) questionResult_1() }}
               style={{
-                backgroundColor: "#e32f45",
+                backgroundColor: "#54a832",
                 height: responsiveHeight(7),
                 width: responsiveWidth(answerWidth),
                 justifyContent: 'center',
@@ -135,9 +150,9 @@ const QuestionScreen = ({ navigation }) => {
                 alignContent: 'center',
               }}><Text style={{ fontWeight: 'bold', color: "white" }}>{buttonPressed ? `Yes, ${Math.round(answerWidth * 1.11111)}%` : `Yes`}</Text></TouchableOpacity>
             <TouchableOpacity
-              onPress={() => questionResult_2()}
+              onPress={() => { if (buttonPressed === false) questionResult_2() }}
               style={{
-                backgroundColor: "gold",
+                backgroundColor: "#e32f45",
                 height: responsiveHeight(7),
                 width: responsiveWidth(90 - answerWidth),
                 justifyContent: 'center',
@@ -147,7 +162,7 @@ const QuestionScreen = ({ navigation }) => {
 
           </View>
         </View>
-      </ScrollView>
+      </ScrollView >
     </View >
   );
 };
@@ -164,6 +179,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingBottom: 20,
     backgroundColor: '#e32f45',
+    // borderBottomLeftRadius: 30,
+    // borderBottomRightRadius: 30,
   },
   text_header: {
     color: 'white',
@@ -171,6 +188,7 @@ const styles = StyleSheet.create({
     fontSize: responsiveFontSize(30),
     alignSelf: 'center',
     paddingTop: responsiveHeight(6),
+
   },
   button: {
     alignItems: 'center',
@@ -186,14 +204,13 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold'
   },
-  inputText: {
+  inputTextContainer: {
     // flex: 1,
     margin: responsiveWidth(10),
     alignSelf: 'center',
-    padding: 10,
-    paddingTop: 15,
+    padding: 8,
+    // paddingTop: 5,
     color: '#e32f45',
-    fontSize: 20,
     borderWidth: 0.5,
     borderColor: '#FA7465',
     // minHeight: height * 0.15,

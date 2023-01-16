@@ -25,10 +25,9 @@ import { responsiveFontSize, responsiveHeight, responsiveWidth } from '../script
 import { CharacterLimit } from '../components/character-limit/character-limit';
 import SwitchSelector from 'react-native-switch-selector';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
-import { firebase } from '../config';
 import { FlatList } from 'react-native-gesture-handler';
 import { FontAwesome } from '@expo/vector-icons';
-// import firestore from '@react-native-firebase/app'
+import { disableErrorHandling } from 'expo';
 
 
 const AddQ = ({ navigation }) => {
@@ -36,69 +35,20 @@ const AddQ = ({ navigation }) => {
   const [title, setTitle] = useState('')
   const [text, setText] = useState('')
   const [isHidden, setIsHidden] = useState(false)
-  const { onPressAddQuestion } = useContext(QuestionsContext)
   const { height } = Dimensions.get("window");
   const { colors } = useTheme();
-
+  const [disableButton, setDisableButton] = useState(true)
   const [todos, setTodos] = useState([]);
-  const todoRef = firebase.firestore().collection('todos')
   const [addData, setAddData] = useState('');
+  const { onPressAddQuestion, questions, question, onPressNextQuestion } = useContext(QuestionsContext)
 
   useEffect(() => {
-    todoRef
-      // .orderBy('createdAt', 'desc')
-      .onSnapshot(
-        querySnapshot => {
-          const todos = []
-          querySnapshot.forEach((doc) => {
-            const { heading } = doc.data()
-            todos.push({
-              id: doc.id,
-              heading,
-            })
-          })
-          setTodos(todos)
-        }
-      )
-  }, [])
-
-  //delete a todo from firestrore db
-
-  const deleteTodo = (todos) => {
-    todoRef
-      .doc(todos.id)
-      .delete()
-      .then(() => {
-        //show a success message
-        alert('Success')
-      })
-      .catch(error => {
-        alert(error);
-      })
-  }
-
-  // add a todo 
-  const addTodo = () => {
-    //check if we have a todo
-    if (addData && addData.length > 0) {
-      // get the timestam
-      const timestamp = firebase.firestore.FieldValue.serverTimestamp();
-      const data = {
-        heading: addData,
-        createdAt: timestamp
-      }
-      todoRef
-        .add(data)
-        .then(() => {
-          setAddData('')
-          //release Keyboard
-          Keyboard.dismiss();
-        })
-        .catch((error) => {
-          alert(error)
-        })
+    if (text !== '') {
+      setDisableButton(false)
     }
-  }
+    else setDisableButton(true)
+  }, [text])
+
 
 
 
@@ -169,8 +119,9 @@ const AddQ = ({ navigation }) => {
             paddingBottom: 5,
             color: '#e32f45',
             fontSize: responsiveFontSize(20),
-            fontWeight: 'bold'
-          }}>{'Your Yes/No question:'}
+            fontWeight: 'bold',
+            alignSelf: 'center'
+          }}>{'Yes/No Question:'}
           </Text>
           <TextInput
             value={text}
@@ -195,18 +146,13 @@ const AddQ = ({ navigation }) => {
           }
           <View style={styles.button}>
             <TouchableOpacity
+              disabled={disableButton}
               style={styles.signIn}
-              onPress={() => onPressAddQuestion({
-                question: {
-                  "id": "c82eaca0-f915-4c52-a6c7-010b731f46786",
-                  text,
-                  title,
-                  "likes": 0
-                }
-              })}
+              onPress={() => onPressAddQuestion({ text })
+              }
             >
               <LinearGradient
-                colors={['#e32f45', 'pink']}
+                colors={disableButton === true ? ['grey', 'pink'] : ['#e32f45', 'pink']}
                 style={styles.signIn}
               >
                 <Text style={[styles.textSign, {
@@ -260,14 +206,7 @@ const styles = StyleSheet.create({
     flex: 1,
     marginRight: 5,
   },
-  button: {
-    height: 47,
-    borderRadius: 5,
-    backgroundColor: "#788eec",
-    width: 80,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+
   buttonText: {
     color: 'white',
     fontSize: 20,
@@ -288,6 +227,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     paddingHorizontal: 20,
     paddingBottom: 20,
+
   },
   footer: {
     flex: 9,
@@ -304,7 +244,8 @@ const styles = StyleSheet.create({
   },
   button: {
     alignItems: 'center',
-    marginTop: 50
+    marginTop: 50,
+
   },
   signIn: {
     width: '100%',

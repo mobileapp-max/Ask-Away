@@ -3,7 +3,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import SignUpScreen from "../screens/SignUpScreen";
 import ProfileScreen from "../screens/ProfileScreen";
-import Profile from "../screens/Profile";
+import Profile from "../screens/YourQuestion";
 
 const LogInStack = createStackNavigator();
 
