@@ -114,7 +114,6 @@ const QuestionScreen = ({ navigation }) => {
           </View>
         </View>
 
-
         <View style={{
           marginTop: responsiveHeight(5),
           alignSelf: 'center',
