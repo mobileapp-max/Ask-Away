@@ -2,7 +2,7 @@ import React from 'react';
 import {
     View,
     Text,
-    StyleSheet
+    StyleSheet,
 } from 'react-native';
 import { responsiveHeight, responsiveWidth, responsiveFontSize } from '../../scripts/constants';
 import { calculateResults } from '../../scripts/calculateResults';
@@ -35,45 +35,66 @@ export const QuestionRow = ({ question: incomingQuestion }) => {
                     }}>{question}</Text>
             </View>
 
-            <View style={{
-                alignSelf: 'center',
-                flexDirection: "row",
-                borderRadius: 10,
-                // width: responsiveWidth(90),
-                overflow: 'hidden',
-                backgroundColor: 'red',
-            }}>
+            {calculateResults({ answer_1, answer_2 }).bothZeros ?
 
+                <View style={{
+                    alignSelf: 'center',
+                    flexDirection: "row",
+                    borderRadius: 10,
+                    overflow: 'hidden',
+                    // backgroundColor: 'white',
+                    height: responsiveHeight(4.6),
+                    width: responsiveWidth(28),
+                    // borderColor: 'red',
+                    // borderWidth: responsiveWidth(0.1),
+                    justifyContent: 'center'
+                }}>
 
-                <View
-                    style={{
-                        backgroundColor: "#54a832",
-                        height: responsiveHeight(5.2),
-                        width: responsiveWidth((28 / 100) * calculateResults({ answer_1, answer_2 }).answer_1_result),
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        alignContent: 'center',
-                    }}>
-                    <Text style={{ fontWeight: 'bold', color: "white" }}>
-                        {`Yes\n${calculateResults({ answer_1, answer_2 }).answer_1_result}%`}
-                    </Text>
+                    <Text style={{ alignSelf: "center" }}>{'No Answers'}</Text>
                 </View>
-                <View
-                    style={{
-                        backgroundColor: "#e32f45",
-                        height: responsiveHeight(5.2),
-                        width: responsiveWidth((28 / 100) * calculateResults({ answer_1, answer_2 }).answer_2_result),
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        alignContent: 'center'
-                    }}>
-                    <Text style={{ fontWeight: 'bold', color: "white" }}>
-                        {`No\n${calculateResults({ answer_1, answer_2 }).answer_2_result}%`}
-                    </Text>
-                </View>
-            </View>
+                :
+                <View style={{
+                    alignSelf: 'center',
+                    flexDirection: "row",
+                    borderRadius: 10,
+                    overflow: 'hidden',
+                    backgroundColor: 'white',
+                    height: responsiveHeight(4.6),
+                    width: responsiveWidth(28),
+                    borderColor: 'red',
+                    // borderWidth: responsiveWidth(0.1),
+                    justifyContent: 'center'
+                }}>
 
-        </View>
+                    <View
+                        style={{
+                            backgroundColor: "#54a832",
+                            height: responsiveHeight(4.6),
+                            width: responsiveWidth((28 / 100) * calculateResults({ answer_1, answer_2 }).answer_1_result),
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            alignContent: 'center',
+                        }}>
+                        <Text style={{ fontWeight: 'bold', color: "white" }}>
+                            {`Yes\n${Math.round(calculateResults({ answer_1, answer_2 }).answer_1_result)}%`}
+                        </Text>
+                    </View>
+                    <View
+                        style={{
+                            backgroundColor: "#e32f45",
+                            height: responsiveHeight(4.6),
+                            width: responsiveWidth((28 / 100) * calculateResults({ answer_1, answer_2 }).answer_2_result),
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            alignContent: 'center'
+                        }}>
+                        <Text style={{ fontWeight: 'bold', color: "white" }}>
+                            {`No\n${Math.round(calculateResults({ answer_1, answer_2 }).answer_2_result)}%`}
+                        </Text>
+                    </View>
+                </View>
+            }
+        </View >
     );
 };
 

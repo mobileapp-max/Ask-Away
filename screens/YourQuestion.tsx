@@ -48,7 +48,7 @@ const Profile = ({ navigation }) => {
                     data={questions}
                     renderItem={({ item }) => <QuestionRow question={item} />}
                     keyExtractor={(item, index) => index}
-                    contentContainerStyle={{ paddingTop: responsiveHeight(4), paddingBottom: responsiveHeight(10) }}
+                    contentContainerStyle={{ paddingTop: responsiveHeight(4), paddingBottom: responsiveHeight(20) }}
                 />
             </View>
             <View style={{

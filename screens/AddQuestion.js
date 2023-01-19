@@ -14,6 +14,7 @@ import {
   KeyboardAvoidingView,
   Keyboard,
   Pressable,
+  Modal
 
 } from 'react-native';
 import * as Animatable from 'react-native-animatable';
@@ -28,6 +29,7 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 import { FlatList } from 'react-native-gesture-handler';
 import { FontAwesome } from '@expo/vector-icons';
 import { disableErrorHandling } from 'expo';
+import { AntDesign } from '@expo/vector-icons';
 
 
 const AddQ = ({ navigation }) => {
@@ -41,6 +43,15 @@ const AddQ = ({ navigation }) => {
   const [todos, setTodos] = useState([]);
   const [addData, setAddData] = useState('');
   const { onPressAddQuestion, questions, question, onPressNextQuestion } = useContext(QuestionsContext)
+  const onPressPostQuestin = () => {
+    setText('')
+    onPressAddQuestion({ text })
+    setModalVisible(true)
+    setTimeout(() => {
+      setModalVisible(false)
+    }, 1000);
+  }
+  const [modalVisible, setModalVisible] = useState(false);
 
   useEffect(() => {
     if (text !== '') {
@@ -98,14 +109,29 @@ const AddQ = ({ navigation }) => {
     <View style={styles.container}>
       <StatusBar backgroundColor='#e32f45' barStyle="light-content" />
       <View style={styles.header}>
-        <Animatable.Text style={styles.text_header} animation='zoomInUp'>
+        <Text style={styles.text_header}>
           {'Add Question'}
-        </Animatable.Text>
+        </Text>
       </View>
       <Animatable.View
         animation="fadeInUpBig"
         style={styles.footer}
       >
+
+        <Modal
+          animationType="fade"
+          transparent={true}
+          visible={modalVisible}
+          onRequestClose={() => {
+            setModalVisible(!modalVisible);
+          }}>
+          <View style={styles.centeredView}>
+            <View style={styles.modalView}>
+              <Text style={styles.modalText}>Added!</Text>
+            </View>
+          </View>
+        </Modal>
+
         <ScrollView
           keyboardDismissMode='on-drag'
           style={styles.scrollView}
@@ -148,8 +174,8 @@ const AddQ = ({ navigation }) => {
             <TouchableOpacity
               disabled={disableButton}
               style={styles.signIn}
-              onPress={() => onPressAddQuestion({ text })
-              }
+              onPress={onPressPostQuestin}
+
             >
               <LinearGradient
                 colors={disableButton === true ? ['grey', 'pink'] : ['#e32f45', 'pink']}
@@ -157,7 +183,7 @@ const AddQ = ({ navigation }) => {
               >
                 <Text style={[styles.textSign, {
                   color: '#fff'
-                }]}>{'Post Question'}</Text>
+                }]}>{'Add Question'}</Text>
               </LinearGradient>
             </TouchableOpacity>
           </View>
@@ -244,7 +270,7 @@ const styles = StyleSheet.create({
   },
   button: {
     alignItems: 'center',
-    marginTop: 50,
+    marginTop: responsiveHeight(3),
 
   },
   signIn: {
@@ -285,5 +311,34 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.5,
     elevation: 5,
+  },
+  centeredView: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    // marginTop: 22,
+
+  },
+  modalView: {
+    // margin: 20,
+    backgroundColor: '#e32f45',
+    borderRadius: 20,
+    padding: 35,
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  modalText: {
+    textAlign: 'center',
+    fontWeight: "bold",
+    fontSize: 18,
+    color: 'white'
+
   },
 });

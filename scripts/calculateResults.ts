@@ -4,7 +4,11 @@ export const calculateResults = ({ answer_1, answer_2 }: { answer_1: number, ans
             answer_1_result: 0,
             answer_2_result: 0,
         }
-        return resultObj
+        const bothZeros = true
+        return {
+            resultObj,
+            bothZeros
+        }
     }
     else {
         const answer_1_result = 100 * answer_1 / (answer_1 + answer_2)
