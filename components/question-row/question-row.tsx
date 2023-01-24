@@ -3,10 +3,13 @@ import {
     View,
     Text,
     StyleSheet,
-    TouchableOpacity
+    TouchableOpacity,
+    TouchableWithoutFeedback,
+    Pressable
 } from 'react-native';
 import { responsiveHeight, responsiveWidth, responsiveFontSize } from '../../scripts/constants';
 import { calculateResults } from '../../scripts/calculateResults';
+import UseOnLayout from '../../scripts/use-on-layout';
 
 
 export const QuestionRow = ({ question: incomingQuestion }) => {
@@ -16,19 +19,30 @@ export const QuestionRow = ({ question: incomingQuestion }) => {
         answer_2,
     } = incomingQuestion;
 
+
+    const {
+        currentHeightOfView,
+        currentWidthOfView,
+        captureView
+    } = UseOnLayout()
+
     return (
-        <TouchableOpacity
+        <Pressable
             style={{
                 flexDirection: "row",
                 justifyContent: 'space-between',
                 marginVertical: responsiveWidth(0.8),
                 marginHorizontal: responsiveWidth(0.8),
-
-
-            }}>
-            <View style={[
-                styles.inputText, {
-                }]}>
+                // backgroundColor: 'white',
+                // overflow: 'hidden',
+            }}
+        >
+            <View
+                onLayout={captureView}
+                style={[
+                    styles.inputText, {
+                    }]}
+            >
                 <Text
                     numberOfLines={2}
                     style={{
@@ -44,11 +58,12 @@ export const QuestionRow = ({ question: incomingQuestion }) => {
                     borderRadius: 10,
                     overflow: 'hidden',
                     // backgroundColor: 'white',
-                    height: responsiveHeight(4.6),
+                    height: currentHeightOfView,
                     width: responsiveWidth(28),
                     // borderColor: 'red',
                     // borderWidth: responsiveWidth(0.1),
-                    justifyContent: 'center'
+                    justifyContent: 'center',
+                    backgroundColor: 'white',
                 }}>
 
                     <Text style={{ alignSelf: "center" }}>{'No Answers'}</Text>
@@ -60,7 +75,7 @@ export const QuestionRow = ({ question: incomingQuestion }) => {
                     borderRadius: 10,
                     overflow: 'hidden',
                     backgroundColor: 'white',
-                    height: responsiveHeight(4.6),
+                    height: currentHeightOfView,
                     width: responsiveWidth(28),
                     borderColor: 'red',
                     // borderWidth: responsiveWidth(0.1),
@@ -70,7 +85,7 @@ export const QuestionRow = ({ question: incomingQuestion }) => {
                     <View
                         style={{
                             backgroundColor: "#54a832",
-                            height: responsiveHeight(4.6),
+                            height: currentHeightOfView,
                             width: responsiveWidth((28 / 100) * calculateResults({ answer_1, answer_2 }).answer_1_result),
                             justifyContent: 'center',
                             alignItems: 'center',
@@ -83,7 +98,7 @@ export const QuestionRow = ({ question: incomingQuestion }) => {
                     <View
                         style={{
                             backgroundColor: "#e32f45",
-                            height: responsiveHeight(4.6),
+                            height: currentHeightOfView,
                             width: responsiveWidth((28 / 100) * calculateResults({ answer_1, answer_2 }).answer_2_result),
                             justifyContent: 'center',
                             alignItems: 'center',
@@ -95,7 +110,7 @@ export const QuestionRow = ({ question: incomingQuestion }) => {
                     </View>
                 </View>
             }
-        </TouchableOpacity >
+        </Pressable >
     );
 };
 
@@ -112,10 +127,12 @@ const styles = StyleSheet.create({
         borderTopRightRadius: 8,
         borderTopLeftRadius: 20,
         borderBottomLeftRadius: 8,
+        overflow: 'visible',
         shadowColor: "#e32f45",
         shadowOffset: {
             width: 0,
             height: 10,
+            overflow: 'visible',
         },
         shadowOpacity: 0.5,
         shadowRadius: 3.5,

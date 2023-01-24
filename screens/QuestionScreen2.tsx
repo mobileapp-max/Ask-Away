@@ -104,8 +104,8 @@ const QuestionScreen = ({ navigation }) => {
                   name="frown"
                   size={30}
                   color='#e32f45'
-
-                  style={{ margin: 3 }} /><Text>{'Report'}</Text></TouchableOpacity>
+                  style={{ margin: 3 }} />
+                <Text>{'Report'}</Text></TouchableOpacity>
               <TouchableOpacity
                 onPress={() => nextQuestion()}
                 style={{ flexDirection: 'row', alignItems: 'center' }} ><Text>{'Next'}</Text><AntDesign name="caretright" size={38} color='#e32f45' /></TouchableOpacity>

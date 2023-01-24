@@ -20,16 +20,11 @@ mutation ($question: String!) {
     }
 }`;
 
-// mutation ($question: String!) {
-//     insert_question(objects: {question: $question}){
-//        returning {
-//             question
-//             id
-//             created_at
-//             answer_1
-//             answer_2
-//         reported_times
-//         user_id
-//         }
-//     }
-// }
+export const DELETE_QUESTION = (id: string) => {
+    return gql(`mutation {
+    delete_question (where: { id: { _eq: "${id}" } }) {
+      affected_rows
+    }
+  } `)
+}
+

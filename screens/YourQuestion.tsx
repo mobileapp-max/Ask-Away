@@ -8,7 +8,8 @@ import {
     StyleSheet,
     StatusBar,
     Alert,
-    ScrollView
+    ScrollView,
+    Pressable
 } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -22,9 +23,8 @@ import FontAwesome from '@expo/vector-icons/build/FontAwesome';
 import { ProfileSetting } from '../components/profileSetting';
 import { useContext } from 'react';
 import { FlatList } from 'react-native-gesture-handler';
-import { AntDesign } from '@expo/vector-icons';
-import { QuestionRow } from '../components/question-row/question-row';
-
+import { MaterialCommunityIcons } from '@expo/vector-icons'; import { QuestionRow } from '../components/question-row/question-row';
+import { SwipeListView } from 'react-native-swipe-list-view';
 
 const Profile = ({ navigation }) => {
 
@@ -41,12 +41,35 @@ const Profile = ({ navigation }) => {
     return (
         <View style={{ flex: 1 }}>
             <View style={{ backgroundColor: '#e32f45', flex: 1.6 }} />
-            <View style={{ flex: 5, backgroundColor: 'white', }}>
-                <FlatList
+            <View style={{ flex: 5, backgroundColor: 'white', overflow: 'visible', }}>
+                <SwipeListView
                     data={questions}
                     renderItem={({ item }) => <QuestionRow question={item} />}
                     keyExtractor={(item, index) => index}
                     contentContainerStyle={{ paddingTop: responsiveHeight(4), paddingBottom: responsiveHeight(20) }}
+                    renderHiddenItem={({ item }) => (
+                        <View style={{
+                            flexDirection: "row",
+                            justifyContent: 'flex-end',
+                            alignContent: 'center',
+                            alignItems: 'center',
+                            // height: responsiveHeight(6),
+                            left: responsiveWidth(-5),
+                            // borderColor: 'red',
+                            // borderWidth: responsiveWidth(0.1),
+                            // backgroundColor: 'yellow',
+                            flex: 1,
+                        }}>
+                            <Pressable>
+                                <MaterialCommunityIcons
+                                    name="delete-forever" size={30}
+                                    color='#e32f45'
+                                    style={{ margin: 3 }} />
+                            </Pressable>
+                        </View>
+                    )}
+                    rightOpenValue={-75}
+                    disableRightSwipe={true}
                 />
             </View>
             <View style={{
