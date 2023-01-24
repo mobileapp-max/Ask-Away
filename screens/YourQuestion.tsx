@@ -25,11 +25,9 @@ import { FlatList } from 'react-native-gesture-handler';
 import { AntDesign } from '@expo/vector-icons';
 import { QuestionRow } from '../components/question-row/question-row';
 
-// import { AuthContext } from '../components/context';
-
-// import Users from '../model/users';
 
 const Profile = ({ navigation }) => {
+
     const { onPressAddQuestion, questions, question, onPressNextQuestion } = useContext(QuestionsContext)
     const renderItem = {
 

@@ -3,6 +3,7 @@ import {
     View,
     Text,
     StyleSheet,
+    TouchableOpacity
 } from 'react-native';
 import { responsiveHeight, responsiveWidth, responsiveFontSize } from '../../scripts/constants';
 import { calculateResults } from '../../scripts/calculateResults';
@@ -16,7 +17,7 @@ export const QuestionRow = ({ question: incomingQuestion }) => {
     } = incomingQuestion;
 
     return (
-        <View
+        <TouchableOpacity
             style={{
                 flexDirection: "row",
                 justifyContent: 'space-between',
@@ -94,7 +95,7 @@ export const QuestionRow = ({ question: incomingQuestion }) => {
                     </View>
                 </View>
             }
-        </View >
+        </TouchableOpacity >
     );
 };
 
