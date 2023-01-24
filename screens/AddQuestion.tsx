@@ -45,7 +45,7 @@ const AddQ = ({ navigation }) => {
   const { onPressAddQuestion, questions, question, onPressNextQuestion } = useContext(QuestionsContext)
   const onPressPostQuestin = () => {
     setText('')
-    onPressAddQuestion({ text })
+    onPressAddQuestion({ text: text?.trim() })
     setModalVisible(true)
     setTimeout(() => {
       setModalVisible(false)
