@@ -20,11 +20,37 @@ mutation ($question: String!) {
     }
 }`;
 
-export const DELETE_QUESTION = (id: string) => {
-    return gql(`mutation {
-    delete_question (where: { id: { _eq: "${id}" } }) {
+// export const DELETE_QUESTION = (id: string) => {
+//     return gql(`mutation {
+//     delete_question (where: { id: { _eq: "${id}" } }) {
+//       affected_rows
+//     }
+//   } `)
+// }
+
+// export const DELETE_QUESTION = gql`
+// mutation ($id: Int) {
+//     delete_question (
+//       where: {
+//         id: {
+//           _eq: $id
+//         }
+//       }
+//     ) {
+//       affected_rows
+//     }
+//   } `;
+
+
+export const DELETE_QUESTION = gql`
+mutation ($id: String) {
+    delete_question (
+      where: {
+        id: {
+          _eq: $id
+        }
+      }
+    ) {
       affected_rows
     }
-  } `)
-}
-
+  } `;

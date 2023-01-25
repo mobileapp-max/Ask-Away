@@ -3,11 +3,13 @@ import {
     View,
     Text,
     StyleSheet,
-    TouchableOpacity,
-    TouchableWithoutFeedback,
     Pressable
 } from 'react-native';
-import { responsiveHeight, responsiveWidth, responsiveFontSize } from '../../scripts/constants';
+import {
+    responsiveHeight,
+    responsiveWidth,
+    responsiveFontSize
+} from '../../scripts/constants';
 import { calculateResults } from '../../scripts/calculateResults';
 import UseOnLayout from '../../scripts/use-on-layout';
 
@@ -18,7 +20,6 @@ export const QuestionRow = ({ question: incomingQuestion }) => {
         answer_1,
         answer_2,
     } = incomingQuestion;
-
 
     const {
         currentHeightOfView,
@@ -33,21 +34,18 @@ export const QuestionRow = ({ question: incomingQuestion }) => {
                 justifyContent: 'space-between',
                 marginVertical: responsiveWidth(0.8),
                 marginHorizontal: responsiveWidth(0.8),
-                // backgroundColor: 'white',
-                // overflow: 'hidden',
             }}
         >
             <View
                 onLayout={captureView}
-                style={[
-                    styles.inputText, {
-                    }]}
+                style={styles.inputText}
             >
                 <Text
                     numberOfLines={2}
-                    style={{
-                        fontSize: responsiveFontSize(16)
-                    }}>{question}</Text>
+                    style={{ fontSize: responsiveFontSize(16) }}
+                >
+                    {question}
+                </Text>
             </View>
 
             {calculateResults({ answer_1, answer_2 }).bothZeros ?
@@ -57,16 +55,16 @@ export const QuestionRow = ({ question: incomingQuestion }) => {
                     flexDirection: "row",
                     borderRadius: 10,
                     overflow: 'hidden',
-                    // backgroundColor: 'white',
                     height: currentHeightOfView,
                     width: responsiveWidth(28),
-                    // borderColor: 'red',
-                    // borderWidth: responsiveWidth(0.1),
+                    borderColor: 'red',
+                    borderWidth: responsiveWidth(0.1),
                     justifyContent: 'center',
                     backgroundColor: 'white',
                 }}>
-
-                    <Text style={{ alignSelf: "center" }}>{'No Answers'}</Text>
+                    <Text style={{ alignSelf: "center" }}>
+                        {'No Answers'}
+                    </Text>
                 </View>
                 :
                 <View style={{
@@ -78,10 +76,8 @@ export const QuestionRow = ({ question: incomingQuestion }) => {
                     height: currentHeightOfView,
                     width: responsiveWidth(28),
                     borderColor: 'red',
-                    // borderWidth: responsiveWidth(0.1),
                     justifyContent: 'center'
                 }}>
-
                     <View
                         style={{
                             backgroundColor: "#54a832",

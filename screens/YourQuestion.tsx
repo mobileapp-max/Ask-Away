@@ -3,40 +3,23 @@ import {
     View,
     Text,
     TouchableOpacity,
-    TextInput,
-    Platform,
     StyleSheet,
-    StatusBar,
-    Alert,
-    ScrollView,
     Pressable
 } from 'react-native';
-import * as Animatable from 'react-native-animatable';
-import { LinearGradient } from 'expo-linear-gradient';
 import Feather from 'react-native-vector-icons/Feather';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { responsiveHeight, responsiveWidth, responsiveFontSize } from '../scripts/constants';
 import { QuestionsContext } from '../contexts/questions-context-provider';
-import { useTheme } from 'react-native-paper';
-import FontAwesome5 from '@expo/vector-icons/build/FontAwesome5';
-import FontAwesome from '@expo/vector-icons/build/FontAwesome';
-import { ProfileSetting } from '../components/profileSetting';
 import { useContext } from 'react';
-import { FlatList } from 'react-native-gesture-handler';
 import { MaterialCommunityIcons } from '@expo/vector-icons'; import { QuestionRow } from '../components/question-row/question-row';
 import { SwipeListView } from 'react-native-swipe-list-view';
 
 const Profile = ({ navigation }) => {
 
-    const { onPressAddQuestion, questions, question, onPressNextQuestion } = useContext(QuestionsContext)
-    const renderItem = {
-
-    }
-
-
-    // if (loading) {
-    //     return <Text>Fetching data...</Text> //while loading return this
-    // }
+    const {
+        onPressAddQuestion,
+        questions,
+        onPressDeleteQuestion
+    } = useContext(QuestionsContext)
 
     return (
         <View style={{ flex: 1 }}>
@@ -46,25 +29,28 @@ const Profile = ({ navigation }) => {
                     data={questions}
                     renderItem={({ item }) => <QuestionRow question={item} />}
                     keyExtractor={(item, index) => index}
-                    contentContainerStyle={{ paddingTop: responsiveHeight(4), paddingBottom: responsiveHeight(20) }}
+                    contentContainerStyle={{
+                        paddingTop: responsiveHeight(4),
+                        paddingBottom: responsiveHeight(20)
+                    }}
                     renderHiddenItem={({ item }) => (
                         <View style={{
                             flexDirection: "row",
                             justifyContent: 'flex-end',
                             alignContent: 'center',
                             alignItems: 'center',
-                            // height: responsiveHeight(6),
                             left: responsiveWidth(-5),
-                            // borderColor: 'red',
-                            // borderWidth: responsiveWidth(0.1),
-                            // backgroundColor: 'yellow',
                             flex: 1,
                         }}>
-                            <Pressable>
+                            <Pressable
+                            // onPress={onPressDeleteQuestion({ text: item?.id })}
+                            >
                                 <MaterialCommunityIcons
-                                    name="delete-forever" size={30}
+                                    name="delete-forever"
+                                    size={30}
                                     color='#e32f45'
-                                    style={{ margin: 3 }} />
+                                    style={{ margin: 3 }}
+                                />
                             </Pressable>
                         </View>
                     )}
@@ -100,16 +86,15 @@ const Profile = ({ navigation }) => {
                         size={22}
                     />
                 </TouchableOpacity>
-
                 <Text style={{
                     top: 35,
                     alignSelf: 'center',
                     fontWeight: 'bold',
                     fontSize: responsiveFontSize(25),
-                }}>{'?Profile Name?'}</Text>
-
+                }}>
+                    {'?Profile Name?'}
+                </Text>
             </View>
-
         </View>
     )
 };
