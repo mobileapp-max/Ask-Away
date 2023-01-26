@@ -43,7 +43,7 @@ mutation ($question: String!) {
 
 
 export const DELETE_QUESTION = gql`
-mutation ($id: String) {
+mutation ($id: uuid) {
     delete_question (
       where: {
         id: {

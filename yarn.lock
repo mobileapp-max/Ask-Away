@@ -4696,7 +4696,7 @@
   "version" "8.6.3"
   dependencies:
     "blueimp-md5" "^2.10.0"
-    "expo-constants" "~13.2.2"
+    "expo-constants": "~14.0.2"
     "expo-file-system" "~14.1.0"
     "invariant" "^2.2.4"
     "md5-file" "^3.2.3"
@@ -4709,22 +4709,15 @@
   "version" "8.7.0"
   dependencies:
     "blueimp-md5" "^2.10.0"
-    "expo-constants" "~14.0.0"
+    "expo-constants" "~14.0.2"
     "expo-file-system" "~15.1.0"
     "invariant" "^2.2.4"
     "md5-file" "^3.2.3"
     "path-browserify" "^1.0.0"
     "url-parse" "^1.5.9"
 
-"expo-constants@~13.2.2":
-  "integrity" "sha512-Zobau8EuTk2GgafwkfGnWM6CmSLB7X8qnQXVuXe0nd3v92hfQUmRWGhJwH88uxXj3LrfqctM6PaJ8taG1vxfBw=="
-  "resolved" "https://registry.npmjs.org/expo-constants/-/expo-constants-13.2.4.tgz"
-  "version" "13.2.4"
-  dependencies:
-    "@expo/config" "~7.0.0"
-    "uuid" "^3.3.2"
 
-"expo-constants@~14.0.0", "expo-constants@~14.0.2":
+"expo-constants@~14.0.2":
   "integrity" "sha512-wzV3nrzTXTI8yG0tfas3fnqCfKV6YE+1GphEREyVDAShEB6mBInX1b6HgtpHFy2wOtnml+lPVmTCeGtjjLnZhA=="
   "resolved" "https://registry.npmjs.org/expo-constants/-/expo-constants-14.0.2.tgz"
   "version" "14.0.2"
@@ -4775,7 +4768,7 @@
   "version" "3.3.0"
   dependencies:
     "@types/qs" "^6.5.3"
-    "expo-constants" "~14.0.0"
+    "expo-constants" "~14.0.2"
     "invariant" "^2.2.4"
     "qs" "^6.9.1"
     "url-parse" "^1.5.9"

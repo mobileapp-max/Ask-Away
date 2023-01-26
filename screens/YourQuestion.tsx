@@ -27,33 +27,38 @@ const Profile = ({ navigation }) => {
             <View style={{ flex: 5, backgroundColor: 'white', overflow: 'visible', }}>
                 <SwipeListView
                     data={questions}
-                    renderItem={({ item }) => <QuestionRow question={item} />}
+                    renderItem={({ item }) =>
+                        <QuestionRow question={item} />
+                    }
                     keyExtractor={(item, index) => index}
                     contentContainerStyle={{
                         paddingTop: responsiveHeight(4),
                         paddingBottom: responsiveHeight(20)
                     }}
-                    renderHiddenItem={({ item }) => (
-                        <View style={{
-                            flexDirection: "row",
-                            justifyContent: 'flex-end',
-                            alignContent: 'center',
-                            alignItems: 'center',
-                            left: responsiveWidth(-5),
-                            flex: 1,
-                        }}>
-                            <Pressable
-                            // onPress={onPressDeleteQuestion({ text: item?.id })}
-                            >
-                                <MaterialCommunityIcons
-                                    name="delete-forever"
-                                    size={30}
-                                    color='#e32f45'
-                                    style={{ margin: 3 }}
-                                />
-                            </Pressable>
-                        </View>
-                    )}
+                    renderHiddenItem={({ item }) => {
+                        console.log(item)
+                        return (
+                            <View style={{
+                                flexDirection: "row",
+                                justifyContent: 'flex-end',
+                                alignContent: 'center',
+                                alignItems: 'center',
+                                left: responsiveWidth(-5),
+                                flex: 1,
+                            }}>
+                                <Pressable
+                                    onPress={() => onPressDeleteQuestion({ questionId: item?.id })}
+                                >
+                                    <MaterialCommunityIcons
+                                        name="delete-forever"
+                                        size={30}
+                                        color='#e32f45'
+                                        style={{ margin: 3 }}
+                                    />
+                                </Pressable>
+                            </View>
+                        )
+                    }}
                     rightOpenValue={-75}
                     disableRightSwipe={true}
                 />
@@ -95,7 +100,7 @@ const Profile = ({ navigation }) => {
                     {'?Profile Name?'}
                 </Text>
             </View>
-        </View>
+        </View >
     )
 };
 
