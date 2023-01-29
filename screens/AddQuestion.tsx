@@ -30,6 +30,8 @@ import { FlatList } from 'react-native-gesture-handler';
 import { FontAwesome } from '@expo/vector-icons';
 import { disableErrorHandling } from 'expo';
 import { AntDesign } from '@expo/vector-icons';
+import { BlurView } from 'expo-blur';
+
 
 
 const AddQ = ({ navigation }) => {
@@ -125,11 +127,12 @@ const AddQ = ({ navigation }) => {
           onRequestClose={() => {
             setModalVisible(!modalVisible);
           }}>
-          <View style={styles.centeredView}>
+          <BlurView
+            intensity={5} style={styles.centeredView}>
             <View style={styles.modalView}>
               <Text style={styles.modalText}>Added!</Text>
             </View>
-          </View>
+          </BlurView>
         </Modal>
 
         <ScrollView

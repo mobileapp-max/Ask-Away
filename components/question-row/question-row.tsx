@@ -12,6 +12,7 @@ import {
 } from '../../scripts/constants';
 import { calculateResults } from '../../scripts/calculateResults';
 import UseOnLayout from '../../scripts/use-on-layout';
+import * as Animatable from 'react-native-animatable';
 
 
 export const QuestionRow = ({ question: incomingQuestion }) => {
@@ -33,7 +34,8 @@ export const QuestionRow = ({ question: incomingQuestion }) => {
                 flexDirection: "row",
                 justifyContent: 'space-between',
                 marginVertical: responsiveWidth(0.8),
-                marginHorizontal: responsiveWidth(0.8),
+                marginHorizontal: responsiveWidth(2),
+
             }}
         >
             <View
@@ -56,7 +58,7 @@ export const QuestionRow = ({ question: incomingQuestion }) => {
                     borderRadius: 10,
                     overflow: 'hidden',
                     height: currentHeightOfView,
-                    width: responsiveWidth(28),
+                    width: responsiveWidth(26),
                     borderColor: 'red',
                     borderWidth: responsiveWidth(0.1),
                     justifyContent: 'center',
@@ -74,7 +76,7 @@ export const QuestionRow = ({ question: incomingQuestion }) => {
                     overflow: 'hidden',
                     backgroundColor: 'white',
                     height: currentHeightOfView,
-                    width: responsiveWidth(28),
+                    width: responsiveWidth(26),
                     borderColor: 'red',
                     justifyContent: 'center'
                 }}>
@@ -82,7 +84,7 @@ export const QuestionRow = ({ question: incomingQuestion }) => {
                         style={{
                             backgroundColor: "#54a832",
                             height: currentHeightOfView,
-                            width: responsiveWidth((28 / 100) * calculateResults({ answer_1, answer_2 }).answer_1_result),
+                            width: responsiveWidth((26 / 100) * calculateResults({ answer_1, answer_2 }).answer_1_result),
                             justifyContent: 'center',
                             alignItems: 'center',
                             alignContent: 'center',
@@ -95,7 +97,7 @@ export const QuestionRow = ({ question: incomingQuestion }) => {
                         style={{
                             backgroundColor: "#e32f45",
                             height: currentHeightOfView,
-                            width: responsiveWidth((28 / 100) * calculateResults({ answer_1, answer_2 }).answer_2_result),
+                            width: responsiveWidth((26 / 100) * calculateResults({ answer_1, answer_2 }).answer_2_result),
                             justifyContent: 'center',
                             alignItems: 'center',
                             alignContent: 'center'
@@ -112,7 +114,7 @@ export const QuestionRow = ({ question: incomingQuestion }) => {
 
 const styles = StyleSheet.create({
     inputText: {
-        width: responsiveWidth(70),
+        width: responsiveWidth(69),
         padding: 10,
         color: '#e32f45',
         borderWidth: 0.5,

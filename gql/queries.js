@@ -8,6 +8,15 @@ subscription MySubscription {
     answer_1
     answer_2
     created_at
+    user_id
+    responses_aggregate {
+      aggregate {
+        sum {
+          response_1
+          response_2
+        }
+      }
+    }
   }
 }
 `;

@@ -59,7 +59,7 @@ const CustomTabButton = (props) => {
 
     return <TouchableOpacity
         style={{
-            top: -30,
+            top: -14,
             justifyContent: "center",
             alignItems: 'center',
             ...style.shadow,
@@ -105,7 +105,7 @@ const Tabs = (props) => {
                 headerShown: false,
                 tabBarStyle: {
                     position: 'absolute',
-                    bottom: 25,
+                    bottom: 15,
                     left: 20,
                     right: 20,
                     elevation: 0,
@@ -113,7 +113,7 @@ const Tabs = (props) => {
                     borderWidth: 2,
                     borderColor: 'red',
                     borderRadius: 15,
-                    height: 90,
+                    height: 60,
                     top: props?.isTabsVisible ? undefined : -100,
                     ...style.shadow
                 }
@@ -129,8 +129,7 @@ const Tabs = (props) => {
                             size={40}
                             color={focused ? 'gold' : '#e32f45'}
                         />
-                        <Text
-                            style={{ color: focused ? 'gold' : '#e32f45' }}>Questions</Text>
+                        <Text style={{ color: focused ? 'gold' : '#e32f45' }}>Questions</Text>
                     </View>
                 )
             }} />
@@ -149,15 +148,9 @@ const Tabs = (props) => {
 
                     ),
                     tabBarButton: (props) => {
-                        // console.log('props', props);
                         return <CustomTabButton {...props} />
                     }
                 }}
-            // listeners={() => ({
-            //     tabPress: event => {
-            //         event.preventDefault();
-            //     }
-            // })}
             />
             <Tab.Screen name="Profile3" component={LogInStackScreen}
                 options={{
@@ -168,14 +161,12 @@ const Tabs = (props) => {
                                 size={40}
                                 color={focused ? 'gold' : '#e32f45'}
                             />
-                            <Text
-                                style={{ color: focused ? 'gold' : '#e32f45' }}>Profile</Text>
+                            <Text style={{ color: focused ? 'gold' : '#e32f45' }}>Profile</Text>
                         </View>
                     )
                 }}
             />
         </Tab.Navigator>
-        // </RootStackScree>
     )
 }
 

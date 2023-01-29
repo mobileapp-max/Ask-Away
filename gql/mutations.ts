@@ -1,5 +1,4 @@
 import { gql } from "@apollo/client";
-// import gql from 'graphql-tag';
 
 export const QUESTIONS_MUTATION = gql`
 mutation ($question: String!) {
@@ -20,28 +19,6 @@ mutation ($question: String!) {
     }
 }`;
 
-// export const DELETE_QUESTION = (id: string) => {
-//     return gql(`mutation {
-//     delete_question (where: { id: { _eq: "${id}" } }) {
-//       affected_rows
-//     }
-//   } `)
-// }
-
-// export const DELETE_QUESTION = gql`
-// mutation ($id: Int) {
-//     delete_question (
-//       where: {
-//         id: {
-//           _eq: $id
-//         }
-//       }
-//     ) {
-//       affected_rows
-//     }
-//   } `;
-
-
 export const DELETE_QUESTION = gql`
 mutation ($id: uuid) {
     delete_question (
@@ -54,3 +31,26 @@ mutation ($id: uuid) {
       affected_rows
     }
   } `;
+
+
+export const ADD_RESPONSE = gql`
+mutation ($question_id: uuid, $response_1: Int, $response_2: Int, $user_id: String, $report: Int) {
+  insert_response (
+    objects: [{
+        response_1 : $response_1,
+        response_2 : $response_2,
+        question_id : $question_id,
+        user_id : $user_id,
+        report: $report,
+      }],
+    ) {
+      returning {
+        question_id
+        response_1
+        response_2
+        id
+        user_id
+        report
+  }
+}
+} `;

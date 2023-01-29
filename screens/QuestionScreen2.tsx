@@ -12,8 +12,8 @@ import {
   Switch,
   TouchableWithoutFeedback,
   KeyboardAvoidingView,
-  FlatList
-
+  FlatList,
+  Modal
 } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -27,34 +27,54 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 import { AntDesign } from '@expo/vector-icons';
 import { ResultsScale } from '../components/resultsScale';
+import { BlurView } from 'expo-blur';
+
 
 const QuestionScreen = ({ navigation }) => {
 
   const [title, setTitle] = useState('')
   const [text, setText] = useState('')
   const [isHidden, setIsHidden] = useState(false)
-  const { onPressAddQuestion, questions, question, onPressNextQuestion } = useContext(QuestionsContext)
+  const { question, onPressNextQuestion, onPressAddResponse } = useContext(QuestionsContext)
   const { height } = Dimensions.get("window");
   const { colors } = useTheme();
   const [answerWidth, setAnswerWidth] = useState(45)
   const [buttonPressed, setButtonPressed] = useState(false);
-  const [questionNumber, setQuestionNumber] = useState(0)
+
 
   const questionResult_1 = function () {
-    setAnswerWidth((question?.answer_1 + 1) / (question?.answer_1 + 1 + question?.answer_2) * 90)
+    setAnswerWidth((question?.responses_aggregate?.aggregate?.sum?.response_1 / (question?.responses_aggregate?.aggregate?.sum?.response_1 + question?.responses_aggregate?.aggregate?.sum?.response_2)) * 90)
     setButtonPressed(true)
+    // onPressAddResponse({ question_id: question?.id, response_1: '1', response_2: '0', user_id: '1' })
+    // console.log(question?.responses_aggregate?.aggregate?.sum?.response_1)
   }
   const questionResult_2 = function () {
-    setAnswerWidth(question?.answer_1 / (question?.answer_1 + question?.answer_2 + 1) * 90)
+    setAnswerWidth(0 || (question?.responses_aggregate?.aggregate?.sum?.response_2 / (question?.responses_aggregate?.aggregate?.sum?.response_1 + question?.responses_aggregate?.aggregate?.sum?.response_2)) * 90)
     setButtonPressed(true)
+    // onPressAddResponse({ question_id: question?.id, response_1: '0', response_2: '1', user_id: '1' })
+  }
+  const onPressReport = () => {
+    onPressAddResponse({ question_id: question?.id, response_1: '0', response_2: '0', user_id: '1', report: '1' })
+    setModalVisible(true)
+    setTimeout(() => {
+      setModalVisible(false)
+      setButtonPressed(false)
+      setAnswerWidth(45)
+      onPressNextQuestion()
+    }, 1500);
+
   }
   const nextQuestion = function () {
-    setQuestionNumber(questionNumber + 1)
     setButtonPressed(false)
     setAnswerWidth(45)
     onPressNextQuestion()
-
+    console.log('q:', question?.question)
+    console.log('q1:', question?.responses_aggregate?.aggregate?.sum?.response_1 || 0)
+    console.log("q2:", question?.responses_aggregate?.aggregate?.sum?.response_2 || 0)
+    console.log("q1%:", (question?.responses_aggregate?.aggregate?.sum?.response_1 / (question?.responses_aggregate?.aggregate?.sum?.response_1 + question?.responses_aggregate?.aggregate?.sum?.response_2)) || 0 * 90)
+    console.log("q2%:", (question?.responses_aggregate?.aggregate?.sum?.response_2 / (question?.responses_aggregate?.aggregate?.sum?.response_1 + question?.responses_aggregate?.aggregate?.sum?.response_2)) || 0 * 90)
   }
+  const [modalVisible, setModalVisible] = useState(false);
 
   // console.log((questions?.answer_1 + 1) / (questions?.answer_1 + questions?.answer_2) * 90)
   // console.log(question?.answer_1 + 1)
@@ -97,7 +117,7 @@ const QuestionScreen = ({ navigation }) => {
 
             <View style={{ flexDirection: 'row', justifyContent: 'space-between', }}>
               <TouchableOpacity
-                // onPress={() => }
+                onPress={onPressReport}
                 style={{ flexDirection: 'row', alignItems: 'center' }}
               >
                 <AntDesign
@@ -147,7 +167,8 @@ const QuestionScreen = ({ navigation }) => {
                 justifyContent: 'center',
                 alignItems: 'center',
                 alignContent: 'center',
-              }}><Text style={{ fontWeight: 'bold', color: "white" }}>{buttonPressed ? `Yes, ${Math.round(answerWidth * 1.11111)}%` : `Yes`}</Text></TouchableOpacity>
+              }}>
+              <Text style={{ fontWeight: 'bold', color: "white" }}>{buttonPressed ? `Yes, ${Math.round(answerWidth * 1.11111)}%` : `Yes`}</Text></TouchableOpacity>
             <TouchableOpacity
               onPress={() => { if (buttonPressed === false) questionResult_2() }}
               style={{
@@ -158,9 +179,22 @@ const QuestionScreen = ({ navigation }) => {
                 alignItems: 'center',
                 alignContent: 'center'
               }}><Text style={{ fontWeight: 'bold', color: "white" }}>{buttonPressed ? `No, ${Math.round(100 - answerWidth * 1.11111)}%` : `No`}</Text></TouchableOpacity>
-
           </View>
         </View>
+        <Modal
+          animationType="fade"
+          transparent={true}
+          visible={modalVisible}
+          onRequestClose={() => {
+            setModalVisible(!modalVisible);
+          }}>
+          <BlurView
+            intensity={5} style={styles.centeredView}>
+            <View style={styles.modalView}>
+              <Text style={styles.modalText}>Reported</Text>
+            </View>
+          </BlurView>
+        </Modal>
       </ScrollView >
     </View >
   );
@@ -176,7 +210,7 @@ const styles = StyleSheet.create({
   header: {
     justifyContent: 'flex-end',
     paddingHorizontal: 20,
-    paddingBottom: 20,
+    paddingBottom: responsiveHeight(4),
     backgroundColor: '#e32f45',
     // borderBottomLeftRadius: 30,
     // borderBottomRightRadius: 30,
@@ -227,5 +261,35 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.5,
     shadowRadius: 3.5,
     elevation: 5,
+  },
+  centeredView: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+
+
+  },
+  modalView: {
+    // margin: 20,
+    // backgroundColor: '#e32f45',
+    borderRadius: 20,
+    top: responsiveHeight(-17),
+    padding: 35,
+    alignItems: 'center',
+    shadowColor: '#e32f45',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  modalText: {
+    textAlign: 'center',
+    fontWeight: "bold",
+    fontSize: responsiveFontSize(70),
+    color: '#e32f45'
+
   },
 });
