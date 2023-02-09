@@ -3,7 +3,8 @@ import {
     View,
     Text,
     StyleSheet,
-    Pressable
+    Pressable,
+    TouchableOpacity
 } from 'react-native';
 import {
     responsiveHeight,
@@ -15,7 +16,7 @@ import UseOnLayout from '../../scripts/use-on-layout';
 import * as Animatable from 'react-native-animatable';
 
 
-export const QuestionRow = ({ question: incomingQuestion }) => {
+export const QuestionRow = ({ question: incomingQuestion, updateQuestionModal }) => {
     const {
         question,
         answer_1,
@@ -30,6 +31,11 @@ export const QuestionRow = ({ question: incomingQuestion }) => {
 
     return (
         <Pressable
+            onPress={() => updateQuestionModal({
+                question,
+                answer_1,
+                answer_2
+            })}
             style={{
                 flexDirection: "row",
                 justifyContent: 'space-between',

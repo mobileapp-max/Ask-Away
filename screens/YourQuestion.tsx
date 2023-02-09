@@ -19,6 +19,8 @@ import { BlurView } from 'expo-blur';
 const Profile = ({ navigation }) => {
 
     const [modalVisible, setModalVisible] = useState(false);
+    const [questionVisible, setQuestionVisible] = useState(false);
+    const [selectedQuestionModal, setSelectedQuestionModal] = useState({})
     const [modalVisibleId, setModalVisibleId] = useState('');
     const onPressDeleteQuestionModal = (item) => {
         setModalVisible(!modalVisible)
@@ -29,16 +31,20 @@ const Profile = ({ navigation }) => {
         setModalVisible(!modalVisible)
     }
 
+    const updateQuestionModal = (incomingModalData) => {
+        setSelectedQuestionModal(incomingModalData)
+        setQuestionVisible(!modalVisible)
+    }
+
     const {
-        onPressAddQuestion,
         questions,
         onPressDeleteQuestion
     } = useContext(QuestionsContext)
 
     return (
-        <View style={{ flex: 1 }}>
-            <View style={{ backgroundColor: '#e32f45', flex: 1.6 }} />
-            <View style={{ flex: 5, backgroundColor: 'white', overflow: 'visible', }}>
+        <View style={styles.container}>
+            <View style={styles.header} />
+            <View style={styles.footer}>
                 <Modal
                     animationType="fade"
                     transparent={true}
@@ -50,18 +56,18 @@ const Profile = ({ navigation }) => {
                         intensity={5}
                         style={styles.centeredView}>
                         <View style={styles.modalView}>
-                            <Text style={styles.modalText}>Delete Question?</Text>
+                            <Text style={styles.modalText}>{'Delete Question?'}</Text>
                             <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', }}>
                                 <TouchableOpacity
                                     onPress={onPressDeleteQuestionYes}
-                                    style={{ margin: 5, padding: 5, backgroundColor: 'red', borderRadius: 15, height: responsiveHeight(7), width: responsiveHeight(7), justifyContent: 'center', alignItems: 'center', }}>
+                                    style={styles.modalQuestion}>
                                     <Text>
                                         {'Yes'}
                                     </Text>
                                 </TouchableOpacity>
                                 <TouchableOpacity
                                     onPress={() => setModalVisible(!modalVisible)}
-                                    style={{ margin: 5, padding: 5, backgroundColor: 'green', borderRadius: 15, height: responsiveHeight(7), width: responsiveHeight(7), justifyContent: 'center', alignItems: 'center', }}>
+                                    style={{ ...styles.modalQuestion, backgroundColor: 'green' }}>
                                     <Text>
                                         {'No'}
                                     </Text>
@@ -70,21 +76,36 @@ const Profile = ({ navigation }) => {
                         </View>
                     </BlurView>
                 </Modal>
+
+                <Modal
+                    animationType="fade"
+                    transparent={true}
+                    visible={questionVisible}
+                    onRequestClose={() => {
+                        setQuestionVisible(!questionVisible);
+                    }}>
+                    <BlurView
+                        intensity={5}
+                        style={styles.centeredView}>
+                        <View style={styles.modalView}>
+                            <Text style={styles.modalText}>{'Delete Question?'}</Text>
+                            <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', }}>
+                                <Text>{selectedQuestionModal?.question}</Text>
+                            </View>
+                        </View>
+                    </BlurView>
+                </Modal>
+
+
                 <SwipeListView
                     data={questions}
-                    // rightActivationValue={-75}
-                    // onRightActionStatusChange={() => console.log('worked')}
-                    // onRightAction={() => onPressDeleteQuestionModal()}
-                    renderItem={({ item }) =>
-                        <QuestionRow question={item} />
-                    }
+                    renderItem={({ item }) => <QuestionRow question={item} updateQuestionModal={updateQuestionModal} />}
                     keyExtractor={(item, index) => index}
                     contentContainerStyle={{
                         paddingTop: responsiveHeight(4),
                         paddingBottom: responsiveHeight(20)
                     }}
                     renderHiddenItem={({ item }) => {
-                        // console.log(item)
                         return (
                             <View style={{
                                 flexDirection: "row",
@@ -96,7 +117,6 @@ const Profile = ({ navigation }) => {
                             }}>
                                 <Pressable
                                     onPress={() => onPressDeleteQuestionModal(item)}
-                                // () => onPressDeleteQuestion({ questionId: item?.id })}
                                 >
                                     <MaterialCommunityIcons
                                         name="delete-forever"
@@ -112,45 +132,30 @@ const Profile = ({ navigation }) => {
                     disableRightSwipe={true}
                 />
             </View>
-            <View style={{
-                position: 'absolute',
-                backgroundColor: 'white',
-                width: responsiveWidth(85),
-                height: responsiveHeight(20),
-                alignSelf: 'center',
-                borderRadius: 25,
-                top: responsiveHeight(7),
-                shadowColor: "#e32f45",
-                shadowOffset: {
-                    width: 0,
-                    height: 10,
-                },
-                shadowOpacity: 0.25,
-                shadowRadius: 3.5,
-                elevation: 5,
-            }}>
-                <TouchableOpacity style={{
-                    flexDirection: "row-reverse",
-                    right: 17,
-                    bottom: -17
-                }}>
+            <View style={styles.card}>
+                <TouchableOpacity style={styles.editButton}>
                     <Feather
                         name="edit"
                         color="#e32f45"
                         size={22}
                     />
                 </TouchableOpacity>
-                <Text style={{
-                    alignSelf: 'center',
-                    fontWeight: 'bold',
-                    fontSize: responsiveFontSize(25),
-                }}>
+                <Text style={styles.profileName}>
                     {'?Profile Name?'}
                 </Text>
-                <View style={{ backgroundColor: 'red', top: 20, flexDirection: 'row' }}>
-                    <Text>{'11'}{'\nYour \nquestions'}</Text>
-                    <Text>{'Your \nanswers'}</Text>
-                    <Text>{'Your questions'}</Text>
+                <View style={styles.cardValueRow}>
+                    <View style={styles.cardValues}>
+                        <Text style={styles.largeNumbers}>{'15'}</Text>
+                        <Text style={styles.regularText}>{'Questions'}</Text>
+                    </View>
+                    <View style={styles.cardValues}>
+                        <Text style={styles.largeNumbers}>{'20'}</Text>
+                        <Text style={styles.regularText}>{'Answered'}</Text>
+                    </View>
+                    <View style={styles.cardValues}>
+                        <Text style={styles.largeNumbers}>{'36'}</Text>
+                        <Text style={styles.regularText}>{'Replies \nrecieved'}</Text>
+                    </View>
                 </View>
             </View>
         </View >
@@ -160,29 +165,19 @@ const Profile = ({ navigation }) => {
 export default Profile;
 
 const styles = StyleSheet.create({
-    inputText: {
-        width: responsiveWidth(70),
-        padding: 10,
-        color: '#e32f45',
-        borderWidth: 0.5,
-        borderColor: '#FA7465',
+    container: {
+        flex: 1
+    },
+    header: {
+        backgroundColor: '#e32f45',
+        flex: 1.6
+    },
+    footer: {
+        flex: 5,
         backgroundColor: 'white',
-        borderRadius: 20,
-        borderBottomRightRadius: 20,
-        borderTopRightRadius: 8,
-        borderTopLeftRadius: 20,
-        borderBottomLeftRadius: 8,
-        shadowColor: "#e32f45",
-        shadowOffset: {
-            width: 0,
-            height: 10,
-        },
-        shadowOpacity: 0.5,
-        shadowRadius: 3.5,
-        elevation: 5,
+        overflow: 'visible',
     },
     modalView: {
-        // margin: 20,
         backgroundColor: 'white',
         borderRadius: 20,
         padding: 35,
@@ -204,12 +199,70 @@ const styles = StyleSheet.create({
         fontSize: 18,
         color: '#e32f45'
 
-    }, centeredView: {
+    },
+    profileName: {
+
+        alignSelf: 'center',
+        fontWeight: 'bold',
+        fontSize: responsiveFontSize(25),
+
+
+    },
+    centeredView: {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        // marginTop: 22,
-
-
+    },
+    card: {
+        position: 'absolute',
+        backgroundColor: 'white',
+        width: responsiveWidth(85),
+        height: responsiveHeight(20),
+        alignSelf: 'center',
+        borderRadius: 25,
+        top: responsiveHeight(7),
+        shadowColor: "#e32f45",
+        shadowOffset: {
+            width: 0,
+            height: 10,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.5,
+        elevation: 5,
+    },
+    cardValues: {
+        flexDirection: 'column',
+        alignItems: 'center',
+        margin: responsiveWidth(3),
+        marginHorizontal: responsiveWidth(5)
+    },
+    cardValueRow: {
+        top: 20,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+    },
+    largeNumbers: {
+        fontSize: responsiveFontSize(29),
+        fontWeight: 'bold',
+        color: '#e32f45'
+    },
+    regularText: {
+        fontSize: responsiveFontSize(17),
+        textAlign: 'center'
+    },
+    editButton: {
+        flexDirection: "row-reverse",
+        right: responsiveHeight(2),
+        bottom: responsiveWidth(-4)
+    },
+    modalQuestion: {
+        margin: 5,
+        padding: 5,
+        backgroundColor: 'red',
+        borderRadius: 15,
+        height: responsiveHeight(7),
+        width: responsiveHeight(7),
+        justifyContent: 'center',
+        alignItems: 'center',
     },
 });

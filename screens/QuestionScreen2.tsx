@@ -135,10 +135,10 @@ const QuestionScreen = ({ navigation }) => {
         </View>
 
         <View style={{
-          marginTop: responsiveHeight(5),
+          // marginTop: responsiveHeight(5),
           alignSelf: 'center',
           flexDirection: "row",
-          borderRadius: 10,
+          // borderRadius: 10,
           width: responsiveWidth(90),
           shadowColor: "#e32f45",
           shadowOffset: {
@@ -156,28 +156,31 @@ const QuestionScreen = ({ navigation }) => {
             flexDirection: "row",
             borderRadius: 10,
             width: responsiveWidth(90),
-            overflow: 'hidden',
+            overflow: 'allow',
+            marginTop: 30,
           }}>
             <TouchableOpacity
               onPress={() => { if (buttonPressed === false) questionResult_1() }}
               style={{
                 backgroundColor: "#54a832",
-                height: responsiveHeight(7),
+                height: responsiveHeight(10),
                 width: responsiveWidth(answerWidth),
                 justifyContent: 'center',
                 alignItems: 'center',
                 alignContent: 'center',
+                borderRadius: 10,
               }}>
               <Text style={{ fontWeight: 'bold', color: "white" }}>{buttonPressed ? `Yes, ${Math.round(answerWidth * 1.11111)}%` : `Yes`}</Text></TouchableOpacity>
             <TouchableOpacity
               onPress={() => { if (buttonPressed === false) questionResult_2() }}
               style={{
                 backgroundColor: "#e32f45",
-                height: responsiveHeight(7),
+                height: responsiveHeight(10),
                 width: responsiveWidth(90 - answerWidth),
                 justifyContent: 'center',
                 alignItems: 'center',
-                alignContent: 'center'
+                alignContent: 'center',
+                borderRadius: 10,
               }}><Text style={{ fontWeight: 'bold', color: "white" }}>{buttonPressed ? `No, ${Math.round(100 - answerWidth * 1.11111)}%` : `No`}</Text></TouchableOpacity>
           </View>
         </View>
@@ -239,7 +242,7 @@ const styles = StyleSheet.create({
   },
   inputTextContainer: {
     // flex: 1,
-    margin: responsiveWidth(10),
+    marginTop: responsiveWidth(10),
     alignSelf: 'center',
     padding: 8,
     // paddingTop: 5,
@@ -253,6 +256,7 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 8,
     borderTopLeftRadius: 20,
     borderBottomLeftRadius: 8,
+    overflow: 'allow',
     shadowColor: "#e32f45",
     shadowOffset: {
       width: 0,

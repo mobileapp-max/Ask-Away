@@ -15,7 +15,7 @@ import { LogInStackScreen } from './logInSignUpNav'
 import { FontAwesome } from '@expo/vector-icons';
 import { useEffect } from 'react';
 import QuestionScreen from '../screens/QuestionScreen2';
-// import { Easing } from 'react-native-reanimated';
+import SignUpScreen from '../screens/SignUpScreen';
 
 
 // import { mdiPlusCircleOutline } from '@mdi/js'
@@ -166,6 +166,20 @@ const Tabs = (props) => {
                     )
                 }}
             />
+            {/* <Tab.Screen name="Profile3" component={SignUpScreen}
+                options={{
+                    tabBarIcon: ({ focused }) => (
+                        <View style={{ alignItems: "center", justifyContent: 'center', top: 10 }}>
+                            <Icon
+                                name="person-circle"
+                                size={40}
+                                color={focused ? 'gold' : '#e32f45'}
+                            />
+                            <Text style={{ color: focused ? 'gold' : '#e32f45' }}>Profile</Text>
+                        </View>
+                    )
+                }}
+            /> */}
         </Tab.Navigator>
     )
 }
