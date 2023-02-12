@@ -3,55 +3,35 @@ import {
   View,
   Text,
   TouchableOpacity,
-  TextInput,
-  Platform,
   StyleSheet,
   Dimensions,
   StatusBar,
   ScrollView,
-  Switch,
-  TouchableWithoutFeedback,
-  KeyboardAvoidingView,
-  FlatList,
   Modal
 } from 'react-native';
-import * as Animatable from 'react-native-animatable';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useTheme } from 'react-native-paper';
 import { useContext } from 'react';
 import { QuestionsContext } from '../contexts/questions-context-provider';
 import { responsiveFontSize, responsiveHeight, responsiveWidth } from '../scripts/constants';
-import { CharacterLimit } from '../components/character-limit/character-limit';
-import SwitchSelector from 'react-native-switch-selector';
-import Icon from 'react-native-vector-icons/Ionicons';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 import { AntDesign } from '@expo/vector-icons';
-import { ResultsScale } from '../components/resultsScale';
 import { BlurView } from 'expo-blur';
 
 
 const QuestionScreen = ({ navigation }) => {
 
-  const [title, setTitle] = useState('')
-  const [text, setText] = useState('')
-  const [isHidden, setIsHidden] = useState(false)
   const { question, onPressNextQuestion, onPressAddResponse } = useContext(QuestionsContext)
-  const { height } = Dimensions.get("window");
-  const { colors } = useTheme();
   const [answerWidth, setAnswerWidth] = useState(45)
   const [buttonPressed, setButtonPressed] = useState(false);
-
+  const [modalVisible, setModalVisible] = useState(false);
 
   const questionResult_1 = function () {
     setAnswerWidth((question?.responses_aggregate?.aggregate?.sum?.response_1 / (question?.responses_aggregate?.aggregate?.sum?.response_1 + question?.responses_aggregate?.aggregate?.sum?.response_2)) * 90)
     setButtonPressed(true)
-    // onPressAddResponse({ question_id: question?.id, response_1: '1', response_2: '0', user_id: '1' })
-    // console.log(question?.responses_aggregate?.aggregate?.sum?.response_1)
   }
   const questionResult_2 = function () {
     setAnswerWidth(0 || (question?.responses_aggregate?.aggregate?.sum?.response_2 / (question?.responses_aggregate?.aggregate?.sum?.response_1 + question?.responses_aggregate?.aggregate?.sum?.response_2)) * 90)
     setButtonPressed(true)
-    // onPressAddResponse({ question_id: question?.id, response_1: '0', response_2: '1', user_id: '1' })
   }
   const onPressReport = () => {
     onPressAddResponse({ question_id: question?.id, response_1: '0', response_2: '0', user_id: '1', report: '1' })
@@ -68,14 +48,12 @@ const QuestionScreen = ({ navigation }) => {
     setButtonPressed(false)
     setAnswerWidth(45)
     onPressNextQuestion()
-    console.log('q:', question?.question)
-    console.log('q1:', question?.responses_aggregate?.aggregate?.sum?.response_1 || 0)
-    console.log("q2:", question?.responses_aggregate?.aggregate?.sum?.response_2 || 0)
-    console.log("q1%:", (question?.responses_aggregate?.aggregate?.sum?.response_1 / (question?.responses_aggregate?.aggregate?.sum?.response_1 + question?.responses_aggregate?.aggregate?.sum?.response_2)) || 0 * 90)
-    console.log("q2%:", (question?.responses_aggregate?.aggregate?.sum?.response_2 / (question?.responses_aggregate?.aggregate?.sum?.response_1 + question?.responses_aggregate?.aggregate?.sum?.response_2)) || 0 * 90)
+    // console.log('q:', question?.question)
+    // console.log('q1:', question?.responses_aggregate?.aggregate?.sum?.response_1 || 0)
+    // console.log("q2:", question?.responses_aggregate?.aggregate?.sum?.response_2 || 0)
+    // console.log("q1%:", (question?.responses_aggregate?.aggregate?.sum?.response_1 / (question?.responses_aggregate?.aggregate?.sum?.response_1 + question?.responses_aggregate?.aggregate?.sum?.response_2)) || 0 * 90)
+    // console.log("q2%:", (question?.responses_aggregate?.aggregate?.sum?.response_2 / (question?.responses_aggregate?.aggregate?.sum?.response_1 + question?.responses_aggregate?.aggregate?.sum?.response_2)) || 0 * 90)
   }
-  const [modalVisible, setModalVisible] = useState(false);
-
   // console.log((questions?.answer_1 + 1) / (questions?.answer_1 + questions?.answer_2) * 90)
   // console.log(question?.answer_1 + 1)
 
@@ -87,16 +65,19 @@ const QuestionScreen = ({ navigation }) => {
           {'Questions'}
         </Text>
       </View>
-
-
-
       <ScrollView>
         <View style={{
           ...styles.inputTextContainer,
           height: responsiveHeight(35),
           width: responsiveWidth(90)
         }}>
-          <View style={{ flex: 1, alignContent: "center", alignItems: "center", justifyContent: 'center' }}>
+          <View
+            style={{
+              flex: 1,
+              alignContent: "center",
+              alignItems: "center",
+              justifyContent: 'center'
+            }}>
             <Text
               adjustsFontSizeToFit={true}
               // numberOfLines={10}
@@ -109,36 +90,50 @@ const QuestionScreen = ({ navigation }) => {
               }}
             >
               {question?.question}
-
             </Text>
           </View>
-          <View style={{ justifyContent: "flex-end", flexDirection: 'column' }}>
-
-
-            <View style={{ flexDirection: 'row', justifyContent: 'space-between', }}>
+          <View style={{
+            justifyContent: "flex-end",
+            flexDirection: 'column'
+          }}>
+            <View style={{
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+            }}>
               <TouchableOpacity
                 onPress={onPressReport}
-                style={{ flexDirection: 'row', alignItems: 'center' }}
+                style={{
+                  flexDirection: 'row',
+                  alignItems: 'center'
+                }}
               >
                 <AntDesign
                   name="frown"
                   size={30}
                   color='#e32f45'
                   style={{ margin: 3 }} />
-                <Text>{'Report'}</Text></TouchableOpacity>
+                <Text>{'Report'}</Text>
+              </TouchableOpacity>
               <TouchableOpacity
                 onPress={() => nextQuestion()}
-                style={{ flexDirection: 'row', alignItems: 'center' }} ><Text>{'Next'}</Text><AntDesign name="caretright" size={38} color='#e32f45' /></TouchableOpacity>
-
+                style={{
+                  flexDirection:
+                    'row',
+                  alignItems: 'center'
+                }} >
+                <Text>{'Next'}</Text>
+                <AntDesign
+                  name="caretright"
+                  size={38}
+                  color='#e32f45'
+                />
+              </TouchableOpacity>
             </View>
           </View>
         </View>
-
         <View style={{
-          // marginTop: responsiveHeight(5),
           alignSelf: 'center',
           flexDirection: "row",
-          // borderRadius: 10,
           width: responsiveWidth(90),
           shadowColor: "#e32f45",
           shadowOffset: {
@@ -150,7 +145,6 @@ const QuestionScreen = ({ navigation }) => {
           elevation: 5,
         }
         }>
-
           <View style={{
             alignSelf: 'center',
             flexDirection: "row",
@@ -170,7 +164,18 @@ const QuestionScreen = ({ navigation }) => {
                 alignContent: 'center',
                 borderRadius: 10,
               }}>
-              <Text style={{ fontWeight: 'bold', color: "white" }}>{buttonPressed ? `Yes, ${Math.round(answerWidth * 1.11111)}%` : `Yes`}</Text></TouchableOpacity>
+              <Text
+                style={{
+                  fontWeight: 'bold',
+                  color: "white"
+                }}>
+                {buttonPressed
+                  ?
+                  `Yes, ${Math.round(answerWidth * 1.11111)}%`
+                  : `Yes`
+                }
+              </Text>
+            </TouchableOpacity>
             <TouchableOpacity
               onPress={() => { if (buttonPressed === false) questionResult_2() }}
               style={{
@@ -181,7 +186,18 @@ const QuestionScreen = ({ navigation }) => {
                 alignItems: 'center',
                 alignContent: 'center',
                 borderRadius: 10,
-              }}><Text style={{ fontWeight: 'bold', color: "white" }}>{buttonPressed ? `No, ${Math.round(100 - answerWidth * 1.11111)}%` : `No`}</Text></TouchableOpacity>
+              }}>
+              <Text style={{
+                fontWeight: 'bold',
+                color: "white"
+              }}>
+                {buttonPressed
+                  ?
+                  `No, ${Math.round(100 - answerWidth * 1.11111)}%`
+                  :
+                  `No`}
+              </Text>
+            </TouchableOpacity>
           </View>
         </View>
         <Modal
@@ -194,7 +210,7 @@ const QuestionScreen = ({ navigation }) => {
           <BlurView
             intensity={5} style={styles.centeredView}>
             <View style={styles.modalView}>
-              <Text style={styles.modalText}>Reported</Text>
+              <Text style={styles.modalText}>{'Reported'}</Text>
             </View>
           </BlurView>
         </Modal>

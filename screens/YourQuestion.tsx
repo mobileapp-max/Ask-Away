@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
     View,
     Text,
@@ -11,9 +11,14 @@ import Feather from 'react-native-vector-icons/Feather';
 import { responsiveHeight, responsiveWidth, responsiveFontSize } from '../scripts/constants';
 import { QuestionsContext } from '../contexts/questions-context-provider';
 import { useContext } from 'react';
-import { MaterialCommunityIcons } from '@expo/vector-icons'; import { QuestionRow } from '../components/question-row/question-row';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { QuestionRow } from '../components/question-row/question-row';
 import { SwipeListView } from 'react-native-swipe-list-view';
 import { BlurView } from 'expo-blur';
+import { ReplyResult } from '../components/replyResult';
+import { calculateResults } from '../scripts/calculateResults';
+import ModalMain from '../components/modalMain';
+
 
 
 const Profile = ({ navigation }) => {
@@ -22,10 +27,21 @@ const Profile = ({ navigation }) => {
     const [questionVisible, setQuestionVisible] = useState(false);
     const [selectedQuestionModal, setSelectedQuestionModal] = useState({})
     const [modalVisibleId, setModalVisibleId] = useState('');
+
+    const onPressDismissModal = () => {
+        setQuestionVisible(!questionVisible)
+    }
+
+
     const onPressDeleteQuestionModal = (item) => {
         setModalVisible(!modalVisible)
         setModalVisibleId(item?.id)
     }
+    useEffect(() => {
+        const answer_1 = selectedQuestionModal?.answer_1
+        const answer_2 = selectedQuestionModal?.answer_2
+    }, [selectedQuestionModal])
+
     const onPressDeleteQuestionYes = () => {
         onPressDeleteQuestion({ questionId: modalVisibleId })
         setModalVisible(!modalVisible)
@@ -77,7 +93,7 @@ const Profile = ({ navigation }) => {
                     </BlurView>
                 </Modal>
 
-                <Modal
+                {/* <Modal
                     animationType="fade"
                     transparent={true}
                     visible={questionVisible}
@@ -87,19 +103,31 @@ const Profile = ({ navigation }) => {
                     <BlurView
                         intensity={5}
                         style={styles.centeredView}>
-                        <View style={styles.modalView}>
-                            <Text style={styles.modalText}>{'Delete Question?'}</Text>
-                            <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', }}>
-                                <Text>{selectedQuestionModal?.question}</Text>
+                        <View style={styles.inputTextContainer}>
+                            <View style={{ alignItems: 'center', justifyContent: 'center', alignSelf: 'center', alignContent: "center", }}>
+                                <Text style={{ padding: 10 }}>{selectedQuestionModal?.question}</Text>
+                                <Text style={{ padding: 10 }}>{selectedQuestionModal?.answer_1}</Text>
+                                <Text style={{ padding: 10 }}>{selectedQuestionModal?.answer_2}</Text>
+
                             </View>
                         </View>
                     </BlurView>
-                </Modal>
+                </Modal> */}
+                <ModalMain
+                    questionVisible={questionVisible}
+                    selectedQuestionModal={selectedQuestionModal}
+                    onPressDismissModal={onPressDismissModal}
+                >
+                </ModalMain>
 
 
                 <SwipeListView
                     data={questions}
-                    renderItem={({ item }) => <QuestionRow question={item} updateQuestionModal={updateQuestionModal} />}
+                    renderItem={({ item }) =>
+                        <QuestionRow
+                            question={item}
+                            updateQuestionModal={updateQuestionModal}
+                        />}
                     keyExtractor={(item, index) => index}
                     contentContainerStyle={{
                         paddingTop: responsiveHeight(4),
@@ -264,5 +292,32 @@ const styles = StyleSheet.create({
         width: responsiveHeight(7),
         justifyContent: 'center',
         alignItems: 'center',
+    },
+    inputTextContainer: {
+        height: responsiveHeight(10),
+        // width: responsiveWidth(90),
+        // marginTop: responsiveWidth(10),
+        alignSelf: 'center',
+        padding: 8,
+        // paddingTop: 5,
+        color: '#e32f45',
+        borderWidth: 0.5,
+        borderColor: '#FA7465',
+        // minHeight: height * 0.15,
+        backgroundColor: 'white',
+        borderRadius: 20,
+        borderBottomRightRadius: 20,
+        borderTopRightRadius: 8,
+        borderTopLeftRadius: 20,
+        borderBottomLeftRadius: 8,
+        overflow: 'allow',
+        shadowColor: "#e32f45",
+        shadowOffset: {
+            width: 0,
+            height: 10,
+        },
+        shadowOpacity: 0.5,
+        shadowRadius: 3.5,
+        elevation: 5,
     },
 });

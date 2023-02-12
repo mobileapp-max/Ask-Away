@@ -17,19 +17,12 @@ import {
   Modal
 
 } from 'react-native';
-import * as Animatable from 'react-native-animatable';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useTheme } from 'react-native-paper';
 import { useContext } from 'react';
 import { QuestionsContext } from '../contexts/questions-context-provider';
 import { responsiveFontSize, responsiveHeight, responsiveWidth } from '../scripts/constants';
 import { CharacterLimit } from '../components/character-limit/character-limit';
-import SwitchSelector from 'react-native-switch-selector';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
-import { FlatList } from 'react-native-gesture-handler';
-import { FontAwesome } from '@expo/vector-icons';
-import { disableErrorHandling } from 'expo';
-import { AntDesign } from '@expo/vector-icons';
 import { BlurView } from 'expo-blur';
 
 
@@ -66,48 +59,6 @@ const AddQ = ({ navigation }) => {
 
 
   return (
-    // <View style={{ flex: 1 }}>
-    //   <View style={styles.formContainer}>
-    //     <TextInput
-    //       style={styles.input}
-    //       placeholder='Add a New Todo'
-    //       placeholderTextColor={'white'}
-    //       onChangeText={(heading) => setAddData(heading)}
-    //       value={addData}
-    //       underlineColorAndroid='transparent'
-    //       autoCapitalize='none'
-    //     />
-    //     <TouchableOpacity style={styles.button} onPress={addTodo}>
-    //       <Text style={styles.buttonText}>Add</Text>
-    //     </TouchableOpacity>
-    //   </View>
-    //   <FlatList
-    //     data={todos}
-    //     numColumns={1}
-    //     renderItem={({ item }) => (
-    //       <View>
-    //         <Pressable
-    //           style={styles.container}
-    //           onPress={() => console.log('hello')}
-    //         >
-    //           <FontAwesome
-    //             name='trash-o'
-    //             color='red'
-    //             onPress={() => deleteTodo(item)}
-    //             style={styles.todIcon}
-    //           />
-    //           <View style={styles.innerContainer}>
-    //             <Text style={styles.innerHeading}>
-    //               {item.heading[0].toUpperCase() + item.heading.slice(1)}
-    //             </Text>
-    //           </View>
-    //         </Pressable>
-    //       </View>
-    //     )}
-    //   />
-    // </View>
-
-
     <View style={styles.container}>
       <StatusBar backgroundColor='#e32f45' barStyle="light-content" />
       <View style={styles.header}>
@@ -115,11 +66,9 @@ const AddQ = ({ navigation }) => {
           {'Add Question'}
         </Text>
       </View>
-      <Animatable.View
-        animation="fadeInUpBig"
+      <View
         style={styles.footer}
       >
-
         <Modal
           animationType="fade"
           transparent={true}
@@ -191,7 +140,7 @@ const AddQ = ({ navigation }) => {
             </TouchableOpacity>
           </View>
         </ScrollView>
-      </Animatable.View >
+      </View >
     </View >
   );
 };
