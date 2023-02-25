@@ -10,7 +10,7 @@ const LogInStack = createStackNavigator();
 export const LogInStackScreen = (props: any) => (
     <LogInStack.Navigator
         screenOptions={{ headerShown: false }}>
-        <LogInStack.Screen name='Profile' component={props?.user?.id ? YourQuestion : SignUpScreen} />
+        <LogInStack.Screen name='Profile' component={props?.user?.uid ? YourQuestion : SignUpScreen} />
     </LogInStack.Navigator>
 
 )

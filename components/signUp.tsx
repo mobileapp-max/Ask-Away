@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import {
     View,
     Text,
@@ -10,6 +10,7 @@ import {
     StyleSheet,
     ScrollView,
     StatusBar,
+    Alert,
 
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -17,6 +18,7 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Feather from 'react-native-vector-icons/Feather';
 import * as Animatable from 'react-native-animatable';
 import { MaterialIcons } from '@expo/vector-icons';
+import { signUpNewUser } from '../api/auth-api';
 
 const SignUp = ({ navigation }) => {
 
@@ -70,6 +72,21 @@ const SignUp = ({ navigation }) => {
             confirm_secureTextEntry: !data.confirm_secureTextEntry
         });
     }
+
+    const onPressSignUp = useCallback(
+        async () => {
+            if (data?.email && data?.password) {
+                await signUpNewUser({ email: data?.email, password: data?.password }).then((response) => {
+                    console.log(response)
+                })
+            }
+            else {
+                Alert.alert('Enter valid data')
+            }
+        },
+        [data],
+    )
+
 
     return (
         <Animatable.View
@@ -151,7 +168,7 @@ const SignUp = ({ navigation }) => {
             <View style={styles.button}>
                 <TouchableOpacity
                     style={styles.signIn}
-                    onPress={() => { }}
+                    onPress={onPressSignUp}
                 >
                     <LinearGradient
                         colors={["#e32f00", "purple"]}
