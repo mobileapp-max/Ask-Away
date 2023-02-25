@@ -19,10 +19,14 @@ import * as Animatable from 'react-native-animatable';
 export const QuestionRow = ({ question: incomingQuestion, updateQuestionModal }) => {
     const {
         question,
-        answer_1,
-        answer_2,
+        // answer_1,
+        // answer_2,
+        responses_aggregate
     } = incomingQuestion;
 
+    const answer_1 = responses_aggregate?.aggregate?.sum?.response_1
+    const answer_2 = responses_aggregate?.aggregate?.sum?.response_2
+    // const answer_2 = responses_aggregate?.aggregate?.sum?.response_2
     const {
         currentHeightOfView,
         currentWidthOfView,
@@ -41,7 +45,6 @@ export const QuestionRow = ({ question: incomingQuestion, updateQuestionModal })
                 justifyContent: 'space-between',
                 marginVertical: responsiveWidth(0.8),
                 marginHorizontal: responsiveWidth(2),
-
             }}
         >
             <View
@@ -53,66 +56,87 @@ export const QuestionRow = ({ question: incomingQuestion, updateQuestionModal })
                     style={{ fontSize: responsiveFontSize(16) }}
                 >
                     {question}
+                    {/* {responses_aggregate?.aggregate?.sum?.response_1} */}
                 </Text>
             </View>
 
-            {calculateResults({ answer_1, answer_2 }).bothZeros ?
+            {
+                // (answer_1 && answer_2) ?
+                calculateResults({ answer_1, answer_2 }).bothZeros ?
 
-                <View style={{
-                    alignSelf: 'center',
-                    flexDirection: "row",
-                    borderRadius: 10,
-                    overflow: 'hidden',
-                    height: currentHeightOfView,
-                    width: responsiveWidth(26),
-                    borderColor: 'red',
-                    borderWidth: responsiveWidth(0.1),
-                    justifyContent: 'center',
-                    backgroundColor: 'white',
-                }}>
-                    <Text style={{ alignSelf: "center" }}>
-                        {'No Answers'}
-                    </Text>
-                </View>
-                :
-                <View style={{
-                    alignSelf: 'center',
-                    flexDirection: "row",
-                    borderRadius: 10,
-                    overflow: 'hidden',
-                    backgroundColor: 'white',
-                    height: currentHeightOfView,
-                    width: responsiveWidth(26),
-                    borderColor: 'red',
-                    justifyContent: 'center'
-                }}>
-                    <View
-                        style={{
-                            backgroundColor: "#54a832",
-                            height: currentHeightOfView,
-                            width: responsiveWidth((26 / 100) * calculateResults({ answer_1, answer_2 }).answer_1_result),
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                            alignContent: 'center',
-                        }}>
-                        <Text style={{ fontWeight: 'bold', color: "white" }}>
-                            {`Yes\n${Math.round(calculateResults({ answer_1, answer_2 }).answer_1_result)}%`}
+                    <View style={{
+                        alignSelf: 'center',
+                        flexDirection: "row",
+                        borderRadius: 10,
+                        overflow: 'hidden',
+                        height: currentHeightOfView,
+                        width: responsiveWidth(26),
+                        borderColor: 'red',
+                        borderWidth: responsiveWidth(0.1),
+                        justifyContent: 'center',
+                        backgroundColor: 'white',
+                    }}>
+                        <Text style={{ alignSelf: "center" }}>
+                            {'No Answers'}
                         </Text>
                     </View>
-                    <View
-                        style={{
-                            backgroundColor: "#e32f45",
-                            height: currentHeightOfView,
-                            width: responsiveWidth((26 / 100) * calculateResults({ answer_1, answer_2 }).answer_2_result),
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                            alignContent: 'center'
-                        }}>
-                        <Text style={{ fontWeight: 'bold', color: "white" }}>
-                            {`No\n${Math.round(calculateResults({ answer_1, answer_2 }).answer_2_result)}%`}
-                        </Text>
+                    :
+                    <View style={{
+                        alignSelf: 'center',
+                        flexDirection: "row",
+                        borderRadius: 10,
+                        overflow: 'hidden',
+                        backgroundColor: 'white',
+                        height: currentHeightOfView,
+                        width: responsiveWidth(26),
+                        borderColor: 'red',
+                        justifyContent: 'center'
+                    }}>
+                        <View
+                            style={{
+                                backgroundColor: "#54a832",
+                                height: currentHeightOfView,
+                                width: responsiveWidth((26 / 100) * calculateResults({ answer_1, answer_2 }).answer_1_result) || 0,
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                                alignContent: 'center',
+                            }}>
+                            <Text style={{ fontWeight: 'bold', color: "white" }}>
+                                {Math.round(calculateResults({ answer_1, answer_2 }).answer_1_result) > 25
+                                    &&
+                                    <View>
+                                        <Text style={{ fontWeight: 'bold', color: "white", }}>
+                                            {`Yes`}
+                                        </Text>
+                                        <Text style={{ fontWeight: 'bold', color: "white", }}>
+                                            {`${Math.round(calculateResults({ answer_1, answer_2 }).answer_1_result)}%`}
+                                        </Text>
+                                    </View>
+                                }
+                            </Text>
+                        </View>
+                        <View
+                            style={{
+                                backgroundColor: "#e32f45",
+                                height: currentHeightOfView,
+                                width: responsiveWidth((26 / 100) * calculateResults({ answer_1, answer_2 }).answer_2_result) || 0,
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                                alignContent: 'center'
+                            }}>
+                            {Math.round(calculateResults({ answer_1, answer_2 }).answer_2_result) > 25
+                                &&
+                                <View>
+                                    <Text style={{ fontWeight: 'bold', color: "white", }}>
+                                        {`No`}
+                                    </Text>
+                                    <Text style={{ fontWeight: 'bold', color: "white", }}>
+                                        {`${Math.round(calculateResults({ answer_1, answer_2 }).answer_2_result)}%`}
+                                    </Text>
+                                </View>
+                            }
+                        </View>
                     </View>
-                </View>
             }
         </Pressable >
     );

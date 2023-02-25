@@ -7,11 +7,10 @@ import Profile from "../screens/YourQuestion";
 
 const LogInStack = createStackNavigator();
 
-export const LogInStackScreen = () => (
+export const LogInStackScreen = (props: any) => (
     <LogInStack.Navigator
         screenOptions={{ headerShown: false }}>
-        <LogInStack.Screen name='Profile' component={YourQuestion} />
-        <LogInStack.Screen name="Signup" component={SignUpScreen} />
+        <LogInStack.Screen name='Profile' component={props?.user?.id ? YourQuestion : SignUpScreen} />
     </LogInStack.Navigator>
 
 )

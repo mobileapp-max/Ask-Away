@@ -1,5 +1,5 @@
 export const calculateResults = ({ answer_1, answer_2 }: { answer_1: number, answer_2: number }) => {
-    if (answer_1 === 0 && answer_2 === 0) {
+    if ((answer_1 === null && answer_2 === null) || (answer_1 === 0 && answer_2 === 0)) {
         const resultObj = {
             answer_1_result: 0,
             answer_2_result: 0,

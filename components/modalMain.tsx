@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, Component } from 'react';
 import {
     View,
     Text,
@@ -18,14 +18,23 @@ import { BlurView } from 'expo-blur';
 import { ReplyResult } from '../components/replyResult';
 import { calculateResults } from '../scripts/calculateResults';
 import { AntDesign } from '@expo/vector-icons';
-import PieChart from 'react-native-pie-chart';
-import { Surface, Shape } from '@react-native-community/art';
+import PieChart from 'react-native-expo-pie-chart';
+import { VictoryBar, VictoryContainer } from "victory-native";
+import { VictoryPie } from 'victory-native';
 
 const ModalMain = ({ children, selectedQuestionModal, questionVisible, onPressDismissModal }) => {
 
-    const widthAndHeight = 250
-    const series = [123, 321, 123, 789, 537]
-    const sliceColor = ['#F44336', '#2196F3', '#FFEB3B', '#4CAF50', '#FF9800']
+    const { question, onPressNextQuestion, onPressAddResponse } = useContext(QuestionsContext)
+    const [graphicData, setGraphicData] = useState(defaultGraphicData);
+    const graphicColor = ['red', 'green',]; // Colors
+    // const wantedGraphicData = [{ y: 10 }, { y: 50 }, { y: 40 }]; // Data that we want to display
+    const wantedGraphicData = [{ x: `${selectedQuestionModal?.answer_2} - No`, y: selectedQuestionModal?.answer_2 }, { x: `${selectedQuestionModal?.answer_1} - Yes`, y: selectedQuestionModal?.answer_1 }];
+    // const defaultGraphicData = [{ y: 0 }, { y: 0 }, { y: 100 }];
+    const defaultGraphicData = [{ x: 'No', y: 0 }, { x: 'Yes', y: 0 }]; // Data used to make the animate prop work
+
+    useEffect(() => {
+        setGraphicData(wantedGraphicData); // Setting the data that we want to display
+    }, [selectedQuestionModal]);
 
     return (
         <Modal
@@ -46,25 +55,43 @@ const ModalMain = ({ children, selectedQuestionModal, questionVisible, onPressDi
                         >
                             <AntDesign name="closecircle" size={24} color="#e32f45" />
                         </Pressable> */}
-
-                        <Text style={{ padding: 10 }}>{selectedQuestionModal?.question}</Text>
+                        <Text style={{ padding: 10, width: responsiveWidth(60) }}>{selectedQuestionModal?.question}</Text>
+                        {
+                            (selectedQuestionModal?.answer_1 > 0 || selectedQuestionModal?.answer_2 > 0)
+                            &&
+                            // <View style={{ position: 'absolute' }}>
+                            <VictoryPie
+                                // sortKey="x"
+                                // sortOrder="ascending"
+                                startAngle={selectedQuestionModal?.answer_1 > selectedQuestionModal?.answer_2 ? 0 : 0}
+                                endAngle={selectedQuestionModal?.answer_1 > selectedQuestionModal?.answer_2 ? 360 : 360}
+                                radius={responsiveWidth(10)}
+                                height={responsiveHeight(30)}
+                                width={responsiveWidth(30)}
+                                // animate={{ easing: 'exp' }}
+                                data={graphicData}
+                                colorScale={graphicColor}
+                                innerRadius={responsiveWidth(2)}
+                                style={{
+                                    data: {
+                                        fillOpacity: 1, stroke: "#fff", strokeWidth: responsiveWidth(0)
+                                    },
+                                    labels: {
+                                        fill: "#212121",
+                                    }
+                                }}
+                            />
+                            // </View>
+                        }
                         <View style={styles.answers}>
                             <View style={styles.answersColumn}>
-                                <Text style={{ padding: 10 }}>{selectedQuestionModal?.answer_1}</Text>
+                                <Text style={{ padding: 10 }}>{selectedQuestionModal?.responses_aggregate?.aggregate?.sum?.response_1}</Text>
+                                {/* {console.log(selectedQuestionModal)} */}
                                 <Text>{'Yes'}</Text>
                             </View>
                             <View style={styles.answersColumn}>
                                 <Text style={{ padding: 10 }}>{selectedQuestionModal?.answer_2}</Text>
                                 <Text>{'No'}</Text>
-                                {/* <PieChart
-                                    widthAndHeight={widthAndHeight}
-                                    series={series}
-                                    sliceColor={sliceColor}
-                                    doughnut={true}
-                                    coverRadius={0.45}
-                                    coverFill={'#FFF'}
-                                /> */}
-
                             </View>
                         </View>
                     </View>
@@ -90,6 +117,7 @@ const styles = StyleSheet.create({
         // marginTop: responsiveWidth(10),
         alignSelf: 'center',
         alignItems: 'center',
+        // flexDirection: 'row',
         padding: 8,
         margin: 10,
         // paddingTop: 5,

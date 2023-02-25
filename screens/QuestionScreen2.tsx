@@ -26,12 +26,14 @@ const QuestionScreen = ({ navigation }) => {
   const [modalVisible, setModalVisible] = useState(false);
 
   const questionResult_1 = function () {
-    setAnswerWidth((question?.responses_aggregate?.aggregate?.sum?.response_1 / (question?.responses_aggregate?.aggregate?.sum?.response_1 + question?.responses_aggregate?.aggregate?.sum?.response_2)) * 90)
+    setAnswerWidth(((question?.responses_aggregate?.aggregate?.sum?.response_1 + 1) / (question?.responses_aggregate?.aggregate?.sum?.response_1 + question?.responses_aggregate?.aggregate?.sum?.response_2 + 1)) * 90)
     setButtonPressed(true)
+    onPressAddResponse({ question_id: question?.id, response_1: '1', response_2: '0', user_id: '1', report: '0' })
   }
   const questionResult_2 = function () {
-    setAnswerWidth(0 || (question?.responses_aggregate?.aggregate?.sum?.response_2 / (question?.responses_aggregate?.aggregate?.sum?.response_1 + question?.responses_aggregate?.aggregate?.sum?.response_2)) * 90)
+    setAnswerWidth(90 - ((question?.responses_aggregate?.aggregate?.sum?.response_2 + 1) / (question?.responses_aggregate?.aggregate?.sum?.response_1 + question?.responses_aggregate?.aggregate?.sum?.response_2 + 1)) * 90)
     setButtonPressed(true)
+    onPressAddResponse({ question_id: question?.id, response_1: '0', response_2: '1', user_id: '1', report: '0' })
   }
   const onPressReport = () => {
     onPressAddResponse({ question_id: question?.id, response_1: '0', response_2: '0', user_id: '1', report: '1' })

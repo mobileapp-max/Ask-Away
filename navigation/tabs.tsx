@@ -152,7 +152,7 @@ const Tabs = (props) => {
                     }
                 }}
             />
-            <Tab.Screen name="Profile3" component={LogInStackScreen}
+            <Tab.Screen name="Profile3" component={() => <LogInStackScreen user={props?.user} />}
                 options={{
                     tabBarIcon: ({ focused }) => (
                         <View style={{ alignItems: "center", justifyContent: 'center', top: 10 }}>

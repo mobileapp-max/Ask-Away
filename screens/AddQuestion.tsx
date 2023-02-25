@@ -55,9 +55,6 @@ const AddQ = ({ navigation }) => {
     else setDisableButton(true)
   }, [text])
 
-
-
-
   return (
     <View style={styles.container}>
       <StatusBar backgroundColor='#e32f45' barStyle="light-content" />

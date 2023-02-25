@@ -5,7 +5,8 @@ import {
     TouchableOpacity,
     StyleSheet,
     Pressable,
-    Modal
+    Modal,
+    ImageBackground
 } from 'react-native';
 import Feather from 'react-native-vector-icons/Feather';
 import { responsiveHeight, responsiveWidth, responsiveFontSize } from '../scripts/constants';
@@ -20,19 +21,15 @@ import { calculateResults } from '../scripts/calculateResults';
 import ModalMain from '../components/modalMain';
 
 
-
 const Profile = ({ navigation }) => {
 
     const [modalVisible, setModalVisible] = useState(false);
     const [questionVisible, setQuestionVisible] = useState(false);
     const [selectedQuestionModal, setSelectedQuestionModal] = useState({})
     const [modalVisibleId, setModalVisibleId] = useState('');
-
     const onPressDismissModal = () => {
         setQuestionVisible(!questionVisible)
     }
-
-
     const onPressDeleteQuestionModal = (item) => {
         setModalVisible(!modalVisible)
         setModalVisibleId(item?.id)
@@ -46,21 +43,24 @@ const Profile = ({ navigation }) => {
         onPressDeleteQuestion({ questionId: modalVisibleId })
         setModalVisible(!modalVisible)
     }
-
     const updateQuestionModal = (incomingModalData) => {
         setSelectedQuestionModal(incomingModalData)
         setQuestionVisible(!modalVisible)
     }
-
     const {
         questions,
         onPressDeleteQuestion
     } = useContext(QuestionsContext)
 
+    const image = require('../assets/images/leaves.jpg');
+
     return (
         <View style={styles.container}>
             <View style={styles.header} />
-            <View style={styles.footer}>
+            <ImageBackground
+                source={image}
+                resizeMode="cover"
+                style={styles.footer}>
                 <Modal
                     animationType="fade"
                     transparent={true}
@@ -92,7 +92,6 @@ const Profile = ({ navigation }) => {
                         </View>
                     </BlurView>
                 </Modal>
-
                 {/* <Modal
                     animationType="fade"
                     transparent={true}
@@ -108,7 +107,6 @@ const Profile = ({ navigation }) => {
                                 <Text style={{ padding: 10 }}>{selectedQuestionModal?.question}</Text>
                                 <Text style={{ padding: 10 }}>{selectedQuestionModal?.answer_1}</Text>
                                 <Text style={{ padding: 10 }}>{selectedQuestionModal?.answer_2}</Text>
-
                             </View>
                         </View>
                     </BlurView>
@@ -119,8 +117,6 @@ const Profile = ({ navigation }) => {
                     onPressDismissModal={onPressDismissModal}
                 >
                 </ModalMain>
-
-
                 <SwipeListView
                     data={questions}
                     renderItem={({ item }) =>
@@ -159,7 +155,7 @@ const Profile = ({ navigation }) => {
                     rightOpenValue={-75}
                     disableRightSwipe={true}
                 />
-            </View>
+            </ImageBackground>
             <View style={styles.card}>
                 <TouchableOpacity style={styles.editButton}>
                     <Feather
@@ -202,8 +198,9 @@ const styles = StyleSheet.create({
     },
     footer: {
         flex: 5,
-        backgroundColor: 'white',
+        // backgroundColor: 'white',
         overflow: 'visible',
+
     },
     modalView: {
         backgroundColor: 'white',
