@@ -15,20 +15,29 @@ import {
 import SwitchSelector from 'react-native-switch-selector'
 import SignUp from '../components/signUp';
 import SignIn from '../components/signIn';
+import { responsiveFontSize, responsiveHeight } from '../scripts/constants';
 
 const SignUpScreen = ({ navigation }) => {
 
-    const options = [
-        { label: 'Sign Up', value: 'Sign Up' },
-        { label: 'Sign In', value: 'Sign In' },
-    ];
-    const [switchSelectorValue, setSwitchSelectorValue] = useState('Sign Up')
+    // const options = [
+    //     { label: 'Sign Up', value: 'Sign Up' },
+    //     { label: 'Sign In', value: 'Sign In' },
+    // ];
+    // const [switchSelectorValue, setSwitchSelectorValue] = useState('Sign Up')
 
     return (
         <View style={styles.container}>
             <View style={styles.header}>
+                <Text
+                    style={{
+                        color: 'white',
+                        fontSize: responsiveFontSize(60),
+                        fontWeight: 'bold',
+                        marginBottom: 0
+                    }}
+                >{'Join In'}</Text>
                 {/* <Text style={styles.text_header}>Join in!</Text> */}
-                <SwitchSelector
+                {/* <SwitchSelector
                     options={options}
                     textColor={"#e32f45"}
                     selectedColor={'white'}
@@ -42,11 +51,11 @@ const SignUpScreen = ({ navigation }) => {
                     borderWidth={2}
                     borderRadius={15}
                     onPress={value => setSwitchSelectorValue(value)}
-                />
+                /> */}
             </View>
             <ScrollView style={styles.footer}>
-
-                {switchSelectorValue === "Sign Up" ? <SignUp /> : <SignIn />}
+                <SignUp />
+                {/* {switchSelectorValue === "Sign Up" ? <SignUp /> : <SignIn />} */}
             </ScrollView>
         </View>
     );
@@ -63,7 +72,7 @@ const styles = StyleSheet.create({
         flex: 0.19,
         justifyContent: 'flex-end',
         paddingHorizontal: 20,
-        paddingBottom: 10
+        // paddingBottom: 10
     },
     footer: {
         flex: 3,

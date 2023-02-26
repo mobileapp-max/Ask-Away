@@ -14,11 +14,12 @@ import {
 
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Feather from 'react-native-vector-icons/Feather';
-import * as Animatable from 'react-native-animatable';
 import { MaterialIcons } from '@expo/vector-icons';
 import { signUpNewUser } from '../api/auth-api';
+import { loginUser } from '../api/auth-api'
+import { sendEmailWithPassword } from '../api/auth-api'
+
 
 const SignUp = ({ navigation }) => {
 
@@ -77,47 +78,61 @@ const SignUp = ({ navigation }) => {
         async () => {
             if (data?.email && data?.password) {
                 await signUpNewUser({ email: data?.email, password: data?.password }).then((response) => {
-                    console.log(response)
+                    // console.log(response)
+                    response?.error && Alert.alert(response?.error)
                 })
             }
             else {
-                Alert.alert('Enter valid data')
+                Alert.alert('Missing email or password')
             }
         },
         [data],
     )
+    const onPressLogIn = useCallback(
+        async () => {
+            if (data?.email && data?.password) {
+                await loginUser({ email: data?.email, password: data?.password }).then((response) => {
+                    // console.log(response)
+                    response?.error && Alert.alert(response?.error)
+                })
+            }
+            else {
+                Alert.alert('Missing email or password')
+            }
+        },
+        [data],
+    )
+    const onPressResetPassword = async () => {
+        if (data?.email) {
+            const response = await sendEmailWithPassword(data?.email);
+            if (response?.error) {
+                Alert.alert(response.error);
+            }
+            else {
+                Alert.alert(`An email to reset your password has been sent to ${data?.email}`);
+            }
+        }
+        else {
+            Alert.alert('Enter the email.')
+        }
+    }
 
 
     return (
-        <Animatable.View
-            animation="slideInRight"
+        <View
             style={styles.container}>
-            <Text style={styles.text_footer}>Username</Text>
+            <Text style={[styles.text_footer, {
+
+            }]}>Email</Text>
             <View style={styles.action}>
-                <FontAwesome
-                    name="user-o"
-                    color="#e32f45"
-                    size={20}
-                />
+                <MaterialIcons name="alternate-email" size={24} color="#e32f45" />
                 <TextInput
-                    placeholder="Your Username"
+                    placeholder="Your Email"
                     style={styles.textInput}
                     autoCapitalize="none"
-                    onChangeText={(val) => textInputChange(val)}
+                    onChangeText={val => handleEmailChange(val)}
                 />
-                {data.check_textInputChange ?
-                    <Animatable.View
-                        animation="bounceIn"
-                    >
-                        <Feather
-                            name="check-circle"
-                            color="green"
-                            size={20}
-                        />
-                    </Animatable.View>
-                    : null}
             </View>
-
             <Text style={[styles.text_footer, {
                 marginTop: 35
             }]}>Password</Text>
@@ -152,20 +167,28 @@ const SignUp = ({ navigation }) => {
                     }
                 </TouchableOpacity>
             </View>
-
-            <Text style={[styles.text_footer, {
-                marginTop: 35
-            }]}>Email</Text>
-            <View style={styles.action}>
-                <MaterialIcons name="alternate-email" size={24} color="#e32f45" />
-                <TextInput
-                    placeholder="Your Email"
-                    style={styles.textInput}
-                    autoCapitalize="none"
-                    onChangeText={val => handleEmailChange(val)}
-                />
-            </View>
+            <TouchableOpacity
+                style={{ marginTop: 10 }}
+                onPress={onPressResetPassword}
+            >
+                <Text
+                    style={{ fontWeight: '200', fontStyle: 'italic', textDecorationLine: 'underline' }}
+                >{'Forgot Password'}</Text>
+            </TouchableOpacity>
             <View style={styles.button}>
+                <TouchableOpacity
+                    style={styles.signIn}
+                    onPress={onPressLogIn}
+                >
+                    <LinearGradient
+                        colors={["#e32156", "yellow"]}
+                        style={styles.signIn}
+                    >
+                        <Text style={[styles.textSign, {
+                            color: '#fff'
+                        }]}>Log In</Text>
+                    </LinearGradient>
+                </TouchableOpacity>
                 <TouchableOpacity
                     style={styles.signIn}
                     onPress={onPressSignUp}
@@ -188,7 +211,7 @@ const SignUp = ({ navigation }) => {
                     </Text>
                 </View>
             </View>
-        </Animatable.View>
+        </View>
     );
 };
 
@@ -237,14 +260,16 @@ const styles = StyleSheet.create({
     },
     button: {
         alignItems: 'center',
-        marginTop: 50
+        marginTop: 40,
+
     },
     signIn: {
         width: '100%',
         height: 50,
         justifyContent: 'center',
         alignItems: 'center',
-        borderRadius: 10
+        borderRadius: 10,
+        margin: 5
     },
     textSign: {
         fontSize: 18,

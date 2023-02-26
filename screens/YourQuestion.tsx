@@ -19,7 +19,8 @@ import { BlurView } from 'expo-blur';
 import { ReplyResult } from '../components/replyResult';
 import { calculateResults } from '../scripts/calculateResults';
 import ModalMain from '../components/modalMain';
-
+import { logoutUser } from '../api/auth-api'
+import { MaterialIcons } from '@expo/vector-icons';
 
 const Profile = ({ navigation }) => {
 
@@ -52,14 +53,11 @@ const Profile = ({ navigation }) => {
         onPressDeleteQuestion
     } = useContext(QuestionsContext)
 
-    const image = require('../assets/images/leaves.jpg');
 
     return (
         <View style={styles.container}>
             <View style={styles.header} />
-            <ImageBackground
-                source={image}
-                resizeMode="cover"
+            <View
                 style={styles.footer}>
                 <Modal
                     animationType="fade"
@@ -155,18 +153,37 @@ const Profile = ({ navigation }) => {
                     rightOpenValue={-75}
                     disableRightSwipe={true}
                 />
-            </ImageBackground>
+            </View>
             <View style={styles.card}>
-                <TouchableOpacity style={styles.editButton}>
-                    <Feather
-                        name="edit"
-                        color="#e32f45"
-                        size={22}
-                    />
-                </TouchableOpacity>
-                <Text style={styles.profileName}>
-                    {'?Profile Name?'}
-                </Text>
+                <View
+                    style={styles.editButton}>
+                    <Text style={styles.profileName}>
+                        {'?Profile Name?'}
+                    </Text>
+                    <View
+                        style={{ flexDirection: "row", }}
+                    >
+                        <TouchableOpacity
+                            onPress={() => { }}
+                        >
+                            <Feather
+                                name="edit"
+                                color="#e32f45"
+                                size={30}
+                            />
+                        </TouchableOpacity >
+                        <TouchableOpacity
+                            onPress={() => logoutUser()}
+                            style={{ paddingLeft: responsiveWidth(3) }}
+                        >
+                            <MaterialIcons
+                                name="exit-to-app"
+                                size={34}
+                                color="#e32f45"
+                            />
+                        </TouchableOpacity >
+                    </View>
+                </View>
                 <View style={styles.cardValueRow}>
                     <View style={styles.cardValues}>
                         <Text style={styles.largeNumbers}>{'15'}</Text>
@@ -198,7 +215,7 @@ const styles = StyleSheet.create({
     },
     footer: {
         flex: 5,
-        // backgroundColor: 'white',
+        backgroundColor: 'white',
         overflow: 'visible',
 
     },
@@ -226,12 +243,10 @@ const styles = StyleSheet.create({
 
     },
     profileName: {
-
         alignSelf: 'center',
         fontWeight: 'bold',
         fontSize: responsiveFontSize(25),
-
-
+        // paddingRight: responsiveWidth(8)
     },
     centeredView: {
         flex: 1,
@@ -262,7 +277,7 @@ const styles = StyleSheet.create({
         marginHorizontal: responsiveWidth(5)
     },
     cardValueRow: {
-        top: 20,
+        top: responsiveHeight(4),
         flexDirection: 'row',
         justifyContent: 'space-between',
     },
@@ -276,9 +291,11 @@ const styles = StyleSheet.create({
         textAlign: 'center'
     },
     editButton: {
-        flexDirection: "row-reverse",
-        right: responsiveHeight(2),
-        bottom: responsiveWidth(-4)
+        flexDirection: "row",
+        // right: responsiveHeight(2),
+        bottom: responsiveWidth(-6),
+        justifyContent: "space-between",
+        paddingHorizontal: responsiveWidth(7)
     },
     modalQuestion: {
         margin: 5,
