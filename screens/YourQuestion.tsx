@@ -21,10 +21,13 @@ import { calculateResults } from '../scripts/calculateResults';
 import ModalMain from '../components/modalMain';
 import { logoutUser } from '../api/auth-api'
 import { MaterialIcons } from '@expo/vector-icons';
+import { UserContext } from '../contexts/user-context-provider';
+import ProfileModal from '../components/profileModal'
 
 const Profile = ({ navigation }) => {
 
     const [modalVisible, setModalVisible] = useState(false);
+    const [profileModalVisible, setProfileModalVisible] = useState(false);
     const [questionVisible, setQuestionVisible] = useState(false);
     const [selectedQuestionModal, setSelectedQuestionModal] = useState({})
     const [modalVisibleId, setModalVisibleId] = useState('');
@@ -52,6 +55,7 @@ const Profile = ({ navigation }) => {
         questions,
         onPressDeleteQuestion
     } = useContext(QuestionsContext)
+    const { user } = useContext(UserContext)
 
 
     return (
@@ -115,6 +119,11 @@ const Profile = ({ navigation }) => {
                     onPressDismissModal={onPressDismissModal}
                 >
                 </ModalMain>
+                {/* <ProfileModal
+                    profileVisible={profileVisible}
+                    onPressDismissModal={onPressDismissModal}
+                >
+                </ProfileModal> */}
                 <SwipeListView
                     data={questions}
                     renderItem={({ item }) =>
@@ -158,21 +167,18 @@ const Profile = ({ navigation }) => {
                 <View
                     style={styles.editButton}>
                     <Text style={styles.profileName}>
-                        {'?Profile Name?'}
+                        {user?.email}
                     </Text>
-                    <View
-                        style={{ flexDirection: "row", }}
+                    <TouchableOpacity
+                        onPress={() => <ProfileModal />}
                     >
-                        <TouchableOpacity
-                            onPress={() => { }}
-                        >
-                            <Feather
-                                name="edit"
-                                color="#e32f45"
-                                size={30}
-                            />
-                        </TouchableOpacity >
-                        <TouchableOpacity
+                        <Feather
+                            name="edit"
+                            color="#e32f45"
+                            size={25}
+                        />
+                    </TouchableOpacity >
+                    {/* <TouchableOpacity
                             onPress={() => logoutUser()}
                             style={{ paddingLeft: responsiveWidth(3) }}
                         >
@@ -181,8 +187,7 @@ const Profile = ({ navigation }) => {
                                 size={34}
                                 color="#e32f45"
                             />
-                        </TouchableOpacity >
-                    </View>
+                        </TouchableOpacity > */}
                 </View>
                 <View style={styles.cardValueRow}>
                     <View style={styles.cardValues}>
@@ -245,7 +250,7 @@ const styles = StyleSheet.create({
     profileName: {
         alignSelf: 'center',
         fontWeight: 'bold',
-        fontSize: responsiveFontSize(25),
+        fontSize: responsiveFontSize(26),
         // paddingRight: responsiveWidth(8)
     },
     centeredView: {

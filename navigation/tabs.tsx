@@ -57,6 +57,7 @@ const CustomTabButton = (props) => {
         onPress()
     }
 
+
     return <TouchableOpacity
         style={{
             top: -14,
@@ -90,7 +91,7 @@ const CustomTabButton = (props) => {
 }
 
 const Tabs = (props) => {
-
+    const ProfileScreen = () => <LogInStackScreen />
 
 
 
@@ -152,7 +153,7 @@ const Tabs = (props) => {
                     }
                 }}
             />
-            <Tab.Screen name="Profile3" component={() => <LogInStackScreen user={props?.user} />}
+            <Tab.Screen name="Profile3" component={ProfileScreen}
                 options={{
                     tabBarIcon: ({ focused }) => (
                         <View style={{ alignItems: "center", justifyContent: 'center', top: 10 }}>

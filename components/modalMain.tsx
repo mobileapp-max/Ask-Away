@@ -28,7 +28,7 @@ const ModalMain = ({ children, selectedQuestionModal, questionVisible, onPressDi
     const [graphicData, setGraphicData] = useState(defaultGraphicData);
     const graphicColor = ['red', 'green',]; // Colors
     // const wantedGraphicData = [{ y: 10 }, { y: 50 }, { y: 40 }]; // Data that we want to display
-    const wantedGraphicData = [{ x: `${selectedQuestionModal?.answer_2} - No`, y: selectedQuestionModal?.answer_2 }, { x: `${selectedQuestionModal?.answer_1} - Yes`, y: selectedQuestionModal?.answer_1 }];
+    const wantedGraphicData = [{ x: `${selectedQuestionModal?.answer_1} - No`, y: selectedQuestionModal?.answer_2 }, { x: `${selectedQuestionModal?.answer_1} - Yes`, y: selectedQuestionModal?.answer_1 }];
     // const defaultGraphicData = [{ y: 0 }, { y: 0 }, { y: 100 }];
     const defaultGraphicData = [{ x: 'No', y: 0 }, { x: 'Yes', y: 0 }]; // Data used to make the animate prop work
 
