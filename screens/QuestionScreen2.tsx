@@ -71,7 +71,8 @@ const QuestionScreen = ({ navigation }) => {
             ...styles.text_header,
             paddingTop: 0,
             fontSize: responsiveFontSize(50),
-            top: responsiveHeight(0)
+            top: responsiveHeight(0),
+            color: 'white'
 
           }}>
           {'Questions'}
@@ -95,8 +96,9 @@ const QuestionScreen = ({ navigation }) => {
               // numberOfLines={10}
               style={{
                 textAlign: 'center',
-                color: 'black',
-                fontSize: responsiveFontSize(20)
+                color: 'white',
+                fontSize: responsiveFontSize(20),
+                fontWeight: 'bold'
                 // paddingHorizontal: responsiveWidth(1),
                 // marginBottom: responsiveHeight(1)
               }}
@@ -122,22 +124,35 @@ const QuestionScreen = ({ navigation }) => {
                 <AntDesign
                   name="frown"
                   size={30}
-                  color='#e32f45'
+                  color='white'
                   style={{ margin: 3 }} />
-                <Text>{'Report'}</Text>
+                <Text
+                  style={{
+                    color: "white",
+                    fontWeight: "bold",
+                    padding: 7
+                  }}
+                >{'Report'}</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 onPress={() => nextQuestion()}
                 style={{
                   flexDirection:
                     'row',
-                  alignItems: 'center'
+                  alignItems: 'center',
+
                 }} >
-                <Text>{'Next'}</Text>
+                <Text
+                  style={{
+                    color: "white",
+                    fontWeight: "bold"
+                  }}
+                >
+                  {'Next'}</Text>
                 <AntDesign
                   name="caretright"
                   size={38}
-                  color='#e32f45'
+                  color='white'
                 />
               </TouchableOpacity>
             </View>
@@ -168,7 +183,7 @@ const QuestionScreen = ({ navigation }) => {
             <TouchableOpacity
               onPress={() => { if (buttonPressed === false) questionResult_1() }}
               style={{
-                backgroundColor: "#54a832",
+                backgroundColor: "#52b788",
                 height: responsiveHeight(10),
                 width: responsiveWidth(answerWidth),
                 justifyContent: 'center',
@@ -194,7 +209,7 @@ const QuestionScreen = ({ navigation }) => {
             <TouchableOpacity
               onPress={() => { if (buttonPressed === false) questionResult_2() }}
               style={{
-                backgroundColor: "#e32f45",
+                backgroundColor: "#f38375",
                 height: responsiveHeight(10),
                 width: responsiveWidth(90 - answerWidth),
                 justifyContent: 'center',
@@ -202,7 +217,7 @@ const QuestionScreen = ({ navigation }) => {
                 alignContent: 'center',
                 borderRadius: 10,
                 borderTopLeftRadius: buttonPressed ? 0 : 10,
-                borderBottomRadius: buttonPressed ? 0 : 10,
+                borderBottomLeftRadius: buttonPressed ? 0 : 10,
               }}>
               <Text style={{
                 fontWeight: 'bold',
@@ -241,13 +256,13 @@ export default QuestionScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: '#f7b267',
 
   },
   header: {
     // justifyContent: 'flex-end',
     // paddingBottom: responsiveHeight(4),
-    backgroundColor: '#e32f45',
+    backgroundColor: '#f25c54',
     // borderBottomLeftRadius: 30,
     // borderBottomRightRadius: 30,
     paddingHorizontal: responsiveWidth(8),
@@ -281,10 +296,10 @@ const styles = StyleSheet.create({
     padding: 8,
     // paddingTop: 5,
     color: '#e32f45',
-    borderWidth: 0.5,
+    // borderWidth: 0.5,
     borderColor: '#FA7465',
     // minHeight: height * 0.15,
-    backgroundColor: 'white',
+    backgroundColor: '#f4845f',
     borderRadius: 20,
     borderBottomRightRadius: 20,
     borderTopRightRadius: 8,
