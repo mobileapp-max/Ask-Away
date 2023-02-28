@@ -24,6 +24,7 @@ import { QuestionsContext } from '../contexts/questions-context-provider';
 import { responsiveFontSize, responsiveHeight, responsiveWidth } from '../scripts/constants';
 import { CharacterLimit } from '../components/character-limit/character-limit';
 import { BlurView } from 'expo-blur';
+import ButtonQApp from '../components/buttonQApp';
 
 
 
@@ -60,7 +61,16 @@ const AddQ = ({ navigation }) => {
       <StatusBar backgroundColor='#e32f45' barStyle="light-content" />
       <View style={styles.header}>
         <Text style={styles.text_header}>
-          {'Add Question'}
+          {'Add'}
+        </Text>
+        <Text
+          style={{
+            ...styles.text_header,
+            paddingTop: 0,
+            fontSize: responsiveFontSize(30),
+            top: responsiveHeight(0)
+          }}>
+          {'Yes-No Questions'}
         </Text>
       </View>
       <View
@@ -87,54 +97,44 @@ const AddQ = ({ navigation }) => {
           behavior={Platform.OS === "ios" ? "height" : "height"}
           keyboardVerticalOffset={responsiveWidth(400)}
         >
-          <Text style={{
-            flex: 1,
-            marginTop: Platform.OS === 'ios' ? 0 : -12,
-            padding: 10,
-            paddingBottom: 5,
-            color: '#e32f45',
-            fontSize: responsiveFontSize(20),
-            fontWeight: 'bold',
-            alignSelf: 'center'
-          }}>{'Yes/No Question:'}
-          </Text>
-          <TextInput
-            value={text}
-            placeholder={"Type here..."}
-            multiline={true}
-            numberOfLines={8}
-            maxLength={300}
-            placeholderTextColor='#C47B76'
-            secureTextEntry={false}
-            style={[
-              styles.inputText, {
-                minHeight: responsiveHeight(15),
-                minWidth: responsiveWidth(90)
-              }]}
-            autoCapitalize="sentences"
-            onChangeText={setText}
-          />
+          <View
+            style={{
+              ...styles.inputTextContainer,
+              height: responsiveHeight(35),
+              width: responsiveWidth(90),
+              marginTop: responsiveHeight(6)
+            }}>
+            <TextInput
+              value={text}
+              placeholder={"Type your question here..."}
+              multiline={true}
+              numberOfLines={8}
+              maxLength={300}
+              placeholderTextColor='white'
+              secureTextEntry={false}
+              style={{
+                color: 'white',
+                textAlign: 'justify',
+                fontSize: responsiveFontSize(20)
+              }}
+              autoCapitalize="sentences"
+              onChangeText={setText}
+            />
+          </View>
           {
             text?.length >= 300 &&
             <CharacterLimit
               errorMessage={'Max characters - 300'} />
           }
           <View style={styles.button}>
-            <TouchableOpacity
+            <ButtonQApp
               disabled={disableButton}
-              style={styles.signIn}
+              title={'Send'}
               onPress={onPressPostQuestin}
-
-            >
-              <LinearGradient
-                colors={disableButton === true ? ['grey', 'pink'] : ['#e32f45', 'pink']}
-                style={styles.signIn}
-              >
-                <Text style={[styles.textSign, {
-                  color: '#fff'
-                }]}>{'Add Question'}</Text>
-              </LinearGradient>
-            </TouchableOpacity>
+              height={responsiveHeight(7)}
+              color={disableButton === true ? 'grey' : '#e32f45'}
+              color2={disableButton === true ? 'silver' : 'pink'}
+            />
           </View>
         </ScrollView>
       </View >
@@ -145,16 +145,6 @@ const AddQ = ({ navigation }) => {
 export default AddQ;
 
 const styles = StyleSheet.create({
-
-  container: {
-    backgroundColor: '#e5e5e5',
-    padding: 15,
-    borderRadius: 15,
-    margin: 5,
-    marginHorizontal: 10,
-    flexDirection: 'row',
-    alignItems: 'center'
-  },
   innerContainer: {
     alignItems: "center",
     flexDirection: 'column',
@@ -200,22 +190,23 @@ const styles = StyleSheet.create({
   header: {
     flex: 1,
     justifyContent: 'flex-end',
-    paddingHorizontal: 20,
-    paddingBottom: 20,
+    paddingHorizontal: responsiveWidth(8),
+    // paddingBottom: 20,
 
   },
   footer: {
-    flex: 9,
+    flex: 5,
     backgroundColor: '#fff',
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,
 
   },
   text_header: {
-    color: '#fff',
+    color: 'white',
     fontWeight: 'bold',
-    fontSize: responsiveFontSize(30),
-    alignSelf: 'center'
+    fontSize: responsiveFontSize(50),
+    paddingTop: responsiveHeight(6),
+    top: responsiveHeight(1.5)
   },
   button: {
     alignItems: 'center',
@@ -289,5 +280,37 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: 'white'
 
+  },
+  inputTextContainer: {
+    height: responsiveHeight(60),
+    width: responsiveWidth(70),
+    // marginTop: responsiveWidth(10),
+    alignSelf: 'center',
+    alignItems: 'center',
+    alignContent: 'center',
+    justifyContent: 'center',
+    // flexDirection: 'row',
+    padding: 8,
+    margin: 10,
+    // paddingTop: 5,
+    color: '#e32f45',
+    borderWidth: 0.5,
+    borderColor: '#FA7465',
+    // minHeight: height * 0.15,
+    backgroundColor: '#e32f45',
+    borderRadius: 20,
+    borderBottomRightRadius: 20,
+    borderTopRightRadius: 8,
+    borderTopLeftRadius: 20,
+    borderBottomLeftRadius: 8,
+    overflow: 'visible',
+    shadowColor: "#e32f45",
+    shadowOffset: {
+      width: 0,
+      height: 10,
+    },
+    shadowOpacity: 0.5,
+    shadowRadius: 3.5,
+    elevation: 5,
   },
 });

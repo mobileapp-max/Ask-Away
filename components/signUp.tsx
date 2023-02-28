@@ -122,7 +122,6 @@ const SignUp = ({ navigation }) => {
         <View
             style={styles.container}>
             <Text style={[styles.text_footer, {
-
             }]}>Email</Text>
             <View style={styles.action}>
                 <MaterialIcons name="alternate-email" size={24} color="#e32f45" />

@@ -31,8 +31,12 @@ const Profile = ({ navigation }) => {
     const [questionVisible, setQuestionVisible] = useState(false);
     const [selectedQuestionModal, setSelectedQuestionModal] = useState({})
     const [modalVisibleId, setModalVisibleId] = useState('');
+
     const onPressDismissModal = () => {
         setQuestionVisible(!questionVisible)
+    }
+    const onPressDismissProfileModal = () => {
+        setProfileModalVisible(!profileModalVisible)
     }
     const onPressDeleteQuestionModal = (item) => {
         setModalVisible(!modalVisible)
@@ -119,11 +123,11 @@ const Profile = ({ navigation }) => {
                     onPressDismissModal={onPressDismissModal}
                 >
                 </ModalMain>
-                {/* <ProfileModal
-                    profileVisible={profileVisible}
-                    onPressDismissModal={onPressDismissModal}
+                <ProfileModal
+                    profileModalVisible={profileModalVisible}
+                    onPressDismissProfileModal={onPressDismissProfileModal}
                 >
-                </ProfileModal> */}
+                </ProfileModal>
                 <SwipeListView
                     data={questions}
                     renderItem={({ item }) =>
@@ -164,21 +168,22 @@ const Profile = ({ navigation }) => {
                 />
             </View>
             <View style={styles.card}>
-                <View
-                    style={styles.editButton}>
-                    <Text style={styles.profileName}>
+                <TouchableOpacity
+                    onPress={onPressDismissProfileModal}
+                    style={styles.editButton}
+                >
+                    <Text
+                        style={styles.profileName}
+                    >
                         {user?.email}
                     </Text>
-                    <TouchableOpacity
-                        onPress={() => <ProfileModal />}
-                    >
-                        <Feather
-                            name="edit"
-                            color="#e32f45"
-                            size={25}
-                        />
-                    </TouchableOpacity >
-                    {/* <TouchableOpacity
+                    <Feather
+                        name="edit"
+                        color="#e32f45"
+                        size={25}
+                    />
+                </TouchableOpacity >
+                {/* <TouchableOpacity
                             onPress={() => logoutUser()}
                             style={{ paddingLeft: responsiveWidth(3) }}
                         >
@@ -188,7 +193,7 @@ const Profile = ({ navigation }) => {
                                 color="#e32f45"
                             />
                         </TouchableOpacity > */}
-                </View>
+
                 <View style={styles.cardValueRow}>
                     <View style={styles.cardValues}>
                         <Text style={styles.largeNumbers}>{'15'}</Text>

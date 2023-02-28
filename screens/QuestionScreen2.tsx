@@ -64,6 +64,16 @@ const QuestionScreen = ({ navigation }) => {
       <View style={styles.header}>
         <StatusBar backgroundColor='#e32f45' barStyle="light-content" />
         <Text style={styles.text_header}>
+          {'Answer'}
+        </Text>
+        <Text
+          style={{
+            ...styles.text_header,
+            paddingTop: 0,
+            fontSize: responsiveFontSize(50),
+            top: responsiveHeight(0)
+
+          }}>
           {'Questions'}
         </Text>
       </View>
@@ -165,6 +175,9 @@ const QuestionScreen = ({ navigation }) => {
                 alignItems: 'center',
                 alignContent: 'center',
                 borderRadius: 10,
+                borderTopRightRadius: buttonPressed ? 0 : 10,
+                borderBottomRightRadius: buttonPressed ? 0 : 10,
+
               }}>
               <Text
                 style={{
@@ -188,6 +201,8 @@ const QuestionScreen = ({ navigation }) => {
                 alignItems: 'center',
                 alignContent: 'center',
                 borderRadius: 10,
+                borderTopLeftRadius: buttonPressed ? 0 : 10,
+                borderBottomRadius: buttonPressed ? 0 : 10,
               }}>
               <Text style={{
                 fontWeight: 'bold',
@@ -226,23 +241,23 @@ export default QuestionScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white'
+    backgroundColor: 'white',
+
   },
   header: {
-    justifyContent: 'flex-end',
-    paddingHorizontal: 20,
-    paddingBottom: responsiveHeight(4),
+    // justifyContent: 'flex-end',
+    // paddingBottom: responsiveHeight(4),
     backgroundColor: '#e32f45',
     // borderBottomLeftRadius: 30,
     // borderBottomRightRadius: 30,
+    paddingHorizontal: responsiveWidth(8),
   },
   text_header: {
     color: 'white',
     fontWeight: 'bold',
     fontSize: responsiveFontSize(30),
-    alignSelf: 'center',
     paddingTop: responsiveHeight(6),
-
+    top: responsiveHeight(1.5)
   },
   button: {
     alignItems: 'center',
@@ -252,7 +267,8 @@ const styles = StyleSheet.create({
     height: 50,
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: 25
+    borderRadius: 25,
+
   },
   textSign: {
     fontSize: 18,
@@ -288,14 +304,12 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-
-
   },
   modalView: {
     // margin: 20,
     // backgroundColor: '#e32f45',
     borderRadius: 20,
-    top: responsiveHeight(-17),
+    top: responsiveHeight(-13),
     padding: 35,
     alignItems: 'center',
     shadowColor: '#e32f45',
@@ -311,7 +325,8 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontWeight: "bold",
     fontSize: responsiveFontSize(70),
-    color: '#e32f45'
+    color: '#e32f45',
+    transform: [{ rotate: '335deg' }]
 
   },
 });
