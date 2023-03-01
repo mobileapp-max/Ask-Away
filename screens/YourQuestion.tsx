@@ -156,7 +156,7 @@ const Profile = ({ navigation }) => {
                                     <MaterialCommunityIcons
                                         name="delete-forever"
                                         size={30}
-                                        color='#e32f45'
+                                        color='#f25c54'
                                         style={{ margin: 3 }}
                                     />
                                 </Pressable>
@@ -179,7 +179,7 @@ const Profile = ({ navigation }) => {
                     </Text>
                     <Feather
                         name="edit"
-                        color="#e32f45"
+                        color="#f25c54"
                         size={25}
                     />
                 </TouchableOpacity >
@@ -220,12 +220,12 @@ const styles = StyleSheet.create({
         flex: 1
     },
     header: {
-        backgroundColor: '#e32f45',
+        backgroundColor: '#f25c54',
         flex: 1.6
     },
     footer: {
         flex: 5,
-        backgroundColor: 'white',
+        backgroundColor: '#f7b267',
         overflow: 'visible',
 
     },
@@ -234,7 +234,7 @@ const styles = StyleSheet.create({
         borderRadius: 20,
         padding: 35,
         alignItems: 'center',
-        borderColor: '#e32f45',
+        borderColor: '#f25c54',
         borderWidth: 1,
         shadowColor: '#000',
         shadowOffset: {
@@ -249,7 +249,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         fontWeight: "bold",
         fontSize: 18,
-        color: '#e32f45'
+        color: '#f25c54'
 
     },
     profileName: {
@@ -294,7 +294,7 @@ const styles = StyleSheet.create({
     largeNumbers: {
         fontSize: responsiveFontSize(29),
         fontWeight: 'bold',
-        color: '#e32f45'
+        color: '#f25c54'
     },
     regularText: {
         fontSize: responsiveFontSize(17),
@@ -324,7 +324,7 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         padding: 8,
         // paddingTop: 5,
-        color: '#e32f45',
+        color: '#f25c54',
         borderWidth: 0.5,
         borderColor: '#FA7465',
         // minHeight: height * 0.15,

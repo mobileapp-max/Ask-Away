@@ -9,21 +9,27 @@ import {
 
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
+import { responsiveFontSize } from '../scripts/constants';
 
 const ButtonQApp = ({ title, onPress, height, disabled, color, color2 }) => {
 
     const styles = useMemo(() => {
         return StyleSheet.create({
             signIn: {
-                width: '95%',
+                width: '100%',
                 height: height,
                 justifyContent: 'center',
                 alignItems: 'center',
                 borderRadius: 10,
-                margin: 5
+                margin: 5,
+                shadowColor: "#e32f45",
+                shadowOffset: {
+                    width: 0,
+                    height: 5,
+                },
             },
             textSign: {
-                fontSize: 18,
+                fontSize: responsiveFontSize(30),
                 fontWeight: 'bold'
             },
         });

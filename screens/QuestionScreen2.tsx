@@ -81,7 +81,7 @@ const QuestionScreen = ({ navigation }) => {
       <ScrollView>
         <View style={{
           ...styles.inputTextContainer,
-          height: responsiveHeight(35),
+          height: responsiveHeight(45),
           width: responsiveWidth(90)
         }}>
           <View
@@ -190,9 +190,6 @@ const QuestionScreen = ({ navigation }) => {
                 alignItems: 'center',
                 alignContent: 'center',
                 borderRadius: 10,
-                borderTopRightRadius: buttonPressed ? 0 : 10,
-                borderBottomRightRadius: buttonPressed ? 0 : 10,
-
               }}>
               <Text
                 style={{
@@ -216,8 +213,6 @@ const QuestionScreen = ({ navigation }) => {
                 alignItems: 'center',
                 alignContent: 'center',
                 borderRadius: 10,
-                borderTopLeftRadius: buttonPressed ? 0 : 10,
-                borderBottomLeftRadius: buttonPressed ? 0 : 10,
               }}>
               <Text style={{
                 fontWeight: 'bold',
@@ -293,7 +288,7 @@ const styles = StyleSheet.create({
     // flex: 1,
     marginTop: responsiveWidth(10),
     alignSelf: 'center',
-    padding: 8,
+    padding: responsiveWidth(3),
     // paddingTop: 5,
     color: '#e32f45',
     // borderWidth: 0.5,

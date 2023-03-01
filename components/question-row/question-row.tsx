@@ -94,7 +94,7 @@ export const QuestionRow = ({ question: incomingQuestion, updateQuestionModal })
                     }}>
                         <View
                             style={{
-                                backgroundColor: "#54a832",
+                                backgroundColor: "#52b788",
                                 height: currentHeightOfView,
                                 width: responsiveWidth((26 / 100) * calculateResults({ answer_1, answer_2 }).answer_1_result) || 0,
                                 justifyContent: 'center',
@@ -117,7 +117,7 @@ export const QuestionRow = ({ question: incomingQuestion, updateQuestionModal })
                         </View>
                         <View
                             style={{
-                                backgroundColor: "#e32f45",
+                                backgroundColor: "#f25c54",
                                 height: currentHeightOfView,
                                 width: responsiveWidth((26 / 100) * calculateResults({ answer_1, answer_2 }).answer_2_result) || 0,
                                 justifyContent: 'center',

@@ -115,7 +115,8 @@ const AddQ = ({ navigation }) => {
               style={{
                 color: 'white',
                 textAlign: 'justify',
-                fontSize: responsiveFontSize(20)
+                fontSize: responsiveFontSize(20),
+                fontWeight: 'bold'
               }}
               autoCapitalize="sentences"
               onChangeText={setText}
@@ -129,11 +130,11 @@ const AddQ = ({ navigation }) => {
           <View style={styles.button}>
             <ButtonQApp
               disabled={disableButton}
-              title={'Send'}
+              title={'Add'}
               onPress={onPressPostQuestin}
-              height={responsiveHeight(7)}
-              color={disableButton === true ? 'grey' : '#e32f45'}
-              color2={disableButton === true ? 'silver' : 'pink'}
+              height={responsiveHeight(8)}
+              color={disableButton === true ? '#f38375' : '#52b788'}
+              color2={disableButton === true ? '#f38375' : '#52b788'}
             />
           </View>
         </ScrollView>
@@ -185,7 +186,7 @@ const styles = StyleSheet.create({
 
   container: {
     flex: 1,
-    backgroundColor: '#e32f45'
+    backgroundColor: '#f25c54'
   },
   header: {
     flex: 1,
@@ -196,7 +197,7 @@ const styles = StyleSheet.create({
   },
   footer: {
     flex: 5,
-    backgroundColor: '#fff',
+    backgroundColor: '#f7b267',
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,
 
@@ -211,6 +212,11 @@ const styles = StyleSheet.create({
   button: {
     alignItems: 'center',
     marginTop: responsiveHeight(3),
+    shadowColor: "#e32f45",
+    shadowOffset: {
+      width: 0,
+      height: 5,
+    },
 
   },
   signIn: {
@@ -294,10 +300,10 @@ const styles = StyleSheet.create({
     margin: 10,
     // paddingTop: 5,
     color: '#e32f45',
-    borderWidth: 0.5,
+    // borderWidth: 0.5,
     borderColor: '#FA7465',
     // minHeight: height * 0.15,
-    backgroundColor: '#e32f45',
+    backgroundColor: '#f79d65',
     borderRadius: 20,
     borderBottomRightRadius: 20,
     borderTopRightRadius: 8,

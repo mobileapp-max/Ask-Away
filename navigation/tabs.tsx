@@ -16,6 +16,7 @@ import { FontAwesome } from '@expo/vector-icons';
 import { useEffect } from 'react';
 import QuestionScreen from '../screens/QuestionScreen2';
 import SignUpScreen from '../screens/SignUpScreen';
+import { responsiveHeight, responsiveWidth } from '../scripts/constants';
 
 
 // import { mdiPlusCircleOutline } from '@mdi/js'
@@ -71,7 +72,7 @@ const CustomTabButton = (props) => {
             width: 70,
             height: 70,
             borderRadius: 35,
-            backgroundColor: currentScreen === 'Profile2' ? 'gold' : '#e32f45',
+            backgroundColor: currentScreen === 'Profile2' ? '#f7b267' : '#f25c54',
             transform:
                 [
                     {
@@ -99,23 +100,22 @@ const Tabs = (props) => {
     return (
         // <RootStackScree>
         <Tab.Navigator
-
             screenOptions={{
-                activeTintColor: "gold",
+                activeTintColor: "#f7b267",
                 tabBarShowLabel: false,
                 headerShown: false,
                 tabBarStyle: {
                     position: 'absolute',
-                    bottom: 15,
-                    left: 20,
-                    right: 20,
+                    bottom: responsiveHeight(2),
+                    left: responsiveWidth(3),
+                    right: responsiveWidth(3),
                     elevation: 0,
-                    backgroundColor: '#ffffff',
-                    borderWidth: 2,
-                    borderColor: 'red',
+                    backgroundColor: '#fbf8cc',
+                    borderWidth: 5,
+                    borderColor: '#f25c54',
                     borderRadius: 15,
-                    height: 60,
-                    top: props?.isTabsVisible ? undefined : -100,
+                    height: responsiveHeight(8),
+                    // top: props?.isTabsVisible ? undefined : -100,
                     ...style.shadow
                 }
 
@@ -124,13 +124,13 @@ const Tabs = (props) => {
 
             <Tab.Screen name="Main" component={QuestionScreen} options={{
                 tabBarIcon: ({ focused }) => (
-                    <View style={{ alignItems: "center", justifyContent: 'center', top: 10 }}>
+                    <View style={{ alignItems: "center", justifyContent: 'center', top: responsiveHeight(1.5), height: responsiveHeight(8) }}>
                         <FontAwesome
                             name="question-circle"
                             size={40}
-                            color={focused ? 'gold' : '#e32f45'}
+                            color={focused ? '#f7b267' : '#f25c54'}
                         />
-                        <Text style={{ color: focused ? 'gold' : '#e32f45' }}>Questions</Text>
+                        {/* <Text style={{ color: focused ? '#f7b267' : '#f25c54' }}>Questions</Text> */}
                     </View>
                 )
             }} />
@@ -139,11 +139,11 @@ const Tabs = (props) => {
                     tabBarIcon: ({ focused }) => (
 
                         <View
-                            style={{ alignItems: "center", justifyContent: 'center' }}>
+                            style={{ alignItems: "center", justifyContent: 'center', }}>
                             <Entypo
                                 name="plus"
                                 size={65}
-                                color={focused ? 'gold' : 'white'}
+                                color={focused ? '#f7b267' : 'white'}
                             />
                         </View>
 
@@ -156,13 +156,13 @@ const Tabs = (props) => {
             <Tab.Screen name="Profile3" component={ProfileScreen}
                 options={{
                     tabBarIcon: ({ focused }) => (
-                        <View style={{ alignItems: "center", justifyContent: 'center', top: 10 }}>
+                        <View style={{ alignItems: "center", justifyContent: 'center', top: responsiveHeight(1.5), height: responsiveHeight(8) }}>
                             <Icon
                                 name="person-circle"
                                 size={40}
-                                color={focused ? 'gold' : '#e32f45'}
+                                color={focused ? '#f7b267' : '#f25c54'}
                             />
-                            <Text style={{ color: focused ? 'gold' : '#e32f45' }}>Profile</Text>
+                            {/* <Text style={{ color: focused ? '#f7b267' : '#f25c54' }}>Profile</Text> */}
                         </View>
                     )
                 }}
@@ -187,7 +187,7 @@ const Tabs = (props) => {
 
 const style = StyleSheet.create({
     shadow: {
-        shadowColor: "#e32f45",
+        shadowColor: "#f25c54",
         shadowOffset: {
             width: 0,
             height: 10,
