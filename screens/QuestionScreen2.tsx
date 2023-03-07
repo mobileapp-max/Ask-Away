@@ -56,35 +56,6 @@ const QuestionScreen = ({ navigation }) => {
     setAnswerWidth(45)
     onPressNextQuestion()
   }
-  // useEffect(() => {
-  //   Animated.loop(
-  //     Animated.timing(nextButton, {
-  //       toValue: 10,
-  //       duration: 2000,
-  //       // easing: 
-  //       useNativeDriver: false
-  //     })
-  //   ).start()
-  // }, [])
-
-  // console.log('Number(nextButton)', nextButton.__getValue())
-  // useEffect(() => {
-  //   if (nextButton.__getValue() === -10) {
-  //     Animated.timing(nextButton, {
-  //       toValue: 10,
-  //       duration: 2000,
-  //       useNativeDriver: false
-  //     }).start()
-  //   }
-  //   if (nextButton.__getValue() === 10) {
-  //     Animated.timing(nextButton, {
-  //       toValue: -10,
-  //       duration: 2000,
-  //       useNativeDriver: false
-  //     }).start()
-  //   }
-  // }, [nextButton.__getValue()])
-
 
   return (
     <View style={styles.container}>
@@ -172,32 +143,57 @@ const QuestionScreen = ({ navigation }) => {
                     alignItems: 'center',
                   }}
                 >
-                  {/* <Animatable.View
-                  animation="shake"
-                  // easing='ease'
-                  duration={15000}
-                  // iterationDelay={2000}
-                  // delay={2000}
-                  iterationCount='infinite'
-                  style={{
-                    flexDirection:
-                      'row',
-                    alignItems: 'center',
-                  }}
-                > */}
-                  <Text
-                    style={{
-                      color: "white",
-                      fontWeight: "bold"
-                    }}
-                  >
-                    {'Next'}</Text>
-                  <AntDesign
-                    name="caretright"
-                    size={38}
-                    color='white'
-                  />
-                  {/* </Animatable.View> */}
+                  {
+                    buttonPressed ?
+                      <>
+                        <Animatable.View
+                          animation="shake"
+                          easing='ease'
+                          duration={15000}
+                          iterationDelay={2000}
+                          // delay={2000}
+                          iterationCount={'infinite'}
+                          style={{
+                            flexDirection:
+                              'row',
+                            alignItems: 'center',
+                          }}>
+                          <Text
+                            style={{
+                              color: "white",
+                              fontWeight: "bold"
+                            }}
+                          >
+                            {'Next'}</Text>
+                          <AntDesign
+                            name="caretright"
+                            size={38}
+                            color='white'
+                          />
+                        </Animatable.View>
+                      </>
+                      :
+                      <View
+                        style={{
+                          flexDirection:
+                            'row',
+                          alignItems: 'center',
+                        }}>
+                        <Text
+                          style={{
+                            color: "white",
+                            fontWeight: "bold"
+                          }}
+                        >
+                          {'Next'}</Text>
+                        <AntDesign
+                          name="caretright"
+                          size={38}
+                          color='white'
+                        />
+                      </View>
+                  }
+
                 </Animated.View>
               </TouchableOpacity>
             </View>
