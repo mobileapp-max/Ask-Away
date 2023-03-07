@@ -259,7 +259,7 @@ const ProfileModal = ({ children, profileModalVisible, onPressDismissProfileModa
                                 </View>
                                 <ButtonQApp
                                     title={'Delete Account'}
-                                    onPress={deleteAuthUser()}
+                                    onPress={() => deleteAuthUser()}
                                     height={responsiveHeight(4)}
                                     color={'#e32f45'}
                                     color2={'pink'}

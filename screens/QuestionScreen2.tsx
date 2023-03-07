@@ -7,7 +7,8 @@ import {
   Dimensions,
   StatusBar,
   ScrollView,
-  Modal
+  Modal,
+  Animated
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useTheme } from 'react-native-paper';
@@ -16,6 +17,7 @@ import { QuestionsContext } from '../contexts/questions-context-provider';
 import { responsiveFontSize, responsiveHeight, responsiveWidth } from '../scripts/constants';
 import { AntDesign } from '@expo/vector-icons';
 import { BlurView } from 'expo-blur';
+import * as Animatable from 'react-native-animatable';
 
 
 const QuestionScreen = ({ navigation }) => {
@@ -24,17 +26,20 @@ const QuestionScreen = ({ navigation }) => {
   const [answerWidth, setAnswerWidth] = useState(45)
   const [buttonPressed, setButtonPressed] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
+  const [nextButton, setNextButton] = useState(new Animated.Value(-10))
 
   const questionResult_1 = function () {
     setAnswerWidth(((question?.responses_aggregate?.aggregate?.sum?.response_1 + 1) / (question?.responses_aggregate?.aggregate?.sum?.response_1 + question?.responses_aggregate?.aggregate?.sum?.response_2 + 1)) * 90)
     setButtonPressed(true)
     onPressAddResponse({ question_id: question?.id, response_1: '1', response_2: '0', user_id: '1', report: '0' })
   }
+
   const questionResult_2 = function () {
     setAnswerWidth(90 - ((question?.responses_aggregate?.aggregate?.sum?.response_2 + 1) / (question?.responses_aggregate?.aggregate?.sum?.response_1 + question?.responses_aggregate?.aggregate?.sum?.response_2 + 1)) * 90)
     setButtonPressed(true)
     onPressAddResponse({ question_id: question?.id, response_1: '0', response_2: '1', user_id: '1', report: '0' })
   }
+
   const onPressReport = () => {
     onPressAddResponse({ question_id: question?.id, response_1: '0', response_2: '0', user_id: '1', report: '1' })
     setModalVisible(true)
@@ -44,20 +49,42 @@ const QuestionScreen = ({ navigation }) => {
       setAnswerWidth(45)
       onPressNextQuestion()
     }, 1500);
-
   }
+
   const nextQuestion = function () {
     setButtonPressed(false)
     setAnswerWidth(45)
     onPressNextQuestion()
-    // console.log('q:', question?.question)
-    // console.log('q1:', question?.responses_aggregate?.aggregate?.sum?.response_1 || 0)
-    // console.log("q2:", question?.responses_aggregate?.aggregate?.sum?.response_2 || 0)
-    // console.log("q1%:", (question?.responses_aggregate?.aggregate?.sum?.response_1 / (question?.responses_aggregate?.aggregate?.sum?.response_1 + question?.responses_aggregate?.aggregate?.sum?.response_2)) || 0 * 90)
-    // console.log("q2%:", (question?.responses_aggregate?.aggregate?.sum?.response_2 / (question?.responses_aggregate?.aggregate?.sum?.response_1 + question?.responses_aggregate?.aggregate?.sum?.response_2)) || 0 * 90)
   }
-  // console.log((questions?.answer_1 + 1) / (questions?.answer_1 + questions?.answer_2) * 90)
-  // console.log(question?.answer_1 + 1)
+  // useEffect(() => {
+  //   Animated.loop(
+  //     Animated.timing(nextButton, {
+  //       toValue: 10,
+  //       duration: 2000,
+  //       // easing: 
+  //       useNativeDriver: false
+  //     })
+  //   ).start()
+  // }, [])
+
+  // console.log('Number(nextButton)', nextButton.__getValue())
+  // useEffect(() => {
+  //   if (nextButton.__getValue() === -10) {
+  //     Animated.timing(nextButton, {
+  //       toValue: 10,
+  //       duration: 2000,
+  //       useNativeDriver: false
+  //     }).start()
+  //   }
+  //   if (nextButton.__getValue() === 10) {
+  //     Animated.timing(nextButton, {
+  //       toValue: -10,
+  //       duration: 2000,
+  //       useNativeDriver: false
+  //     }).start()
+  //   }
+  // }, [nextButton.__getValue()])
+
 
   return (
     <View style={styles.container}>
@@ -135,25 +162,43 @@ const QuestionScreen = ({ navigation }) => {
                 >{'Report'}</Text>
               </TouchableOpacity>
               <TouchableOpacity
-                onPress={() => nextQuestion()}
-                style={{
-                  flexDirection:
-                    'row',
-                  alignItems: 'center',
 
-                }} >
-                <Text
+                onPress={() => nextQuestion()}
+              >
+                <Animated.View
                   style={{
-                    color: "white",
-                    fontWeight: "bold"
+                    left: nextButton,
+                    flexDirection: 'row',
+                    alignItems: 'center',
                   }}
                 >
-                  {'Next'}</Text>
-                <AntDesign
-                  name="caretright"
-                  size={38}
-                  color='white'
-                />
+                  {/* <Animatable.View
+                  animation="shake"
+                  // easing='ease'
+                  duration={15000}
+                  // iterationDelay={2000}
+                  // delay={2000}
+                  iterationCount='infinite'
+                  style={{
+                    flexDirection:
+                      'row',
+                    alignItems: 'center',
+                  }}
+                > */}
+                  <Text
+                    style={{
+                      color: "white",
+                      fontWeight: "bold"
+                    }}
+                  >
+                    {'Next'}</Text>
+                  <AntDesign
+                    name="caretright"
+                    size={38}
+                    color='white'
+                  />
+                  {/* </Animatable.View> */}
+                </Animated.View>
               </TouchableOpacity>
             </View>
           </View>
@@ -162,7 +207,7 @@ const QuestionScreen = ({ navigation }) => {
           alignSelf: 'center',
           flexDirection: "row",
           width: responsiveWidth(90),
-          shadowColor: "#e32f45",
+          // shadowColor: "#e32f45",
           shadowOffset: {
             width: 0,
             height: 5,
@@ -237,7 +282,13 @@ const QuestionScreen = ({ navigation }) => {
           <BlurView
             intensity={5} style={styles.centeredView}>
             <View style={styles.modalView}>
-              <Text style={styles.modalText}>{'Reported'}</Text>
+              <Animatable.View
+                animation="tada"
+              // delay={2000}
+              // iterationCount='infinite'
+              >
+                <Text style={styles.modalText}>{'Reported'}</Text>
+              </Animatable.View>
             </View>
           </BlurView>
         </Modal>
@@ -319,8 +370,9 @@ const styles = StyleSheet.create({
     // margin: 20,
     // backgroundColor: '#e32f45',
     borderRadius: 20,
-    top: responsiveHeight(-13),
+    top: responsiveHeight(-10),
     padding: 35,
+    // height: responsiveHeight(100),
     alignItems: 'center',
     shadowColor: '#e32f45',
     shadowOffset: {

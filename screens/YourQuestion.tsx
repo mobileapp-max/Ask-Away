@@ -156,7 +156,7 @@ const Profile = ({ navigation }) => {
                                     <MaterialCommunityIcons
                                         name="delete-forever"
                                         size={30}
-                                        color='#f25c54'
+                                        color='white'
                                         style={{ margin: 3 }}
                                     />
                                 </Pressable>
@@ -257,6 +257,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         fontSize: responsiveFontSize(26),
         // paddingRight: responsiveWidth(8)
+        color: '#f79d65'
     },
     centeredView: {
         flex: 1,
@@ -298,7 +299,8 @@ const styles = StyleSheet.create({
     },
     regularText: {
         fontSize: responsiveFontSize(17),
-        textAlign: 'center'
+        textAlign: 'center',
+        color: '#f25c54'
     },
     editButton: {
         flexDirection: "row",

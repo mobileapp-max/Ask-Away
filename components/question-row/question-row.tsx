@@ -65,14 +65,12 @@ export const QuestionRow = ({ question: incomingQuestion, updateQuestionModal })
                 calculateResults({ answer_1, answer_2 }).bothZeros ?
 
                     <View style={{
-                        alignSelf: 'center',
+                        // alignSelf: 'center',
                         flexDirection: "row",
                         borderRadius: 10,
                         overflow: 'hidden',
                         height: currentHeightOfView,
                         width: responsiveWidth(26),
-                        borderColor: 'red',
-                        borderWidth: responsiveWidth(0.1),
                         justifyContent: 'center',
                         backgroundColor: 'white',
                     }}>
@@ -82,29 +80,34 @@ export const QuestionRow = ({ question: incomingQuestion, updateQuestionModal })
                     </View>
                     :
                     <View style={{
-                        alignSelf: 'center',
+                        // alignSelf: 'center',
                         flexDirection: "row",
                         borderRadius: 10,
                         overflow: 'hidden',
-                        backgroundColor: 'white',
+                        // backgroundColor: 'white',
                         height: currentHeightOfView,
                         width: responsiveWidth(26),
-                        borderColor: 'red',
-                        justifyContent: 'center'
+                        // borderColor: 'red',
+                        // justifyContent: 'center'
                     }}>
                         <View
                             style={{
                                 backgroundColor: "#52b788",
                                 height: currentHeightOfView,
-                                width: responsiveWidth((26 / 100) * calculateResults({ answer_1, answer_2 }).answer_1_result) || 0,
+                                width: responsiveWidth((26.5 / 100) * calculateResults({ answer_1, answer_2 }).answer_1_result) || 0,
                                 justifyContent: 'center',
                                 alignItems: 'center',
                                 alignContent: 'center',
                             }}>
                             <Text style={{ fontWeight: 'bold', color: "white" }}>
-                                {Math.round(calculateResults({ answer_1, answer_2 }).answer_1_result) > 25
+                                {Math.round(calculateResults({ answer_1, answer_2 }).answer_1_result) > 40
                                     &&
-                                    <View>
+                                    <View style={{
+                                        justifyContent: 'center',
+                                        alignItems: 'center',
+                                        alignContent: 'center'
+                                    }}
+                                    >
                                         <Text style={{ fontWeight: 'bold', color: "white", }}>
                                             {`Yes`}
                                         </Text>
@@ -119,14 +122,19 @@ export const QuestionRow = ({ question: incomingQuestion, updateQuestionModal })
                             style={{
                                 backgroundColor: "#f25c54",
                                 height: currentHeightOfView,
-                                width: responsiveWidth((26 / 100) * calculateResults({ answer_1, answer_2 }).answer_2_result) || 0,
+                                width: responsiveWidth((26.5 / 100) * calculateResults({ answer_1, answer_2 }).answer_2_result) || 0,
                                 justifyContent: 'center',
                                 alignItems: 'center',
                                 alignContent: 'center'
                             }}>
-                            {Math.round(calculateResults({ answer_1, answer_2 }).answer_2_result) > 25
+                            {Math.round(calculateResults({ answer_1, answer_2 }).answer_2_result) > 40
                                 &&
-                                <View>
+                                <View style={{
+                                    justifyContent: 'center',
+                                    alignItems: 'center',
+                                    alignContent: 'center'
+
+                                }}>
                                     <Text style={{ fontWeight: 'bold', color: "white", }}>
                                         {`No`}
                                     </Text>
@@ -147,7 +155,7 @@ const styles = StyleSheet.create({
         width: responsiveWidth(69),
         padding: 10,
         color: '#e32f45',
-        borderWidth: 0.5,
+        // borderWidth: 0.5,s
         borderColor: '#FA7465',
         backgroundColor: 'white',
         borderRadius: 20,

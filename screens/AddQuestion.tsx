@@ -61,7 +61,7 @@ const AddQ = ({ navigation }) => {
       <StatusBar backgroundColor='#e32f45' barStyle="light-content" />
       <View style={styles.header}>
         <Text style={styles.text_header}>
-          {'Add'}
+          {'Ask'}
         </Text>
         <Text
           style={{
