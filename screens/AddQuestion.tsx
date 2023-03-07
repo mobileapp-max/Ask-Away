@@ -25,11 +25,16 @@ import { responsiveFontSize, responsiveHeight, responsiveWidth } from '../script
 import { CharacterLimit } from '../components/character-limit/character-limit';
 import { BlurView } from 'expo-blur';
 import ButtonQApp from '../components/buttonQApp';
+import { UserContext, UserProvider } from '../contexts/user-context-provider';
+
 
 
 
 const AddQ = ({ navigation }) => {
 
+  const { user } = useContext(UserContext)
+  // console.log('user', user?.uid)
+  // console.log('user', user?.email)
   const [title, setTitle] = useState('')
   const [text, setText] = useState('')
   const [isHidden, setIsHidden] = useState(false)
@@ -41,7 +46,7 @@ const AddQ = ({ navigation }) => {
   const { onPressAddQuestion, questions, question, onPressNextQuestion, onPressDeleteQuestion } = useContext(QuestionsContext)
   const onPressPostQuestin = () => {
     setText('')
-    onPressAddQuestion({ text: text?.trim() })
+    onPressAddQuestion({ question: text?.trim(), email: user?.email, user_id: user?.uid })
     setModalVisible(true)
     setTimeout(() => {
       setModalVisible(false)

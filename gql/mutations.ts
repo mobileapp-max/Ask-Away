@@ -1,10 +1,12 @@
 import { gql } from "@apollo/client";
 
 export const QUESTIONS_MUTATION = gql`
-mutation ($question: String!) {
+mutation ($question: String!, $user_id: String, $email: String) {
     insert_question(
         objects: [{
             question: $question
+            user_id: $user_id
+            email: $email
     }]
         ){
             returning {

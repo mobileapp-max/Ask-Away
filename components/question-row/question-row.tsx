@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import {
     View,
     Text,
@@ -14,15 +14,23 @@ import {
 import { calculateResults } from '../../scripts/calculateResults';
 import UseOnLayout from '../../scripts/use-on-layout';
 import * as Animatable from 'react-native-animatable';
+import { UserContext } from '../../contexts/user-context-provider';
 
 
 export const QuestionRow = ({ question: incomingQuestion, updateQuestionModal }) => {
+
+    const { user } = useContext(UserContext)
+    // console.log(user?.uid == question?.user_id)
+
     const {
         question,
         // answer_1,
         // answer_2,
         responses_aggregate
     } = incomingQuestion;
+
+    // console.log('user', user?.uid)
+    // console.log('question', question)
 
     const answer_1 = responses_aggregate?.aggregate?.sum?.response_1
     const answer_2 = responses_aggregate?.aggregate?.sum?.response_2
@@ -56,7 +64,9 @@ export const QuestionRow = ({ question: incomingQuestion, updateQuestionModal })
                     style={{ fontSize: responsiveFontSize(16) }}
                 >
                     {question}
-                    {/* {responses_aggregate?.aggregate?.sum?.response_1} */}
+
+                    {/* .filter(each => each?.user_id == user?.uid)} */}
+
                 </Text>
             </View>
 

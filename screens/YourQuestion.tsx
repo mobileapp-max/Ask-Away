@@ -24,6 +24,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { UserContext } from '../contexts/user-context-provider';
 import ProfileModal from '../components/profileModal'
 
+
 const Profile = ({ navigation }) => {
 
     const [modalVisible, setModalVisible] = useState(false);
@@ -59,7 +60,12 @@ const Profile = ({ navigation }) => {
         questions,
         onPressDeleteQuestion
     } = useContext(QuestionsContext)
+
     const { user } = useContext(UserContext)
+
+    // console.log(questions[23]?.user_id)
+    // console.log(questions[0])
+    // console.log(user?.uid == questions[23]?.user_id)
 
 
     return (
@@ -129,7 +135,7 @@ const Profile = ({ navigation }) => {
                 >
                 </ProfileModal>
                 <SwipeListView
-                    data={questions}
+                    data={questions.filter(question => question?.user_id == user?.uid)}
                     renderItem={({ item }) =>
                         <QuestionRow
                             question={item}
