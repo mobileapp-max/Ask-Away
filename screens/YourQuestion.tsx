@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import {
     View,
     Text,
@@ -16,14 +16,9 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { QuestionRow } from '../components/question-row/question-row';
 import { SwipeListView } from 'react-native-swipe-list-view';
 import { BlurView } from 'expo-blur';
-import { ReplyResult } from '../components/replyResult';
-import { calculateResults } from '../scripts/calculateResults';
 import ModalMain from '../components/modalMain';
-import { logoutUser } from '../api/auth-api'
-import { MaterialIcons } from '@expo/vector-icons';
 import { UserContext } from '../contexts/user-context-provider';
 import ProfileModal from '../components/profileModal'
-
 
 const Profile = ({ navigation }) => {
 
@@ -58,15 +53,19 @@ const Profile = ({ navigation }) => {
     }
     const {
         questions,
-        onPressDeleteQuestion
+        onPressDeleteQuestion,
+        userQuestions
     } = useContext(QuestionsContext)
 
     const { user } = useContext(UserContext)
 
-    // console.log(questions[23]?.user_id)
-    // console.log(questions[0])
-    // console.log(user?.uid == questions[23]?.user_id)
-
+    const sumAnswers = useMemo(() => {
+        let sum = 0
+        userQuestions.forEach(question => {
+            sum += question?.responses_aggregate?.aggregate?.sum?.response_1 + question?.responses_aggregate?.aggregate?.sum?.response_2
+        })
+        return sum
+    }, [userQuestions])
 
     return (
         <View style={styles.container}>
@@ -135,7 +134,7 @@ const Profile = ({ navigation }) => {
                 >
                 </ProfileModal>
                 <SwipeListView
-                    data={questions.filter(question => question?.user_id == user?.uid)}
+                    data={userQuestions}
                     renderItem={({ item }) =>
                         <QuestionRow
                             question={item}
@@ -202,11 +201,11 @@ const Profile = ({ navigation }) => {
 
                 <View style={styles.cardValueRow}>
                     <View style={styles.cardValues}>
-                        <Text style={styles.largeNumbers}>{'15'}</Text>
+                        <Text style={styles.largeNumbers}>{userQuestions?.length}</Text>
                         <Text style={styles.regularText}>{'Questions'}</Text>
                     </View>
                     <View style={styles.cardValues}>
-                        <Text style={styles.largeNumbers}>{'20'}</Text>
+                        <Text style={styles.largeNumbers}>{sumAnswers}</Text>
                         <Text style={styles.regularText}>{'Answered'}</Text>
                     </View>
                     <View style={styles.cardValues}>
