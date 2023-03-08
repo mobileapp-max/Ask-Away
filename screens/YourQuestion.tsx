@@ -53,6 +53,7 @@ const Profile = ({ navigation }) => {
     }
     const {
         questions,
+        response,
         onPressDeleteQuestion,
         userQuestions
     } = useContext(QuestionsContext)
@@ -66,6 +67,18 @@ const Profile = ({ navigation }) => {
         })
         return sum
     }, [userQuestions])
+
+    const sumReplies = useMemo(() => {
+        let sum = 0
+        response?.response.forEach(resp => {
+            if (resp?.user_id === user?.uid) {
+                if (resp?.response_1 !== 0 || resp?.response_2 !== 0) {
+                    sum += 1
+                }
+            }
+        })
+        return sum
+    }, [response])
 
     return (
         <View style={styles.container}>
@@ -205,11 +218,11 @@ const Profile = ({ navigation }) => {
                         <Text style={styles.regularText}>{'Questions'}</Text>
                     </View>
                     <View style={styles.cardValues}>
-                        <Text style={styles.largeNumbers}>{sumAnswers}</Text>
+                        <Text style={styles.largeNumbers}>{sumReplies}</Text>
                         <Text style={styles.regularText}>{'Answered'}</Text>
                     </View>
                     <View style={styles.cardValues}>
-                        <Text style={styles.largeNumbers}>{'36'}</Text>
+                        <Text style={styles.largeNumbers}>{sumAnswers}</Text>
                         <Text style={styles.regularText}>{'Replies \nrecieved'}</Text>
                     </View>
                 </View>
@@ -330,7 +343,6 @@ const styles = StyleSheet.create({
         // marginTop: responsiveWidth(10),
         alignSelf: 'center',
         padding: 8,
-        // paddingTop: 5,
         color: '#f25c54',
         borderWidth: 0.5,
         borderColor: '#FA7465',

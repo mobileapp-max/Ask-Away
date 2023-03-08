@@ -55,8 +55,9 @@ const ModalMain = ({ children, selectedQuestionModal, questionVisible, onPressDi
                         >
                             <AntDesign name="closecircle" size={24} color="#e32f45" />
                         </Pressable> */}
-                        <Text style={{ padding: 10, width: responsiveWidth(60) }}>{selectedQuestionModal?.question}</Text>
-                        {
+                        <Text style={{ padding: 10, width: responsiveWidth(60), textAlign: 'center' }}>
+                            {selectedQuestionModal?.question}</Text>
+                        {/* {
                             (selectedQuestionModal?.answer_1 > 0 || selectedQuestionModal?.answer_2 > 0)
                             &&
                             // <View style={{ position: 'absolute' }}>
@@ -82,7 +83,7 @@ const ModalMain = ({ children, selectedQuestionModal, questionVisible, onPressDi
                                 }}
                             />
                             // </View>
-                        }
+                        } */}
                         <View style={styles.answers}>
                             <View style={styles.answersColumn}>
                                 <Text style={{ padding: 10 }}>{selectedQuestionModal?.responses_aggregate?.aggregate?.sum?.response_1}</Text>

@@ -66,7 +66,7 @@ export default SignUpScreen;
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#e32f45"
+        backgroundColor: "#f25c54"
     },
     header: {
         flex: 0.19,
@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
     },
     footer: {
         flex: 3,
-        backgroundColor: '#fff',
+        backgroundColor: '#f7b267',
         borderTopLeftRadius: 30,
         borderTopRightRadius: 30,
         paddingHorizontal: 20,

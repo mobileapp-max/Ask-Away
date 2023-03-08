@@ -21,3 +21,15 @@ subscription MySubscription {
 }
 `;
 
+
+export const RESPONSE_SUBSCRIPTION = gql`
+subscription MySubscription {
+  response {
+    question_id
+    user_id
+    response_1
+    response_2
+    report
+  }
+}
+`;

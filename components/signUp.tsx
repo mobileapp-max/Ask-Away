@@ -19,6 +19,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { signUpNewUser } from '../api/auth-api';
 import { loginUser } from '../api/auth-api'
 import { sendEmailWithPassword } from '../api/auth-api'
+import { responsiveHeight } from '../scripts/constants';
 
 
 const SignUp = ({ navigation }) => {
@@ -124,11 +125,16 @@ const SignUp = ({ navigation }) => {
             <Text style={[styles.text_footer, {
             }]}>Email</Text>
             <View style={styles.action}>
-                <MaterialIcons name="alternate-email" size={24} color="#e32f45" />
+                <MaterialIcons
+                    name="alternate-email"
+                    size={24}
+                    color="#f25c54"
+                />
                 <TextInput
                     placeholder="Your Email"
                     style={styles.textInput}
                     autoCapitalize="none"
+                    placeholderTextColor={'#f5e2c9'}
                     onChangeText={val => handleEmailChange(val)}
                 />
             </View>
@@ -138,7 +144,7 @@ const SignUp = ({ navigation }) => {
             <View style={styles.action}>
                 <Feather
                     name="lock"
-                    color="#e32f45"
+                    color="#f25c54"
                     size={20}
                 />
                 <TextInput
@@ -146,6 +152,7 @@ const SignUp = ({ navigation }) => {
                     secureTextEntry={data.secureTextEntry ? true : false}
                     style={styles.textInput}
                     autoCapitalize="none"
+                    placeholderTextColor={'#f5e2c9'}
                     onChangeText={(val) => handlePasswordChange(val)}
                 />
                 <TouchableOpacity
@@ -154,24 +161,32 @@ const SignUp = ({ navigation }) => {
                     {data.secureTextEntry ?
                         <Feather
                             name="eye-off"
-                            color="#e32f45"
+                            color="#f25c54"
                             size={20}
                         />
                         :
                         <Feather
                             name="eye"
-                            color="#e32f45"
+                            color="white"
                             size={20}
                         />
                     }
                 </TouchableOpacity>
             </View>
             <TouchableOpacity
-                style={{ marginTop: 10 }}
+                style={{
+                    marginTop: responsiveHeight(3),
+                    // flexDirection: 'row-reverse'
+                }}
                 onPress={onPressResetPassword}
             >
                 <Text
-                    style={{ fontWeight: '200', fontStyle: 'italic', textDecorationLine: 'underline' }}
+                    style={{
+                        fontWeight: '300',
+                        fontStyle: 'italic',
+                        textDecorationLine: 'underline',
+                        color: '#f5e2c9'
+                    }}
                 >{'Forgot Password'}</Text>
             </TouchableOpacity>
             <View style={styles.button}>
@@ -180,7 +195,7 @@ const SignUp = ({ navigation }) => {
                     onPress={onPressLogIn}
                 >
                     <LinearGradient
-                        colors={["#e32156", "yellow"]}
+                        colors={["#52b788", "#52b788"]}
                         style={styles.signIn}
                     >
                         <Text style={[styles.textSign, {
@@ -193,7 +208,7 @@ const SignUp = ({ navigation }) => {
                     onPress={onPressSignUp}
                 >
                     <LinearGradient
-                        colors={["#e32f00", "purple"]}
+                        colors={["#f38375", "#f38375"]}
                         style={styles.signIn}
                     >
                         <Text style={[styles.textSign, {
@@ -201,14 +216,14 @@ const SignUp = ({ navigation }) => {
                         }]}>Sign Up</Text>
                     </LinearGradient>
                 </TouchableOpacity>
-                <View style={styles.textPrivate}>
-                    <Text style={styles.color_textPrivate}>
-                        By signing up you agree to our
-                        <Text style={{ fontWeight: 'bold' }}>{" "}Terms of service</Text>
-                        <Text>{" "}and </Text>
-                        <Text style={{ fontWeight: 'bold' }}>{" "}Privacy policy</Text>
-                    </Text>
-                </View>
+            </View>
+            <View style={styles.textPrivate}>
+                <Text style={styles.color_textPrivate}>
+                    By signing up you agree to our
+                    <Text style={{ fontWeight: 'bold' }}>{" "}Terms of Service</Text>
+                    <Text>{" "}and</Text>
+                    <Text style={{ fontWeight: 'bold' }}>{" "}Privacy Policy.</Text>
+                </Text>
             </View>
         </View>
     );
@@ -241,26 +256,26 @@ const styles = StyleSheet.create({
         fontSize: 30
     },
     text_footer: {
-        color: '#05375a',
-        fontSize: 18
+        color: 'white',
+        fontSize: 18,
+        fontWeight: 'bold'
     },
     action: {
         flexDirection: 'row',
         marginTop: 10,
         borderBottomWidth: 1,
-        borderBottomColor: '#f2f2f2',
+        borderBottomColor: '#f79d65',
         paddingBottom: 5
     },
     textInput: {
         flex: 1,
         marginTop: Platform.OS === 'ios' ? 0 : -12,
         paddingLeft: 10,
-        color: '#05375a',
+        color: 'white',
     },
     button: {
         alignItems: 'center',
-        marginTop: 40,
-
+        marginTop: responsiveHeight(3),
     },
     signIn: {
         width: '100%',
@@ -277,9 +292,12 @@ const styles = StyleSheet.create({
     textPrivate: {
         flexDirection: 'row',
         flexWrap: 'wrap',
-        marginTop: 20
+        marginTop: responsiveHeight(1),
+        // marginHorizontal: 10,
+        alignSelf: 'center'
     },
     color_textPrivate: {
-        color: 'grey'
+        color: 'white',
+        textAlign: 'center'
     }
 });

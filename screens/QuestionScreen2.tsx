@@ -18,10 +18,12 @@ import { responsiveFontSize, responsiveHeight, responsiveWidth } from '../script
 import { AntDesign } from '@expo/vector-icons';
 import { BlurView } from 'expo-blur';
 import * as Animatable from 'react-native-animatable';
+import { UserContext } from '../contexts/user-context-provider';
 
 
 const QuestionScreen = ({ navigation }) => {
 
+  const { user } = useContext(UserContext)
   const { question, onPressNextQuestion, onPressAddResponse } = useContext(QuestionsContext)
   const [answerWidth, setAnswerWidth] = useState(45)
   const [buttonPressed, setButtonPressed] = useState(false);
@@ -31,17 +33,17 @@ const QuestionScreen = ({ navigation }) => {
   const questionResult_1 = function () {
     setAnswerWidth(((question?.responses_aggregate?.aggregate?.sum?.response_1 + 1) / (question?.responses_aggregate?.aggregate?.sum?.response_1 + question?.responses_aggregate?.aggregate?.sum?.response_2 + 1)) * 90)
     setButtonPressed(true)
-    onPressAddResponse({ question_id: question?.id, response_1: '1', response_2: '0', user_id: '1', report: '0' })
+    onPressAddResponse({ question_id: question?.id, response_1: '1', response_2: '0', user_id: user?.uid || 'anonymous', report: '0' })
   }
 
   const questionResult_2 = function () {
     setAnswerWidth(90 - ((question?.responses_aggregate?.aggregate?.sum?.response_2 + 1) / (question?.responses_aggregate?.aggregate?.sum?.response_1 + question?.responses_aggregate?.aggregate?.sum?.response_2 + 1)) * 90)
     setButtonPressed(true)
-    onPressAddResponse({ question_id: question?.id, response_1: '0', response_2: '1', user_id: '1', report: '0' })
+    onPressAddResponse({ question_id: question?.id, response_1: '0', response_2: '1', user_id: user?.uid || 'anonymous', report: '0' })
   }
 
   const onPressReport = () => {
-    onPressAddResponse({ question_id: question?.id, response_1: '0', response_2: '0', user_id: '1', report: '1' })
+    onPressAddResponse({ question_id: question?.id, response_1: '0', response_2: '0', user_id: user?.uid || 'anonymous', report: '1' })
     setModalVisible(true)
     setTimeout(() => {
       setModalVisible(false)
@@ -52,9 +54,15 @@ const QuestionScreen = ({ navigation }) => {
   }
 
   const nextQuestion = function () {
-    setButtonPressed(false)
-    setAnswerWidth(45)
-    onPressNextQuestion()
+    if (buttonPressed) {
+      setButtonPressed(false)
+      setAnswerWidth(45)
+      onPressNextQuestion()
+    }
+    else {
+      onPressAddResponse({ question_id: question?.id, response_1: '0', response_2: '0', user_id: user?.uid || 'anonymous', report: '0' })
+      onPressNextQuestion()
+    }
   }
 
   return (
@@ -299,14 +307,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#f7b267',
-
   },
   header: {
-    // justifyContent: 'flex-end',
-    // paddingBottom: responsiveHeight(4),
     backgroundColor: '#f25c54',
-    // borderBottomLeftRadius: 30,
-    // borderBottomRightRadius: 30,
     paddingHorizontal: responsiveWidth(8),
   },
   text_header: {
@@ -325,22 +328,17 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 25,
-
   },
   textSign: {
     fontSize: 18,
     fontWeight: 'bold'
   },
   inputTextContainer: {
-    // flex: 1,
     marginTop: responsiveWidth(10),
     alignSelf: 'center',
     padding: responsiveWidth(3),
-    // paddingTop: 5,
     color: '#e32f45',
-    // borderWidth: 0.5,
     borderColor: '#FA7465',
-    // minHeight: height * 0.15,
     backgroundColor: '#f4845f',
     borderRadius: 20,
     borderBottomRightRadius: 20,
@@ -363,12 +361,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   modalView: {
-    // margin: 20,
-    // backgroundColor: '#e32f45',
     borderRadius: 20,
-    top: responsiveHeight(-10),
+    top: responsiveHeight(-9),
     padding: 35,
-    // height: responsiveHeight(100),
     alignItems: 'center',
     shadowColor: '#e32f45',
     shadowOffset: {
@@ -385,6 +380,5 @@ const styles = StyleSheet.create({
     fontSize: responsiveFontSize(70),
     color: '#e32f45',
     transform: [{ rotate: '335deg' }]
-
   },
 });
