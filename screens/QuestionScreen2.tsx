@@ -24,7 +24,7 @@ import { UserContext } from '../contexts/user-context-provider';
 const QuestionScreen = ({ navigation }) => {
 
   const { user } = useContext(UserContext)
-  const { question, onPressNextQuestion, onPressAddResponse } = useContext(QuestionsContext)
+  const { question, onPressAddResponse } = useContext(QuestionsContext)
   const [answerWidth, setAnswerWidth] = useState(45)
   const [buttonPressed, setButtonPressed] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
@@ -49,7 +49,6 @@ const QuestionScreen = ({ navigation }) => {
       setModalVisible(false)
       setButtonPressed(false)
       setAnswerWidth(45)
-      onPressNextQuestion()
     }, 1500);
   }
 
@@ -57,11 +56,9 @@ const QuestionScreen = ({ navigation }) => {
     if (buttonPressed) {
       setButtonPressed(false)
       setAnswerWidth(45)
-      onPressNextQuestion()
     }
     else {
       onPressAddResponse({ question_id: question?.id, response_1: '0', response_2: '0', user_id: user?.uid || 'anonymous', report: '0' })
-      onPressNextQuestion()
     }
   }
 

@@ -43,7 +43,7 @@ const AddQ = ({ navigation }) => {
   const [disableButton, setDisableButton] = useState(true)
   const [todos, setTodos] = useState([]);
   const [addData, setAddData] = useState('');
-  const { onPressAddQuestion, questions, question, onPressNextQuestion, onPressDeleteQuestion } = useContext(QuestionsContext)
+  const { onPressAddQuestion, questions, question, onPressDeleteQuestion } = useContext(QuestionsContext)
   const onPressPostQuestin = () => {
     setText('')
     onPressAddQuestion({ question: text?.trim(), email: user?.email, user_id: user?.uid })
