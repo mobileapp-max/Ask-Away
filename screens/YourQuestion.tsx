@@ -28,7 +28,7 @@ const Profile = ({ navigation }) => {
     const [selectedQuestionModal, setSelectedQuestionModal] = useState({})
     const [modalVisibleId, setModalVisibleId] = useState('');
 
-    const onPressDismissModal = () => {
+    const onPressDismissDeleteModal = () => {
         setQuestionVisible(!questionVisible)
     }
     const onPressDismissProfileModal = () => {
@@ -101,14 +101,24 @@ const Profile = ({ navigation }) => {
                                 <TouchableOpacity
                                     onPress={onPressDeleteQuestionYes}
                                     style={styles.modalQuestion}>
-                                    <Text>
+                                    <Text
+                                        style={{
+                                            color: 'white',
+                                            fontWeight: 'bold'
+                                        }}
+                                    >
                                         {'Yes'}
                                     </Text>
                                 </TouchableOpacity>
                                 <TouchableOpacity
                                     onPress={() => setModalVisible(!modalVisible)}
-                                    style={{ ...styles.modalQuestion, backgroundColor: 'green' }}>
-                                    <Text>
+                                    style={{ ...styles.modalQuestion, backgroundColor: '#f38375' }}>
+                                    <Text
+                                        style={{
+                                            color: 'white',
+                                            fontWeight: 'bold'
+                                        }}
+                                    >
                                         {'No'}
                                     </Text>
                                 </TouchableOpacity>
@@ -138,7 +148,7 @@ const Profile = ({ navigation }) => {
                 <ModalMain
                     questionVisible={questionVisible}
                     selectedQuestionModal={selectedQuestionModal}
-                    onPressDismissModal={onPressDismissModal}
+                    onPressDismissDeleteModal={onPressDismissDeleteModal}
                 >
                 </ModalMain>
                 <ProfileModal
@@ -248,27 +258,28 @@ const styles = StyleSheet.create({
 
     },
     modalView: {
-        backgroundColor: 'white',
+        // backgroundColor: 'white',
         borderRadius: 20,
         padding: 35,
         alignItems: 'center',
         borderColor: '#f25c54',
-        borderWidth: 1,
-        shadowColor: '#000',
+        borderWidth: 0.3,
+        shadowColor: 'red',
         shadowOffset: {
             width: 0,
             height: 2,
         },
-        shadowOpacity: 0.25,
+        shadowOpacity: 0.5,
         shadowRadius: 4,
         elevation: 5,
+        backgroundColor: '#f7b267'
     },
     modalText: {
         textAlign: 'center',
         fontWeight: "bold",
         fontSize: 18,
-        color: '#f25c54'
-
+        color: 'white',
+        marginBottom: responsiveHeight(0.5)
     },
     profileName: {
         alignSelf: 'center',
@@ -330,12 +341,13 @@ const styles = StyleSheet.create({
     modalQuestion: {
         margin: 5,
         padding: 5,
-        backgroundColor: 'red',
+        backgroundColor: '#52b788',
         borderRadius: 15,
         height: responsiveHeight(7),
         width: responsiveHeight(7),
         justifyContent: 'center',
         alignItems: 'center',
+        color: 'white'
     },
     inputTextContainer: {
         height: responsiveHeight(10),

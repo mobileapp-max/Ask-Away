@@ -21,8 +21,10 @@ import { AntDesign } from '@expo/vector-icons';
 import PieChart from 'react-native-expo-pie-chart';
 import { VictoryBar, VictoryContainer } from "victory-native";
 import { VictoryPie } from 'victory-native';
+import { Ionicons } from '@expo/vector-icons';
 
-const ModalMain = ({ children, selectedQuestionModal, questionVisible, onPressDismissModal }) => {
+
+const ModalMain = ({ children, selectedQuestionModal, questionVisible, onPressDismissDeleteModal }) => {
 
     const { question, onPressNextQuestion, onPressAddResponse } = useContext(QuestionsContext)
     const [graphicData, setGraphicData] = useState(defaultGraphicData);
@@ -43,11 +45,11 @@ const ModalMain = ({ children, selectedQuestionModal, questionVisible, onPressDi
             visible={questionVisible}
         >
             <BlurView
-                intensity={5}
+                intensity={9}
                 style={styles.centeredView}>
                 <Pressable
                     style={styles.centeredView}
-                    onPress={() => onPressDismissModal()}>
+                    onPress={() => onPressDismissDeleteModal()}>
                     <View style={styles.inputTextContainer}>
                         {children}
                         {/* <Pressable
@@ -86,13 +88,13 @@ const ModalMain = ({ children, selectedQuestionModal, questionVisible, onPressDi
                         } */}
                         <View style={styles.answers}>
                             <View style={styles.answersColumn}>
-                                <Text style={{ padding: 10 }}>{selectedQuestionModal?.responses_aggregate?.aggregate?.sum?.response_1}</Text>
+                                <Text>{'Yes:'}</Text>
+                                <Text style={{ padding: 10 }}>{selectedQuestionModal?.answer_1 || 0}</Text>
                                 {/* {console.log(selectedQuestionModal)} */}
-                                <Text>{'Yes'}</Text>
                             </View>
                             <View style={styles.answersColumn}>
-                                <Text style={{ padding: 10 }}>{selectedQuestionModal?.answer_2}</Text>
-                                <Text>{'No'}</Text>
+                                <Text>{'No:'}</Text>
+                                <Text style={{ padding: 10 }}>{selectedQuestionModal?.answer_2 || 0}</Text>
                             </View>
                         </View>
                     </View>
@@ -143,13 +145,21 @@ const styles = StyleSheet.create({
         elevation: 5,
     },
     answers: {
-        flexDirection: 'row'
+        flexDirection: 'row',
+        paddingLeft: responsiveWidth(2),
+
     },
     answersColumn: {
-        flexDirection: 'column',
+        flexDirection: 'row',
         alignContent: 'center',
         alignItems: 'center',
-        alignSelf: 'center'
+        alignSelf: 'center',
+        backgroundColor: '#fcaba2',
+        // padding: responsiveWidth(1.5),
+        borderBottomRightRadius: 20,
+        borderTopRightRadius: 8,
+        borderTopLeftRadius: 20,
+        borderBottomLeftRadius: 8,
     }
 
 });

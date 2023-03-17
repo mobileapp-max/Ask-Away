@@ -23,6 +23,10 @@ export function responsiveHeight(percentage) {
     }
 }
 
+export function responsiveSize(number) {
+    return windowHeight / windowWidth * number
+}
+
 export const colors = {
     green: "#72FA41",
     blue: "#24CCFF",

@@ -32,6 +32,15 @@ mutation ($id: uuid) {
     ) {
       affected_rows
     }
+    delete_response (
+      where: {
+        question_id: {
+          _eq: $id
+        }
+      }
+    ) {
+      affected_rows
+    }
   } `;
 
 

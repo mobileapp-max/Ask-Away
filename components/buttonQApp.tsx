@@ -11,10 +11,11 @@ import {
 import { LinearGradient } from 'expo-linear-gradient';
 import { responsiveFontSize } from '../scripts/constants';
 
-const ButtonQApp = ({ title, onPress, height, disabled, color, color2 }) => {
+const ButtonQApp = ({ title, onPress, height, disabled, color, color2, fontSize }) => {
 
     const styles = useMemo(() => {
         return StyleSheet.create({
+
             signIn: {
                 width: '100%',
                 height: height,
@@ -29,7 +30,7 @@ const ButtonQApp = ({ title, onPress, height, disabled, color, color2 }) => {
                 },
             },
             textSign: {
-                fontSize: responsiveFontSize(30),
+                fontSize: fontSize,
                 fontWeight: 'bold'
             },
         });
