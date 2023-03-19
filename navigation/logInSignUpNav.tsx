@@ -1,9 +1,7 @@
 import React, { useContext } from "react";
-import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import SignUpScreen from "../screens/SignUpScreen";
 import YourQuestion from "../screens/YourQuestion";
-import Profile from "../screens/YourQuestion";
 import { UserContext } from "../contexts/user-context-provider";
 
 const LogInStack = createStackNavigator();

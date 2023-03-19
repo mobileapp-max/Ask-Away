@@ -10,8 +10,6 @@ import {
   Modal,
   Animated
 } from 'react-native';
-import { LinearGradient } from 'expo-linear-gradient';
-import { useTheme } from 'react-native-paper';
 import { useContext } from 'react';
 import { QuestionsContext } from '../contexts/questions-context-provider';
 import { responsiveFontSize, responsiveHeight, responsiveWidth } from '../scripts/constants';

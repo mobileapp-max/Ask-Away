@@ -62,7 +62,7 @@ const Profile = ({ navigation }) => {
 
     const sumAnswers = useMemo(() => {
         let sum = 0
-        userQuestions.forEach(question => {
+        userQuestions?.forEach(question => {
             sum += question?.responses_aggregate?.aggregate?.sum?.response_1 + question?.responses_aggregate?.aggregate?.sum?.response_2
         })
         return sum

@@ -9,6 +9,7 @@ import { Image, Text, View, TouchableOpacity, StyleSheet } from "react-native"
 import { CharacterLimitProps } from "./character-limit-interface"
 import { CharacterLimitPresets } from "./character-limit-presets"
 import * as Animatable from 'react-native-animatable';
+import { responsiveFontSize } from "../../scripts/constants";
 
 
 /**
@@ -40,7 +41,9 @@ export const CharacterLimit = (props: CharacterLimitProps) => {
         <Text
           style={{
             // left: responsiveWidth(10),
-            color: 'red',
+            color: 'white',
+            fontWeight: "bold",
+            fontSize: responsiveFontSize(18)
           }}>
           {errorMessage}
         </Text>
