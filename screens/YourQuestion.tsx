@@ -6,7 +6,6 @@ import {
     StyleSheet,
     Pressable,
     Modal,
-    ImageBackground
 } from 'react-native';
 import Feather from 'react-native-vector-icons/Feather';
 import { responsiveHeight, responsiveWidth, responsiveFontSize } from '../scripts/constants';
@@ -19,7 +18,8 @@ import { BlurView } from 'expo-blur';
 import ModalMain from '../components/modalMain';
 import { UserContext } from '../contexts/user-context-provider';
 import ProfileModal from '../components/profileModal'
-import { DefaultquestionRow } from '../components/default-question-row'
+import fonts from '../scripts/fonts';
+
 
 const Profile = ({ navigation }) => {
 
@@ -185,6 +185,7 @@ const Profile = ({ navigation }) => {
                                     style={styles.modalQuestion}>
                                     <Text
                                         style={{
+                                            ...fonts.note,
                                             color: 'white',
                                             fontWeight: 'bold'
                                         }}
@@ -197,6 +198,7 @@ const Profile = ({ navigation }) => {
                                     style={{ ...styles.modalQuestion, backgroundColor: '#f38375' }}>
                                     <Text
                                         style={{
+                                            ...fonts.note,
                                             color: 'white',
                                             fontWeight: 'bold'
                                         }}
@@ -331,6 +333,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#f7b267'
     },
     modalText: {
+        ...fonts.note,
         textAlign: 'center',
         fontWeight: "bold",
         fontSize: 18,
@@ -338,6 +341,7 @@ const styles = StyleSheet.create({
         marginBottom: responsiveHeight(0.5)
     },
     profileName: {
+        ...fonts.note,
         alignSelf: 'center',
         fontWeight: 'bold',
         fontSize: responsiveFontSize(26),
@@ -351,7 +355,7 @@ const styles = StyleSheet.create({
     },
     card: {
         position: 'absolute',
-        backgroundColor: 'white',
+        backgroundColor: '#FFFAD7',
         width: responsiveWidth(85),
         height: responsiveHeight(20),
         alignSelf: 'center',
@@ -373,16 +377,18 @@ const styles = StyleSheet.create({
         marginHorizontal: responsiveWidth(5)
     },
     cardValueRow: {
-        top: responsiveHeight(4),
+        top: responsiveHeight(2),
         flexDirection: 'row',
         justifyContent: 'space-between',
     },
     largeNumbers: {
+        ...fonts.note,
         fontSize: responsiveFontSize(29),
         fontWeight: 'bold',
         color: '#f25c54'
     },
     regularText: {
+        ...fonts.note,
         fontSize: responsiveFontSize(17),
         textAlign: 'center',
         color: '#f25c54'

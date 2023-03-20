@@ -17,6 +17,7 @@ import { CharacterLimit } from '../components/character-limit/character-limit';
 import { BlurView } from 'expo-blur';
 import ButtonQApp from '../components/buttonQApp';
 import { UserContext } from '../contexts/user-context-provider';
+import fonts from '../scripts/fonts';
 
 const AddQ = ({ navigation }) => {
 
@@ -105,15 +106,13 @@ const AddQ = ({ navigation }) => {
               value={text}
               placeholder={"Type your question..."}
               multiline={true}
-              // textAlign={'left'
-              // textAlignVertical={'bottom'}
-              // numberOfLines={8}
               maxLength={300}
               placeholderTextColor='white'
               secureTextEntry={false}
               style={{
+                ...fonts.note,
                 color: 'white',
-                fontSize: text == '' ? responsiveFontSize(40) : responsiveFontSize(20),
+                fontSize: text == '' ? responsiveFontSize(35) : responsiveFontSize(20),
                 fontWeight: 'bold',
               }}
               autoCapitalize="sentences"
@@ -166,6 +165,7 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 30,
   },
   text_header: {
+    ...fonts.note,
     color: 'white',
     fontWeight: 'bold',
     fontSize: responsiveFontSize(50),

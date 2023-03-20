@@ -15,6 +15,7 @@ import { calculateResults } from '../../scripts/calculateResults';
 import UseOnLayout from '../../scripts/use-on-layout';
 import * as Animatable from 'react-native-animatable';
 import { UserContext } from '../../contexts/user-context-provider';
+import fonts from '../../scripts/fonts';
 
 
 export const QuestionRow = ({ question: incomingQuestion, updateQuestionModal, color, colorNo, colorYes }) => {
@@ -87,7 +88,10 @@ export const QuestionRow = ({ question: incomingQuestion, updateQuestionModal, c
             >
                 <Text
                     numberOfLines={2}
-                    style={{ fontSize: responsiveFontSize(16) }}
+                    style={{
+                        ...fonts.note,
+                        fontSize: responsiveFontSize(16)
+                    }}
                 >
                     {question}
                 </Text>
@@ -107,7 +111,10 @@ export const QuestionRow = ({ question: incomingQuestion, updateQuestionModal, c
                         justifyContent: 'center',
                         backgroundColor: 'white',
                     }}>
-                        <Text style={{ alignSelf: "center" }}>
+                        <Text style={{
+                            ...fonts.note,
+                            alignSelf: "center"
+                        }}>
                             {'No Answers'}
                         </Text>
                     </View>
@@ -142,7 +149,10 @@ export const QuestionRow = ({ question: incomingQuestion, updateQuestionModal, c
                                         alignContent: 'center'
                                     }}
                                     >
-                                        <Text style={{ fontWeight: 'bold', color: "white", }}>
+                                        <Text style={{
+                                            ...fonts.note,
+                                            fontWeight: 'bold', color: "white",
+                                        }}>
                                             {`Yes`}
                                         </Text>
                                         <Text style={{ fontWeight: 'bold', color: "white", }}>
@@ -170,7 +180,10 @@ export const QuestionRow = ({ question: incomingQuestion, updateQuestionModal, c
                                     alignContent: 'center'
 
                                 }}>
-                                    <Text style={{ fontWeight: 'bold', color: "white", }}>
+                                    <Text style={{
+                                        ...fonts.note,
+                                        fontWeight: 'bold', color: "white",
+                                    }}>
                                         {`No`}
                                     </Text>
                                     <Text style={{ fontWeight: 'bold', color: "white", }}>

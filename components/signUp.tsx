@@ -20,6 +20,7 @@ import { signUpNewUser } from '../api/auth-api';
 import { loginUser } from '../api/auth-api'
 import { sendEmailWithPassword } from '../api/auth-api'
 import { responsiveHeight } from '../scripts/constants';
+import fonts from '../scripts/fonts';
 
 
 const SignUp = ({ navigation }) => {
@@ -182,7 +183,7 @@ const SignUp = ({ navigation }) => {
             >
                 <Text
                     style={{
-                        fontWeight: '300',
+                        fontWeight: '600',
                         fontStyle: 'italic',
                         textDecorationLine: 'underline',
                         color: '#f5e2c9'
@@ -234,7 +235,7 @@ export default SignUp;
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        paddingTop: 20
+        // paddingTop: responsiveHeight(0)
     },
     header: {
         flex: 0.1,
@@ -256,6 +257,7 @@ const styles = StyleSheet.create({
         fontSize: 30
     },
     text_footer: {
+        ...fonts.note,
         color: 'white',
         fontSize: 18,
         fontWeight: 'bold'
@@ -286,6 +288,7 @@ const styles = StyleSheet.create({
         margin: 5
     },
     textSign: {
+        ...fonts.note,
         fontSize: 18,
         fontWeight: 'bold'
     },

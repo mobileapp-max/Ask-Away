@@ -17,41 +17,46 @@ import { AntDesign } from '@expo/vector-icons';
 import { BlurView } from 'expo-blur';
 import * as Animatable from 'react-native-animatable';
 import { UserContext } from '../contexts/user-context-provider';
+import fonts from '../scripts/fonts';
 
 
 const QuestionScreen = ({ navigation }) => {
 
   const { user } = useContext(UserContext)
-  const { question, onPressAddResponse } = useContext(QuestionsContext)
+  const { question, onPressAddResponse, answeredQuestion, setAnsweredQuestion } = useContext(QuestionsContext)
   const [answerWidth, setAnswerWidth] = useState(45)
   const [buttonPressed, setButtonPressed] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
   const [nextButton, setNextButton] = useState(new Animated.Value(-10))
 
   const questionResult_1 = function () {
+    setAnsweredQuestion(question)
     setAnswerWidth(((question?.responses_aggregate?.aggregate?.sum?.response_1 + 1) / (question?.responses_aggregate?.aggregate?.sum?.response_1 + question?.responses_aggregate?.aggregate?.sum?.response_2 + 1)) * 90)
     setButtonPressed(true)
     onPressAddResponse({ question_id: question?.id, response_1: '1', response_2: '0', user_id: user?.uid || 'anonymous', report: '0' })
+
   }
 
   const questionResult_2 = function () {
+    setAnsweredQuestion(question)
     setAnswerWidth(90 - ((question?.responses_aggregate?.aggregate?.sum?.response_2 + 1) / (question?.responses_aggregate?.aggregate?.sum?.response_1 + question?.responses_aggregate?.aggregate?.sum?.response_2 + 1)) * 90)
     setButtonPressed(true)
     onPressAddResponse({ question_id: question?.id, response_1: '0', response_2: '1', user_id: user?.uid || 'anonymous', report: '0' })
   }
 
   const onPressReport = () => {
-    onPressAddResponse({ question_id: question?.id, response_1: '0', response_2: '0', user_id: user?.uid || 'anonymous', report: '1' })
     setModalVisible(true)
     setTimeout(() => {
       setModalVisible(false)
       setButtonPressed(false)
       setAnswerWidth(45)
     }, 1500);
+    onPressAddResponse({ question_id: question?.id, response_1: '0', response_2: '0', user_id: user?.uid || 'anonymous', report: '1' })
   }
 
   const nextQuestion = function () {
     if (buttonPressed) {
+      setAnsweredQuestion(null)
       setButtonPressed(false)
       setAnswerWidth(45)
     }
@@ -69,12 +74,12 @@ const QuestionScreen = ({ navigation }) => {
         </Text>
         <Text
           style={{
+            ...fonts.note,
             ...styles.text_header,
             paddingTop: 0,
             fontSize: responsiveFontSize(50),
-            top: responsiveHeight(0),
-            color: 'white'
-
+            top: responsiveHeight(-1),
+            color: 'white',
           }}>
           {'Questions'}
         </Text>
@@ -96,15 +101,20 @@ const QuestionScreen = ({ navigation }) => {
               adjustsFontSizeToFit={true}
               // numberOfLines={10}
               style={{
+                ...fonts.note,
                 textAlign: 'center',
                 color: 'white',
-                fontSize: responsiveFontSize(20),
-                fontWeight: 'bold'
+                fontSize: responsiveFontSize(25),
+                fontWeight: 'bold',
+
                 // paddingHorizontal: responsiveWidth(1),
                 // marginBottom: responsiveHeight(1)
               }}
             >
-              {question?.question}
+              {answeredQuestion ?
+                answeredQuestion?.question
+                :
+                question?.question}
             </Text>
           </View>
           <View style={{
@@ -129,9 +139,11 @@ const QuestionScreen = ({ navigation }) => {
                   style={{ margin: 3 }} />
                 <Text
                   style={{
+                    ...fonts.note,
                     color: "white",
                     fontWeight: "bold",
-                    padding: 7
+                    padding: 7,
+                    fontSize: responsiveFontSize(20)
                   }}
                 >{'Report'}</Text>
               </TouchableOpacity>
@@ -163,8 +175,10 @@ const QuestionScreen = ({ navigation }) => {
                           }}>
                           <Text
                             style={{
+                              ...fonts.note,
                               color: "white",
-                              fontWeight: "bold"
+                              fontWeight: "bold",
+                              fontSize: responsiveFontSize(20)
                             }}
                           >
                             {'Next'}</Text>
@@ -184,8 +198,10 @@ const QuestionScreen = ({ navigation }) => {
                         }}>
                         <Text
                           style={{
+                            ...fonts.note,
                             color: "white",
-                            fontWeight: "bold"
+                            fontWeight: "bold",
+                            fontSize: responsiveFontSize(20)
                           }}
                         >
                           {'Next'}</Text>
@@ -196,7 +212,6 @@ const QuestionScreen = ({ navigation }) => {
                         />
                       </View>
                   }
-
                 </Animated.View>
               </TouchableOpacity>
             </View>
@@ -237,6 +252,7 @@ const QuestionScreen = ({ navigation }) => {
               }}>
               <Text
                 style={{
+                  ...fonts.note,
                   fontWeight: 'bold',
                   color: "white",
                   fontSize: responsiveFontSize(24)
@@ -260,6 +276,7 @@ const QuestionScreen = ({ navigation }) => {
                 borderRadius: 10,
               }}>
               <Text style={{
+                ...fonts.note,
                 fontWeight: 'bold',
                 color: "white",
                 fontSize: responsiveFontSize(24)
@@ -310,11 +327,12 @@ const styles = StyleSheet.create({
     paddingHorizontal: responsiveWidth(8),
   },
   text_header: {
+    ...fonts.note,
     color: 'white',
     fontWeight: 'bold',
     fontSize: responsiveFontSize(30),
-    paddingTop: responsiveHeight(6),
-    top: responsiveHeight(1.5)
+    paddingTop: responsiveHeight(3),
+    top: responsiveHeight(2),
   },
   button: {
     alignItems: 'center',

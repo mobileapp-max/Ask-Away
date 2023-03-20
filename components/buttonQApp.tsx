@@ -10,6 +10,8 @@ import {
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { responsiveFontSize } from '../scripts/constants';
+import fonts from '../scripts/fonts';
+
 
 const ButtonQApp = ({ title, onPress, height, disabled, color, color2, fontSize }) => {
 
@@ -30,6 +32,7 @@ const ButtonQApp = ({ title, onPress, height, disabled, color, color2, fontSize 
                 },
             },
             textSign: {
+                ...fonts.note,
                 fontSize: fontSize,
                 fontWeight: 'bold'
             },

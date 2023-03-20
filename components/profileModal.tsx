@@ -17,6 +17,8 @@ import ButtonQApp from './buttonQApp';
 import { deleteAuthUser, logoutUser, updateUsersPassword } from '../api/auth-api';
 import { Feather } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
+import fonts from '../scripts/fonts';
+
 
 const ProfileModal = ({ children, profileModalVisible, onPressDismissProfileModal }) => {
 
@@ -90,6 +92,7 @@ const ProfileModal = ({ children, profileModalVisible, onPressDismissProfileModa
                                 }}
                             >
                                 <Text style={[styles.text_footer, {
+                                    ...fonts.note,
                                     fontWeight: 'bold',
                                     alignSelf: 'center',
                                     fontSize: responsiveFontSize(29)
@@ -260,6 +263,7 @@ const styles = StyleSheet.create({
 
     },
     text_footer: {
+        ...fonts.note,
         color: 'white',
         fontSize: 18,
         fontWeight: 'bold',
