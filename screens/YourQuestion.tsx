@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState, useRef } from 'react';
 import {
     View,
     Text,
@@ -19,6 +19,7 @@ import { BlurView } from 'expo-blur';
 import ModalMain from '../components/modalMain';
 import { UserContext } from '../contexts/user-context-provider';
 import ProfileModal from '../components/profileModal'
+import { DefaultquestionRow } from '../components/default-question-row'
 
 const Profile = ({ navigation }) => {
 
@@ -58,6 +59,7 @@ const Profile = ({ navigation }) => {
         userQuestions
     } = useContext(QuestionsContext)
 
+    console.log(userQuestions)
     const { user } = useContext(UserContext)
 
     const sumAnswers = useMemo(() => {
@@ -79,6 +81,86 @@ const Profile = ({ navigation }) => {
         })
         return sum
     }, [response])
+
+    const ExampleItem = ({ text }) => {
+        return (
+            <View style={{ padding: 16 }}>
+                <Text>{text}</Text>
+            </View>
+        );
+    };
+
+    const defaultQuestions = [
+        {
+            "__typename": "question",
+            "answer_1": 0,
+            "answer_2": 0,
+            "created_at": "2023-03-07T22:03:57.695653+00:00",
+            "id": "6834fa7a-683b-492c-9297-1c52464a84f2",
+            "question": "Sample Question:                            Do you think aliens exist?",
+            "responses_aggregate": {
+                "__typename": "response_aggregate",
+                "aggregate": {
+                    "__typename": "response_aggregate_fields",
+                    "sum": {
+                        "__typename": "response_sum_fields",
+                        "response_1": 51,
+                        "response_2": 49,
+                    },
+                },
+            },
+            "user_id": "HBlSWJoP5dcK1LEJPMqeGio9JXo2",
+        },
+    ]
+
+    const renderEmptyComponent = () => {
+        return (
+            <SwipeListView
+                data={defaultQuestions}
+                ListEmptyComponent={renderEmptyComponent}
+                renderItem={({ item }) =>
+                    <QuestionRow
+                        updateQuestionModal={updateQuestionModal}
+                        question={item}
+                        color={'#FEFD97'}
+                        colorYes={'#65C18C'}
+                        colorNo={'#FF6363'}
+                    />
+                }
+                keyExtractor={(item, index) => index}
+                contentContainerStyle={{
+                    paddingTop: responsiveHeight(4),
+                    paddingBottom: responsiveHeight(20)
+                }}
+                renderHiddenItem={({ item }) => {
+                    return (
+                        <View style={{
+                            flexDirection: "row",
+                            justifyContent: 'flex-end',
+                            alignContent: 'center',
+                            alignItems: 'center',
+                            left: responsiveWidth(-5),
+                            flex: 1,
+                        }}>
+                            <Pressable
+                                onPress={() => onPressDeleteQuestionModal(item)}
+                            >
+                                <MaterialCommunityIcons
+                                    name="delete-forever"
+                                    size={30}
+                                    color='white'
+                                    style={{ margin: 3 }}
+                                />
+                            </Pressable>
+                        </View>
+                    )
+                }}
+                rightOpenValue={- 75}
+                disableRightSwipe={true}
+            />
+
+        );
+    };
 
     return (
         <View style={styles.container}>
@@ -126,25 +208,6 @@ const Profile = ({ navigation }) => {
                         </View>
                     </BlurView>
                 </Modal>
-                {/* <Modal
-                    animationType="fade"
-                    transparent={true}
-                    visible={questionVisible}
-                    onRequestClose={() => {
-                        setQuestionVisible(!questionVisible);
-                    }}>
-                    <BlurView
-                        intensity={5}
-                        style={styles.centeredView}>
-                        <View style={styles.inputTextContainer}>
-                            <View style={{ alignItems: 'center', justifyContent: 'center', alignSelf: 'center', alignContent: "center", }}>
-                                <Text style={{ padding: 10 }}>{selectedQuestionModal?.question}</Text>
-                                <Text style={{ padding: 10 }}>{selectedQuestionModal?.answer_1}</Text>
-                                <Text style={{ padding: 10 }}>{selectedQuestionModal?.answer_2}</Text>
-                            </View>
-                        </View>
-                    </BlurView>
-                </Modal> */}
                 <ModalMain
                     questionVisible={questionVisible}
                     selectedQuestionModal={selectedQuestionModal}
@@ -158,10 +221,14 @@ const Profile = ({ navigation }) => {
                 </ProfileModal>
                 <SwipeListView
                     data={userQuestions}
+                    ListEmptyComponent={renderEmptyComponent}
                     renderItem={({ item }) =>
                         <QuestionRow
                             question={item}
                             updateQuestionModal={updateQuestionModal}
+                            color={'white'}
+                            colorYes={'#65C18C'}
+                            colorNo={'#FF6363'}
                         />}
                     keyExtractor={(item, index) => index}
                     contentContainerStyle={{
@@ -211,17 +278,6 @@ const Profile = ({ navigation }) => {
                         size={25}
                     />
                 </TouchableOpacity >
-                {/* <TouchableOpacity
-                            onPress={() => logoutUser()}
-                            style={{ paddingLeft: responsiveWidth(3) }}
-                        >
-                            <MaterialIcons
-                                name="exit-to-app"
-                                size={34}
-                                color="#e32f45"
-                            />
-                        </TouchableOpacity > */}
-
                 <View style={styles.cardValueRow}>
                     <View style={styles.cardValues}>
                         <Text style={styles.largeNumbers}>{userQuestions?.length}</Text>

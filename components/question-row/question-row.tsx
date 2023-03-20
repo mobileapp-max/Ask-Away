@@ -17,7 +17,33 @@ import * as Animatable from 'react-native-animatable';
 import { UserContext } from '../../contexts/user-context-provider';
 
 
-export const QuestionRow = ({ question: incomingQuestion, updateQuestionModal }) => {
+export const QuestionRow = ({ question: incomingQuestion, updateQuestionModal, color, colorNo, colorYes }) => {
+
+    const styles = StyleSheet.create({
+        inputText: {
+            width: responsiveWidth(69),
+            padding: 10,
+            color: '#e32f45',
+            // borderWidth: 0.5,s
+            borderColor: '#FA7465',
+            backgroundColor: color,
+            borderRadius: 20,
+            borderBottomRightRadius: 20,
+            borderTopRightRadius: 8,
+            borderTopLeftRadius: 20,
+            borderBottomLeftRadius: 8,
+            overflow: 'visible',
+            shadowColor: "#e32f45",
+            shadowOffset: {
+                width: 0,
+                height: 10,
+                overflow: 'visible',
+            },
+            shadowOpacity: 0.5,
+            shadowRadius: 3.5,
+            elevation: 5,
+        },
+    });
 
     const { user } = useContext(UserContext)
     // console.log(user?.uid == question?.user_id)
@@ -64,9 +90,6 @@ export const QuestionRow = ({ question: incomingQuestion, updateQuestionModal })
                     style={{ fontSize: responsiveFontSize(16) }}
                 >
                     {question}
-
-                    {/* .filter(each => each?.user_id == user?.uid)} */}
-
                 </Text>
             </View>
 
@@ -102,7 +125,8 @@ export const QuestionRow = ({ question: incomingQuestion, updateQuestionModal })
                     }}>
                         <View
                             style={{
-                                backgroundColor: "#52b788",
+                                // backgroundColor: "#52b788",
+                                backgroundColor: colorYes,
                                 height: currentHeightOfView,
                                 width: responsiveWidth((26.5 / 100) * calculateResults({ answer_1, answer_2 }).answer_1_result) || 0,
                                 justifyContent: 'center',
@@ -130,7 +154,8 @@ export const QuestionRow = ({ question: incomingQuestion, updateQuestionModal })
                         </View>
                         <View
                             style={{
-                                backgroundColor: "#f25c54",
+                                // backgroundColor: "#f25c54",
+                                backgroundColor: colorNo,
                                 height: currentHeightOfView,
                                 width: responsiveWidth((26.5 / 100) * calculateResults({ answer_1, answer_2 }).answer_2_result) || 0,
                                 justifyContent: 'center',
@@ -160,28 +185,3 @@ export const QuestionRow = ({ question: incomingQuestion, updateQuestionModal })
     );
 };
 
-const styles = StyleSheet.create({
-    inputText: {
-        width: responsiveWidth(69),
-        padding: 10,
-        color: '#e32f45',
-        // borderWidth: 0.5,s
-        borderColor: '#FA7465',
-        backgroundColor: 'white',
-        borderRadius: 20,
-        borderBottomRightRadius: 20,
-        borderTopRightRadius: 8,
-        borderTopLeftRadius: 20,
-        borderBottomLeftRadius: 8,
-        overflow: 'visible',
-        shadowColor: "#e32f45",
-        shadowOffset: {
-            width: 0,
-            height: 10,
-            overflow: 'visible',
-        },
-        shadowOpacity: 0.5,
-        shadowRadius: 3.5,
-        elevation: 5,
-    },
-});

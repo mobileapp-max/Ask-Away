@@ -1,19 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {
   View,
   Text,
   TextInput,
   Platform,
   StyleSheet,
-  Dimensions,
   StatusBar,
   ScrollView,
-  Modal
+  Modal,
+  Pressable
 } from 'react-native';
-import { useTheme } from 'react-native-paper';
 import { useContext } from 'react';
 import { QuestionsContext } from '../contexts/questions-context-provider';
-import { responsiveFontSize, responsiveHeight, responsiveWidth } from '../scripts/constants';
+import { responsiveFontSize, responsiveHeight, responsiveSize, responsiveWidth } from '../scripts/constants';
 import { CharacterLimit } from '../components/character-limit/character-limit';
 import { BlurView } from 'expo-blur';
 import ButtonQApp from '../components/buttonQApp';
@@ -21,6 +20,10 @@ import { UserContext } from '../contexts/user-context-provider';
 
 const AddQ = ({ navigation }) => {
 
+  const inputRef = useRef(null);
+  const handleButtonPress = () => {
+    inputRef.current.focus();
+  };
   const { user } = useContext(UserContext)
   const [text, setText] = useState('')
   const [disableButton, setDisableButton] = useState(true)
@@ -85,31 +88,38 @@ const AddQ = ({ navigation }) => {
           behavior={Platform.OS === "ios" ? "height" : "height"}
           keyboardVerticalOffset={responsiveWidth(400)}
         >
-          <View
+          <Pressable
+            onPress={handleButtonPress}
             style={{
               ...styles.inputTextContainer,
               height: responsiveHeight(35),
               width: responsiveWidth(90),
-              marginTop: responsiveHeight(6)
+              marginTop: responsiveHeight(6),
+              justifyContent: 'center',
+              alignSelf: 'center',
+              alignItems: 'center',
+              alignContent: 'center',
             }}>
             <TextInput
+              ref={inputRef}
               value={text}
-              placeholder={"Type your question here..."}
+              placeholder={"Type your question..."}
               multiline={true}
+              // textAlign={'left'
+              // textAlignVertical={'bottom'}
               // numberOfLines={8}
               maxLength={300}
               placeholderTextColor='white'
               secureTextEntry={false}
               style={{
                 color: 'white',
-                textAlign: 'auto',
-                fontSize: responsiveFontSize(20),
-                fontWeight: 'bold'
+                fontSize: text == '' ? responsiveFontSize(40) : responsiveFontSize(20),
+                fontWeight: 'bold',
               }}
               autoCapitalize="sentences"
               onChangeText={setText}
             />
-          </View>
+          </Pressable>
           {
             text?.length >= 300 &&
             <CharacterLimit
@@ -117,7 +127,7 @@ const AddQ = ({ navigation }) => {
           }
           <View style={styles.button}>
             <ButtonQApp
-              fontSize={responsiveFontSize(30)}
+              fontSize={responsiveFontSize(35)}
               disabled={disableButton}
               title={'Add'}
               onPress={onPressInitiateAddQuestin}
@@ -138,6 +148,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#f25c54'
+  },
+  centeredView: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   header: {
     flex: 1,
@@ -175,6 +190,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     padding: 35,
     alignItems: 'center',
+    justifyContent: 'center',
     shadowColor: '#000',
     shadowOffset: {
       width: 0,

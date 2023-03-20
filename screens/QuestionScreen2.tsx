@@ -238,7 +238,8 @@ const QuestionScreen = ({ navigation }) => {
               <Text
                 style={{
                   fontWeight: 'bold',
-                  color: "white"
+                  color: "white",
+                  fontSize: responsiveFontSize(24)
                 }}>
                 {buttonPressed
                   ?
@@ -260,7 +261,8 @@ const QuestionScreen = ({ navigation }) => {
               }}>
               <Text style={{
                 fontWeight: 'bold',
-                color: "white"
+                color: "white",
+                fontSize: responsiveFontSize(24)
               }}>
                 {buttonPressed
                   ?
