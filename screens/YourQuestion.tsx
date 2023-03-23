@@ -8,7 +8,7 @@ import {
     Modal,
 } from 'react-native';
 import Feather from 'react-native-vector-icons/Feather';
-import { responsiveHeight, responsiveWidth, responsiveFontSize } from '../scripts/constants';
+import { responsiveHeight, responsiveWidth, responsiveFontSize, responsiveSize } from '../scripts/constants';
 import { QuestionsContext } from '../contexts/questions-context-provider';
 import { useContext } from 'react';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
@@ -19,26 +19,35 @@ import ModalMain from '../components/modalMain';
 import { UserContext } from '../contexts/user-context-provider';
 import ProfileModal from '../components/profileModal'
 import fonts from '../scripts/fonts';
+import ModalToDelete from '../components/modalToDelete';
 
 
 const Profile = ({ navigation }) => {
 
-    const [modalVisible, setModalVisible] = useState(false);
     const [profileModalVisible, setProfileModalVisible] = useState(false);
+    const [deleteModalVisible, setDeleteModalVisible] = useState(false);
     const [questionVisible, setQuestionVisible] = useState(false);
+
     const [selectedQuestionModal, setSelectedQuestionModal] = useState({})
     const [modalVisibleId, setModalVisibleId] = useState('');
+    const [modalVisible, setModalVisible] = useState(false);
 
-    const onPressDismissDeleteModal = () => {
+
+    const onPressDismissMainModal = () => {
         setQuestionVisible(!questionVisible)
     }
     const onPressDismissProfileModal = () => {
         setProfileModalVisible(!profileModalVisible)
     }
-    const onPressDeleteQuestionModal = (item) => {
-        setModalVisible(!modalVisible)
+    const onPressDismissDeleteModal = (item) => {
+        setDeleteModalVisible(!deleteModalVisible)
         setModalVisibleId(item?.id)
     }
+    const onPressDeleteQuestionModal = () => {
+        setQuestionVisible(!modalVisible)
+        // setModalVisibleId(item?.id)
+    }
+    // console.log(item?.id)
     useEffect(() => {
         const answer_1 = selectedQuestionModal?.answer_1
         const answer_2 = selectedQuestionModal?.answer_2
@@ -59,7 +68,6 @@ const Profile = ({ navigation }) => {
         userQuestions
     } = useContext(QuestionsContext)
 
-    console.log(userQuestions)
     const { user } = useContext(UserContext)
 
     const sumAnswers = useMemo(() => {
@@ -82,13 +90,6 @@ const Profile = ({ navigation }) => {
         return sum
     }, [response])
 
-    const ExampleItem = ({ text }) => {
-        return (
-            <View style={{ padding: 16 }}>
-                <Text>{text}</Text>
-            </View>
-        );
-    };
 
     const defaultQuestions = [
         {
@@ -97,7 +98,7 @@ const Profile = ({ navigation }) => {
             "answer_2": 0,
             "created_at": "2023-03-07T22:03:57.695653+00:00",
             "id": "6834fa7a-683b-492c-9297-1c52464a84f2",
-            "question": "Sample Question:                            Do you think aliens exist?",
+            "question": "Sample Question: Do you think aliens exist?",
             "responses_aggregate": {
                 "__typename": "response_aggregate",
                 "aggregate": {
@@ -158,7 +159,6 @@ const Profile = ({ navigation }) => {
                 rightOpenValue={- 75}
                 disableRightSwipe={true}
             />
-
         );
     };
 
@@ -167,53 +167,16 @@ const Profile = ({ navigation }) => {
             <View style={styles.header} />
             <View
                 style={styles.footer}>
-                <Modal
-                    animationType="fade"
-                    transparent={true}
-                    visible={modalVisible}
-                    onRequestClose={() => {
-                        setModalVisible(!modalVisible);
-                    }}>
-                    <BlurView
-                        intensity={5}
-                        style={styles.centeredView}>
-                        <View style={styles.modalView}>
-                            <Text style={styles.modalText}>{'Delete Question?'}</Text>
-                            <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', }}>
-                                <TouchableOpacity
-                                    onPress={onPressDeleteQuestionYes}
-                                    style={styles.modalQuestion}>
-                                    <Text
-                                        style={{
-                                            ...fonts.note,
-                                            color: 'white',
-                                            fontWeight: 'bold'
-                                        }}
-                                    >
-                                        {'Yes'}
-                                    </Text>
-                                </TouchableOpacity>
-                                <TouchableOpacity
-                                    onPress={() => setModalVisible(!modalVisible)}
-                                    style={{ ...styles.modalQuestion, backgroundColor: '#f38375' }}>
-                                    <Text
-                                        style={{
-                                            ...fonts.note,
-                                            color: 'white',
-                                            fontWeight: 'bold'
-                                        }}
-                                    >
-                                        {'No'}
-                                    </Text>
-                                </TouchableOpacity>
-                            </View>
-                        </View>
-                    </BlurView>
-                </Modal>
+                <ModalToDelete
+                    text={'Delete Question?'}
+                    deleteModalVisible={deleteModalVisible}
+                    onPressDismissDeleteModal={onPressDismissDeleteModal}
+                    onPressDeleteQuestionYes={onPressDeleteQuestionYes}
+                />
                 <ModalMain
                     questionVisible={questionVisible}
                     selectedQuestionModal={selectedQuestionModal}
-                    onPressDismissDeleteModal={onPressDismissDeleteModal}
+                    onPressDismissMainModal={onPressDismissMainModal}
                 >
                 </ModalMain>
                 <ProfileModal
@@ -228,7 +191,7 @@ const Profile = ({ navigation }) => {
                         <QuestionRow
                             question={item}
                             updateQuestionModal={updateQuestionModal}
-                            color={'white'}
+                            color={'#ffe6c9'}
                             colorYes={'#65C18C'}
                             colorNo={'#FF6363'}
                         />}
@@ -248,7 +211,7 @@ const Profile = ({ navigation }) => {
                                 flex: 1,
                             }}>
                                 <Pressable
-                                    onPress={() => onPressDeleteQuestionModal(item)}
+                                    onPress={() => onPressDismissDeleteModal(item)}
                                 >
                                     <MaterialCommunityIcons
                                         name="delete-forever"
@@ -274,24 +237,44 @@ const Profile = ({ navigation }) => {
                     >
                         {user?.email}
                     </Text>
-                    <Feather
-                        name="edit"
-                        color="#f25c54"
-                        size={25}
-                    />
+                    <View
+                        style={{
+                            width: 30,
+                            height: 30,
+                            backgroundColor: "#ffe6c9",
+                            borderRadius: 25,
+                            top: responsiveSize(5),
+                            left: responsiveSize(4)
+                        }}>
+                        <Feather
+                            name="edit"
+                            color="#f25c54"
+                            size={25}
+                            style={{
+                                top: responsiveSize(1),
+                                left: responsiveSize(2)
+                            }}
+                        />
+                    </View>
                 </TouchableOpacity >
                 <View style={styles.cardValueRow}>
-                    <View style={styles.cardValues}>
-                        <Text style={styles.largeNumbers}>{userQuestions?.length}</Text>
-                        <Text style={styles.regularText}>{'Questions'}</Text>
+                    <View style={{ flexDirection: 'column', }}>
+                        <View style={styles.cardValues}>
+                            <Text style={styles.largeNumbers}>{userQuestions?.length}</Text>
+                        </View>
+                        <Text style={styles.regularText}>{'Your'}</Text><Text style={{ ...styles.regularText, top: responsiveHeight(-5.5) }}>{'\nQuestions'}</Text>
                     </View>
-                    <View style={styles.cardValues}>
-                        <Text style={styles.largeNumbers}>{sumReplies}</Text>
-                        <Text style={styles.regularText}>{'Answered'}</Text>
+                    <View style={{ flexDirection: 'column', }}>
+                        <View style={styles.cardValues}>
+                            <Text style={styles.largeNumbers}>{sumReplies}</Text>
+                        </View>
+                        <Text style={styles.regularText}>{'Your'}</Text><Text style={{ ...styles.regularText, top: responsiveHeight(-5.5) }}>{'\nAnswers'}</Text>
                     </View>
-                    <View style={styles.cardValues}>
-                        <Text style={styles.largeNumbers}>{sumAnswers}</Text>
-                        <Text style={styles.regularText}>{'Replies \nrecieved'}</Text>
+                    <View style={{ flexDirection: 'column', }}>
+                        <View style={styles.cardValues}>
+                            <Text style={styles.largeNumbers}>{sumAnswers}</Text>
+                        </View>
+                        <Text style={styles.regularText}>{'Replies'}</Text><Text style={{ ...styles.regularText, top: responsiveHeight(-5.5) }}>{'\nRecieved'}</Text>
                     </View>
                 </View>
             </View>
@@ -315,23 +298,6 @@ const styles = StyleSheet.create({
         overflow: 'visible',
 
     },
-    modalView: {
-        // backgroundColor: 'white',
-        borderRadius: 20,
-        padding: 35,
-        alignItems: 'center',
-        borderColor: '#f25c54',
-        borderWidth: 0.3,
-        shadowColor: 'red',
-        shadowOffset: {
-            width: 0,
-            height: 2,
-        },
-        shadowOpacity: 0.5,
-        shadowRadius: 4,
-        elevation: 5,
-        backgroundColor: '#f7b267'
-    },
     modalText: {
         ...fonts.note,
         textAlign: 'center',
@@ -342,22 +308,19 @@ const styles = StyleSheet.create({
     },
     profileName: {
         ...fonts.note,
-        alignSelf: 'center',
+        // alignSelf: 'center',
         fontWeight: 'bold',
         fontSize: responsiveFontSize(26),
         // paddingRight: responsiveWidth(8)
-        color: '#f79d65'
-    },
-    centeredView: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
+        color: '#FF6363'
     },
     card: {
         position: 'absolute',
-        backgroundColor: '#FFFAD7',
+        backgroundColor: '#ffcd96',
         width: responsiveWidth(85),
         height: responsiveHeight(20),
+        // borderWidth: responsiveWidth(0.1),
+        borderColor: '#FF6363',
         alignSelf: 'center',
         borderRadius: 25,
         top: responsiveHeight(7),
@@ -374,43 +337,38 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         alignItems: 'center',
         margin: responsiveWidth(3),
-        marginHorizontal: responsiveWidth(5)
+        // marginHorizontal: responsiveWidth(5),
+        backgroundColor: '#ffe6c9',
+        borderRadius: 50,
+        width: responsiveSize(23),
+        height: responsiveSize(23)
     },
     cardValueRow: {
-        top: responsiveHeight(2),
+        top: responsiveHeight(1),
         flexDirection: 'row',
-        justifyContent: 'space-between',
+        justifyContent: 'space-evenly',
     },
     largeNumbers: {
         ...fonts.note,
         fontSize: responsiveFontSize(29),
         fontWeight: 'bold',
-        color: '#f25c54'
+        color: '#FF6363'
     },
     regularText: {
         ...fonts.note,
         fontSize: responsiveFontSize(17),
         textAlign: 'center',
-        color: '#f25c54'
+        color: '#FF6363',
+        top: responsiveSize(-5)
     },
     editButton: {
         flexDirection: "row",
         // right: responsiveHeight(2),
-        bottom: responsiveWidth(-6),
-        justifyContent: "space-between",
-        paddingHorizontal: responsiveWidth(7)
+        bottom: responsiveWidth(-3),
+        justifyContent: "center",
+        paddingHorizontal: responsiveWidth(5)
     },
-    modalQuestion: {
-        margin: 5,
-        padding: 5,
-        backgroundColor: '#52b788',
-        borderRadius: 15,
-        height: responsiveHeight(7),
-        width: responsiveHeight(7),
-        justifyContent: 'center',
-        alignItems: 'center',
-        color: 'white'
-    },
+
     inputTextContainer: {
         height: responsiveHeight(10),
         // width: responsiveWidth(90),

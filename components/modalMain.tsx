@@ -8,7 +8,7 @@ import {
     Modal
 } from 'react-native';
 import Feather from 'react-native-vector-icons/Feather';
-import { responsiveHeight, responsiveWidth, responsiveFontSize } from '../scripts/constants';
+import { responsiveHeight, responsiveWidth, responsiveFontSize, responsiveSize } from '../scripts/constants';
 import { QuestionsContext } from '../contexts/questions-context-provider';
 import { useContext } from 'react';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
@@ -22,9 +22,10 @@ import PieChart from 'react-native-expo-pie-chart';
 import { VictoryBar, VictoryContainer } from "victory-native";
 import { VictoryPie } from 'victory-native';
 import { Ionicons } from '@expo/vector-icons';
+import fonts from '../scripts/fonts';
 
 
-const ModalMain = ({ children, selectedQuestionModal, questionVisible, onPressDismissDeleteModal }) => {
+const ModalMain = ({ children, selectedQuestionModal, questionVisible, onPressDismissMainModal }) => {
 
     const { question, onPressNextQuestion, onPressAddResponse } = useContext(QuestionsContext)
     const [graphicData, setGraphicData] = useState(defaultGraphicData);
@@ -49,58 +50,54 @@ const ModalMain = ({ children, selectedQuestionModal, questionVisible, onPressDi
                 style={styles.centeredView}>
                 <Pressable
                     style={styles.centeredView}
-                    onPress={() => onPressDismissDeleteModal()}>
+                    onPress={() => onPressDismissMainModal()}>
                     <View style={styles.inputTextContainer}>
                         {children}
-                        {/* <Pressable
-                            onPress={() => onPressDismissModal()}
-                        >
-                            <AntDesign name="closecircle" size={24} color="#e32f45" />
-                        </Pressable> */}
-                        <Text style={{ padding: 10, width: responsiveWidth(60), textAlign: 'center' }}>
-                            {selectedQuestionModal?.question}</Text>
-                        {/* {
-                            (selectedQuestionModal?.answer_1 > 0 || selectedQuestionModal?.answer_2 > 0)
-                            &&
-                            // <View style={{ position: 'absolute' }}>
-                            <VictoryPie
-                                // sortKey="x"
-                                // sortOrder="ascending"
-                                startAngle={selectedQuestionModal?.answer_1 > selectedQuestionModal?.answer_2 ? 0 : 0}
-                                endAngle={selectedQuestionModal?.answer_1 > selectedQuestionModal?.answer_2 ? 360 : 360}
-                                radius={responsiveWidth(10)}
-                                height={responsiveHeight(30)}
-                                width={responsiveWidth(30)}
-                                // animate={{ easing: 'exp' }}
-                                data={graphicData}
-                                colorScale={graphicColor}
-                                innerRadius={responsiveWidth(2)}
-                                style={{
-                                    data: {
-                                        fillOpacity: 1, stroke: "#fff", strokeWidth: responsiveWidth(0)
-                                    },
-                                    labels: {
-                                        fill: "#212121",
-                                    }
-                                }}
-                            />
-                            // </View>
-                        } */}
+                        <View style={{
+                            backgroundColor: '#ffe6c9',
+                            borderRadius: 15,
+                            minWidth: responsiveSize(3),
+                            minHeight: responsiveSize(5),
+                            marginBottom: responsiveSize(7),
+                        }}>
+                            <Text style={{
+                                ...fonts.note,
+                                color: '#f25c54',
+                                padding: 10,
+                                width: responsiveWidth(75),
+                                textAlign: 'center',
+                                fontSize: responsiveFontSize(20)
+                            }}>
+                                {selectedQuestionModal?.question}</Text>
+                        </View>
                         <View style={styles.answers}>
-                            <View style={styles.answersColumn}>
-                                <Text>{'Yes:'}</Text>
-                                <Text style={{ padding: 10 }}>{selectedQuestionModal?.answer_1 || 0}</Text>
-                                {/* {console.log(selectedQuestionModal)} */}
+                            <View style={{
+                                flexDirection: 'column',
+                                justifyContent: 'center',
+                                alignContent: 'center',
+                                alignItems: 'center'
+                            }}>
+                                <View style={styles.answersColumn}>
+                                    <Text style={styles.text}>{selectedQuestionModal?.answer_1 || 0}</Text>
+                                </View>
+                                <Text style={styles.text}>{'Yes'}</Text>
                             </View>
-                            <View style={styles.answersColumn}>
-                                <Text>{'No:'}</Text>
-                                <Text style={{ padding: 10 }}>{selectedQuestionModal?.answer_2 || 0}</Text>
+                            <View style={{
+                                flexDirection: 'column',
+                                justifyContent: 'center',
+                                alignContent: 'center',
+                                alignItems: 'center'
+                            }}>
+                                <View style={styles.answersColumn}>
+                                    <Text style={styles.text}>{selectedQuestionModal?.answer_2 || 0}</Text>
+                                </View>
+                                <Text style={styles.text}>{'No'}</Text>
                             </View>
                         </View>
                     </View>
                 </Pressable>
             </BlurView>
-        </Modal>
+        </Modal >
 
     )
 };
@@ -115,20 +112,13 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     inputTextContainer: {
-        // height: responsiveHeight(10),
-        // width: responsiveWidth(90),
-        // marginTop: responsiveWidth(10),
         alignSelf: 'center',
         alignItems: 'center',
-        // flexDirection: 'row',
         padding: 8,
         margin: 10,
-        // paddingTop: 5,
         color: '#e32f45',
-        borderWidth: 0.5,
         borderColor: '#FA7465',
-        // minHeight: height * 0.15,
-        backgroundColor: 'white',
+        backgroundColor: '#ffcd96',
         borderRadius: 20,
         borderBottomRightRadius: 20,
         borderTopRightRadius: 8,
@@ -143,23 +133,32 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.5,
         shadowRadius: 3.5,
         elevation: 5,
+        // paddingVertical: responsiveSize(7),
+        // paddingHorizontal: responsiveSize(6)
     },
     answers: {
         flexDirection: 'row',
-        paddingLeft: responsiveWidth(2),
-
+        alignContent: 'space-around',
+        justifyContent: "space-around",
+        // paddingHorizontal: responsiveFontSize(8)
     },
     answersColumn: {
-        flexDirection: 'row',
+        justifyContent: 'center',
         alignContent: 'center',
         alignItems: 'center',
         alignSelf: 'center',
-        backgroundColor: '#fcaba2',
-        // padding: responsiveWidth(1.5),
-        borderBottomRightRadius: 20,
-        borderTopRightRadius: 8,
-        borderTopLeftRadius: 20,
-        borderBottomLeftRadius: 8,
+        backgroundColor: '#ffe6c9',
+        borderRadius: 50,
+        width: responsiveSize(23),
+        height: responsiveSize(23),
+        marginHorizontal: responsiveFontSize(10)
+
+    },
+    text: {
+        ...fonts.note,
+        padding: responsiveSize(2),
+        color: '#f25c54',
+        fontSize: responsiveSize(8),
     }
 
 });

@@ -25,7 +25,7 @@ export const QuestionRow = ({ question: incomingQuestion, updateQuestionModal, c
             width: responsiveWidth(69),
             padding: 10,
             color: '#e32f45',
-            // borderWidth: 0.5,s
+            // borderWidth: 0.5,
             borderColor: '#FA7465',
             backgroundColor: color,
             borderRadius: 20,
@@ -90,7 +90,8 @@ export const QuestionRow = ({ question: incomingQuestion, updateQuestionModal, c
                     numberOfLines={2}
                     style={{
                         ...fonts.note,
-                        fontSize: responsiveFontSize(16)
+                        fontSize: responsiveFontSize(16),
+                        color: '#eb5252',
                     }}
                 >
                     {question}
@@ -109,11 +110,12 @@ export const QuestionRow = ({ question: incomingQuestion, updateQuestionModal, c
                         height: currentHeightOfView,
                         width: responsiveWidth(26),
                         justifyContent: 'center',
-                        backgroundColor: 'white',
+                        backgroundColor: '#ffe6c9',
                     }}>
                         <Text style={{
                             ...fonts.note,
-                            alignSelf: "center"
+                            alignSelf: "center",
+                            color: '#eb5252',
                         }}>
                             {'No Answers'}
                         </Text>

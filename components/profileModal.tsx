@@ -182,7 +182,10 @@ const ProfileModal = ({ children, profileModalVisible, onPressDismissProfileModa
                             </View>
                             <ButtonQApp
                                 title={'Update Password'}
-                                // onPress={deleteAuthUser()}
+                                onPress={() => updateUsersPassword({
+                                    currentPassword: data?.currentPassword,
+                                    newPassword: data?.newPassword
+                                })}
                                 height={responsiveHeight(5)}
                                 color={'#52b788'}
                                 color2={'#52b788'}

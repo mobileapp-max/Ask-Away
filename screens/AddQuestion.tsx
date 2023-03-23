@@ -159,7 +159,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: responsiveWidth(8),
   },
   footer: {
-    flex: 5,
+    flex: 4.5,
     backgroundColor: '#f7b267',
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,

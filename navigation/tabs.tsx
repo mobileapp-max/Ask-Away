@@ -1,7 +1,6 @@
-import React, { useRef, useState } from 'react';
+import React, { useContext, useRef, useState } from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity, Animated, Pressable, } from 'react-native';
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import Icon from 'react-native-vector-icons/Ionicons';
 import Entypo from 'react-native-vector-icons/Entypo';
 import AddQ from '../screens/AddQuestion';
 import { LogInStackScreen } from './logInSignUpNav'
@@ -9,10 +8,12 @@ import { FontAwesome } from '@expo/vector-icons';
 import QuestionScreen from '../screens/QuestionScreen2';
 import { responsiveHeight, responsiveWidth } from '../scripts/constants';
 import { Octicons } from '@expo/vector-icons';
+import { UserContext } from '../contexts/user-context-provider';
 
 const Tab = createBottomTabNavigator();
 
 const CustomTabButton = (props) => {
+    const { user } = useContext(UserContext)
     const children = props?.children
     const onPress = props?.onPress
     const currentScreen = props?.currentScreen
@@ -33,6 +34,8 @@ const CustomTabButton = (props) => {
         rotatePlusSign()
         onPress()
     }
+
+    // console.log(user)
 
     return <Pressable
         style={{
@@ -74,6 +77,7 @@ const Tabs = (props) => {
 
     return (
         // <RootStackScree>
+
         <Tab.Navigator
             screenOptions={{
                 activeTintColor: "#f7b267",

@@ -15,7 +15,7 @@ import {
 import SwitchSelector from 'react-native-switch-selector'
 import SignUp from '../components/signUp';
 import SignIn from '../components/signIn';
-import { responsiveFontSize, responsiveHeight } from '../scripts/constants';
+import { responsiveFontSize, responsiveHeight, responsiveSize } from '../scripts/constants';
 import fonts from '../scripts/fonts';
 
 
@@ -36,7 +36,8 @@ const SignUpScreen = ({ navigation }) => {
                         color: 'white',
                         fontSize: responsiveFontSize(60),
                         fontWeight: 'bold',
-                        marginBottom: 0
+                        marginBottom: 0,
+                        top: responsiveSize(4)
                     }}
                 >{'Join In'}</Text>
                 {/* <Text style={styles.text_header}>Join in!</Text> */}

@@ -12,7 +12,7 @@ import {
 } from 'react-native';
 import { useContext } from 'react';
 import { QuestionsContext } from '../contexts/questions-context-provider';
-import { responsiveFontSize, responsiveHeight, responsiveWidth } from '../scripts/constants';
+import { responsiveFontSize, responsiveHeight, responsiveSize, responsiveWidth } from '../scripts/constants';
 import { AntDesign } from '@expo/vector-icons';
 import { BlurView } from 'expo-blur';
 import * as Animatable from 'react-native-animatable';
@@ -69,20 +69,22 @@ const QuestionScreen = ({ navigation }) => {
     <View style={styles.container}>
       <View style={styles.header}>
         <StatusBar backgroundColor='#e32f45' barStyle="light-content" />
-        <Text style={styles.text_header}>
-          {'Answer'}
-        </Text>
-        <Text
-          style={{
-            ...fonts.note,
-            ...styles.text_header,
-            paddingTop: 0,
-            fontSize: responsiveFontSize(50),
-            top: responsiveHeight(-1),
-            color: 'white',
-          }}>
-          {'Questions'}
-        </Text>
+        <View style={{ top: responsiveSize(6) }}>
+          <Text style={styles.text_header}>
+            {'Answer'}
+          </Text>
+          <Text
+            style={{
+              ...fonts.note,
+              ...styles.text_header,
+              paddingTop: 0,
+              fontSize: responsiveFontSize(50),
+              top: responsiveHeight(-1),
+              color: 'white',
+            }}>
+            {'Questions'}
+          </Text>
+        </View>
       </View>
       <ScrollView>
         <View style={{
@@ -104,7 +106,7 @@ const QuestionScreen = ({ navigation }) => {
                 ...fonts.note,
                 textAlign: 'center',
                 color: 'white',
-                fontSize: responsiveFontSize(25),
+                fontSize: responsiveFontSize(21),
                 fontWeight: 'bold',
 
                 // paddingHorizontal: responsiveWidth(1),
