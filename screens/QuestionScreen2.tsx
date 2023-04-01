@@ -34,7 +34,6 @@ const QuestionScreen = ({ navigation }) => {
     setAnswerWidth(((question?.responses_aggregate?.aggregate?.sum?.response_1 + 1) / (question?.responses_aggregate?.aggregate?.sum?.response_1 + question?.responses_aggregate?.aggregate?.sum?.response_2 + 1)) * 90)
     setButtonPressed(true)
     onPressAddResponse({ question_id: question?.id, response_1: '1', response_2: '0', user_id: user?.uid || 'anonymous', report: '0' })
-
   }
 
   const questionResult_2 = function () {
@@ -106,8 +105,8 @@ const QuestionScreen = ({ navigation }) => {
                 ...fonts.note,
                 textAlign: 'center',
                 color: 'white',
-                fontSize: responsiveFontSize(21),
-                fontWeight: 'bold',
+                fontSize: responsiveFontSize(20),
+                // fontWeight: 'bold',
 
                 // paddingHorizontal: responsiveWidth(1),
                 // marginBottom: responsiveHeight(1)
@@ -333,7 +332,7 @@ const styles = StyleSheet.create({
     color: 'white',
     fontWeight: 'bold',
     fontSize: responsiveFontSize(30),
-    paddingTop: responsiveHeight(3),
+    paddingTop: responsiveHeight(1),
     top: responsiveHeight(2),
   },
   button: {

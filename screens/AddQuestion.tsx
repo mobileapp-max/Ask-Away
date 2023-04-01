@@ -8,7 +8,9 @@ import {
   StatusBar,
   ScrollView,
   Modal,
-  Pressable
+  Pressable,
+  Keyboard,
+  TouchableOpacity
 } from 'react-native';
 import { useContext } from 'react';
 import { QuestionsContext } from '../contexts/questions-context-provider';
@@ -18,6 +20,8 @@ import { BlurView } from 'expo-blur';
 import ButtonQApp from '../components/buttonQApp';
 import { UserContext } from '../contexts/user-context-provider';
 import fonts from '../scripts/fonts';
+import { Ionicons } from '@expo/vector-icons';
+import ModalToDelete from '../components/modalToDelete';
 
 const AddQ = ({ navigation }) => {
 
@@ -46,6 +50,88 @@ const AddQ = ({ navigation }) => {
     else setDisableButton(true)
   }, [text])
 
+
+  function handleKeyPress(e) {
+    // Log the key code of the pressed key
+    // console.log('Key pressed:', e.nativeEvent.key);
+
+    // Prevent the user from typing the letter 'a'
+    if (e.nativeEvent.key === 'Return') {
+      e.preventDefault();
+    }
+  }
+
+  const [editedText, setEditedText] = useState('')
+
+  function removeLineBreaks(str) {
+    return str.replace(/\n/g, " ").replace(/\s+/g, " ");
+  }
+  const newString = removeLineBreaks(text);
+
+  // console.log(newString)
+
+  useEffect(() => {
+    function removeLineBreaks(text) {
+      return
+    }
+  }, [text])
+
+
+  const handleOnSubmitEditing = () => {
+    // Dismiss the keyboard when the return key is pressed
+    Keyboard.dismiss();
+  };
+
+
+  const handleClearText = () => {
+    setText('');
+  };
+
+  const renderClearButton = () => {
+    if (text.length > 0) {
+      return (
+        <TouchableOpacity
+          style={{
+            // alignSelf: 'flex-end',
+            // justifyContent: 'flex-end',
+            // alignContent: 'flex-end',
+            position: 'absolute',
+            top: responsiveHeight(34),
+            left: responsiveWidth(80),
+            // flexDirection: 'column-reverse'
+          }}
+          onPress={handleClearText}>
+          <Ionicons
+            name={Platform.OS === 'ios' ? 'ios-close-circle' : 'md-close-circle'}
+            size={30}
+            color="#f25c54"
+          />
+        </TouchableOpacity>
+      );
+    } else {
+      return null;
+    }
+  };
+
+  const onPressTrashCan = (itemId) => {
+    setDeleteModalVisible(!deleteModalVisible)
+    setQuestionIdToDelete(itemId)
+    console.log(itemId)
+  }
+
+  const onPressDeleteQuestionNo = () => {
+    setDeleteModalVisible(false)
+    setQuestionIdToDelete(null)
+  }
+
+  const onPessDeleteQuestionYes = () => {
+    setDeleteModalVisible(false)
+    onPressDeleteQuestion({ questionId: questionIdToDelete })
+    console.log(questionIdToDelete)
+  }
+
+
+
   return (
     <View style={styles.container}>
       <StatusBar backgroundColor='#e32f45' barStyle="light-content" />
@@ -66,6 +152,12 @@ const AddQ = ({ navigation }) => {
       <View
         style={styles.footer}
       >
+        <ModalToDelete
+          text={'Add Question?'}
+          deleteModalVisible={deleteModalVisible}
+          onPressDeleteQuestionNo={onPressDeleteQuestionNo}
+          onPessDeleteQuestionYes={onPessDeleteQuestionYes}
+        />
         <Modal
           animationType="fade"
           transparent={true}
@@ -93,7 +185,7 @@ const AddQ = ({ navigation }) => {
             onPress={handleButtonPress}
             style={{
               ...styles.inputTextContainer,
-              height: responsiveHeight(35),
+              height: responsiveHeight(40),
               width: responsiveWidth(90),
               marginTop: responsiveHeight(6),
               justifyContent: 'center',
@@ -102,8 +194,10 @@ const AddQ = ({ navigation }) => {
               alignContent: 'center',
             }}>
             <TextInput
+              onKeyPress={handleKeyPress}
+              onSubmitEditing={handleOnSubmitEditing}
               ref={inputRef}
-              value={text}
+              value={newString}
               placeholder={"Type your question..."}
               multiline={true}
               maxLength={300}
@@ -118,6 +212,7 @@ const AddQ = ({ navigation }) => {
               autoCapitalize="sentences"
               onChangeText={setText}
             />
+            {renderClearButton()}
           </Pressable>
           {
             text?.length >= 300 &&

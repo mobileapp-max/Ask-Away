@@ -23,6 +23,15 @@ mutation ($question: String!, $user_id: String, $email: String) {
 
 export const DELETE_QUESTION = gql`
 mutation ($id: uuid) {
+  delete_response (
+    where: {
+      question_id: {
+        _eq: $id
+      }
+    }
+  ) {
+    affected_rows
+  }
     delete_question (
       where: {
         id: {
@@ -32,15 +41,7 @@ mutation ($id: uuid) {
     ) {
       affected_rows
     }
-    delete_response (
-      where: {
-        question_id: {
-          _eq: $id
-        }
-      }
-    ) {
-      affected_rows
-    }
+  
   } `;
 
 

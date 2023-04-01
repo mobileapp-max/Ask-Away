@@ -29,7 +29,7 @@ const Profile = ({ navigation }) => {
     const [questionVisible, setQuestionVisible] = useState(false);
 
     const [selectedQuestionModal, setSelectedQuestionModal] = useState({})
-    const [modalVisibleId, setModalVisibleId] = useState('');
+    const [questionIdToDelete, setQuestionIdToDelete] = useState(null);
     const [modalVisible, setModalVisible] = useState(false);
 
 
@@ -39,24 +39,32 @@ const Profile = ({ navigation }) => {
     const onPressDismissProfileModal = () => {
         setProfileModalVisible(!profileModalVisible)
     }
-    const onPressDismissDeleteModal = (item) => {
+    const onPressTrashCan = (itemId) => {
         setDeleteModalVisible(!deleteModalVisible)
-        setModalVisibleId(item?.id)
+        setQuestionIdToDelete(itemId)
+        console.log(itemId)
     }
-    const onPressDeleteQuestionModal = () => {
-        setQuestionVisible(!modalVisible)
-        // setModalVisibleId(item?.id)
+
+    const onPressDeleteQuestionNo = () => {
+        setDeleteModalVisible(false)
+        setQuestionIdToDelete(null)
     }
-    // console.log(item?.id)
+
+    const onPessDeleteQuestionYes = () => {
+        setModalVisible(false)
+        onPressDeleteQuestion({ questionId: questionIdToDelete })
+        console.log(questionIdToDelete)
+    }
+
+
+
+
+
     useEffect(() => {
         const answer_1 = selectedQuestionModal?.answer_1
         const answer_2 = selectedQuestionModal?.answer_2
     }, [selectedQuestionModal])
 
-    const onPressDeleteQuestionYes = () => {
-        onPressDeleteQuestion({ questionId: modalVisibleId })
-        setModalVisible(!modalVisible)
-    }
     const updateQuestionModal = (incomingModalData) => {
         setSelectedQuestionModal(incomingModalData)
         setQuestionVisible(!modalVisible)
@@ -144,7 +152,7 @@ const Profile = ({ navigation }) => {
                             flex: 1,
                         }}>
                             <Pressable
-                                onPress={() => onPressDeleteQuestionModal(item)}
+                                onPress={() => onPressTrashCan(item?.id)}
                             >
                                 <MaterialCommunityIcons
                                     name="delete-forever"
@@ -170,8 +178,8 @@ const Profile = ({ navigation }) => {
                 <ModalToDelete
                     text={'Delete Question?'}
                     deleteModalVisible={deleteModalVisible}
-                    onPressDismissDeleteModal={onPressDismissDeleteModal}
-                    onPressDeleteQuestionYes={onPressDeleteQuestionYes}
+                    onPressDeleteQuestionNo={onPressDeleteQuestionNo}
+                    onPessDeleteQuestionYes={onPessDeleteQuestionYes}
                 />
                 <ModalMain
                     questionVisible={questionVisible}
@@ -211,7 +219,7 @@ const Profile = ({ navigation }) => {
                                 flex: 1,
                             }}>
                                 <Pressable
-                                    onPress={() => onPressDismissDeleteModal(item)}
+                                    onPress={() => onPressTrashCan(item?.id)}
                                 >
                                     <MaterialCommunityIcons
                                         name="delete-forever"
@@ -262,19 +270,22 @@ const Profile = ({ navigation }) => {
                         <View style={styles.cardValues}>
                             <Text style={styles.largeNumbers}>{userQuestions?.length}</Text>
                         </View>
-                        <Text style={styles.regularText}>{'Your'}</Text><Text style={{ ...styles.regularText, top: responsiveHeight(-5.5) }}>{'\nQuestions'}</Text>
+                        {/* <Text style={styles.regularText}>{'Your'}</Text> */}
+                        <Text style={{ ...styles.regularText, top: responsiveHeight(-5) }}>{'\nAsked'}</Text>
                     </View>
                     <View style={{ flexDirection: 'column', }}>
                         <View style={styles.cardValues}>
                             <Text style={styles.largeNumbers}>{sumReplies}</Text>
                         </View>
-                        <Text style={styles.regularText}>{'Your'}</Text><Text style={{ ...styles.regularText, top: responsiveHeight(-5.5) }}>{'\nAnswers'}</Text>
+                        {/* <Text style={styles.regularText}>{'Your'}</Text> */}
+                        <Text style={{ ...styles.regularText, top: responsiveHeight(-5) }}>{'\nAnswered'}</Text>
                     </View>
                     <View style={{ flexDirection: 'column', }}>
                         <View style={styles.cardValues}>
                             <Text style={styles.largeNumbers}>{sumAnswers}</Text>
                         </View>
-                        <Text style={styles.regularText}>{'Replies'}</Text><Text style={{ ...styles.regularText, top: responsiveHeight(-5.5) }}>{'\nRecieved'}</Text>
+                        {/* <Text style={styles.regularText}>{'Replies'}</Text> */}
+                        <Text style={{ ...styles.regularText, top: responsiveHeight(-5) }}>{'\nRecieved'}</Text>
                     </View>
                 </View>
             </View>
@@ -323,7 +334,7 @@ const styles = StyleSheet.create({
         borderColor: '#FF6363',
         alignSelf: 'center',
         borderRadius: 25,
-        top: responsiveHeight(7),
+        top: responsiveHeight(5),
         shadowColor: "#e32f45",
         shadowOffset: {
             width: 0,
@@ -344,7 +355,7 @@ const styles = StyleSheet.create({
         height: responsiveSize(23)
     },
     cardValueRow: {
-        top: responsiveHeight(1),
+        top: responsiveHeight(1.5),
         flexDirection: 'row',
         justifyContent: 'space-evenly',
     },

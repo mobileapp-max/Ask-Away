@@ -22,18 +22,14 @@ import fonts from '../scripts/fonts';
 
 
 
-const ModalToDelete = ({ children, onPressDismissDeleteModal, text, deleteModalVisible, onPressDeleteQuestionYes }) => {
+const ModalToDelete = ({ children, text, deleteModalVisible, onPessDeleteQuestionYes, onPressDeleteQuestionNo }) => {
 
-    const pressingYes = () => {
-        onPressDismissDeleteModal()
-        onPressDeleteQuestionYes()
-    }
     return (
         <Modal
             animationType="fade"
             transparent={true}
             visible={deleteModalVisible}
-            onRequestClose={() => onPressDismissDeleteModal()}>
+            onRequestClose={onPressDeleteQuestionNo}>
             {children}
             <BlurView
                 intensity={5}
@@ -42,7 +38,7 @@ const ModalToDelete = ({ children, onPressDismissDeleteModal, text, deleteModalV
                     <Text style={styles.modalText}>{text}</Text>
                     <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', }}>
                         <TouchableOpacity
-                            onPress={pressingYes}
+                            onPress={onPessDeleteQuestionYes}
                             style={styles.modalQuestion}>
                             <Text
                                 style={{
@@ -55,7 +51,7 @@ const ModalToDelete = ({ children, onPressDismissDeleteModal, text, deleteModalV
                             </Text>
                         </TouchableOpacity>
                         <TouchableOpacity
-                            onPress={onPressDismissDeleteModal}
+                            onPress={onPressDeleteQuestionNo}
                             style={{ ...styles.modalQuestion, backgroundColor: '#f38375' }}>
                             <Text
                                 style={{

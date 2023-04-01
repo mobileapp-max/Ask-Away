@@ -6,7 +6,7 @@ import AddQ from '../screens/AddQuestion';
 import { LogInStackScreen } from './logInSignUpNav'
 import { FontAwesome } from '@expo/vector-icons';
 import QuestionScreen from '../screens/QuestionScreen2';
-import { responsiveHeight, responsiveWidth } from '../scripts/constants';
+import { responsiveFontSize, responsiveHeight, responsiveSize, responsiveWidth } from '../scripts/constants';
 import { Octicons } from '@expo/vector-icons';
 import { UserContext } from '../contexts/user-context-provider';
 
@@ -39,7 +39,7 @@ const CustomTabButton = (props) => {
 
     return <Pressable
         style={{
-            top: -14,
+            top: -responsiveFontSize(17),
             justifyContent: "center",
             alignItems: 'center',
             ...style.shadow,
@@ -84,55 +84,41 @@ const Tabs = (props) => {
                 tabBarShowLabel: false,
                 headerShown: false,
                 tabBarStyle: {
-                    position: 'absolute',
-                    // bottom: responsiveHeight(2),
-                    // left: responsiveWidth(6),
-                    // right: responsiveWidth(6),
-                    elevation: 0,
                     backgroundColor: '#f25c54',
-                    // borderWidth: 3,
-                    // borderColor: '#f7b267',
-                    // borderRadius: 25,
                     justifyContent: "center",
                     alignItems: 'center',
                     alignSelf: 'center',
-                    height: responsiveHeight(7.5),
-                    // top: props?.isTabsVisible ? undefined : -100,
-                    shadowColor: "#f25c54",
-                    shadowOffset: {
-                        width: 0,
-                        height: 5,
-                    },
-                    shadowOpacity: 0.25,
-                    shadowRadius: 3.5,
-                    elevation: 5
-
+                    height: responsiveSize(30),
+                    // shadowColor: "#f25c54",
+                    // shadowOffset: {
+                    //     width: 0,
+                    //     height: 5,
+                    // },
+                    // shadowOpacity: 0.25,
+                    // shadowRadius: 3.5,
+                    // elevation: 5
                 }
 
             }}>
-            {/* <Tab.Screen name="Questions" component={QScreen} /> */}
-
             <Tab.Screen name="Main" component={QuestionScreen} options={{
                 tabBarIcon: ({ focused }) => (
-                    <View style={{ alignItems: "center", justifyContent: 'center', top: responsiveHeight(1.5), height: responsiveHeight(8) }}>
-                        {/* <FontAwesome
-                            name="question-circle"
-                            size={45}
-                            color={focused ? 'white' : '#f7b267'}
-                        /> */}
+                    <View style={{
+                        alignItems: "center",
+                        justifyContent: 'center',
+                        top: responsiveSize(3),
+                        position: 'absolute',
+                    }}>
                         <Octicons
                             name="question"
                             size={40}
                             color={focused ? 'white' : '#f7b267'}
                         />
-                        {/* <Text style={{ color: focused ? '#f7b267' : '#f25c54' }}>Questions</Text> */}
                     </View>
                 )
             }} />
             <Tab.Screen name="Profile2" component={AddQ}
                 options={{
                     tabBarIcon: ({ focused }) => (
-
                         <View
                             style={{ alignItems: "center", justifyContent: 'center', }}>
                             <Entypo
@@ -153,18 +139,17 @@ const Tabs = (props) => {
             <Tab.Screen name="Profile3" component={ProfileScreen}
                 options={{
                     tabBarIcon: ({ focused }) => (
-                        <View style={{ alignItems: "center", justifyContent: 'center', top: responsiveHeight(1.5), height: responsiveHeight(8) }}>
-                            {/* <Icon
-                                name="person-circle"
-                                size={45}
-                                color={focused ? 'white' : '#f7b267'}
-                            /> */}
+                        <View style={{
+                            alignItems: "center",
+                            justifyContent: 'center',
+                            top: responsiveSize(3),
+                            position: 'absolute',
+                        }}>
                             <Octicons
                                 name="feed-person"
                                 size={40}
                                 color={focused ? 'white' : '#f7b267'}
                             />
-                            {/* <Text style={{ color: focused ? '#f7b267' : '#f25c54' }}>Profile</Text> */}
                         </View>
                     )
                 }}
