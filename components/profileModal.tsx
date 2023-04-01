@@ -18,6 +18,7 @@ import { deleteAuthUser, logoutUser, updateUsersPassword } from '../api/auth-api
 import { Feather } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 import fonts from '../scripts/fonts';
+import ModalToDelete from './modalToDelete';
 
 
 const ProfileModal = ({ children, profileModalVisible, onPressDismissProfileModal }) => {
@@ -53,165 +54,208 @@ const ProfileModal = ({ children, profileModalVisible, onPressDismissProfileModa
         });
     }
 
+    const [logOutModalVisible, setLogOutModalVisible] = useState(false);
+    const [deleteAccountModalVisible, setDeleteAccountModalVisible] = useState(false);
+
+    const onPressOpenLogOutModal = () => {
+        setLogOutModalVisible(!logOutModalVisible)
+    }
+    const onPressOpenDeleteAccountModal = () => {
+        setDeleteAccountModalVisible(!deleteAccountModalVisible)
+    }
+    const onPressDeleteQuestionNo = () => {
+        setLogOutModalVisible(false)
+        setDeleteAccountModalVisible(false)
+    }
+    const onPessDeleteQuestionYes = () => {
+        if (logOutModalVisible === true) {
+            setLogOutModalVisible(false)
+            onPressDismissProfileModal()
+            logoutUser()
+        }
+        if (deleteAccountModalVisible === true) {
+            deleteAuthUser()
+            setDeleteAccountModalVisible(false)
+            onPressDismissProfileModal()
+        }
+    }
+
     return (
-        <Modal
-            animationType="fade"
-            transparent={true}
-            visible={profileModalVisible}
-        >
-            <BlurView
-                intensity={8}
-                style={{ flex: 1 }}
+        <>
+            <Modal
+                animationType="fade"
+                transparent={true}
+                visible={profileModalVisible}
             >
-                <Pressable
-                    onPress={() => onPressDismissProfileModal()}
-                    style={styles.centeredView}
+                <ModalToDelete
+                    text={'Log Out?'}
+                    deleteModalVisible={logOutModalVisible}
+                    onPressDeleteQuestionNo={onPressDeleteQuestionNo}
+                    onPessDeleteQuestionYes={onPessDeleteQuestionYes}
+                />
+                <ModalToDelete
+                    text={'Delete Account?'}
+                    deleteModalVisible={deleteAccountModalVisible}
+                    onPressDeleteQuestionNo={onPressDeleteQuestionNo}
+                    onPessDeleteQuestionYes={onPessDeleteQuestionYes}
+                />
+                <BlurView
+                    intensity={8}
+                    style={{ flex: 1 }}
                 >
-                    <TouchableWithoutFeedback>
-                        <View style={styles.inputTextContainer}>
-                            <TouchableOpacity
-                                onPress={() => onPressDismissProfileModal()}
-                                style={{
-                                    position: 'absolute',
-                                    left: responsiveWidth(60),
-                                    top: responsiveWidth(3.5),
-                                    zIndex: 1
-                                }}
-                            >
-                                <Ionicons
-                                    name="ios-close-circle"
-                                    size={40}
-                                    color="#f25c54"
-                                />
-                            </TouchableOpacity>
-                            {/* {children} */}
-                            <View
-                                style={{
-                                    marginBottom: responsiveHeight(3),
-                                    // marginTop: responsiveHeight(3)
-                                }}
-                            >
-                                <Text style={[styles.text_footer, {
-                                    ...fonts.note,
-                                    fontWeight: 'bold',
-                                    alignSelf: 'center',
-                                    fontSize: responsiveFontSize(29)
-                                }]}>
-                                    {'Settings'}
-                                </Text>
+                    <Pressable
+                        onPress={() => onPressDismissProfileModal()}
+                        style={styles.centeredView}
+                    >
+                        <TouchableWithoutFeedback>
+
+                            <View style={styles.inputTextContainer}>
+                                <TouchableOpacity
+                                    onPress={() => onPressDismissProfileModal()}
+                                    style={{
+                                        position: 'absolute',
+                                        left: responsiveWidth(60),
+                                        top: responsiveWidth(3.5),
+                                        zIndex: 1
+                                    }}
+                                >
+                                    <Ionicons
+                                        name="ios-close-circle"
+                                        size={40}
+                                        color="#f25c54"
+                                    />
+                                </TouchableOpacity>
+                                {/* {children} */}
                                 <View
                                     style={{
-                                        borderBottomWidth: 1,
-                                        borderBottomColor: '#f79d65',
-                                        // marginBottom: responsiveHeight(1),
-                                        paddingBottom: responsiveHeight(0.5),
+                                        marginBottom: responsiveHeight(3),
+                                        // marginTop: responsiveHeight(3)
                                     }}
+                                >
+                                    <Text style={[styles.text_footer, {
+                                        ...fonts.note,
+                                        fontWeight: 'bold',
+                                        alignSelf: 'center',
+                                        fontSize: responsiveFontSize(29)
+                                    }]}>
+                                        {'Settings'}
+                                    </Text>
+                                    <View
+                                        style={{
+                                            borderBottomWidth: 1,
+                                            borderBottomColor: '#f79d65',
+                                            // marginBottom: responsiveHeight(1),
+                                            paddingBottom: responsiveHeight(0.5),
+                                        }}
+                                    />
+                                    <Text style={[styles.text_footer, {
+                                    }]}>
+                                        {'Current Password'}
+                                    </Text>
+                                    <View style={styles.action}>
+                                        <Feather
+                                            name="lock"
+                                            color='#f25c54'
+                                            size={20}
+                                        />
+                                        <TextInput
+                                            placeholder="Current Password"
+                                            onChangeText={val => handleCurrentPasswordChange(val)}
+                                            secureTextEntry={data.secureTextEntry1 ? true : false}
+                                            style={styles.textInput}
+                                            autoCapitalize="none"
+                                            placeholderTextColor={'#f5e2c9'}
+                                        />
+                                        <TouchableOpacity
+                                            onPress={updateSecureTextEntry1}
+                                        >
+                                            {data.secureTextEntry1 ?
+                                                <Feather
+                                                    name="eye-off"
+                                                    color="#f25c54"
+                                                    size={20}
+                                                />
+                                                :
+                                                <Feather
+                                                    name="eye"
+                                                    color="white"
+                                                    size={20}
+                                                />
+                                            }
+                                        </TouchableOpacity>
+                                    </View>
+                                    <Text style={[styles.text_footer, {
+                                    }]}>
+                                        {'New Password'}
+                                    </Text>
+                                    <View style={styles.action}>
+                                        <Feather
+                                            name="lock"
+                                            color="#f25c54"
+                                            size={20}
+                                        />
+                                        <TextInput
+                                            placeholder="New Password"
+                                            secureTextEntry={data.secureTextEntry2 ? true : false}
+                                            style={styles.textInput}
+                                            autoCapitalize="none"
+                                            placeholderTextColor={'#f5e2c9'}
+                                            onChangeText={(val) => handleNewPasswordChange(val)}
+                                        />
+                                        <TouchableOpacity
+                                            onPress={updateSecureTextEntry2}
+                                        >
+                                            {data.secureTextEntry2 ?
+                                                <Feather
+                                                    name="eye-off"
+                                                    color="#f25c54"
+                                                    size={20}
+                                                />
+                                                :
+                                                <Feather
+                                                    name="eye"
+                                                    color="white"
+                                                    size={20}
+                                                />
+                                            }
+                                        </TouchableOpacity>
+                                    </View>
+                                </View>
+                                <ButtonQApp
+                                    title={'Update Password'}
+                                    onPress={() => updateUsersPassword({
+                                        currentPassword: data?.currentPassword,
+                                        newPassword: data?.newPassword
+                                    })}
+                                    height={responsiveHeight(5)}
+                                    color={'#52b788'}
+                                    color2={'#52b788'}
+                                    fontSize={responsiveFontSize(20)}
                                 />
-                                <Text style={[styles.text_footer, {
-                                }]}>
-                                    {'Current Password'}
-                                </Text>
-                                <View style={styles.action}>
-                                    <Feather
-                                        name="lock"
-                                        color='#f25c54'
-                                        size={20}
-                                    />
-                                    <TextInput
-                                        placeholder="Current Password"
-                                        onChangeText={val => handleCurrentPasswordChange(val)}
-                                        secureTextEntry={data.secureTextEntry1 ? true : false}
-                                        style={styles.textInput}
-                                        autoCapitalize="none"
-                                        placeholderTextColor={'#f5e2c9'}
-                                    />
-                                    <TouchableOpacity
-                                        onPress={updateSecureTextEntry1}
-                                    >
-                                        {data.secureTextEntry1 ?
-                                            <Feather
-                                                name="eye-off"
-                                                color="#f25c54"
-                                                size={20}
-                                            />
-                                            :
-                                            <Feather
-                                                name="eye"
-                                                color="white"
-                                                size={20}
-                                            />
-                                        }
-                                    </TouchableOpacity>
-                                </View>
-                                <Text style={[styles.text_footer, {
-                                }]}>
-                                    {'New Password'}
-                                </Text>
-                                <View style={styles.action}>
-                                    <Feather
-                                        name="lock"
-                                        color="#f25c54"
-                                        size={20}
-                                    />
-                                    <TextInput
-                                        placeholder="New Password"
-                                        secureTextEntry={data.secureTextEntry2 ? true : false}
-                                        style={styles.textInput}
-                                        autoCapitalize="none"
-                                        placeholderTextColor={'#f5e2c9'}
-                                        onChangeText={(val) => handleNewPasswordChange(val)}
-                                    />
-                                    <TouchableOpacity
-                                        onPress={updateSecureTextEntry2}
-                                    >
-                                        {data.secureTextEntry2 ?
-                                            <Feather
-                                                name="eye-off"
-                                                color="#f25c54"
-                                                size={20}
-                                            />
-                                            :
-                                            <Feather
-                                                name="eye"
-                                                color="white"
-                                                size={20}
-                                            />
-                                        }
-                                    </TouchableOpacity>
-                                </View>
+                                <ButtonQApp
+                                    title={'Delete Account'}
+                                    onPress={
+                                        // onPressOpenDeleteAccountModal}
+                                        () => deleteAuthUser()}
+                                    height={responsiveHeight(4)}
+                                    color={'#f25c54'}
+                                    color2={'#f25c54'}
+                                    fontSize={responsiveFontSize(20)}
+                                />
+                                <ButtonQApp
+                                    title={'Log Out'}
+                                    onPress={onPressOpenLogOutModal}
+                                    height={responsiveHeight(7)}
+                                    color={'#ffd940'}
+                                    color2={'#ffd940'}
+                                    fontSize={responsiveFontSize(20)}
+                                />
                             </View>
-                            <ButtonQApp
-                                title={'Update Password'}
-                                onPress={() => updateUsersPassword({
-                                    currentPassword: data?.currentPassword,
-                                    newPassword: data?.newPassword
-                                })}
-                                height={responsiveHeight(5)}
-                                color={'#52b788'}
-                                color2={'#52b788'}
-                                fontSize={responsiveFontSize(20)}
-                            />
-                            <ButtonQApp
-                                title={'Delete Account'}
-                                onPress={() => deleteAuthUser()}
-                                height={responsiveHeight(4)}
-                                color={'#f25c54'}
-                                color2={'#f25c54'}
-                                fontSize={responsiveFontSize(20)}
-                            />
-                            <ButtonQApp
-                                title={'Log Out'}
-                                onPress={() => logoutUser()}
-                                height={responsiveHeight(7)}
-                                color={'#ffd940'}
-                                color2={'#ffd940'}
-                                fontSize={responsiveFontSize(20)}
-                            />
-                        </View>
-                    </TouchableWithoutFeedback>
-                </Pressable>
-            </BlurView>
-        </Modal>
+                        </TouchableWithoutFeedback>
+                    </Pressable>
+                </BlurView>
+            </Modal>
+        </>
     )
 };
 

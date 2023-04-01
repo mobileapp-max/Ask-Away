@@ -22,7 +22,7 @@ import fonts from '../scripts/fonts';
 
 
 
-const ModalToDelete = ({ children, text, deleteModalVisible, onPessDeleteQuestionYes, onPressDeleteQuestionNo }) => {
+const ModalToDelete = ({ children, text, deleteModalVisible, onPessDeleteQuestionYes, onPressDeleteQuestionNo, text2 }) => {
 
     return (
         <Modal
@@ -36,6 +36,16 @@ const ModalToDelete = ({ children, text, deleteModalVisible, onPessDeleteQuestio
                 style={styles.centeredView}>
                 <View style={styles.modalView}>
                     <Text style={styles.modalText}>{text}</Text>
+                    {text2 &&
+                        <View style={{ borderRadius: 15, backgroundColor: '#ffe6c9', marginBottom: responsiveHeight(1) }}>
+                            <Text style={{
+                                ...styles.modalText,
+                                color: '#f25c54',
+                            }}>
+                                {text2}
+                            </Text>
+                        </View>
+                    }
                     <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', }}>
                         <TouchableOpacity
                             onPress={onPessDeleteQuestionYes}
@@ -82,7 +92,8 @@ const styles = StyleSheet.create({
     modalView: {
         // backgroundColor: 'white',
         borderRadius: 20,
-        padding: 35,
+        padding: responsiveSize(10),
+        maxWidth: responsiveSize(150),
         alignItems: 'center',
         borderColor: '#f25c54',
         borderWidth: 0.3,
@@ -103,7 +114,7 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
         fontSize: 18,
         color: 'white',
-        marginBottom: responsiveHeight(0.5)
+        marginBottom: responsiveHeight(1)
     },
     modalQuestion: {
         margin: 5,

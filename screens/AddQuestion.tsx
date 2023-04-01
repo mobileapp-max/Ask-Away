@@ -92,13 +92,9 @@ const AddQ = ({ navigation }) => {
       return (
         <TouchableOpacity
           style={{
-            // alignSelf: 'flex-end',
-            // justifyContent: 'flex-end',
-            // alignContent: 'flex-end',
             position: 'absolute',
             top: responsiveHeight(34),
             left: responsiveWidth(80),
-            // flexDirection: 'column-reverse'
           }}
           onPress={handleClearText}>
           <Ionicons
@@ -113,21 +109,19 @@ const AddQ = ({ navigation }) => {
     }
   };
 
-  const onPressTrashCan = (itemId) => {
+  const [deleteModalVisible, setDeleteModalVisible] = useState(false);
+
+  const onPressTrashCan = () => {
     setDeleteModalVisible(!deleteModalVisible)
-    setQuestionIdToDelete(itemId)
-    console.log(itemId)
   }
 
   const onPressDeleteQuestionNo = () => {
     setDeleteModalVisible(false)
-    setQuestionIdToDelete(null)
   }
 
   const onPessDeleteQuestionYes = () => {
     setDeleteModalVisible(false)
-    onPressDeleteQuestion({ questionId: questionIdToDelete })
-    console.log(questionIdToDelete)
+    onPressInitiateAddQuestin()
   }
 
 
@@ -154,6 +148,7 @@ const AddQ = ({ navigation }) => {
       >
         <ModalToDelete
           text={'Add Question?'}
+          text2={text}
           deleteModalVisible={deleteModalVisible}
           onPressDeleteQuestionNo={onPressDeleteQuestionNo}
           onPessDeleteQuestionYes={onPessDeleteQuestionYes}
@@ -220,15 +215,20 @@ const AddQ = ({ navigation }) => {
               errorMessage={'Character limit - 300'} />
           }
           <View style={styles.button}>
-            <ButtonQApp
-              fontSize={responsiveFontSize(35)}
-              disabled={disableButton}
-              title={'Add'}
-              onPress={onPressInitiateAddQuestin}
-              height={responsiveHeight(8)}
-              color={disableButton === true ? '#f38375' : '#52b788'}
-              color2={disableButton === true ? '#f38375' : '#52b788'}
-            />
+            {
+              disableButton === true ?
+                null
+                :
+                <ButtonQApp
+                  fontSize={responsiveFontSize(35)}
+                  disabled={disableButton}
+                  title={'Add'}
+                  onPress={onPressTrashCan}
+                  height={responsiveHeight(8)}
+                  color={disableButton === true ? '#f38375' : '#52b788'}
+                  color2={disableButton === true ? '#f38375' : '#52b788'}
+                />
+            }
           </View>
         </ScrollView>
       </View >

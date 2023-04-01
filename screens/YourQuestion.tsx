@@ -57,9 +57,6 @@ const Profile = ({ navigation }) => {
     }
 
 
-
-
-
     useEffect(() => {
         const answer_1 = selectedQuestionModal?.answer_1
         const answer_2 = selectedQuestionModal?.answer_2
