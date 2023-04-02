@@ -147,7 +147,7 @@ const ProfileModal = ({ children, profileModalVisible, onPressDismissProfileModa
                                             paddingBottom: responsiveHeight(0.5),
                                         }}
                                     />
-                                    <Text style={[styles.text_footer, {
+                                    {/* <Text style={[styles.text_footer, {
                                     }]}>
                                         {'Current Password'}
                                     </Text>
@@ -218,9 +218,9 @@ const ProfileModal = ({ children, profileModalVisible, onPressDismissProfileModa
                                                 />
                                             }
                                         </TouchableOpacity>
-                                    </View>
+                                    </View> */}
                                 </View>
-                                <ButtonQApp
+                                {/* <ButtonQApp
                                     title={'Update Password'}
                                     onPress={() => updateUsersPassword({
                                         currentPassword: data?.currentPassword,
@@ -230,7 +230,7 @@ const ProfileModal = ({ children, profileModalVisible, onPressDismissProfileModa
                                     color={'#52b788'}
                                     color2={'#52b788'}
                                     fontSize={responsiveFontSize(20)}
-                                />
+                                /> */}
                                 <ButtonQApp
                                     title={'Delete Account'}
                                     onPress={
