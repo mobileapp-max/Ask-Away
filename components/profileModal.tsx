@@ -62,6 +62,7 @@ const ProfileModal = ({ children, profileModalVisible, onPressDismissProfileModa
     }
     const onPressOpenDeleteAccountModal = () => {
         setDeleteAccountModalVisible(!deleteAccountModalVisible)
+
     }
     const onPressDeleteQuestionNo = () => {
         setLogOutModalVisible(false)
@@ -74,9 +75,7 @@ const ProfileModal = ({ children, profileModalVisible, onPressDismissProfileModa
             logoutUser()
         }
         if (deleteAccountModalVisible === true) {
-            deleteAuthUser()
-            setDeleteAccountModalVisible(false)
-            onPressDismissProfileModal()
+            deleteAuthUser().then(logoutUser)
         }
     }
 
@@ -235,8 +234,8 @@ const ProfileModal = ({ children, profileModalVisible, onPressDismissProfileModa
                                 <ButtonQApp
                                     title={'Delete Account'}
                                     onPress={
-                                        // onPressOpenDeleteAccountModal}
-                                        () => deleteAuthUser()}
+                                        onPressOpenDeleteAccountModal}
+                                    // () => deleteAuthUser()}
                                     height={responsiveHeight(4)}
                                     color={'#f25c54'}
                                     color2={'#f25c54'}
