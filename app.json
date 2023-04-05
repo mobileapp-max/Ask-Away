@@ -37,6 +37,16 @@
         "projectId": "d1b7ca59-99b6-4d60-aa1a-66111078066a"
       }
     },
-    "owner": "max_qapp"
+    "owner": "max_qapp",
+    "plugins": [
+      [
+        "expo-build-properties",
+        {
+          "ios": {
+            "useFrameworks": "static"
+          }
+        }
+      ]
+    ]
   }
 }
