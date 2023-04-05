@@ -23,7 +23,7 @@
     "@react-native-community/art": "^1.2.0",
     "@react-native-community/blur": "^4.3.0",
     "@react-native-community/masked-view": "^0.1.11",
-    "@react-native-firebase/app": "^17.3.1",
+    "@react-native-firebase/app": "^16.4.6",
     "@react-native-firebase/app-check": "^16.4.6",
     "@react-native-firebase/firestore": "^16.4.6",
     "@react-navigation/bottom-tabs": "^6.3.3",
