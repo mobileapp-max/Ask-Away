@@ -8,7 +8,8 @@ import {
   StatusBar,
   ScrollView,
   Modal,
-  Animated
+  Animated,
+  ActivityIndicator
 } from 'react-native';
 import { useContext } from 'react';
 import { QuestionsContext } from '../contexts/questions-context-provider';
@@ -98,6 +99,7 @@ const QuestionScreen = ({ navigation }) => {
               alignItems: "center",
               justifyContent: 'center'
             }}>
+              <ActivityIndicator size="large" color="#fff" />
             <Text
               adjustsFontSizeToFit={true}
               // numberOfLines={10}

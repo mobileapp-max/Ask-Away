@@ -2,18 +2,12 @@ import React, { useCallback, useState } from 'react';
 import {
     View,
     Text,
-    Button,
     TouchableOpacity,
-    Dimensions,
     TextInput,
     Platform,
     StyleSheet,
-    ScrollView,
-    StatusBar,
     Alert,
-
 } from 'react-native';
-import { LinearGradient } from 'expo-linear-gradient';
 import Feather from 'react-native-vector-icons/Feather';
 import { MaterialIcons } from '@expo/vector-icons';
 import { signUpNewUser } from '../api/auth-api';
@@ -26,39 +20,21 @@ import fonts from '../scripts/fonts';
 const SignUp = ({ navigation }) => {
 
     const [data, setData] = useState({
-        username: '',
-        password: '',
         email: '',
-        check_textInputChange: false,
+        password: '',
         secureTextEntry: true,
     });
 
-    const textInputChange = (val) => {
-        if (val.length !== 0) {
-            setData({
-                ...data,
-                username: val,
-                check_textInputChange: true
-            });
-        } else {
-            setData({
-                ...data,
-                username: val,
-                check_textInputChange: false
-            });
-        }
-    }
-
-    const handlePasswordChange = (val) => {
-        setData({
-            ...data,
-            password: val
-        });
-    }
     const handleEmailChange = (val) => {
         setData({
             ...data,
             email: val
+        });
+    }
+    const handlePasswordChange = (val) => {
+        setData({
+            ...data,
+            password: val
         });
     }
 
@@ -69,40 +45,31 @@ const SignUp = ({ navigation }) => {
         });
     }
 
-    const updateConfirmSecureTextEntry = () => {
-        setData({
-            ...data,
-            confirm_secureTextEntry: !data.confirm_secureTextEntry
-        });
-    }
-
     const onPressSignUp = useCallback(
         async () => {
             if (data?.email && data?.password) {
                 await signUpNewUser({ email: data?.email, password: data?.password }).then((response) => {
-                    // console.log(response)
                     response?.error && Alert.alert(response?.error)
                 })
             }
             else {
-                Alert.alert('Missing email or password')
+                Alert.alert('Missing email or password.')
             }
         },
-        [data],
+        [data]
     )
     const onPressLogIn = useCallback(
         async () => {
             if (data?.email && data?.password) {
                 await loginUser({ email: data?.email, password: data?.password }).then((response) => {
-                    // console.log(response)
                     response?.error && Alert.alert(response?.error)
                 })
             }
             else {
-                Alert.alert('Missing email or password')
+                Alert.alert('Missing email or password.')
             }
         },
-        [data],
+        [data]
     )
     const onPressResetPassword = async () => {
         if (data?.email) {
@@ -115,41 +82,41 @@ const SignUp = ({ navigation }) => {
             }
         }
         else {
-            Alert.alert('Enter the email.')
+            Alert.alert('Email must be entered.')
         }
     }
-
 
     return (
         <View
             style={styles.container}>
-            <Text style={[styles.text_footer, {
-            }]}>Email</Text>
+            <Text style={styles.text_footer}>
+                {'Email'}
+                </Text>
             <View style={styles.action}>
                 <MaterialIcons
                     name="alternate-email"
-                    size={24}
+                    size={30}
                     color="#f25c54"
                 />
                 <TextInput
-                    placeholder="Your Email"
+                    placeholder="Enter Email"
                     style={styles.textInput}
                     autoCapitalize="none"
                     placeholderTextColor={'#f5e2c9'}
                     onChangeText={val => handleEmailChange(val)}
                 />
             </View>
-            <Text style={[styles.text_footer, {
-                marginTop: 35
-            }]}>Password</Text>
+            <Text style={[styles.text_footer, {marginTop: 35}]}>
+                {'Password'}
+                </Text>
             <View style={styles.action}>
                 <Feather
                     name="lock"
                     color="#f25c54"
-                    size={20}
+                    size={28}
                 />
                 <TextInput
-                    placeholder="Your Password"
+                    placeholder="Enter Password"
                     secureTextEntry={data.secureTextEntry ? true : false}
                     style={styles.textInput}
                     autoCapitalize="none"
@@ -176,18 +143,12 @@ const SignUp = ({ navigation }) => {
             </View>
             <TouchableOpacity
                 style={{
-                    marginTop: responsiveHeight(3),
-                    // flexDirection: 'row-reverse'
+                    marginTop: responsiveHeight(1),
                 }}
                 onPress={onPressResetPassword}
             >
                 <Text
-                    style={{
-                        fontWeight: '600',
-                        fontStyle: 'italic',
-                        textDecorationLine: 'underline',
-                        color: '#f5e2c9'
-                    }}
+                    style={styles.resetPassword}
                 >{'Forgot Password'}</Text>
             </TouchableOpacity>
             <View style={styles.button}>
@@ -195,35 +156,30 @@ const SignUp = ({ navigation }) => {
                     style={styles.signIn}
                     onPress={onPressLogIn}
                 >
-                    <LinearGradient
-                        colors={["#52b788", "#52b788"]}
-                        style={styles.signIn}
+                    <View
+                        style={[styles.signIn,{ backgroundColor: data?.email && data?.password ? '#52b788' : '#52b788' } ]}
                     >
                         <Text style={[styles.textSign, {
                             color: '#fff'
-                        }]}>Log In</Text>
-                    </LinearGradient>
+                        }]}>{'Log In'}</Text>
+                    </View>
                 </TouchableOpacity>
                 <TouchableOpacity
                     style={styles.signIn}
                     onPress={onPressSignUp}
                 >
-                    <LinearGradient
-                        colors={["#f38375", "#f38375"]}
-                        style={styles.signIn}
+                    <View
+                          style={[styles.signIn,{ backgroundColor: data?.email && data?.password ? '#f38375' : '#f38375' } ]}
                     >
                         <Text style={[styles.textSign, {
                             color: '#fff'
-                        }]}>Sign Up</Text>
-                    </LinearGradient>
+                        }]}>{'Sign Up'}</Text>
+                    </View>
                 </TouchableOpacity>
             </View>
             <View style={styles.textPrivate}>
                 <Text style={styles.color_textPrivate}>
-                    By signing up you agree to our
-                    <Text style={{ fontWeight: 'bold' }}>{" "}Terms of Service</Text>
-                    <Text>{" "}and</Text>
-                    <Text style={{ fontWeight: 'bold' }}>{" "}Privacy Policy.</Text>
+                    {'By signing up you agree to our Terms of Service and Privacy Policy.'}
                 </Text>
             </View>
         </View>
@@ -235,31 +191,11 @@ export default SignUp;
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        // paddingTop: responsiveHeight(0)
-    },
-    header: {
-        flex: 0.1,
-        justifyContent: 'flex-end',
-        paddingHorizontal: 20,
-        paddingBottom: 10
-    },
-    footer: {
-        flex: 3,
-        backgroundColor: '#fff',
-        borderTopLeftRadius: 30,
-        borderTopRightRadius: 30,
-        paddingHorizontal: 20,
-        paddingVertical: 30
-    },
-    text_header: {
-        color: '#fff',
-        fontWeight: 'bold',
-        fontSize: 30
     },
     text_footer: {
         ...fonts.note,
         color: 'white',
-        fontSize: 18,
+        fontSize: 20,
         fontWeight: 'bold'
     },
     action: {
@@ -270,10 +206,12 @@ const styles = StyleSheet.create({
         paddingBottom: 5
     },
     textInput: {
+        ...fonts.note,
         flex: 1,
         marginTop: Platform.OS === 'ios' ? 0 : -12,
-        paddingLeft: 10,
+        paddingLeft: 5,
         color: 'white',
+        fontSize: '17',
     },
     button: {
         alignItems: 'center',
@@ -285,22 +223,30 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 10,
-        margin: 5
+        margin: 5,
     },
     textSign: {
         ...fonts.note,
-        fontSize: 18,
+        fontSize: responsiveHeight(4),
         fontWeight: 'bold'
     },
     textPrivate: {
         flexDirection: 'row',
         flexWrap: 'wrap',
         marginTop: responsiveHeight(1),
-        // marginHorizontal: 10,
         alignSelf: 'center'
     },
     color_textPrivate: {
+        ...fonts.note,
         color: 'white',
         textAlign: 'center'
+    },
+    resetPassword: {
+        fontWeight: '700',
+        fontStyle: 'italic',
+        textDecorationLine: 'underline',
+        color: '#fff',
+        fontSize: '14',
+        ...fonts.note,
     }
 });

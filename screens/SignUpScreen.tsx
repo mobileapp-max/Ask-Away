@@ -1,32 +1,16 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
     View,
     Text,
-    Button,
-    TouchableOpacity,
-    Dimensions,
-    TextInput,
-    Platform,
     StyleSheet,
     ScrollView,
-    StatusBar,
-
 } from 'react-native';
-import SwitchSelector from 'react-native-switch-selector'
 import SignUp from '../components/signUp';
-import SignIn from '../components/signIn';
-import { responsiveFontSize, responsiveHeight, responsiveSize } from '../scripts/constants';
+import { responsiveFontSize, responsiveSize } from '../scripts/constants';
 import fonts from '../scripts/fonts';
 
 
 const SignUpScreen = ({ navigation }) => {
-
-    // const options = [
-    //     { label: 'Sign Up', value: 'Sign Up' },
-    //     { label: 'Sign In', value: 'Sign In' },
-    // ];
-    // const [switchSelectorValue, setSwitchSelectorValue] = useState('Sign Up')
-
     return (
         <View style={styles.container}>
             <View style={styles.header}>
@@ -40,26 +24,9 @@ const SignUpScreen = ({ navigation }) => {
                         top: responsiveSize(4)
                     }}
                 >{'Join In'}</Text>
-                {/* <Text style={styles.text_header}>Join in!</Text> */}
-                {/* <SwitchSelector
-                    options={options}
-                    textColor={"#e32f45"}
-                    selectedColor={'white'}
-                    buttonColor={"#e32f45"}
-                    borderColor={"white"}
-                    hasPadding
-                    initial={0}
-                    height={60}
-                    valuePadding={1}
-                    bold={true}
-                    borderWidth={2}
-                    borderRadius={15}
-                    onPress={value => setSwitchSelectorValue(value)}
-                /> */}
             </View>
             <ScrollView style={styles.footer}>
                 <SignUp />
-                {/* {switchSelectorValue === "Sign Up" ? <SignUp /> : <SignIn />} */}
             </ScrollView>
         </View>
     );

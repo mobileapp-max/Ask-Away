@@ -14,7 +14,7 @@ import {
 } from 'react-native';
 import { useContext } from 'react';
 import { QuestionsContext } from '../contexts/questions-context-provider';
-import { responsiveFontSize, responsiveHeight, responsiveSize, responsiveWidth } from '../scripts/constants';
+import { responsiveFontSize, responsiveHeight, responsiveWidth } from '../scripts/constants';
 import { CharacterLimit } from '../components/character-limit/character-limit';
 import { BlurView } from 'expo-blur';
 import ButtonQApp from '../components/buttonQApp';
