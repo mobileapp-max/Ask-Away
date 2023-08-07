@@ -5,7 +5,7 @@ import Entypo from 'react-native-vector-icons/Entypo';
 import AddQ from '../screens/AddQuestion';
 import { LogInStackScreen } from './logInSignUpNav'
 import { FontAwesome } from '@expo/vector-icons';
-import QuestionScreen from '../screens/QuestionScreen2';
+import QuestionScreen from '../screens/AnswerQuestions';
 import { responsiveFontSize, responsiveHeight, responsiveSize, responsiveWidth } from '../scripts/constants';
 import { Octicons } from '@expo/vector-icons';
 import { UserContext } from '../contexts/user-context-provider';

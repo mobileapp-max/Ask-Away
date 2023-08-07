@@ -1,10 +1,9 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Text,
   TouchableOpacity,
   StyleSheet,
-  Dimensions,
   StatusBar,
   ScrollView,
   Modal,
@@ -99,25 +98,22 @@ const QuestionScreen = ({ navigation }) => {
               alignItems: "center",
               justifyContent: 'center'
             }}>
-              <ActivityIndicator size="large" color="#fff" />
             <Text
               adjustsFontSizeToFit={true}
-              // numberOfLines={10}
               style={{
                 ...fonts.note,
                 textAlign: 'center',
                 color: 'white',
                 fontSize: responsiveFontSize(20),
-                // fontWeight: 'bold',
-
-                // paddingHorizontal: responsiveWidth(1),
-                // marginBottom: responsiveHeight(1)
               }}
             >
-              {answeredQuestion ?
+              {question ? 
+              answeredQuestion ?
                 answeredQuestion?.question
                 :
-                question?.question}
+                question?.question
+              : 
+              <ActivityIndicator size="large" color="#fff" />}
             </Text>
           </View>
           <View style={{
