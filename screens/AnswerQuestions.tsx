@@ -20,14 +20,17 @@ import { UserContext } from '../contexts/user-context-provider';
 import fonts from '../scripts/fonts';
 
 
-const QuestionScreen = ({ navigation }) => {
+const AnswerQuestionScreen = ({ navigation }) => {
 
   const { user } = useContext(UserContext)
-  const { question, onPressAddResponse, answeredQuestion, setAnsweredQuestion } = useContext(QuestionsContext)
+  const { question, onPressAddResponse, answeredQuestion, setAnsweredQuestion, addQuestionIdToListOfViewedIds } = useContext(QuestionsContext)
   const [answerWidth, setAnswerWidth] = useState(45)
   const [buttonPressed, setButtonPressed] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
   const [nextButton, setNextButton] = useState(new Animated.Value(-10))
+  const [isConditionTrue, setIsConditionTrue] = useState(true)
+  const color1 = "#f79d65"
+  const color2 ='#f4845f'
 
   const questionResult_1 = function () {
     setAnsweredQuestion(question)
@@ -46,14 +49,19 @@ const QuestionScreen = ({ navigation }) => {
   const onPressReport = () => {
     setModalVisible(true)
     setTimeout(() => {
-      setModalVisible(false)
       setButtonPressed(false)
       setAnswerWidth(45)
-    }, 1500);
-    onPressAddResponse({ question_id: question?.id, response_1: '0', response_2: '0', user_id: user?.uid || 'anonymous', report: '1' })
+      addQuestionIdToListOfViewedIds({questionId: question?.id})
+      setIsConditionTrue(!isConditionTrue)
+      onPressAddResponse({ question_id: question?.id, response_1: '0', response_2: '0', user_id: user?.uid || 'anonymous', report: '1' })
+      setModalVisible(false)
+      setAnsweredQuestion(null)
+    },1500)
   }
 
   const nextQuestion = function () {
+    addQuestionIdToListOfViewedIds({questionId: question?.id})
+    setIsConditionTrue(!isConditionTrue)
     if (buttonPressed) {
       setAnsweredQuestion(null)
       setButtonPressed(false)
@@ -74,25 +82,19 @@ const QuestionScreen = ({ navigation }) => {
           </Text>
           <Text
             style={{
-              ...fonts.note,
               ...styles.text_header,
               paddingTop: 0,
               fontSize: responsiveFontSize(50),
               top: responsiveHeight(-1),
-              color: 'white',
             }}>
             {'Questions'}
           </Text>
         </View>
       </View>
       <ScrollView>
-        <View style={{
-          ...styles.inputTextContainer,
-          height: responsiveHeight(45),
-          width: responsiveWidth(90)
-        }}>
+        <View style={{...styles.inputTextContainer, backgroundColor: isConditionTrue ? color1 : color2,}}>
           <View
-            style={{
+            style={{ 
               flex: 1,
               alignContent: "center",
               alignItems: "center",
@@ -103,7 +105,7 @@ const QuestionScreen = ({ navigation }) => {
               style={{
                 ...fonts.note,
                 textAlign: 'center',
-                color: 'white',
+                color: '#fff',
                 fontSize: responsiveFontSize(20),
               }}
             >
@@ -113,7 +115,7 @@ const QuestionScreen = ({ navigation }) => {
                 :
                 question?.question
               : 
-              <ActivityIndicator size="large" color="#fff" />}
+              <ActivityIndicator size="large" color={'#fff'} />}
             </Text>
           </View>
           <View style={{
@@ -134,15 +136,15 @@ const QuestionScreen = ({ navigation }) => {
                 <AntDesign
                   name="frown"
                   size={30}
-                  color='white'
+                  color= '#fff'
                   style={{ margin: 3 }} />
                 <Text
                   style={{
                     ...fonts.note,
-                    color: "white",
                     fontWeight: "bold",
                     padding: 7,
-                    fontSize: responsiveFontSize(20)
+                    fontSize: responsiveFontSize(20),
+                    color: '#fff',
                   }}
                 >{'Report'}</Text>
               </TouchableOpacity>
@@ -175,7 +177,7 @@ const QuestionScreen = ({ navigation }) => {
                           <Text
                             style={{
                               ...fonts.note,
-                              color: "white",
+                              color: '#fff',
                               fontWeight: "bold",
                               fontSize: responsiveFontSize(20)
                             }}
@@ -184,8 +186,7 @@ const QuestionScreen = ({ navigation }) => {
                           <AntDesign
                             name="caretright"
                             size={38}
-                            color='white'
-                          />
+                            color= '#fff'/>
                         </Animatable.View>
                       </>
                       :
@@ -198,7 +199,7 @@ const QuestionScreen = ({ navigation }) => {
                         <Text
                           style={{
                             ...fonts.note,
-                            color: "white",
+                            color: '#fff',
                             fontWeight: "bold",
                             fontSize: responsiveFontSize(20)
                           }}
@@ -207,8 +208,8 @@ const QuestionScreen = ({ navigation }) => {
                         <AntDesign
                           name="caretright"
                           size={38}
-                          color='white'
-                        />
+                          color= '#fff'
+                          />
                       </View>
                   }
                 </Animated.View>
@@ -314,7 +315,7 @@ const QuestionScreen = ({ navigation }) => {
   );
 };
 
-export default QuestionScreen;
+export default AnswerQuestionScreen;
 
 const styles = StyleSheet.create({
   container: {
@@ -348,12 +349,13 @@ const styles = StyleSheet.create({
     fontWeight: 'bold'
   },
   inputTextContainer: {
+    height: responsiveHeight(45),
+    width: responsiveWidth(90),
     marginTop: responsiveWidth(10),
     alignSelf: 'center',
     padding: responsiveWidth(3),
     color: '#e32f45',
-    borderColor: '#FA7465',
-    backgroundColor: '#f4845f',
+    // borderColor: '#FA7465',
     borderRadius: 20,
     borderBottomRightRadius: 20,
     borderTopRightRadius: 8,
@@ -369,6 +371,7 @@ const styles = StyleSheet.create({
     shadowRadius: 3.5,
     elevation: 5,
   },
+  
   centeredView: {
     flex: 1,
     justifyContent: 'center',

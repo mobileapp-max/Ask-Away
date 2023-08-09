@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 import {
   View,
   Text,
@@ -50,25 +50,16 @@ const AddQ = ({ navigation }) => {
     else setDisableButton(true)
   }, [text])
 
-
   function handleKeyPress(e) {
-    // Log the key code of the pressed key
-    // console.log('Key pressed:', e.nativeEvent.key);
-
-    // Prevent the user from typing the letter 'a'
     if (e.nativeEvent.key === 'Return') {
       e.preventDefault();
     }
   }
 
-  const [editedText, setEditedText] = useState('')
-
   function removeLineBreaks(str) {
     return str.replace(/\n/g, " ").replace(/\s+/g, " ");
   }
   const newString = removeLineBreaks(text);
-
-  // console.log(newString)
 
   useEffect(() => {
     function removeLineBreaks(text) {
@@ -78,10 +69,8 @@ const AddQ = ({ navigation }) => {
 
 
   const handleOnSubmitEditing = () => {
-    // Dismiss the keyboard when the return key is pressed
     Keyboard.dismiss();
   };
-
 
   const handleClearText = () => {
     setText('');
@@ -100,7 +89,7 @@ const AddQ = ({ navigation }) => {
           <Ionicons
             name={Platform.OS === 'ios' ? 'ios-close-circle' : 'md-close-circle'}
             size={30}
-            color="#f25c54"
+            color="#fff"
           />
         </TouchableOpacity>
       );
@@ -110,7 +99,6 @@ const AddQ = ({ navigation }) => {
   };
 
   const [deleteModalVisible, setDeleteModalVisible] = useState(false);
-
   const onPressTrashCan = () => {
     setDeleteModalVisible(!deleteModalVisible)
   }
@@ -124,7 +112,15 @@ const AddQ = ({ navigation }) => {
     onPressInitiateAddQuestin()
   }
 
+  const [fontSize, setFontSize] = useState(responsiveFontSize(30)); // Default font size
 
+  const handleChangeText = text => {
+    setText(text)
+    const newTextLength = text.length;
+    const decreaseFactor = Math.floor(newTextLength / 20); // Decrease font size for every 60 characters
+    const newFontSize = Math.max(responsiveFontSize(35) - decreaseFactor, 10); // Minimum font size of 10
+    setFontSize(newFontSize);
+  };
 
   return (
     <View style={styles.container}>
@@ -140,18 +136,18 @@ const AddQ = ({ navigation }) => {
             fontSize: responsiveFontSize(30),
             top: responsiveHeight(0)
           }}>
-          {'Yes-No Questions'}
+          {'Yes-No Question'}
         </Text>
       </View>
       <View
         style={styles.footer}
       >
         <ModalToDelete
-          text={'Add Question?'}
+          text={'Ask this Question?'}
           text2={text}
           deleteModalVisible={deleteModalVisible}
-          onPressDeleteQuestionNo={onPressDeleteQuestionNo}
           onPessDeleteQuestionYes={onPessDeleteQuestionYes}
+          onPressDeleteQuestionNo={onPressDeleteQuestionNo}
         />
         <Modal
           animationType="fade"
@@ -165,7 +161,7 @@ const AddQ = ({ navigation }) => {
             style={styles.centeredView}>
             <View style={styles.modalView}>
               <Text style={styles.modalText}>
-                {'Question Added!'}
+                {'Question Created!'}
               </Text>
             </View>
           </BlurView>
@@ -189,6 +185,7 @@ const AddQ = ({ navigation }) => {
               alignContent: 'center',
             }}>
             <TextInput
+            textAlign={'center'}
               onKeyPress={handleKeyPress}
               onSubmitEditing={handleOnSubmitEditing}
               ref={inputRef}
@@ -196,16 +193,16 @@ const AddQ = ({ navigation }) => {
               placeholder={"Type your question..."}
               multiline={true}
               maxLength={300}
-              placeholderTextColor='white'
+              placeholderTextColor='#f5e2c9'
               secureTextEntry={false}
               style={{
                 ...fonts.note,
                 color: 'white',
-                fontSize: text == '' ? responsiveFontSize(35) : responsiveFontSize(20),
+                fontSize: fontSize,
                 fontWeight: 'bold',
               }}
               autoCapitalize="sentences"
-              onChangeText={setText}
+              onChangeText={handleChangeText}
             />
             {renderClearButton()}
           </Pressable>
@@ -222,11 +219,11 @@ const AddQ = ({ navigation }) => {
                 <ButtonQApp
                   fontSize={responsiveFontSize(35)}
                   disabled={disableButton}
-                  title={'Add'}
+                  title={'Ask Away'}
                   onPress={onPressTrashCan}
                   height={responsiveHeight(8)}
-                  color={disableButton === true ? '#f38375' : '#52b788'}
-                  color2={disableButton === true ? '#f38375' : '#52b788'}
+                  color='#52b788'
+                  color2='#52b788'
                 />
             }
           </View>

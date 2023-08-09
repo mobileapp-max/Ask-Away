@@ -13,7 +13,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { signUpNewUser } from '../api/auth-api';
 import { loginUser } from '../api/auth-api'
 import { sendEmailWithPassword } from '../api/auth-api'
-import { responsiveHeight } from '../scripts/constants';
+import { responsiveHeight, responsiveSize } from '../scripts/constants';
 import fonts from '../scripts/fonts';
 
 
@@ -227,7 +227,7 @@ const styles = StyleSheet.create({
     },
     textSign: {
         ...fonts.note,
-        fontSize: responsiveHeight(4),
+        fontSize: responsiveSize(14),
         fontWeight: 'bold'
     },
     textPrivate: {
