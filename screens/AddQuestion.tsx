@@ -67,7 +67,6 @@ const AddQ = ({ navigation }) => {
     }
   }, [text])
 
-
   const handleOnSubmitEditing = () => {
     Keyboard.dismiss();
   };
@@ -143,7 +142,7 @@ const AddQ = ({ navigation }) => {
         style={styles.footer}
       >
         <ModalToDelete
-          text={'Ask this Question?'}
+          text={'Add this Question?'}
           text2={text}
           deleteModalVisible={deleteModalVisible}
           onPessDeleteQuestionYes={onPessDeleteQuestionYes}
@@ -185,14 +184,14 @@ const AddQ = ({ navigation }) => {
               alignContent: 'center',
             }}>
             <TextInput
-            textAlign={'center'}
+            textAlign={ text ? 'center' : "right"}
               onKeyPress={handleKeyPress}
               onSubmitEditing={handleOnSubmitEditing}
               ref={inputRef}
               value={newString}
-              placeholder={"Type your question..."}
+              placeholder={"Add your question..."}
               multiline={true}
-              maxLength={300}
+              maxLength={250}
               placeholderTextColor='#f5e2c9'
               secureTextEntry={false}
               style={{
@@ -207,9 +206,9 @@ const AddQ = ({ navigation }) => {
             {renderClearButton()}
           </Pressable>
           {
-            text?.length >= 300 &&
+            text?.length >= 250 &&
             <CharacterLimit
-              errorMessage={'Character limit - 300'} />
+              errorMessage={'Character limit - 250'} />
           }
           <View style={styles.button}>
             {
