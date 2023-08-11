@@ -32,6 +32,7 @@
     "@react-navigation/native": "6.0.0",
     "@react-navigation/native-stack": "6.0.0",
     "@react-navigation/stack": "6.0.0",
+    "@stackbuilders/react-native-spotlight-tour": "^2.1.0",
     "apollo-link-http": "^1.5.17",
     "expo": "^48.0.0",
     "expo-asset": "~8.9.1",

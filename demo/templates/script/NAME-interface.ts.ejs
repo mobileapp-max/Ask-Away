@@ -1,0 +1,16 @@
+export default interface <%= props.pascalCaseName %>Interface {
+  ({
+    incomingSample,
+  }: {
+    /*
+     * Customize this note to describe the incomingSample prop.
+     * It will appear as TypeScript autocomplete helper text when calling this function.
+     */
+    incomingSample: string
+  }): {
+    /*
+     * Customize this note to describe what is being returned by this function.
+     */
+    outputVariableFromFunction: string
+  }
+}

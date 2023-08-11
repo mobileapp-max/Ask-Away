@@ -1,0 +1,10 @@
+import React, { memo } from "react"
+import {  <%= props.pascalCaseName %>Presentation } from "./<%= props.kebabCaseName %>-presentation"
+import { <%= props.pascalCaseName %>Props } from "./<%= props.kebabCaseName %>-interface"
+import { use<%= props.pascalCaseName %>Functions } from "./<%= props.kebabCaseName %>-functions"
+
+export const <%= props.pascalCaseName %> = memo((props: <%= props.pascalCaseName %>Props): JSX.Element => {
+  const <%= props.pascalCaseName %>FunctionsResults = use<%= props.pascalCaseName %>Functions(props)
+
+  return <<%= props.pascalCaseName %>Presentation  { ...<%= props.pascalCaseName %>FunctionsResults } />
+})

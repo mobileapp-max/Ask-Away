@@ -1,0 +1,15 @@
+/*
+ * Describe the new script here...
+ */
+
+import <%= props.pascalCaseName %>Interface from './<%= props.kebabCaseName %>-interface'
+
+/**
+ * Write a JSDoc explanation of your util here
+ */
+export const <%= props.pascalCaseName %> = (props: <%= props.pascalCaseName %>Interface['arguments']) => {
+  const helloWorld = 'Hello World'
+  return {
+    outputVariableFromFunction: incomingSample || helloWorld,
+  }
+}

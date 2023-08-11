@@ -1,16 +1,10 @@
-export const COLORS = {
-    white: '#fff',
-    black: '#000',
-    1: '#03071E',
-    2: '#370617',
-    3: '#6A040F',
-    4: '#9D0208',
-    5: '#D00000',
-    6: '#DC2F02',
-    7: '#E85D04',
-    8: '#F48C06',
-    9: '#FAA307',
-    10: '#FFBA08',
-
-
+export const colors = {
+    orange1: '#f79d65',
+    orange2: '#f4845f',
+    backgroundOrange: '#f7b267',
+    red: '#f25c54',
+    yesGreen: '#52b788',
+    noRed: '#f38375',
+    black: '#000000',
+    white: '#ffffff'
 }

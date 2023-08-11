@@ -1,153 +1,160 @@
-import React, { useEffect, useState, Component, useCallback } from 'react';
+import React, { useEffect, useState, Component, useCallback } from "react";
 import {
-    View,
-    Text,
-    StyleSheet,
-    Pressable,
-    Modal,
-    TextInput,
-    TouchableOpacity,
-    TouchableWithoutFeedback,
-    Alert,
-    Platform
-} from 'react-native';
-import { responsiveHeight, responsiveWidth, responsiveFontSize } from '../scripts/constants';
-import { BlurView } from 'expo-blur';
-import ButtonQApp from './buttonQApp';
-import { deleteAuthUser, logoutUser, updateUsersPassword } from '../api/auth-api';
-import { Feather } from '@expo/vector-icons';
-import { Ionicons } from '@expo/vector-icons';
-import fonts from '../scripts/fonts';
-import ModalToDelete from './modalToDelete';
+  View,
+  Text,
+  StyleSheet,
+  Pressable,
+  Modal,
+  TextInput,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+  Alert,
+  Platform,
+} from "react-native";
+import {
+  responsiveHeight,
+  responsiveWidth,
+  responsiveFontSize,
+} from "../scripts/constants";
+import { BlurView } from "expo-blur";
+import ButtonQApp from "./buttonQApp";
+import {
+  deleteAuthUser,
+  logoutUser,
+  updateUsersPassword,
+} from "../api/auth-api";
+import { Feather } from "@expo/vector-icons";
+import { Ionicons } from "@expo/vector-icons";
+import fonts from "../scripts/fonts";
+import ModalToDelete from "./modalToDelete";
 
-
-const ProfileModal = ({ children, profileModalVisible, onPressDismissProfileModal }) => {
-
-    const [data, setData] = useState({
-        currentPassword: '',
-        newPassword: '',
-        secureTextEntry1: true,
-        secureTextEntry2: true,
+const ProfileModal = ({
+  children,
+  profileModalVisible,
+  onPressDismissProfileModal,
+}) => {
+  const [data, setData] = useState({
+    currentPassword: "",
+    newPassword: "",
+    secureTextEntry1: true,
+    secureTextEntry2: true,
+  });
+  const handleCurrentPasswordChange = (val) => {
+    setData({
+      ...data,
+      currentPassword: val,
     });
-    const handleCurrentPasswordChange = (val) => {
-        setData({
-            ...data,
-            currentPassword: val
-        });
-    }
-    const handleNewPasswordChange = (val) => {
-        setData({
-            ...data,
-            newPassword: val
-        });
-    }
-    const updateSecureTextEntry1 = () => {
-        setData({
-            ...data,
-            secureTextEntry1: !data.secureTextEntry1
-        });
-    }
-    const updateSecureTextEntry2 = () => {
-        setData({
-            ...data,
-            secureTextEntry2: !data.secureTextEntry2
-        });
-    }
+  };
+  const handleNewPasswordChange = (val) => {
+    setData({
+      ...data,
+      newPassword: val,
+    });
+  };
+  const updateSecureTextEntry1 = () => {
+    setData({
+      ...data,
+      secureTextEntry1: !data.secureTextEntry1,
+    });
+  };
+  const updateSecureTextEntry2 = () => {
+    setData({
+      ...data,
+      secureTextEntry2: !data.secureTextEntry2,
+    });
+  };
 
-    const [logOutModalVisible, setLogOutModalVisible] = useState(false);
-    const [deleteAccountModalVisible, setDeleteAccountModalVisible] = useState(false);
+  const [logOutModalVisible, setLogOutModalVisible] = useState(false);
+  const [deleteAccountModalVisible, setDeleteAccountModalVisible] =
+    useState(false);
 
-    const onPressOpenLogOutModal = () => {
-        setLogOutModalVisible(!logOutModalVisible)
+  const onPressOpenLogOutModal = () => {
+    setLogOutModalVisible(!logOutModalVisible);
+  };
+  const onPressOpenDeleteAccountModal = () => {
+    setDeleteAccountModalVisible(!deleteAccountModalVisible);
+  };
+  const onPressDeleteQuestionNo = () => {
+    setLogOutModalVisible(false);
+    setDeleteAccountModalVisible(false);
+  };
+  const onPessDeleteQuestionYes = () => {
+    if (logOutModalVisible === true) {
+      setLogOutModalVisible(false);
+      onPressDismissProfileModal();
+      logoutUser();
     }
-    const onPressOpenDeleteAccountModal = () => {
-        setDeleteAccountModalVisible(!deleteAccountModalVisible)
+    if (deleteAccountModalVisible === true) {
+      deleteAuthUser().then(logoutUser);
+    }
+  };
 
-    }
-    const onPressDeleteQuestionNo = () => {
-        setLogOutModalVisible(false)
-        setDeleteAccountModalVisible(false)
-    }
-    const onPessDeleteQuestionYes = () => {
-        if (logOutModalVisible === true) {
-            setLogOutModalVisible(false)
-            onPressDismissProfileModal()
-            logoutUser()
-        }
-        if (deleteAccountModalVisible === true) {
-            deleteAuthUser().then(logoutUser)
-        }
-    }
-
-    return (
-        <>
-            <Modal
-                animationType="fade"
-                transparent={true}
-                visible={profileModalVisible}
-            >
-                <ModalToDelete
-                    text={'Log Out?'}
-                    deleteModalVisible={logOutModalVisible}
-                    onPressDeleteQuestionNo={onPressDeleteQuestionNo}
-                    onPessDeleteQuestionYes={onPessDeleteQuestionYes}
-                />
-                <ModalToDelete
-                    text={'Delete Account?'}
-                    deleteModalVisible={deleteAccountModalVisible}
-                    onPressDeleteQuestionNo={onPressDeleteQuestionNo}
-                    onPessDeleteQuestionYes={onPessDeleteQuestionYes}
-                />
-                <BlurView
-                    intensity={8}
-                    style={{ flex: 1 }}
+  return (
+    <>
+      <Modal
+        animationType="fade"
+        transparent={true}
+        visible={profileModalVisible}
+      >
+        <ModalToDelete
+          text={"Log Out?"}
+          deleteModalVisible={logOutModalVisible}
+          onPressDeleteQuestionNo={onPressDeleteQuestionNo}
+          onPessDeleteQuestionYes={onPessDeleteQuestionYes}
+        />
+        <ModalToDelete
+          text={"Delete Account?"}
+          deleteModalVisible={deleteAccountModalVisible}
+          onPressDeleteQuestionNo={onPressDeleteQuestionNo}
+          onPessDeleteQuestionYes={onPessDeleteQuestionYes}
+        />
+        <BlurView intensity={8} style={{ flex: 1 }}>
+          <Pressable
+            onPress={() => onPressDismissProfileModal()}
+            style={styles.centeredView}
+          >
+            <TouchableWithoutFeedback>
+              <View style={styles.inputTextContainer}>
+                <TouchableOpacity
+                  onPress={() => onPressDismissProfileModal()}
+                  style={{
+                    position: "absolute",
+                    left: responsiveWidth(60),
+                    top: responsiveWidth(3.5),
+                    zIndex: 1,
+                  }}
                 >
-                    <Pressable
-                        onPress={() => onPressDismissProfileModal()}
-                        style={styles.centeredView}
-                    >
-                        <TouchableWithoutFeedback>
-
-                            <View style={styles.inputTextContainer}>
-                                <TouchableOpacity
-                                    onPress={() => onPressDismissProfileModal()}
-                                    style={{
-                                        position: 'absolute',
-                                        left: responsiveWidth(60),
-                                        top: responsiveWidth(3.5),
-                                        zIndex: 1
-                                    }}
-                                >
-                                    <Ionicons
-                                        name="ios-close-circle"
-                                        size={40}
-                                        color="#f25c54"
-                                    />
-                                </TouchableOpacity>
-                                {/* {children} */}
-                                <View
-                                    style={{
-                                        marginBottom: responsiveHeight(3),
-                                        // marginTop: responsiveHeight(3)
-                                    }}
-                                >
-                                    <Text style={[styles.text_footer, {
-                                        ...fonts.note,
-                                        fontWeight: 'bold',
-                                        alignSelf: 'center',
-                                        fontSize: responsiveFontSize(29)
-                                    }]}>
-                                        {'Settings'}
-                                    </Text>
-                                    <View
-                                        style={{
-                                            borderBottomWidth: 1,
-                                            borderBottomColor: '#f79d65',
-                                            // marginBottom: responsiveHeight(1),
-                                            paddingBottom: responsiveHeight(0.5),
-                                        }}
-                                    />
-                                    {/* <Text style={[styles.text_footer, {
+                  <Ionicons name="ios-close-circle" size={40} color="#ffff" />
+                </TouchableOpacity>
+                {/* {children} */}
+                <View
+                  style={{
+                    marginBottom: responsiveHeight(3),
+                    // marginTop: responsiveHeight(3)
+                  }}
+                >
+                  <Text
+                    style={[
+                      styles.text_footer,
+                      {
+                        ...fonts.note,
+                        fontWeight: "bold",
+                        alignSelf: "center",
+                        fontSize: responsiveFontSize(29),
+                      },
+                    ]}
+                  >
+                    {"Settings"}
+                  </Text>
+                  <View
+                    style={{
+                      borderBottomWidth: 1,
+                      borderBottomColor: "#fff",
+                      // marginBottom: responsiveHeight(1),
+                      paddingBottom: responsiveHeight(0.5),
+                    }}
+                  />
+                  {/* <Text style={[styles.text_footer, {
                                     }]}>
                                         {'Current Password'}
                                     </Text>
@@ -219,8 +226,8 @@ const ProfileModal = ({ children, profileModalVisible, onPressDismissProfileModa
                                             }
                                         </TouchableOpacity>
                                     </View> */}
-                                </View>
-                                {/* <ButtonQApp
+                </View>
+                {/* <ButtonQApp
                                     title={'Update Password'}
                                     onPress={() => updateUsersPassword({
                                         currentPassword: data?.currentPassword,
@@ -231,103 +238,98 @@ const ProfileModal = ({ children, profileModalVisible, onPressDismissProfileModa
                                     color2={'#52b788'}
                                     fontSize={responsiveFontSize(20)}
                                 /> */}
-                                <ButtonQApp
-                                    title={'Delete Account'}
-                                    onPress={
-                                        onPressOpenDeleteAccountModal}
-                                    // () => deleteAuthUser()}
-                                    height={responsiveHeight(4)}
-                                    color={'#f25c54'}
-                                    color2={'#f25c54'}
-                                    fontSize={responsiveFontSize(20)}
-                                />
-                                <ButtonQApp
-                                    title={'Log Out'}
-                                    onPress={onPressOpenLogOutModal}
-                                    height={responsiveHeight(7)}
-                                    color={'#ffd940'}
-                                    color2={'#ffd940'}
-                                    fontSize={responsiveFontSize(20)}
-                                />
-                            </View>
-                        </TouchableWithoutFeedback>
-                    </Pressable>
-                </BlurView>
-            </Modal>
-        </>
-    )
+                <ButtonQApp
+                  title={"Delete Account"}
+                  onPress={onPressOpenDeleteAccountModal}
+                  // () => deleteAuthUser()}
+                  height={responsiveHeight(4)}
+                  color={"#f79d65"}
+                  color2={"#f79d65"}
+                  fontSize={responsiveFontSize(20)}
+                />
+                <ButtonQApp
+                  title={"Log Out"}
+                  onPress={onPressOpenLogOutModal}
+                  height={responsiveHeight(7)}
+                  color={"#f4845f"}
+                  color2={"#f4845f"}
+                  fontSize={responsiveFontSize(20)}
+                />
+              </View>
+            </TouchableWithoutFeedback>
+          </Pressable>
+        </BlurView>
+      </Modal>
+    </>
+  );
 };
 
 export default ProfileModal;
 
 const styles = StyleSheet.create({
-
-    centeredView: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
+  centeredView: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  inputTextContainer: {
+    width: responsiveWidth(75),
+    alignSelf: "center",
+    alignItems: "center",
+    padding: 8,
+    margin: 10,
+    color: "#e32f45",
+    borderWidth: 0.5,
+    borderColor: "#FA7465",
+    borderRadius: 20,
+    borderBottomRightRadius: 20,
+    borderTopRightRadius: 8,
+    borderTopLeftRadius: 20,
+    borderBottomLeftRadius: 8,
+    overflow: "visible",
+    shadowColor: "#e32f45",
+    shadowOffset: {
+      width: 0,
+      height: 10,
     },
-    inputTextContainer: {
-        // height: responsiveHeight(60),
-        width: responsiveWidth(75),
-        alignSelf: 'center',
-        alignItems: 'center',
-        padding: 8,
-        margin: 10,
-        color: '#e32f45',
-        borderWidth: 0.5,
-        borderColor: '#FA7465',
-        borderRadius: 20,
-        borderBottomRightRadius: 20,
-        borderTopRightRadius: 8,
-        borderTopLeftRadius: 20,
-        borderBottomLeftRadius: 8,
-        overflow: 'visible',
-        shadowColor: "#e32f45",
-        shadowOffset: {
-            width: 0,
-            height: 10,
-        },
-        shadowOpacity: 0.5,
-        shadowRadius: 3.5,
-        elevation: 5,
-        backgroundColor: '#f7b267'
-    },
-    answers: {
-        flexDirection: 'row'
-    },
-    answersColumn: {
-        flexDirection: 'column',
-        alignContent: 'center',
-        alignItems: 'center',
-        alignSelf: 'center'
-    },
-    text_header: {
-        color: '#fff',
-        fontWeight: 'bold',
-        fontSize: 30,
-
-    },
-    text_footer: {
-        ...fonts.note,
-        color: 'white',
-        fontSize: 18,
-        fontWeight: 'bold',
-        marginTop: responsiveHeight(2)
-    },
-    action: {
-        flexDirection: 'row',
-        marginTop: 10,
-        borderBottomWidth: 0.5,
-        borderBottomColor: '#f79d65',
-        paddingBottom: 5,
-        width: responsiveWidth(60)
-    },
-    textInput: {
-        flex: 1,
-        marginTop: Platform.OS === 'ios' ? 0 : -12,
-        paddingLeft: 10,
-        color: 'white',
-    },
-
+    shadowOpacity: 0.5,
+    shadowRadius: 3.5,
+    elevation: 5,
+    backgroundColor: "#f7b267",
+  },
+  answers: {
+    flexDirection: "row",
+  },
+  answersColumn: {
+    flexDirection: "column",
+    alignContent: "center",
+    alignItems: "center",
+    alignSelf: "center",
+  },
+  text_header: {
+    color: "#fff",
+    fontWeight: "bold",
+    fontSize: 30,
+  },
+  text_footer: {
+    ...fonts.note,
+    color: "white",
+    fontSize: 18,
+    fontWeight: "bold",
+    marginTop: responsiveHeight(2),
+  },
+  action: {
+    flexDirection: "row",
+    marginTop: 10,
+    borderBottomWidth: 0.5,
+    borderBottomColor: "#f79d65",
+    paddingBottom: 5,
+    width: responsiveWidth(60),
+  },
+  textInput: {
+    flex: 1,
+    marginTop: Platform.OS === "ios" ? 0 : -12,
+    paddingLeft: 10,
+    color: "white",
+  },
 });

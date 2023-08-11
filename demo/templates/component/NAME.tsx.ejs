@@ -1,0 +1,32 @@
+import React, { memo } from "react";
+import { View } from "react-native";
+import { ScreenProps } from "./screen-interface";
+
+/**
+ * Describe the new component here...
+ */
+export const <%= props.pascalCaseName %> = memo(({ children, style }: <%= props.pascalCaseName %>Props): JSX.Element => {
+  const { style, data } = props
+
+  const {
+    theme: { palette },
+  } = useThemeContext()
+
+  const styles = useMemo(() => {
+    return {
+      exampleViewStyle: {
+        backgroundColor: palette.background,
+      } as ViewStyle,
+      exampleTitleStyle: {
+        color: palette.text,
+      } as TextStyle,
+      exampleTextStyle: {
+        color: `${palette.text}99`,
+      } as TextStyle,
+    }
+  }, [palette])
+
+  return (
+    return <View style={style}>{children}</View>;
+  )
+})

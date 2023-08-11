@@ -19,7 +19,6 @@ import { useContext } from "react";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { QuestionRow } from "../components/question-row/question-row";
 import { SwipeListView } from "react-native-swipe-list-view";
-import { BlurView } from "expo-blur";
 import ModalMain from "../components/modalMain";
 import { UserContext } from "../contexts/user-context-provider";
 import ProfileModal from "../components/profileModal";
@@ -101,7 +100,7 @@ const Profile = ({ navigation }) => {
       answer_2: 0,
       created_at: "2023-03-07T22:03:57.695653+00:00",
       id: "6834fa7a-683b-492c-9297-1c52464a84f2",
-      question: "Sample Question: Do you think aliens exist?",
+      question: "Sample Question",
       responses_aggregate: {
         __typename: "response_aggregate",
         aggregate: {
@@ -126,7 +125,7 @@ const Profile = ({ navigation }) => {
           <QuestionRow
             updateQuestionModal={updateQuestionModal}
             question={item}
-            color={"#FEFD97"}
+            color={"#f4845f"}
             colorYes={"#65C18C"}
             colorNo={"#FF6363"}
           />
@@ -304,20 +303,10 @@ const styles = StyleSheet.create({
     backgroundColor: "#f7b267",
     overflow: "visible",
   },
-  modalText: {
-    ...fonts.note,
-    textAlign: "center",
-    fontWeight: "bold",
-    fontSize: 18,
-    color: "white",
-    marginBottom: responsiveHeight(0.5),
-  },
   profileName: {
     ...fonts.note,
-    // alignSelf: 'center',
     fontWeight: "bold",
     fontSize: responsiveFontSize(26),
-    // paddingRight: responsiveWidth(8)
     color: "#FF6363",
   },
   card: {
@@ -325,7 +314,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#ffcd96",
     width: responsiveWidth(85),
     height: responsiveHeight(20),
-    // borderWidth: responsiveWidth(0.1),
     borderColor: "#FF6363",
     alignSelf: "center",
     borderRadius: 25,
@@ -343,7 +331,6 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     alignItems: "center",
     margin: responsiveWidth(3),
-    // marginHorizontal: responsiveWidth(5),
     backgroundColor: "#ffe6c9",
     borderRadius: 50,
     width: responsiveSize(23),
@@ -369,36 +356,8 @@ const styles = StyleSheet.create({
   },
   editButton: {
     flexDirection: "row",
-    // right: responsiveHeight(2),
     bottom: responsiveWidth(-3),
     justifyContent: "center",
     paddingHorizontal: responsiveWidth(5),
-  },
-
-  inputTextContainer: {
-    height: responsiveHeight(10),
-    // width: responsiveWidth(90),
-    // marginTop: responsiveWidth(10),
-    alignSelf: "center",
-    padding: 8,
-    color: "#f25c54",
-    borderWidth: 0.5,
-    borderColor: "#FA7465",
-    // minHeight: height * 0.15,
-    backgroundColor: "white",
-    borderRadius: 20,
-    borderBottomRightRadius: 20,
-    borderTopRightRadius: 8,
-    borderTopLeftRadius: 20,
-    borderBottomLeftRadius: 8,
-    overflow: "allow",
-    shadowColor: "#e32f45",
-    shadowOffset: {
-      width: 0,
-      height: 10,
-    },
-    shadowOpacity: 0.5,
-    shadowRadius: 3.5,
-    elevation: 5,
   },
 });

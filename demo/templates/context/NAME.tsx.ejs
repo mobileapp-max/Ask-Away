@@ -1,0 +1,25 @@
+import * as React from "react"
+import { createContext } from 'react'
+import { observer } from 'mobx-react-lite'
+
+export const <%= props.pascalCaseName %>Context = createContext({
+  isValueTrue: false,
+})
+
+/**
+ * Describe your new context provider here...
+ */
+export const <%= props.pascalCaseName %>Provider = observer((props: any) => {
+
+  const isValueTrue = (1 + 1 === 2)
+
+  return (
+    <<%= props.pascalCaseName %>Context.Provider
+      value={{
+        isValueTrue
+      }}
+    >
+      {props?.children}
+    </<%= props.pascalCaseName %>Context.Provider>
+  )
+})
