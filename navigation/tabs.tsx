@@ -3,7 +3,6 @@ import { StyleSheet, View, Animated, Pressable } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Entypo from "react-native-vector-icons/Entypo";
 import { LogInStackScreen } from "./logInSignUpNav";
-import AnswerQuestionScreen from "../screens/AnswerQuestions";
 import {
   responsiveFontSize,
   responsiveHeight,
@@ -13,6 +12,7 @@ import {
 import { Octicons } from "@expo/vector-icons";
 import { UserContext } from "../contexts/user-context-provider";
 import { AddQuestion } from "../src/screens/add-question/add-question";
+import { AnswerQuestions } from "../src/screens/answer-questions/answer-questions";
 
 const Tab = createBottomTabNavigator();
 
@@ -105,7 +105,7 @@ const Tabs = (props) => {
     >
       <Tab.Screen
         name="Main"
-        component={AnswerQuestionScreen}
+        component={AnswerQuestions}
         options={{
           tabBarIcon: ({ focused }) => (
             <View

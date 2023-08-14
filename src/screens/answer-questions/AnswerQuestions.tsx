@@ -11,18 +11,18 @@ import {
   ActivityIndicator,
 } from "react-native";
 import { useContext } from "react";
-import { QuestionsContext } from "../contexts/questions-context-provider";
+import { QuestionsContext } from "../../../contexts/questions-context-provider";
 import {
   responsiveFontSize,
   responsiveHeight,
   responsiveSize,
   responsiveWidth,
-} from "../scripts/constants";
+} from "../../../scripts/constants";
 import { AntDesign } from "@expo/vector-icons";
 import { BlurView } from "expo-blur";
 import * as Animatable from "react-native-animatable";
-import { UserContext } from "../contexts/user-context-provider";
-import fonts from "../scripts/fonts";
+import { UserContext } from "../../../contexts/user-context-provider";
+import fonts from "../../../scripts/fonts";
 
 const AnswerQuestionScreen = ({ navigation }) => {
   const { user } = useContext(UserContext);
