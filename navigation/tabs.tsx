@@ -13,6 +13,7 @@ import { Octicons } from "@expo/vector-icons";
 import { UserContext } from "../contexts/user-context-provider";
 import { AddQuestion } from "../src/screens/add-question/add-question";
 import { AnswerQuestions } from "../src/screens/answer-questions/answer-questions";
+import { Profile } from "../src/screens/profile/profile";
 
 const Tab = createBottomTabNavigator();
 
