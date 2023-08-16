@@ -1,14 +1,12 @@
-import React, { useContext, useRef, useState } from "react";
+import React, { useContext, useState } from "react";
 import { StyleSheet, View, Animated, Pressable } from "react-native";
 import { AddQuestion } from "../src/screens/add-question/add-question";
 import { AnswerQuestions } from "../src/screens/answer-questions/answer-questions";
-import { Profile } from "../src/screens/profile/profile";
-import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Octicons, Entypo } from "@expo/vector-icons";
 import { responsiveFontSize, responsiveSize } from "../scripts/constants";
-import { LogInStackScreen } from "./logInSignUpNav";
 import { UserContext } from "../contexts/user-context-provider";
+import { Profile } from "../src/screens/profile/profile";
 
 const Tab = createBottomTabNavigator();
 
@@ -36,8 +34,6 @@ const AuthenticatedStack = (props) => {
       onPress();
     };
 
-    // console.log(user)
-
     return (
       <Pressable
         style={{
@@ -53,7 +49,6 @@ const AuthenticatedStack = (props) => {
             width: 80,
             height: 80,
             borderRadius: 50,
-            // borderWidth: responsiveWidth(1),
             borderColor: "#f7b267",
             backgroundColor:
               currentScreen === "Profile2" ? "#f7b267" : "#f25c54",
@@ -138,7 +133,7 @@ const AuthenticatedStack = (props) => {
       />
       <Tab.Screen
         name="Profile3"
-        component={LogInStackScreen}
+        component={Profile}
         options={{
           tabBarIcon: ({ focused }) => (
             <View

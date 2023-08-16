@@ -1,9 +1,12 @@
-import { View, Text, StyleSheet, Dimensions, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, Dimensions, TouchableOpacity, Button } from 'react-native'
 import React from 'react'
 import Onboarding from 'react-native-onboarding-swiper';
 import Lottie from 'lottie-react-native';
 import { useNavigation } from '@react-navigation/native';
 import { setItem } from '../utils/asyncStorage';
+import fonts from '../scripts/fonts';
+import { responsiveFontSize, responsiveSize, responsiveWidth } from '../scripts/constants';
+
 
 const {width, height} = Dimensions.get('window');
 
@@ -17,50 +20,71 @@ export default function OnboardingScreen() {
 
     const doneButton = ({...props})=>{
         return (
-            <TouchableOpacity style={styles.doneButton} {...props}>
-                <Text>Done</Text>
+            <TouchableOpacity  {...props}>
+                <Text style={styles.doneButton}>Done</Text>
             </TouchableOpacity>
         )
-        
     }
+ 
   return (
     <View style={styles.container}>
       <Onboarding
             onDone={handleDone}
-            onSkip={handleDone}
-            // bottomBarHighlight={false}
-            DoneButtonComponent={doneButton}
-            containerStyles={{paddingHorizontal: 15}}
+            nextLabel={ 
+            <>
+            <Text
+                style={{
+                  ...fonts.note,
+                  color: "#fff",
+                  fontWeight: "bold",
+                  fontSize: responsiveFontSize(20),
+                  
+                }}
+              >
+                {"Next"}
+              </Text>
+              {/* <AntDesign
+                name="caretright"
+                size={38}
+                color="#fff"
+              /> */}
+              </>
+            }
+            skipLabel={''}
+            DoneButtonComponent={doneButton}    
+            containerStyles={{paddingHorizontal: responsiveSize(5)}}
+            titleStyles={{fontSize: responsiveFontSize(35), ...fonts.note}}
+            subTitleStyles={{fontSize: responsiveFontSize(20), color: '#ffffff', ...fonts.note}}
             pages={[
                 {
-                    backgroundColor: '#a7f3d0',
+                    backgroundColor: '#f79d65',
                     image: (
                         <View style={styles.lottie}>
-                            <Lottie source={require('../assets/animations/boost.json')} autoPlay loop />
+                            <Lottie source={require('../assets/animations/animation_1.json')} autoPlay loop />
                         </View>
                     ),
-                    title: 'Boost Productivity',
-                    subtitle: 'Subscribe this channel to boost your productivity level',
+                    title: 'Ask Yes-No Questions',
+                    subtitle: "Curious about what others think? Ask away and find out!",
                 },
                 {
-                    backgroundColor: '#fef3c7',
+                    backgroundColor: '#52b788',
                     image: (
                         <View style={styles.lottie}>
-                            <Lottie source={require('../assets/animations/work.json')} autoPlay loop />
+                            <Lottie source={require('../assets/animations/animation_2.json')} autoPlay loop />
                         </View>
                     ),
-                    title: 'Work Seamlessly',
-                    subtitle: 'Get your work done seamlessly without interruption',
+                    title: 'Express Your Opinion',
+                    subtitle: "Answer others' questions and help them settle a matter.",
                 },
                 {
-                    backgroundColor: '#a78bfa',
+                    backgroundColor: '#f25c54',
                     image: (
                         <View style={styles.lottie}>
-                            <Lottie source={require('../assets/animations/achieve.json')} autoPlay loop />
+                            <Lottie source={require('../assets/animations/animation_3_2.json')} autoPlay loop />
                         </View>
                     ),
-                    title: 'Achieve Higher Goals',
-                    subtitle: 'By boosting your productivity we help you to achieve higher goals',
+                    title: 'Monitor Replies',
+                    subtitle: "Watch how people answer your questions and learn what they think.",
                 },
             ]}
         />
@@ -78,9 +102,12 @@ const styles = StyleSheet.create({
         height: width
     },
     doneButton: {
-        padding: 20,
-        // backgroundColor: 'white',
-        // borderTopLeftRadius: '100%',
-        // borderBottomLeftRadius: '100%'
+        // padding: 20,
+        ...fonts.note,
+                  color: "#fff",
+                  fontWeight: "bold",
+                  fontSize: responsiveFontSize(25),     
+                  marginRight: responsiveWidth(6)
+
     }
 })
