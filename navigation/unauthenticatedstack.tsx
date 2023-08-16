@@ -6,11 +6,11 @@ import { SignIn } from "../src/screens/sign-in/sign-in";
 
 const LogInStack = createStackNavigator();
 
-export const YourScreen = (props: any) => {
+export const UnauthenticatedStack = (props: any) => {
   const { user } = useContext(UserContext);
   return (
     <LogInStack.Navigator screenOptions={{ headerShown: false }}>
-      <LogInStack.Screen name="Profile" component={SignIn} />
+      <LogInStack.Screen name="SignIn" component={SignIn} />
     </LogInStack.Navigator>
   );
 };

@@ -1,6 +1,6 @@
 import { Screen } from "../../components/screen/screen";
 import { AnswerQuestionsProps } from "./answer-questions-interface";
-import React, { useState, memo } from "react";
+import React, { memo } from "react";
 import {
   View,
   Text,
@@ -12,8 +12,6 @@ import {
   Animated,
   ActivityIndicator,
 } from "react-native";
-import { useContext } from "react";
-import { QuestionsContext } from "../../../contexts/questions-context-provider";
 import {
   responsiveFontSize,
   responsiveHeight,
@@ -23,7 +21,6 @@ import {
 import { AntDesign } from "@expo/vector-icons";
 import { BlurView } from "expo-blur";
 import * as Animatable from "react-native-animatable";
-import { UserContext } from "../../../contexts/user-context-provider";
 import fonts from "../../../scripts/fonts";
 
 export const AnswerQuestionsPresentation = memo(

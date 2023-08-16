@@ -12,7 +12,6 @@ import { UserContext } from "../../../contexts/user-context-provider";
 export const useAddQuestionFunctions = (props: any) => {
 
   const { navigation, route } = props
-  const { params } = route
 
     const onPressBack = (): void => {
       navigation.goBack()

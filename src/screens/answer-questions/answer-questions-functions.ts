@@ -1,28 +1,13 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
-  View,
-  Text,
-  TouchableOpacity,
-  StyleSheet,
-  StatusBar,
-  ScrollView,
-  Modal,
   Animated,
-  ActivityIndicator,
 } from "react-native";
 import { useContext } from "react";
 import { QuestionsContext } from "../../../contexts/questions-context-provider";
 import {
   responsiveFontSize,
-  responsiveHeight,
-  responsiveSize,
-  responsiveWidth,
 } from "../../../scripts/constants";
-import { AntDesign } from "@expo/vector-icons";
-import { BlurView } from "expo-blur";
-import * as Animatable from "react-native-animatable";
 import { UserContext } from "../../../contexts/user-context-provider";
-import fonts from "../../../scripts/fonts";
 
 export const useAnswerQuestionsFunctions = (props: any) => {
 
