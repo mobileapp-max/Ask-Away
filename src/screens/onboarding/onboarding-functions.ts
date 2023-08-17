@@ -1,13 +1,22 @@
-export const useOnboardingFunctions = (props: any) => {
+import { useNavigation } from "@react-navigation/native";
+import { setItem } from "../../../utils/asyncStorage";
 
-  const { navigation, route } = props
+export const useOnboardingFunctions = (props: any) => {
 
 
     const onPressBack = (): void => {
       navigation.goBack()
     }
 
+    const navigation = useNavigation();
+
+    const handleDone = () => {
+        navigation.navigate('Home');
+        setItem('onboarded', '1');
+    }
+
     return {
-      onPressBack
+      onPressBack,
+      handleDone
     }
 }

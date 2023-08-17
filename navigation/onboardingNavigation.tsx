@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import HomeScreen from "../screens/HomeScreen.js";
-import OnboardingScreen from "../screens/OnboardingScreen.js";
 import { getItem } from "../utils/asyncStorage.js";
+import { Onboarding } from "../src/screens/onboarding/onboarding.tsx";
 
 const Stack = createNativeStackNavigator();
 
@@ -25,18 +24,17 @@ export default function AppNavigation() {
     }
   };
 
-  // if (showOnboarding == null) {
-  //   return null;
-  // }
+  if (showOnboarding == null) {
+    return null;
+  }
 
   if (showOnboarding) {
     return (
-      // <NavigationContainer independent={true}>
       <Stack.Navigator initialRouteName="Onboarding">
         <Stack.Screen
           name="Onboarding"
           options={{ headerShown: false }}
-          component={OnboardingScreen}
+          component={Onboarding}
         />
         <Stack.Screen
           name="Home"
@@ -44,16 +42,14 @@ export default function AppNavigation() {
           component={HomeScreen}
         />
       </Stack.Navigator>
-      // </NavigationContainer>
     );
   } else {
     return (
-      // <NavigationContainer>
       <Stack.Navigator initialRouteName="Home">
         <Stack.Screen
           name="Onboarding"
           options={{ headerShown: false }}
-          component={OnboardingScreen}
+          component={Onboarding}
         />
         <Stack.Screen
           name="Home"
@@ -61,7 +57,6 @@ export default function AppNavigation() {
           component={HomeScreen}
         />
       </Stack.Navigator>
-      // </NavigationContainer>
     );
   }
 }
