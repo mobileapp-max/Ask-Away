@@ -15,6 +15,7 @@ export default function AppNavigation() {
 
   const checkIfAlreadyOnboarded = async () => {
     let onboarded = await getItem("onboarded");
+    console.log(onboarded);
     if (onboarded == 1) {
       // hide onboarding
       setShowOnboarding(false);
@@ -24,9 +25,9 @@ export default function AppNavigation() {
     }
   };
 
-  if (showOnboarding == null) {
-    return null;
-  }
+  // if (showOnboarding == null) {
+  //   return null;
+  // }
 
   if (showOnboarding) {
     return (

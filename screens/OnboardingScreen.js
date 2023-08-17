@@ -13,14 +13,15 @@ const {width, height} = Dimensions.get('window');
 export default function OnboardingScreen() {
     const navigation = useNavigation();
 
-    const handleDone = ()=>{
+    const handleDone = () => {
         navigation.navigate('Home');
         setItem('onboarded', '1');
     }
 
     const doneButton = ({...props})=>{
         return (
-            <TouchableOpacity  {...props}>
+            <TouchableOpacity  {...props}
+            onPress={handleDone}>
                 <Text style={styles.doneButton}>Done</Text>
             </TouchableOpacity>
         )
@@ -43,11 +44,6 @@ export default function OnboardingScreen() {
               >
                 {"Next"}
               </Text>
-              {/* <AntDesign
-                name="caretright"
-                size={38}
-                color="#fff"
-              /> */}
               </>
             }
             skipLabel={''}
@@ -102,7 +98,6 @@ const styles = StyleSheet.create({
         height: width
     },
     doneButton: {
-        // padding: 20,
         ...fonts.note,
                   color: "#fff",
                   fontWeight: "bold",
