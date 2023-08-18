@@ -18,10 +18,10 @@ import {
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { QuestionRow } from "../../../components/question-row/question-row";
 import { SwipeListView } from "react-native-swipe-list-view";
-import ModalMain from "../../../components/modalMain";
+import QuestionReviewMondal from "../../../components/questionReviewMondal";
 import ProfileModal from "../../../components/profileModal";
 import fonts from "../../../scripts/fonts";
-import ModalToDelete from "../../../components/modalToDelete";
+import ModalToAddOrDeleteQuestion from "../../../components/modalToDelete";
 
 export const ProfilePresentation = memo(
   ({
@@ -49,14 +49,14 @@ export const ProfilePresentation = memo(
         <View style={styles.container}>
           <View style={styles.header} />
           <View style={styles.footer}>
-            <ModalToDelete
+            <ModalToAddOrDeleteQuestion
               titleText={"Delete Question?"}
               questionText={questionToDelete}
               deleteModalVisible={deleteModalVisible}
               onPressDeleteQuestionNo={onPressDeleteQuestionNo}
               onPessDeleteQuestionYes={onPessDeleteQuestionYes}
             />
-            <ModalMain
+            <QuestionReviewMondal
               questionVisible={questionVisible}
               selectedQuestionModal={selectedQuestionModal}
               onPressDismissMainModal={onPressDismissMainModal}
@@ -67,16 +67,19 @@ export const ProfilePresentation = memo(
             />
             <SwipeListView
               data={userQuestions?.length ? userQuestions : defaultQuestions}
-              renderItem={({ item }) => (
-                <QuestionRow
-                  question={item}
-                  updateQuestionModal={updateQuestionModal}
-                  color={"#ffe6c9"}
-                  colorYes={"#65C18C"}
-                  colorNo={"#FF6363"}
-                />
-              )}
-              keyExtractor={(item, index) => index}
+              renderItem={({ item }) => {
+                console.log(item);
+                return (
+                  <QuestionRow
+                    question={item}
+                    updateQuestionModal={updateQuestionModal}
+                    color={"#ffe6c9"}
+                    colorYes={"#65C18C"}
+                    colorNo={"#FF6363"}
+                  />
+                );
+              }}
+              keyExtractor={(item, index) => item?.id}
               contentContainerStyle={{
                 paddingTop: responsiveHeight(4),
                 paddingBottom: responsiveHeight(20),

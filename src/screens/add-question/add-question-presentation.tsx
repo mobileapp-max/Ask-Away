@@ -23,7 +23,7 @@ import { BlurView } from "expo-blur";
 import ButtonQApp from "../../../components/buttonQApp";
 import fonts from "../../../scripts/fonts";
 import { Ionicons } from "@expo/vector-icons";
-import ModalToDelete from "../../../components/modalToDelete";
+import ModalToAddOrDeleteQuestion from "../../../components/modalToDelete";
 
 export const AddQuestionPresentation = memo(
   ({
@@ -64,7 +64,7 @@ export const AddQuestionPresentation = memo(
             </Text>
           </View>
           <View style={styles.footer}>
-            <ModalToDelete
+            <ModalToAddOrDeleteQuestion
               titleText={"Add this Question?"}
               questionText={text}
               deleteModalVisible={deleteModalVisible}
@@ -105,6 +105,7 @@ export const AddQuestionPresentation = memo(
                 }}
               >
                 <TextInput
+                  selectionColor={"#FFFFFF"}
                   textAlign={text ? "center" : "right"}
                   onKeyPress={handleKeyPress}
                   onSubmitEditing={handleOnSubmitEditing}

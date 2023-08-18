@@ -17,10 +17,10 @@ import {
 import { QuestionsContext } from "../contexts/questions-context-provider";
 import { useContext } from "react";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { QuestionRow } from "../components/question-row/question-row";
+import { QuestionRow } from "./question-row/question-row";
 import { SwipeListView } from "react-native-swipe-list-view";
 import { BlurView } from "expo-blur";
-import { ReplyResult } from "../components/replyResult";
+import { ReplyResult } from "./replyResult";
 import { calculateResults } from "../scripts/calculateResults";
 import { AntDesign } from "@expo/vector-icons";
 import PieChart from "react-native-expo-pie-chart";
@@ -29,7 +29,7 @@ import { VictoryPie } from "victory-native";
 import { Ionicons } from "@expo/vector-icons";
 import fonts from "../scripts/fonts";
 
-const ModalMain = ({
+const QuestionReviewMondal = ({
   children,
   selectedQuestionModal,
   questionVisible,
@@ -155,7 +155,7 @@ const ModalMain = ({
   );
 };
 
-export default ModalMain;
+export default QuestionReviewMondal;
 
 const styles = StyleSheet.create({
   centeredView: {

@@ -23,7 +23,7 @@ import {
 } from "../api/auth-api";
 import { Ionicons } from "@expo/vector-icons";
 import fonts from "../scripts/fonts";
-import ModalToDelete from "./modalToDelete";
+import ModalToAddOrDeleteQuestion from "./modalToDelete";
 import { removeItem } from "../utils/asyncStorage";
 import { useNavigation } from "@react-navigation/native";
 import { SCREENS } from "../navigation/screenNames";
@@ -103,14 +103,14 @@ const ProfileModal = ({
         transparent={true}
         visible={profileModalVisible}
       >
-        <ModalToDelete
-          text={"Log Out?"}
+        <ModalToAddOrDeleteQuestion
+          titleText={"Log Out?"}
           deleteModalVisible={logOutModalVisible}
           onPressDeleteQuestionNo={onPressDeleteQuestionNo}
           onPessDeleteQuestionYes={onPessDeleteQuestionYes}
         />
-        <ModalToDelete
-          text={"Delete Account?"}
+        <ModalToAddOrDeleteQuestion
+          titleText={"Delete Account?"}
           deleteModalVisible={deleteAccountModalVisible}
           onPressDeleteQuestionNo={onPressDeleteQuestionNo}
           onPessDeleteQuestionYes={onPessDeleteQuestionYes}

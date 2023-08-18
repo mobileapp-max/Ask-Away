@@ -8,15 +8,14 @@ export const useProfileFunctions = (props: any) => {
   const { navigation, route } = props
   const { params } = route
 
-
   const onPressBack = (): void => {
     navigation.goBack()
   }
 
-  const [profileModalVisible, setProfileModalVisible] = useState(false);
   const [deleteModalVisible, setDeleteModalVisible] = useState(false);
   const [questionVisible, setQuestionVisible] = useState(false);
 
+  const [profileModalVisible, setProfileModalVisible] = useState(false);
   const [selectedQuestionModal, setSelectedQuestionModal] = useState({});
   const [questionIdToDelete, setQuestionIdToDelete] = useState(null);
   const [modalVisible, setModalVisible] = useState(false);
@@ -31,7 +30,6 @@ export const useProfileFunctions = (props: any) => {
   const onPressTrashCan = ({ itemId, itemQuestion }: { itemId: string, itemQuestion: string }) => {
     setDeleteModalVisible(!deleteModalVisible);
     setQuestionIdToDelete(itemId);
-    console.log(itemId);
     setQuestionToDelete(itemQuestion);
   };
 

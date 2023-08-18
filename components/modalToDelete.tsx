@@ -9,7 +9,7 @@ import {
 import { BlurView } from "expo-blur";
 import fonts from "../scripts/fonts";
 
-const ModalToDelete = ({
+const ModalToAddOrDeleteQuestion = ({
   children,
   titleText,
   deleteModalVisible,
@@ -97,7 +97,7 @@ const ModalToDelete = ({
   );
 };
 
-export default ModalToDelete;
+export default ModalToAddOrDeleteQuestion;
 
 const styles = StyleSheet.create({
   centeredView: {
