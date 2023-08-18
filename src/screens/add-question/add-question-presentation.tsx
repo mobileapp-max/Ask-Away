@@ -31,9 +31,9 @@ export const AddQuestionPresentation = memo(
     onPressTrashCan,
     disableButton,
     text,
-    deleteModalVisible,
-    onPessDeleteQuestionYes,
-    onPressDeleteQuestionNo,
+    modalToAddOrDeleteQuestionVisible,
+    onPressAddOrDeleteQuestionYes,
+    onPressAddOrDeleteQuestionNo,
     modalVisible,
     setModalVisible,
     handleButtonPress,
@@ -67,9 +67,11 @@ export const AddQuestionPresentation = memo(
             <ModalToAddOrDeleteQuestion
               titleText={"Add this Question?"}
               questionText={text}
-              deleteModalVisible={deleteModalVisible}
-              onPessDeleteQuestionYes={onPessDeleteQuestionYes}
-              onPressDeleteQuestionNo={onPressDeleteQuestionNo}
+              modalToAddOrDeleteQuestionVisible={
+                modalToAddOrDeleteQuestionVisible
+              }
+              onPressAddOrDeleteQuestionYes={onPressAddOrDeleteQuestionYes}
+              onPressAddOrDeleteQuestionNo={onPressAddOrDeleteQuestionNo}
             />
             <Modal
               animationType="fade"

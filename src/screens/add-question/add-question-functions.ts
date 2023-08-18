@@ -69,16 +69,16 @@ export const useAddQuestionFunctions = (props: any) => {
     setText("");
   };
 
-  const [deleteModalVisible, setDeleteModalVisible] = useState(false);
+  const [modalToAddOrDeleteQuestionVisible, setDeleteModalVisible] = useState(false);
   const onPressTrashCan = () => {
-    setDeleteModalVisible(!deleteModalVisible);
+    setDeleteModalVisible(!modalToAddOrDeleteQuestionVisible);
   };
 
-  const onPressDeleteQuestionNo = () => {
+  const onPressAddOrDeleteQuestionNo = () => {
     setDeleteModalVisible(false);
   };
 
-  const onPessDeleteQuestionYes = () => {
+  const onPressAddOrDeleteQuestionYes = () => {
     setDeleteModalVisible(false);
     onPressInitiateAddQuestin();
   };
@@ -98,9 +98,9 @@ export const useAddQuestionFunctions = (props: any) => {
     onPressTrashCan,
     disableButton,
     text,
-    deleteModalVisible,
-    onPessDeleteQuestionYes,
-    onPressDeleteQuestionNo,
+    modalToAddOrDeleteQuestionVisible,
+    onPressAddOrDeleteQuestionYes,
+    onPressAddOrDeleteQuestionNo,
     modalVisible,
     setModalVisible,
     handleButtonPress,

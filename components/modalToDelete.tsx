@@ -12,9 +12,9 @@ import fonts from "../scripts/fonts";
 const ModalToAddOrDeleteQuestion = ({
   children,
   titleText,
-  deleteModalVisible,
-  onPessDeleteQuestionYes,
-  onPressDeleteQuestionNo,
+  modalToAddOrDeleteQuestionVisible,
+  onPressAddOrDeleteQuestionYes,
+  onPressAddOrDeleteQuestionNo,
   questionText,
 }) => {
   const [fontSize, setFontSize] = useState(responsiveFontSize(26));
@@ -28,8 +28,8 @@ const ModalToAddOrDeleteQuestion = ({
     <Modal
       animationType="fade"
       transparent={true}
-      visible={deleteModalVisible}
-      onRequestClose={onPressDeleteQuestionNo}
+      visible={modalToAddOrDeleteQuestionVisible}
+      onRequestClose={onPressAddOrDeleteQuestionNo}
     >
       {children}
       <BlurView intensity={70} tint={"dark"} style={styles.centeredView}>
@@ -79,13 +79,13 @@ const ModalToAddOrDeleteQuestion = ({
             }}
           >
             <TouchableOpacity
-              onPress={onPessDeleteQuestionYes}
+              onPress={onPressAddOrDeleteQuestionYes}
               style={styles.modalQuestion}
             >
               <Text style={styles.buttonTitle}>{"Yes"}</Text>
             </TouchableOpacity>
             <TouchableOpacity
-              onPress={onPressDeleteQuestionNo}
+              onPress={onPressAddOrDeleteQuestionNo}
               style={{ ...styles.modalQuestion, backgroundColor: "#f38375" }}
             >
               <Text style={styles.buttonTitle}>{"No"}</Text>

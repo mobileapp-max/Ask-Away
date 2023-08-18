@@ -12,41 +12,41 @@ export const useProfileFunctions = (props: any) => {
     navigation.goBack()
   }
 
-  const [deleteModalVisible, setDeleteModalVisible] = useState(false);
-  const [questionVisible, setQuestionVisible] = useState(false);
+  const [modalToAddOrDeleteQuestionVisible, setDeleteModalVisible] = useState(false);
+  const [QuestionReviewModalVisible, setQuestionVisible] = useState(false);
 
   const [profileModalVisible, setProfileModalVisible] = useState(false);
-  const [selectedQuestionModal, setSelectedQuestionModal] = useState({});
+  const [QuestionReviewModal, setSelectedQuestionModal] = useState({});
   const [questionIdToDelete, setQuestionIdToDelete] = useState(null);
   const [modalVisible, setModalVisible] = useState(false);
-  const [questionToDelete, setQuestionToDelete] = useState(null)
+  const [questionToAddOrDelete, setQuestionToDelete] = useState(null)
 
-  const onPressDismissMainModal = () => {
-    setQuestionVisible(!questionVisible);
+  const onPressDissmissQuestionReviewModal = () => {
+    setQuestionVisible(!QuestionReviewModalVisible);
   };
   const onPressDismissProfileModal = () => {
     setProfileModalVisible(!profileModalVisible);
   };
   const onPressTrashCan = ({ itemId, itemQuestion }: { itemId: string, itemQuestion: string }) => {
-    setDeleteModalVisible(!deleteModalVisible);
+    setDeleteModalVisible(!modalToAddOrDeleteQuestionVisible);
     setQuestionIdToDelete(itemId);
     setQuestionToDelete(itemQuestion);
   };
 
-  const onPressDeleteQuestionNo = () => {
+  const onPressAddOrDeleteQuestionNo = () => {
     setDeleteModalVisible(false);
     setQuestionIdToDelete(null);
   };
 
-  const onPessDeleteQuestionYes = () => {
+  const onPressAddOrDeleteQuestionYes = () => {
     setDeleteModalVisible(false);
     onPressDeleteQuestion({ questionId: questionIdToDelete });
   };
 
   useEffect(() => {
-    const answer_1 = selectedQuestionModal?.answer_1;
-    const answer_2 = selectedQuestionModal?.answer_2;
-  }, [selectedQuestionModal]);
+    const answer_1 = QuestionReviewModal?.answer_1;
+    const answer_2 = QuestionReviewModal?.answer_2;
+  }, [QuestionReviewModal]);
 
   const updateQuestionModal = (incomingModalData) => {
     setSelectedQuestionModal(incomingModalData);
@@ -104,12 +104,12 @@ export const useProfileFunctions = (props: any) => {
 
   return {
     onPressBack,
-    deleteModalVisible,
-    onPressDeleteQuestionNo,
-    onPessDeleteQuestionYes,
-    questionVisible,
-    selectedQuestionModal,
-    onPressDismissMainModal,
+    modalToAddOrDeleteQuestionVisible,
+    onPressAddOrDeleteQuestionNo,
+    onPressAddOrDeleteQuestionYes,
+    QuestionReviewModalVisible,
+    QuestionReviewModal,
+    onPressDissmissQuestionReviewModal,
     profileModalVisible,
     onPressDismissProfileModal,
     userQuestions,
@@ -120,6 +120,6 @@ export const useProfileFunctions = (props: any) => {
     user,
     sumReplies,
     setProfileModalVisible,
-    questionToDelete
+    questionToAddOrDelete
   }
 }

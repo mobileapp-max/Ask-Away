@@ -81,11 +81,11 @@ const ProfileModal = ({
     // await removeItem("onboardedUserIds");
     navigation.push(SCREENS.ONBOARDING);
   };
-  const onPressDeleteQuestionNo = () => {
+  const onPressAddOrDeleteQuestionNo = () => {
     setLogOutModalVisible(false);
     setDeleteAccountModalVisible(false);
   };
-  const onPessDeleteQuestionYes = () => {
+  const onPressAddOrDeleteQuestionYes = () => {
     if (logOutModalVisible) {
       setLogOutModalVisible(false);
       onPressDismissProfileModal();
@@ -105,15 +105,15 @@ const ProfileModal = ({
       >
         <ModalToAddOrDeleteQuestion
           titleText={"Log Out?"}
-          deleteModalVisible={logOutModalVisible}
-          onPressDeleteQuestionNo={onPressDeleteQuestionNo}
-          onPessDeleteQuestionYes={onPessDeleteQuestionYes}
+          modalToAddOrDeleteQuestionVisible={logOutModalVisible}
+          onPressAddOrDeleteQuestionNo={onPressAddOrDeleteQuestionNo}
+          onPressAddOrDeleteQuestionYes={onPressAddOrDeleteQuestionYes}
         />
         <ModalToAddOrDeleteQuestion
           titleText={"Delete Account?"}
-          deleteModalVisible={deleteAccountModalVisible}
-          onPressDeleteQuestionNo={onPressDeleteQuestionNo}
-          onPessDeleteQuestionYes={onPessDeleteQuestionYes}
+          modalToAddOrDeleteQuestionVisible={deleteAccountModalVisible}
+          onPressAddOrDeleteQuestionNo={onPressAddOrDeleteQuestionNo}
+          onPressAddOrDeleteQuestionYes={onPressAddOrDeleteQuestionYes}
         />
         <BlurView intensity={8} style={{ flex: 1 }}>
           <Pressable

@@ -18,20 +18,21 @@ import {
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { QuestionRow } from "../../../components/question-row/question-row";
 import { SwipeListView } from "react-native-swipe-list-view";
-import QuestionReviewMondal from "../../../components/questionReviewMondal";
 import ProfileModal from "../../../components/profileModal";
 import fonts from "../../../scripts/fonts";
 import ModalToAddOrDeleteQuestion from "../../../components/modalToDelete";
+import QuestionReviewModal from "../../../components/questionReviewModal";
+import QuestionReviewMondal from "../../../components/questionReviewMondal";
 
 export const ProfilePresentation = memo(
   ({
     onPressBack,
-    deleteModalVisible,
-    onPressDeleteQuestionNo,
-    onPessDeleteQuestionYes,
-    questionVisible,
-    selectedQuestionModal,
-    onPressDismissMainModal,
+    modalToAddOrDeleteQuestionVisible,
+    onPressAddOrDeleteQuestionNo,
+    onPressAddOrDeleteQuestionYes,
+    QuestionReviewModalVisible,
+    QuestionReviewModal,
+    onPressDissmissQuestionReviewModal,
     profileModalVisible,
     onPressDismissProfileModal,
     userQuestions,
@@ -42,7 +43,7 @@ export const ProfilePresentation = memo(
     user,
     sumReplies,
     setProfileModalVisible,
-    questionToDelete,
+    questionToAddOrDelete,
   }: ProfileProps): JSX.Element => {
     return (
       <Screen onPressBack={onPressBack} title={"Profile Screen"}>
@@ -51,15 +52,19 @@ export const ProfilePresentation = memo(
           <View style={styles.footer}>
             <ModalToAddOrDeleteQuestion
               titleText={"Delete Question?"}
-              questionText={questionToDelete}
-              deleteModalVisible={deleteModalVisible}
-              onPressDeleteQuestionNo={onPressDeleteQuestionNo}
-              onPessDeleteQuestionYes={onPessDeleteQuestionYes}
+              questionText={questionToAddOrDelete}
+              modalToAddOrDeleteQuestionVisible={
+                modalToAddOrDeleteQuestionVisible
+              }
+              onPressAddOrDeleteQuestionNo={onPressAddOrDeleteQuestionNo}
+              onPressAddOrDeleteQuestionYes={onPressAddOrDeleteQuestionYes}
             />
             <QuestionReviewMondal
-              questionVisible={questionVisible}
-              selectedQuestionModal={selectedQuestionModal}
-              onPressDismissMainModal={onPressDismissMainModal}
+              QuestionReviewModalVisible={QuestionReviewModalVisible}
+              QuestionReviewModal={QuestionReviewModal}
+              onPressDissmissQuestionReviewModal={
+                onPressDissmissQuestionReviewModal
+              }
             />
             <ProfileModal
               profileModalVisible={profileModalVisible}

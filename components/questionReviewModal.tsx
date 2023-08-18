@@ -29,7 +29,7 @@ import { VictoryPie } from "victory-native";
 import { Ionicons } from "@expo/vector-icons";
 import fonts from "../scripts/fonts";
 
-const QuestionReviewMondal = ({
+const QuestionReviewModal = ({
   children,
   QuestionReviewModal,
   QuestionReviewModalVisible,
@@ -159,7 +159,7 @@ const QuestionReviewMondal = ({
   );
 };
 
-export default QuestionReviewMondal;
+export default QuestionReviewModal;
 
 const styles = StyleSheet.create({
   centeredView: {
