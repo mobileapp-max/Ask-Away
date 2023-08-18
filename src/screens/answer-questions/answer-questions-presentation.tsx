@@ -22,6 +22,7 @@ import { AntDesign } from "@expo/vector-icons";
 import { BlurView } from "expo-blur";
 import * as Animatable from "react-native-animatable";
 import fonts from "../../../scripts/fonts";
+import Lottie from "lottie-react-native";
 
 export const AnswerQuestionsPresentation = memo(
   ({
@@ -90,7 +91,14 @@ export const AnswerQuestionsPresentation = memo(
                   {question ? (
                     checkForAnsweredQuestion
                   ) : (
-                    <ActivityIndicator size="large" color={"#fff"} />
+                    // <ActivityIndicator size="large" color={"#fff"} />
+                    <View style={styles.lottie}>
+                      <Lottie
+                        source={require("../../../assets/animations/elephan.json")}
+                        autoPlay
+                        loop
+                      />
+                    </View>
                   )}
                 </Text>
               </View>
@@ -377,5 +385,10 @@ const styles = StyleSheet.create({
     fontSize: responsiveFontSize(70),
     color: "#e32f45",
     transform: [{ rotate: "335deg" }],
+  },
+  lottie: {
+    width: responsiveSize(100),
+    height: responsiveSize(100),
+    flex: 1,
   },
 });
