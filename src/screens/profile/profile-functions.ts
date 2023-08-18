@@ -9,9 +9,9 @@ export const useProfileFunctions = (props: any) => {
   const { params } = route
 
 
-    const onPressBack = (): void => {
-      navigation.goBack()
-    }
+  const onPressBack = (): void => {
+    navigation.goBack()
+  }
 
   const [profileModalVisible, setProfileModalVisible] = useState(false);
   const [deleteModalVisible, setDeleteModalVisible] = useState(false);
@@ -20,6 +20,7 @@ export const useProfileFunctions = (props: any) => {
   const [selectedQuestionModal, setSelectedQuestionModal] = useState({});
   const [questionIdToDelete, setQuestionIdToDelete] = useState(null);
   const [modalVisible, setModalVisible] = useState(false);
+  const [questionToDelete, setQuestionToDelete] = useState(null)
 
   const onPressDismissMainModal = () => {
     setQuestionVisible(!questionVisible);
@@ -27,10 +28,11 @@ export const useProfileFunctions = (props: any) => {
   const onPressDismissProfileModal = () => {
     setProfileModalVisible(!profileModalVisible);
   };
-  const onPressTrashCan = (itemId) => {
+  const onPressTrashCan = ({ itemId, itemQuestion }: { itemId: string, itemQuestion: string }) => {
     setDeleteModalVisible(!deleteModalVisible);
     setQuestionIdToDelete(itemId);
     console.log(itemId);
+    setQuestionToDelete(itemQuestion);
   };
 
   const onPressDeleteQuestionNo = () => {
@@ -39,9 +41,8 @@ export const useProfileFunctions = (props: any) => {
   };
 
   const onPessDeleteQuestionYes = () => {
-    setModalVisible(false);
+    setDeleteModalVisible(false);
     onPressDeleteQuestion({ questionId: questionIdToDelete });
-    console.log(questionIdToDelete);
   };
 
   useEffect(() => {
@@ -103,23 +104,24 @@ export const useProfileFunctions = (props: any) => {
     },
   ];
 
-    return {
-      onPressBack,
-      deleteModalVisible,
-      onPressDeleteQuestionNo,
-      onPessDeleteQuestionYes,
-      questionVisible,
-      selectedQuestionModal,
-      onPressDismissMainModal,
-      profileModalVisible,
-      onPressDismissProfileModal,
-      userQuestions,
-      defaultQuestions,
-      updateQuestionModal,
-      onPressTrashCan,
-      sumAnswers,
-      user,
-      sumReplies,  
-      setProfileModalVisible
-    }
+  return {
+    onPressBack,
+    deleteModalVisible,
+    onPressDeleteQuestionNo,
+    onPessDeleteQuestionYes,
+    questionVisible,
+    selectedQuestionModal,
+    onPressDismissMainModal,
+    profileModalVisible,
+    onPressDismissProfileModal,
+    userQuestions,
+    defaultQuestions,
+    updateQuestionModal,
+    onPressTrashCan,
+    sumAnswers,
+    user,
+    sumReplies,
+    setProfileModalVisible,
+    questionToDelete
+  }
 }

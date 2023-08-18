@@ -47,7 +47,6 @@ export const QuestionRow = ({ question: incomingQuestion, updateQuestionModal, c
     });
 
     const { user } = useContext(UserContext)
-    // console.log(user?.uid == question?.user_id)
 
     const {
         question,
@@ -55,9 +54,6 @@ export const QuestionRow = ({ question: incomingQuestion, updateQuestionModal, c
         // answer_2,
         responses_aggregate
     } = incomingQuestion;
-
-    // console.log('user', user?.uid)
-    // console.log('question', question)
 
     const answer_1 = responses_aggregate?.aggregate?.sum?.response_1
     const answer_2 = responses_aggregate?.aggregate?.sum?.response_2

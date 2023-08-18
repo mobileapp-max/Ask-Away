@@ -23,8 +23,6 @@ export default function AppNavigation() {
     checkIfAlreadyOnboarded();
   }, []);
 
-  console.log("showOnboarding1: ", showOnboarding);
-
   if (showOnboarding == null) {
     return null;
   }

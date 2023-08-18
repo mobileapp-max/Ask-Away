@@ -42,6 +42,7 @@ export const ProfilePresentation = memo(
     user,
     sumReplies,
     setProfileModalVisible,
+    questionToDelete,
   }: ProfileProps): JSX.Element => {
     return (
       <Screen onPressBack={onPressBack} title={"Profile Screen"}>
@@ -49,7 +50,8 @@ export const ProfilePresentation = memo(
           <View style={styles.header} />
           <View style={styles.footer}>
             <ModalToDelete
-              text={"Delete Question?"}
+              titleText={"Delete Question?"}
+              questionText={questionToDelete}
               deleteModalVisible={deleteModalVisible}
               onPressDeleteQuestionNo={onPressDeleteQuestionNo}
               onPessDeleteQuestionYes={onPessDeleteQuestionYes}
@@ -58,11 +60,11 @@ export const ProfilePresentation = memo(
               questionVisible={questionVisible}
               selectedQuestionModal={selectedQuestionModal}
               onPressDismissMainModal={onPressDismissMainModal}
-            ></ModalMain>
+            />
             <ProfileModal
               profileModalVisible={profileModalVisible}
               onPressDismissProfileModal={onPressDismissProfileModal}
-            ></ProfileModal>
+            />
             <SwipeListView
               data={userQuestions?.length ? userQuestions : defaultQuestions}
               renderItem={({ item }) => (
@@ -91,7 +93,14 @@ export const ProfilePresentation = memo(
                       flex: 1,
                     }}
                   >
-                    <Pressable onPress={() => onPressTrashCan(item?.id)}>
+                    <Pressable
+                      onPress={() =>
+                        onPressTrashCan({
+                          itemId: item?.id,
+                          itemQuestion: item?.question,
+                        })
+                      }
+                    >
                       <MaterialCommunityIcons
                         name="delete-forever"
                         size={30}

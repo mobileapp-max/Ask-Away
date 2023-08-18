@@ -11,15 +11,15 @@ import fonts from "../scripts/fonts";
 
 const ModalToDelete = ({
   children,
-  text,
+  titleText,
   deleteModalVisible,
   onPessDeleteQuestionYes,
   onPressDeleteQuestionNo,
-  text2,
+  questionText,
 }) => {
   const [fontSize, setFontSize] = useState(responsiveFontSize(26));
   const handleTextLayout = (event) => {
-    const decreaseFactor = Math.floor(text2.length / 50);
+    const decreaseFactor = Math.floor(questionText.length / 50);
     const newFontSize = Math.max(responsiveFontSize(26) - decreaseFactor, 10);
     setFontSize(newFontSize);
   };
@@ -42,16 +42,15 @@ const ModalToDelete = ({
               marginBottom: responsiveHeight(2),
             }}
           >
-            {text}
+            {titleText}
           </Text>
-          {text2 && (
+          {questionText && (
             <View
               style={{
                 borderRadius: 15,
                 backgroundColor: "#f79d65",
-                marginBottom: responsiveSize(6),
+                marginBottom: responsiveSize(3),
                 width: responsiveWidth(80),
-                minHeight: responsiveSize(40),
                 justifyContent: "center",
                 borderBottomRightRadius: 20,
                 borderTopRightRadius: 8,
@@ -67,7 +66,7 @@ const ModalToDelete = ({
                   fontSize: fontSize,
                 }}
               >
-                {text2}
+                {questionText}
               </Text>
             </View>
           )}
@@ -146,7 +145,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#52b788",
     borderRadius: 15,
     height: responsiveHeight(7),
-    width: responsiveHeight(16),
+    width: responsiveHeight(18),
     justifyContent: "center",
     alignItems: "center",
     color: "white",

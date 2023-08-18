@@ -38,16 +38,12 @@ null
     const onboardedUserIdsList = currentOnbboardedUserIds
     ? JSON.parse(currentOnbboardedUserIds)
     : null;
-    console.log("onboardedUserIdsList:", currentOnbboardedUserIds);
-    console.log("onboardedUserIdsList:", onboardedUserIdsList?.includes(user?.uid))
     if (onboardedUserIdsList?.includes(user?.uid)) {
       // hide onboarding
-      console.log("ran false")
       setShowOnboarding(false);
     } else {
       // show onboarding
       setShowOnboarding(true);
-      console.log("ran true")
     }
   };
 

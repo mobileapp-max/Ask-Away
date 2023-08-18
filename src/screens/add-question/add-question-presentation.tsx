@@ -44,6 +44,7 @@ export const AddQuestionPresentation = memo(
     fontSize,
     handleChangeText,
     handleClearText,
+    questionText,
   }: AddQuestionProps): JSX.Element => {
     return (
       <Screen onPressBack={onPressBack} title={"AddQuestion Screen"}>
@@ -64,8 +65,8 @@ export const AddQuestionPresentation = memo(
           </View>
           <View style={styles.footer}>
             <ModalToDelete
-              text={"Add this Question?"}
-              text2={text}
+              titleText={"Add this Question?"}
+              questionText={text}
               deleteModalVisible={deleteModalVisible}
               onPessDeleteQuestionYes={onPessDeleteQuestionYes}
               onPressDeleteQuestionNo={onPressDeleteQuestionNo}
