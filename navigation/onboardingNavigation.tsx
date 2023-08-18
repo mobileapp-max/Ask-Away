@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { Onboarding } from "../src/screens/onboarding/onboarding.tsx";
-import AuthenticatedStack from "./aunthenticatedstack.tsx";
+import AuthenticatedStack from "./authenticatedStack";
 import { UserContext } from "../contexts/user-context-provider.tsx";
 import { useOnboardingFunctions } from "../src/screens/onboarding/onboarding-functions";
 import { SCREENS } from "./screenNames";

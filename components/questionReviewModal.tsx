@@ -29,9 +29,9 @@ import { VictoryPie } from "victory-native";
 import { Ionicons } from "@expo/vector-icons";
 import fonts from "../scripts/fonts";
 
-const QuestionReviewModal = ({
+const selectedQuestionForReviewModal = ({
   children,
-  QuestionReviewModal,
+  selectedQuestionForReviewModal,
   QuestionReviewModalVisible,
   onPressDissmissQuestionReviewModal,
 }) => {
@@ -42,12 +42,12 @@ const QuestionReviewModal = ({
   // const wantedGraphicData = [{ y: 10 }, { y: 50 }, { y: 40 }]; // Data that we want to display
   const wantedGraphicData = [
     {
-      x: `${QuestionReviewModal?.answer_1} - No`,
-      y: QuestionReviewModal?.answer_2,
+      x: `${selectedQuestionForReviewModal?.answer_1} - No`,
+      y: selectedQuestionForReviewModal?.answer_2,
     },
     {
-      x: `${QuestionReviewModal?.answer_1} - Yes`,
-      y: QuestionReviewModal?.answer_1,
+      x: `${selectedQuestionForReviewModal?.answer_1} - Yes`,
+      y: selectedQuestionForReviewModal?.answer_1,
     },
   ];
   // const defaultGraphicData = [{ y: 0 }, { y: 0 }, { y: 100 }];
@@ -58,7 +58,7 @@ const QuestionReviewModal = ({
 
   useEffect(() => {
     setGraphicData(wantedGraphicData); // Setting the data that we want to display
-  }, [QuestionReviewModal]);
+  }, [selectedQuestionForReviewModal]);
 
   return (
     <Modal
@@ -96,7 +96,7 @@ const QuestionReviewModal = ({
                   fontSize: responsiveFontSize(20),
                 }}
               >
-                {QuestionReviewModal?.question}
+                {selectedQuestionForReviewModal?.question}
               </Text>
             </View>
             <View style={styles.answers}>
@@ -124,7 +124,7 @@ const QuestionReviewModal = ({
                   </Text>
                   <View style={styles.answersColumn}>
                     <Text style={styles.text}>
-                      {QuestionReviewModal?.answer_1 || 0}
+                      {selectedQuestionForReviewModal?.answer_1 || 0}
                     </Text>
                   </View>
                 </View>
@@ -145,7 +145,7 @@ const QuestionReviewModal = ({
                 >
                   <View style={styles.answersColumn}>
                     <Text style={styles.text}>
-                      {QuestionReviewModal?.answer_2 || 0}
+                      {selectedQuestionForReviewModal?.answer_2 || 0}
                     </Text>
                   </View>
                   <Text style={{ ...styles.text, padding: 0 }}>{" - No"}</Text>
@@ -159,7 +159,7 @@ const QuestionReviewModal = ({
   );
 };
 
-export default QuestionReviewModal;
+export default selectedQuestionForReviewModal;
 
 const styles = StyleSheet.create({
   centeredView: {

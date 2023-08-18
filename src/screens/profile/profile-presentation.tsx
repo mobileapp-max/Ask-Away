@@ -21,8 +21,8 @@ import { SwipeListView } from "react-native-swipe-list-view";
 import ProfileModal from "../../../components/profileModal";
 import fonts from "../../../scripts/fonts";
 import ModalToAddOrDeleteQuestion from "../../../components/modalToDelete";
-import QuestionReviewModal from "../../../components/questionReviewModal";
-import QuestionReviewMondal from "../../../components/questionReviewMondal";
+import selectedQuestionForReviewModal from "../../../components/questionReviewModal";
+import QuestionReviewModal from "../../../components/questionReviewMondal";
 
 export const ProfilePresentation = memo(
   ({
@@ -31,7 +31,7 @@ export const ProfilePresentation = memo(
     onPressAddOrDeleteQuestionNo,
     onPressAddOrDeleteQuestionYes,
     QuestionReviewModalVisible,
-    QuestionReviewModal,
+    selectedQuestionForReviewModal,
     onPressDissmissQuestionReviewModal,
     profileModalVisible,
     onPressDismissProfileModal,
@@ -59,9 +59,9 @@ export const ProfilePresentation = memo(
               onPressAddOrDeleteQuestionNo={onPressAddOrDeleteQuestionNo}
               onPressAddOrDeleteQuestionYes={onPressAddOrDeleteQuestionYes}
             />
-            <QuestionReviewMondal
+            <QuestionReviewModal
               QuestionReviewModalVisible={QuestionReviewModalVisible}
-              QuestionReviewModal={QuestionReviewModal}
+              selectedQuestionForReviewModal={selectedQuestionForReviewModal}
               onPressDissmissQuestionReviewModal={
                 onPressDissmissQuestionReviewModal
               }
@@ -73,7 +73,6 @@ export const ProfilePresentation = memo(
             <SwipeListView
               data={userQuestions?.length ? userQuestions : defaultQuestions}
               renderItem={({ item }) => {
-                console.log(item);
                 return (
                   <QuestionRow
                     question={item}

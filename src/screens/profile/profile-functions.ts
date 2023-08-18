@@ -14,12 +14,12 @@ export const useProfileFunctions = (props: any) => {
 
   const [modalToAddOrDeleteQuestionVisible, setDeleteModalVisible] = useState(false);
   const [QuestionReviewModalVisible, setQuestionVisible] = useState(false);
-
-  const [profileModalVisible, setProfileModalVisible] = useState(false);
-  const [QuestionReviewModal, setSelectedQuestionModal] = useState({});
-  const [questionIdToDelete, setQuestionIdToDelete] = useState(null);
-  const [modalVisible, setModalVisible] = useState(false);
   const [questionToAddOrDelete, setQuestionToDelete] = useState(null)
+  const [profileModalVisible, setProfileModalVisible] = useState(false);
+  const [selectedQuestionForReviewModal, setSelectedQuestionModal] = useState({});
+  const [questionIdToDelete, setQuestionIdToDelete] = useState(null);
+
+  const [modalVisible, setModalVisible] = useState(false);
 
   const onPressDissmissQuestionReviewModal = () => {
     setQuestionVisible(!QuestionReviewModalVisible);
@@ -44,9 +44,9 @@ export const useProfileFunctions = (props: any) => {
   };
 
   useEffect(() => {
-    const answer_1 = QuestionReviewModal?.answer_1;
-    const answer_2 = QuestionReviewModal?.answer_2;
-  }, [QuestionReviewModal]);
+    const answer_1 = selectedQuestionForReviewModal?.answer_1;
+    const answer_2 = selectedQuestionForReviewModal?.answer_2;
+  }, [selectedQuestionForReviewModal]);
 
   const updateQuestionModal = (incomingModalData) => {
     setSelectedQuestionModal(incomingModalData);
@@ -108,7 +108,7 @@ export const useProfileFunctions = (props: any) => {
     onPressAddOrDeleteQuestionNo,
     onPressAddOrDeleteQuestionYes,
     QuestionReviewModalVisible,
-    QuestionReviewModal,
+    selectedQuestionForReviewModal,
     onPressDissmissQuestionReviewModal,
     profileModalVisible,
     onPressDismissProfileModal,
