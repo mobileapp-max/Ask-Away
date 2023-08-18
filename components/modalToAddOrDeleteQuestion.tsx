@@ -37,9 +37,11 @@ const ModalToAddOrDeleteQuestion = ({
           <Text
             style={{
               ...styles.modalText,
-              fontSize: responsiveFontSize(35),
-              marginTop: responsiveHeight(0),
-              marginBottom: responsiveHeight(2),
+              marginVertical: responsiveHeight(1),
+              fontSize: responsiveFontSize(38),
+              fontWeight: "bold",
+              // marginTop: responsiveHeight(0),
+              // marginBottom: responsiveHeight(2),
             }}
           >
             {titleText}
@@ -64,6 +66,7 @@ const ModalToAddOrDeleteQuestion = ({
                   ...styles.modalText,
                   color: "#fff",
                   fontSize: fontSize,
+                  marginVertical: responsiveHeight(0.5),
                 }}
               >
                 {questionText}
@@ -76,6 +79,8 @@ const ModalToAddOrDeleteQuestion = ({
               alignItems: "flex-end",
               justifyContent: "flex-end",
               alignContent: "flex-end",
+              justifyContent: "center",
+              alignItems: "center",
             }}
           >
             <TouchableOpacity
@@ -106,11 +111,13 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   modalView: {
-    width: responsiveWidth(90),
+    width: responsiveWidth(85),
     alignSelf: "center",
     alignItems: "center",
-    padding: 8,
-    margin: 10,
+    justifyContent: "center",
+    alignContent: "center",
+    padding: responsiveSize(2),
+    // margin: 10,
     color: "#e32f45",
     borderColor: "#FA7465",
     backgroundColor: "#f7b267",
@@ -133,9 +140,9 @@ const styles = StyleSheet.create({
   modalText: {
     ...fonts.note,
     textAlign: "center",
-    fontWeight: "bold",
+    // fontWeight: "bold",
     color: "white",
-    marginVertical: responsiveHeight(1),
+    // marginVertical: responsiveHeight(1),
     paddingHorizontal: responsiveSize(5),
     borderRadius: 20,
   },

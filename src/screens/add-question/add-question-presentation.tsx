@@ -23,7 +23,8 @@ import { BlurView } from "expo-blur";
 import ButtonQApp from "../../../components/buttonQApp";
 import fonts from "../../../scripts/fonts";
 import { Ionicons } from "@expo/vector-icons";
-import ModalToAddOrDeleteQuestion from "../../../components/modalToDelete";
+import ModalToAddOrDeleteQuestion from "../../../components/modalToAddOrDeleteQuestion";
+import { ConfirmatioModal } from "../../../components/confirmationModal";
 
 export const AddQuestionPresentation = memo(
   ({
@@ -73,20 +74,12 @@ export const AddQuestionPresentation = memo(
               onPressAddOrDeleteQuestionYes={onPressAddOrDeleteQuestionYes}
               onPressAddOrDeleteQuestionNo={onPressAddOrDeleteQuestionNo}
             />
-            <Modal
-              animationType="fade"
-              transparent={true}
-              visible={modalVisible}
-              onRequestClose={() => {
-                setModalVisible(!modalVisible);
-              }}
-            >
-              <BlurView intensity={70} style={styles.centeredView} tint="light">
-                <View style={styles.modalView}>
-                  <Text style={styles.modalText}>{"Question Added!"}</Text>
-                </View>
-              </BlurView>
-            </Modal>
+            <ConfirmatioModal
+              modalVisible={modalVisible}
+              setModalVisible={setModalVisible}
+              messageToDisplay={"Added"}
+              tintColor={"light"}
+            />
             <ScrollView
               keyboardDismissMode="on-drag"
               style={styles.scrollView}

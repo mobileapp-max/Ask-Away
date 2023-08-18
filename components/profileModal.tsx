@@ -23,7 +23,7 @@ import {
 } from "../api/auth-api";
 import { Ionicons } from "@expo/vector-icons";
 import fonts from "../scripts/fonts";
-import ModalToAddOrDeleteQuestion from "./modalToDelete";
+import ModalToAddOrDeleteQuestion from "./modalToAddOrDeleteQuestion";
 import { removeItem } from "../utils/asyncStorage";
 import { useNavigation } from "@react-navigation/native";
 import { SCREENS } from "../navigation/screenNames";

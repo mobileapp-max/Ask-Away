@@ -3,6 +3,7 @@ import { Platform, StyleSheet } from 'react-native';
 const iosFonts = {
     default: 'Helvetica',
     note: 'Noteworthy-Bold',
+    // noteBold: 'Noteworthy-bold',
     serif: 'Times New Roman',
     sansSerif: 'Helvetica',
     monospace: 'Courier',

@@ -18,6 +18,7 @@ export const useProfileFunctions = (props: any) => {
   const [profileModalVisible, setProfileModalVisible] = useState(false);
   const [selectedQuestionForReviewModal, setSelectedQuestionModal] = useState({});
   const [questionIdToDelete, setQuestionIdToDelete] = useState(null);
+  const [isConfirmationModalVisible, setIsConfirmationModalVisible] = useState(false)
 
   const [modalVisible, setModalVisible] = useState(false);
 
@@ -40,6 +41,12 @@ export const useProfileFunctions = (props: any) => {
 
   const onPressAddOrDeleteQuestionYes = () => {
     setDeleteModalVisible(false);
+
+    setIsConfirmationModalVisible(true);
+    setTimeout(() => {
+      setIsConfirmationModalVisible(false);
+    }, 2000);
+
     onPressDeleteQuestion({ questionId: questionIdToDelete });
   };
 
@@ -120,6 +127,8 @@ export const useProfileFunctions = (props: any) => {
     user,
     sumReplies,
     setProfileModalVisible,
-    questionToAddOrDelete
+    questionToAddOrDelete,
+    setIsConfirmationModalVisible,
+    isConfirmationModalVisible
   }
 }

@@ -20,9 +20,10 @@ import { QuestionRow } from "../../../components/question-row/question-row";
 import { SwipeListView } from "react-native-swipe-list-view";
 import ProfileModal from "../../../components/profileModal";
 import fonts from "../../../scripts/fonts";
-import ModalToAddOrDeleteQuestion from "../../../components/modalToDelete";
+import ModalToAddOrDeleteQuestion from "../../../components/modalToAddOrDeleteQuestion";
 import selectedQuestionForReviewModal from "../../../components/questionReviewModal";
 import QuestionReviewModal from "../../../components/questionReviewMondal";
+import { ConfirmatioModal } from "../../../components/confirmationModal";
 
 export const ProfilePresentation = memo(
   ({
@@ -44,6 +45,8 @@ export const ProfilePresentation = memo(
     sumReplies,
     setProfileModalVisible,
     questionToAddOrDelete,
+    setIsConfirmationModalVisible,
+    isConfirmationModalVisible,
   }: ProfileProps): JSX.Element => {
     return (
       <Screen onPressBack={onPressBack} title={"Profile Screen"}>
@@ -69,6 +72,12 @@ export const ProfilePresentation = memo(
             <ProfileModal
               profileModalVisible={profileModalVisible}
               onPressDismissProfileModal={onPressDismissProfileModal}
+            />
+            <ConfirmatioModal
+              modalVisible={isConfirmationModalVisible}
+              setModalVisible={setIsConfirmationModalVisible}
+              messageToDisplay={"Deleted"}
+              tintColor={"dark"}
             />
             <SwipeListView
               data={userQuestions?.length ? userQuestions : defaultQuestions}
