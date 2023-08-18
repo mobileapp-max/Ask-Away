@@ -7,10 +7,14 @@ import { Octicons, Entypo } from "@expo/vector-icons";
 import { responsiveFontSize, responsiveSize } from "../scripts/constants";
 import { UserContext } from "../contexts/user-context-provider";
 import { Profile } from "../src/screens/profile/profile";
+import { useNavigation } from "@react-navigation/native";
+import { removeItem } from "../utils/asyncStorage";
+import { SCREENS } from "./screenNames";
 
 const Tab = createBottomTabNavigator();
 
 const AuthenticatedStack = (props) => {
+  const navigation = useNavigation();
   const CustomTabButton = (props) => {
     const { user } = useContext(UserContext);
     const children = props?.children;
@@ -92,7 +96,7 @@ const AuthenticatedStack = (props) => {
       }}
     >
       <Tab.Screen
-        name="Main"
+        name={SCREENS.ANSWER_QUESTIONS}
         component={AnswerQuestions}
         options={{
           tabBarIcon: ({ focused }) => (
@@ -114,7 +118,7 @@ const AuthenticatedStack = (props) => {
         }}
       />
       <Tab.Screen
-        name="Profile2"
+        name={SCREENS.ADD_QUESTIONS}
         component={AddQuestion}
         options={{
           tabBarIcon: ({ focused }) => (
@@ -132,7 +136,7 @@ const AuthenticatedStack = (props) => {
         }}
       />
       <Tab.Screen
-        name="Profile3"
+        name={SCREENS.PROFILE}
         component={Profile}
         options={{
           tabBarIcon: ({ focused }) => (

@@ -13,7 +13,7 @@ export const useProfileFunctions = (props: any) => {
       navigation.goBack()
     }
 
-    const [profileModalVisible, setProfileModalVisible] = useState(false);
+  const [profileModalVisible, setProfileModalVisible] = useState(false);
   const [deleteModalVisible, setDeleteModalVisible] = useState(false);
   const [questionVisible, setQuestionVisible] = useState(false);
 
@@ -120,5 +120,6 @@ export const useProfileFunctions = (props: any) => {
       sumAnswers,
       user,
       sumReplies,  
+      setProfileModalVisible
     }
 }

@@ -1,14 +1,12 @@
-import React, { useEffect, useState, Component, useCallback } from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
   StyleSheet,
   Pressable,
   Modal,
-  TextInput,
   TouchableOpacity,
   TouchableWithoutFeedback,
-  Alert,
   Platform,
 } from "react-native";
 import {
@@ -23,16 +21,20 @@ import {
   logoutUser,
   updateUsersPassword,
 } from "../api/auth-api";
-import { Feather } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 import fonts from "../scripts/fonts";
 import ModalToDelete from "./modalToDelete";
+import { removeItem } from "../utils/asyncStorage";
+import { useNavigation } from "@react-navigation/native";
+import { SCREENS } from "../navigation/screenNames";
 
 const ProfileModal = ({
   children,
   profileModalVisible,
   onPressDismissProfileModal,
+  setProfileModalVisible,
 }) => {
+  const navigation = useNavigation();
   const [data, setData] = useState({
     currentPassword: "",
     newPassword: "",
@@ -74,12 +76,17 @@ const ProfileModal = ({
   const onPressOpenDeleteAccountModal = () => {
     setDeleteAccountModalVisible(!deleteAccountModalVisible);
   };
+  const onPressOpenTutorial = async () => {
+    onPressDismissProfileModal();
+    // await removeItem("onboardedUserIds");
+    navigation.push(SCREENS.ONBOARDING);
+  };
   const onPressDeleteQuestionNo = () => {
     setLogOutModalVisible(false);
     setDeleteAccountModalVisible(false);
   };
   const onPessDeleteQuestionYes = () => {
-    if (logOutModalVisible === true) {
+    if (logOutModalVisible) {
       setLogOutModalVisible(false);
       onPressDismissProfileModal();
       logoutUser();
@@ -238,6 +245,14 @@ const ProfileModal = ({
                                     color2={'#52b788'}
                                     fontSize={responsiveFontSize(20)}
                                 /> */}
+                <ButtonQApp
+                  title={"Tutorial"}
+                  onPress={onPressOpenTutorial}
+                  height={responsiveHeight(4)}
+                  color={"#e6d387"}
+                  color2={"#e6d387"}
+                  fontSize={responsiveFontSize(20)}
+                />
                 <ButtonQApp
                   title={"Delete Account"}
                   onPress={onPressOpenDeleteAccountModal}

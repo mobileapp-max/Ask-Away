@@ -1,28 +1,29 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import HomeScreen from "../screens/HomeScreen.js";
-import { getItem } from "../utils/asyncStorage.js";
 import { Onboarding } from "../src/screens/onboarding/onboarding.tsx";
+import AuthenticatedStack from "./aunthenticatedstack.tsx";
+import { UserContext } from "../contexts/user-context-provider.tsx";
+import { useOnboardingFunctions } from "../src/screens/onboarding/onboarding-functions";
+import { SCREENS } from "./screenNames";
 
 const Stack = createNativeStackNavigator();
 
 export default function AppNavigation() {
-  const [showOnboarding, setShowOnboarding] = useState(null);
+  const { user } = useContext(UserContext);
+  const {
+    checkIfAlreadyOnboarded,
+    showOnboarding,
+    onPressBack,
+    handleDone,
+    setShowOnboarding,
+    isLoading,
+  } = useOnboardingFunctions();
+
   useEffect(() => {
     checkIfAlreadyOnboarded();
   }, []);
 
-  const checkIfAlreadyOnboarded = async () => {
-    let onboarded = await getItem("onboarded");
-    console.log(onboarded);
-    if (onboarded == 1) {
-      // hide onboarding
-      setShowOnboarding(false);
-    } else {
-      // show onboarding
-      setShowOnboarding(true);
-    }
-  };
+  console.log("showOnboarding1: ", showOnboarding);
 
   if (showOnboarding == null) {
     return null;
@@ -30,31 +31,31 @@ export default function AppNavigation() {
 
   if (showOnboarding) {
     return (
-      <Stack.Navigator initialRouteName="Onboarding">
+      <Stack.Navigator initialRouteName={SCREENS.ONBOARDING}>
         <Stack.Screen
-          name="Onboarding"
+          name={SCREENS.ONBOARDING}
           options={{ headerShown: false }}
           component={Onboarding}
         />
         <Stack.Screen
-          name="Home"
+          name={SCREENS.AUTHENTICATED_STACK}
           options={{ headerShown: false }}
-          component={HomeScreen}
+          component={AuthenticatedStack}
         />
       </Stack.Navigator>
     );
   } else {
     return (
-      <Stack.Navigator initialRouteName="Home">
+      <Stack.Navigator initialRouteName={SCREENS.AUTHENTICATED_STACK}>
         <Stack.Screen
-          name="Onboarding"
+          name={SCREENS.ONBOARDING}
           options={{ headerShown: false }}
           component={Onboarding}
         />
         <Stack.Screen
-          name="Home"
+          name={SCREENS.AUTHENTICATED_STACK}
           options={{ headerShown: false }}
-          component={HomeScreen}
+          component={AuthenticatedStack}
         />
       </Stack.Navigator>
     );

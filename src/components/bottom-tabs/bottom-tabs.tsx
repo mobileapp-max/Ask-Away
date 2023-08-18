@@ -5,6 +5,7 @@ import { responsiveFontSize, responsiveSize } from "../../../scripts/constants";
 import { Entypo, Octicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import AnswerQuestionScreen from "../../screens/answer-questions/AnswerQuestions";
+import { SCREENS } from "../../../navigation/screenNames";
 
 /**
  * Describe the new component here...
@@ -40,7 +41,7 @@ export const BottomTabs = memo(({ children }: BottomTabsProps): JSX.Element => {
     <View style={style.container}>
       <Pressable
         onPress={() => {
-          navigation.navigate("AnswerQuestions");
+          navigation.navigate(SCREENS.ANSWER_QUESTIONS);
           setPressedTab({
             answerQuestions: true,
             addQuestion: false,
@@ -66,7 +67,7 @@ export const BottomTabs = memo(({ children }: BottomTabsProps): JSX.Element => {
         }}
         onPress={() => {
           rotatePlusSign;
-          navigation.navigate("AddQuestion");
+          navigation.navigate(SCREENS.ADD_QUESTIONS);
         }}
       >
         <Animated.View

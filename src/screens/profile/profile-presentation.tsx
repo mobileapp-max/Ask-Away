@@ -41,6 +41,7 @@ export const ProfilePresentation = memo(
     sumAnswers,
     user,
     sumReplies,
+    setProfileModalVisible,
   }: ProfileProps): JSX.Element => {
     return (
       <Screen onPressBack={onPressBack} title={"Profile Screen"}>
