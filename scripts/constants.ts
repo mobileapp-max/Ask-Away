@@ -1,4 +1,5 @@
 import { Dimensions, Platform, PixelRatio } from 'react-native';
+import { colors } from '../assets/colors';
 
 export const windowWidth = Dimensions.get('window').width;
 export const windowHeight = Dimensions.get('window').height;
@@ -25,20 +26,6 @@ export function responsiveHeight(percentage) {
 
 export function responsiveSize(number) {
     return windowHeight / windowWidth * number
-}
-
-export const colors = {
-    green: "#72FA41",
-    blue: "#24CCFF",
-    yellow: "#FBFF00",
-    pink: "#FF69B4",
-    grey: "#C1C1C1",
-    dkGrey: "#777777",
-    warmGrey: "#707070",
-    charcoalGrey: "#31363c",
-    darkGrey: "#262a2f",
-    stemBlack: "#1C1C1C",
-    black: "#000000"
 }
 
 export const hitSlop = { top: 10, bottom: 10, left: 10, right: 10 };

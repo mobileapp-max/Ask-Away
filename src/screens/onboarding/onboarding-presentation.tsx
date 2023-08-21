@@ -51,11 +51,15 @@ export const OnboardingPresentation = memo(
               );
             }}
             containerStyles={{ paddingHorizontal: responsiveSize(5) }}
-            titleStyles={{ fontSize: responsiveFontSize(35), ...fonts.note }}
+            titleStyles={{
+              fontSize: responsiveFontSize(35),
+              ...fonts.note,
+            }}
             subTitleStyles={{
               fontSize: responsiveFontSize(20),
               color: "#ffffff",
               ...fonts.note,
+              top: responsiveFontSize(-10),
             }}
             pages={[
               {

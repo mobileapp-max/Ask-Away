@@ -91,13 +91,20 @@ export const AnswerQuestionsPresentation = memo(
                   {question ? (
                     checkForAnsweredQuestion
                   ) : (
-                    // <ActivityIndicator size="large" color={"#fff"} />
                     <View style={styles.lottie}>
                       <Lottie
-                        source={require("../../../assets/animations/elephan.json")}
+                        source={require("../../../assets/animations/elephan_2.json")}
                         autoPlay
                         loop
                       />
+                      <Text
+                        style={{
+                          ...styles.textForButtons,
+                          top: responsiveSize(30),
+                        }}
+                      >
+                        {"Loading"}
+                      </Text>
                     </View>
                   )}
                 </Text>
@@ -127,17 +134,7 @@ export const AnswerQuestionsPresentation = memo(
                       color="#fff"
                       style={{ margin: 3 }}
                     />
-                    <Text
-                      style={{
-                        ...fonts.note,
-                        fontWeight: "bold",
-                        padding: 7,
-                        fontSize: responsiveFontSize(20),
-                        color: "#fff",
-                      }}
-                    >
-                      {"Report"}
-                    </Text>
+                    <Text style={styles.textForButtons}>{"Report"}</Text>
                   </TouchableOpacity>
                   <TouchableOpacity onPress={() => nextQuestion()}>
                     <Animated.View
@@ -161,16 +158,7 @@ export const AnswerQuestionsPresentation = memo(
                               alignItems: "center",
                             }}
                           >
-                            <Text
-                              style={{
-                                ...fonts.note,
-                                color: "#fff",
-                                fontWeight: "bold",
-                                fontSize: responsiveFontSize(20),
-                              }}
-                            >
-                              {"Next"}
-                            </Text>
+                            <Text style={styles.textForButtons}>{"Next"}</Text>
                             <AntDesign
                               name="caretright"
                               size={38}
@@ -390,5 +378,16 @@ const styles = StyleSheet.create({
     width: responsiveSize(100),
     height: responsiveSize(100),
     flex: 1,
+    alignContent: "center",
+    justifyContent: "center",
+    alignSelf: "center",
+    alignItems: "center",
+  },
+  textForButtons: {
+    ...fonts.note,
+    fontWeight: "bold",
+    padding: 7,
+    fontSize: responsiveFontSize(20),
+    color: "#fff",
   },
 });
