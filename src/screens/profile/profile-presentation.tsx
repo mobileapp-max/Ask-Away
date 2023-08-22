@@ -23,6 +23,7 @@ import ModalToAddOrDeleteQuestion from "../../../components/modalToAddOrDeleteQu
 import QuestionReviewModal from "../../../components/questionReviewMondal";
 import { ConfirmatioModal } from "../../../components/confirmationModal";
 import { Ionicons } from "@expo/vector-icons";
+import { colors } from "../../../assets/colors";
 
 export const ProfilePresentation = memo(
   ({
@@ -151,10 +152,10 @@ export const ProfilePresentation = memo(
               <Text
                 style={{
                   ...styles.profileName,
-                  fontSize: responsiveFontSize(26),
+                  fontSize: responsiveFontSize(30),
                 }}
               >
-                {"Profile"}
+                {"Your"}
               </Text>
               <View
                 style={{
@@ -162,7 +163,7 @@ export const ProfilePresentation = memo(
                   height: 25,
                   backgroundColor: "#ffe6c9",
                   borderRadius: 25,
-                  top: responsiveSize(5),
+                  top: responsiveSize(7),
                   left: responsiveSize(4),
                   alignItems: "center",
                   justifyContent: "center",
@@ -176,47 +177,64 @@ export const ProfilePresentation = memo(
               </View>
             </TouchableOpacity>
             <View style={styles.cardValueRow}>
+              {/* <View> */}
               <TouchableOpacity
                 onPress={() => setAreQuestionsDisplayed(true)}
                 style={{ flexDirection: "column" }}
               >
-                <View style={styles.cardValues}>
+                <View
+                  style={{
+                    ...styles.cardValues,
+                    backgroundColor: areQuestionsDisplayed
+                      ? "#ffe6c9"
+                      : "#ffcd96",
+                    borderColor: "#ffe6c9",
+                    borderWidth: !areQuestionsDisplayed
+                      ? StyleSheet.hairlineWidth * 2
+                      : 0,
+                    shadowColor: areQuestionsDisplayed ? "#ffe6c9" : "#e32f45",
+                  }}
+                >
                   <Text style={styles.largeNumbers}>
                     {userQuestions?.length}
                   </Text>
+                  <Text style={{ ...styles.regularText }}>{"\nQuestions"}</Text>
                 </View>
-                {/* <Text style={styles.regularText}>{'Your'}</Text> */}
-                <Text
-                  style={{ ...styles.regularText, top: responsiveHeight(-5) }}
-                >
-                  {"\nAsked"}
-                </Text>
               </TouchableOpacity>
               <TouchableOpacity
                 onPress={() => setAreQuestionsDisplayed(false)}
                 style={{ flexDirection: "column" }}
               >
-                <View style={styles.cardValues}>
+                <View
+                  style={{
+                    ...styles.cardValues,
+                    backgroundColor: !areQuestionsDisplayed
+                      ? "#ffe6c9"
+                      : "#ffcd96",
+                    borderColor: "#ffe6c9",
+                    borderWidth: areQuestionsDisplayed
+                      ? StyleSheet.hairlineWidth * 2
+                      : 0,
+                    shadowColor: !areQuestionsDisplayed ? "#ffe6c9" : "#e32f45",
+                  }}
+                >
                   <Text style={styles.largeNumbers}>{sumReplies}</Text>
+                  <Text style={{ ...styles.regularText }}>{"\nAnswers"}</Text>
                 </View>
                 {/* <Text style={styles.regularText}>{'Your'}</Text> */}
-                <Text
-                  style={{ ...styles.regularText, top: responsiveHeight(-5) }}
-                >
-                  {"\nAnswered"}
-                </Text>
               </TouchableOpacity>
-              <View style={{ flexDirection: "column" }}>
+              {/* <View style={{ flexDirection: "column" }}>
                 <View style={styles.cardValues}>
                   <Text style={styles.largeNumbers}>{sumAnswers}</Text>
                 </View>
-                {/* <Text style={styles.regularText}>{'Replies'}</Text> */}
+                <Text style={styles.regularText}>{"Replies"}</Text>
                 <Text
                   style={{ ...styles.regularText, top: responsiveHeight(-5) }}
                 >
                   {"\nRecieved"}
                 </Text>
-              </View>
+              </View> */}
+              {/* </View> */}
             </View>
           </View>
         </View>
@@ -264,30 +282,44 @@ const styles = StyleSheet.create({
   },
   cardValues: {
     flexDirection: "column",
+
     alignItems: "center",
-    margin: responsiveWidth(3),
+    margin: responsiveWidth(0.5),
     backgroundColor: "#ffe6c9",
-    borderRadius: 50,
-    width: responsiveSize(23),
-    height: responsiveSize(23),
+    borderRadius: responsiveSize(5),
+    width: responsiveSize(65),
+    height: responsiveSize(40),
+    justifyContent: "center",
+    shadowColor: "#e32f45",
+    shadowOffset: {
+      width: 0,
+      height: 10,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.5,
+    elevation: 5,
   },
   cardValueRow: {
-    top: responsiveHeight(1.5),
     flexDirection: "row",
-    justifyContent: "space-evenly",
+    justifyContent: "center",
+    top: responsiveSize(8),
+    // alignItems: "flex-end",
+    // alignSelf: "stretch",
+    // alignContent: "flex-end",
   },
   largeNumbers: {
     ...fonts.note,
-    fontSize: responsiveFontSize(29),
+    fontSize: responsiveFontSize(35),
     fontWeight: "bold",
     color: "#FF6363",
+    top: responsiveSize(8),
   },
   regularText: {
     ...fonts.note,
-    fontSize: responsiveFontSize(17),
+    fontSize: responsiveFontSize(20),
     textAlign: "center",
     color: "#FF6363",
-    top: responsiveSize(-5),
+    top: responsiveSize(-9),
   },
   editButton: {
     flexDirection: "row",
