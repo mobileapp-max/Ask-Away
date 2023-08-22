@@ -20,6 +20,7 @@ export const useProfileFunctions = (props: any) => {
   const [selectedQuestionForReviewModal, setSelectedQuestionModal] = useState({});
   const [questionIdToDelete, setQuestionIdToDelete] = useState(null);
   const [isConfirmationModalVisible, setIsConfirmationModalVisible] = useState(false)
+  const [areQuestionsDisplayed, setAreQuestionsDisplayed] = useState(true)
 
   const [modalVisible, setModalVisible] = useState(false);
 
@@ -63,14 +64,6 @@ export const useProfileFunctions = (props: any) => {
   const { questions, response, onPressDeleteQuestion, userQuestions, userResponses, questionsYouRespondedTo, respondedQuestionIds } =
     useContext(QuestionsContext);
 
-  // console.log(JSON.parse(response).filter(response => response.user_id === user?.uid))
-  // console.log(JSON.parse(response))
-  // console.log(response.slice(0, 100))
-  console.log('respondedQuestionIds:', respondedQuestionIds)
-
-  // response?.user_id?.filter(
-  //   (response) => response?.user_id == user?.uid
-
   const { user } = useContext(UserContext);
 
   const sumAnswers = useMemo(() => {
@@ -111,7 +104,7 @@ export const useProfileFunctions = (props: any) => {
       answer_2: 0,
       created_at: "2023-03-07T22:03:57.695653+00:00",
       id: "6834fa7a-683b-492c-9297-1c52464a84f2",
-      question: "Example - Your questions will display here.",
+      question: "Your questions will display here.",
       responses_aggregate: {
         __typename: "response_aggregate",
         aggregate: {
@@ -126,7 +119,28 @@ export const useProfileFunctions = (props: any) => {
       user_id: "HBlSWJoP5dcK1LEJPMqeGio9JXo2",
     },
   ];
-
+  const defaultAnswer = [
+    {
+      __typename: "question",
+      answer_1: 0,
+      answer_2: 0,
+      created_at: "2023-03-07T22:03:57.695653+00:00",
+      id: "6834fa7a-683b-492c-9297-1c52464a84f3",
+      question: "Answers will display here.",
+      responses_aggregate: {
+        __typename: "response_aggregate",
+        aggregate: {
+          __typename: "response_aggregate_fields",
+          sum: {
+            __typename: "response_sum_fields",
+            response_1: 0,
+            response_2: 0,
+          },
+        },
+      },
+      user_id: "HBlSWJoP5dcK1LEJPMqeGio9JXo2",
+    },
+  ];
 
   return {
     onPressBack,
@@ -149,5 +163,9 @@ export const useProfileFunctions = (props: any) => {
     questionToAddOrDelete,
     setIsConfirmationModalVisible,
     isConfirmationModalVisible,
+    questionsYouRespondedTo,
+    setAreQuestionsDisplayed,
+    areQuestionsDisplayed,
+    defaultAnswer
   }
 }

@@ -42,10 +42,13 @@ export const ProfilePresentation = memo(
     sumAnswers,
     user,
     sumReplies,
-    setProfileModalVisible,
     questionToAddOrDelete,
     setIsConfirmationModalVisible,
     isConfirmationModalVisible,
+    questionsYouRespondedTo,
+    setAreQuestionsDisplayed,
+    areQuestionsDisplayed,
+    defaultAnswer,
   }: ProfileProps): JSX.Element => {
     return (
       <Screen onPressBack={onPressBack} title={"Profile Screen"}>
@@ -79,7 +82,15 @@ export const ProfilePresentation = memo(
               tintColor={"dark"}
             />
             <SwipeListView
-              data={userQuestions?.length ? userQuestions : defaultQuestions}
+              data={
+                areQuestionsDisplayed
+                  ? userQuestions?.length
+                    ? userQuestions
+                    : defaultQuestions
+                  : questionsYouRespondedTo?.length
+                  ? questionsYouRespondedTo
+                  : defaultAnswer
+              }
               renderItem={({ item }) => {
                 return (
                   <QuestionRow
@@ -129,6 +140,7 @@ export const ProfilePresentation = memo(
               }}
               rightOpenValue={-75}
               disableRightSwipe={true}
+              disableLeftSwipe={!areQuestionsDisplayed}
             />
           </View>
           <View style={styles.card}>
@@ -164,7 +176,10 @@ export const ProfilePresentation = memo(
               </View>
             </TouchableOpacity>
             <View style={styles.cardValueRow}>
-              <View style={{ flexDirection: "column" }}>
+              <TouchableOpacity
+                onPress={() => setAreQuestionsDisplayed(true)}
+                style={{ flexDirection: "column" }}
+              >
                 <View style={styles.cardValues}>
                   <Text style={styles.largeNumbers}>
                     {userQuestions?.length}
@@ -176,8 +191,11 @@ export const ProfilePresentation = memo(
                 >
                   {"\nAsked"}
                 </Text>
-              </View>
-              <View style={{ flexDirection: "column" }}>
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => setAreQuestionsDisplayed(false)}
+                style={{ flexDirection: "column" }}
+              >
                 <View style={styles.cardValues}>
                   <Text style={styles.largeNumbers}>{sumReplies}</Text>
                 </View>
@@ -187,7 +205,7 @@ export const ProfilePresentation = memo(
                 >
                   {"\nAnswered"}
                 </Text>
-              </View>
+              </TouchableOpacity>
               <View style={{ flexDirection: "column" }}>
                 <View style={styles.cardValues}>
                   <Text style={styles.largeNumbers}>{sumAnswers}</Text>
