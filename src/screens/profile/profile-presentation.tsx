@@ -8,7 +8,6 @@ import {
   StyleSheet,
   Pressable,
 } from "react-native";
-import Feather from "react-native-vector-icons/Feather";
 import {
   responsiveHeight,
   responsiveWidth,
@@ -21,9 +20,9 @@ import { SwipeListView } from "react-native-swipe-list-view";
 import ProfileModal from "../../../components/profileModal";
 import fonts from "../../../scripts/fonts";
 import ModalToAddOrDeleteQuestion from "../../../components/modalToAddOrDeleteQuestion";
-import selectedQuestionForReviewModal from "../../../components/questionReviewModal";
 import QuestionReviewModal from "../../../components/questionReviewMondal";
 import { ConfirmatioModal } from "../../../components/confirmationModal";
+import { Ionicons } from "@expo/vector-icons";
 
 export const ProfilePresentation = memo(
   ({
@@ -94,7 +93,7 @@ export const ProfilePresentation = memo(
               }}
               keyExtractor={(item, index) => item?.id}
               contentContainerStyle={{
-                paddingTop: responsiveHeight(4),
+                paddingTop: responsiveHeight(5),
                 paddingBottom: responsiveHeight(20),
               }}
               renderHiddenItem={({ item }) => {
@@ -107,6 +106,7 @@ export const ProfilePresentation = memo(
                       alignItems: "center",
                       left: responsiveWidth(-5),
                       flex: 1,
+                      // alignSelf: "center",
                     }}
                   >
                     <Pressable
@@ -136,25 +136,30 @@ export const ProfilePresentation = memo(
               onPress={onPressDismissProfileModal}
               style={styles.editButton}
             >
-              <Text style={styles.profileName}>{user?.email}</Text>
+              <Text
+                style={{
+                  ...styles.profileName,
+                  fontSize: responsiveFontSize(26),
+                }}
+              >
+                {"Profile"}
+              </Text>
               <View
                 style={{
-                  width: 30,
-                  height: 30,
+                  width: 25,
+                  height: 25,
                   backgroundColor: "#ffe6c9",
                   borderRadius: 25,
                   top: responsiveSize(5),
                   left: responsiveSize(4),
+                  alignItems: "center",
+                  justifyContent: "center",
                 }}
               >
-                <Feather
-                  name="edit"
-                  color="#f25c54"
+                <Ionicons
+                  name="md-chevron-down-sharp"
                   size={25}
-                  style={{
-                    top: responsiveSize(1),
-                    left: responsiveSize(2),
-                  }}
+                  color="#f25c54"
                 />
               </View>
             </TouchableOpacity>
@@ -229,7 +234,7 @@ const styles = StyleSheet.create({
     borderColor: "#FF6363",
     alignSelf: "center",
     borderRadius: 25,
-    top: responsiveHeight(5),
+    top: responsiveHeight(6),
     shadowColor: "#e32f45",
     shadowOffset: {
       width: 0,

@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import { QuestionsContext } from "../../../contexts/questions-context-provider";
 import { useContext } from "react";
 import { UserContext } from "../../../contexts/user-context-provider";
+import { responsiveFontSize } from "../../../scripts/constants";
 
 export const useProfileFunctions = (props: any) => {
 
@@ -59,8 +60,16 @@ export const useProfileFunctions = (props: any) => {
     setSelectedQuestionModal(incomingModalData);
     setQuestionVisible(!modalVisible);
   };
-  const { questions, response, onPressDeleteQuestion, userQuestions } =
+  const { questions, response, onPressDeleteQuestion, userQuestions, userResponses, questionsYouRespondedTo, respondedQuestionIds } =
     useContext(QuestionsContext);
+
+  // console.log(JSON.parse(response).filter(response => response.user_id === user?.uid))
+  // console.log(JSON.parse(response))
+  // console.log(response.slice(0, 100))
+  console.log('respondedQuestionIds:', respondedQuestionIds)
+
+  // response?.user_id?.filter(
+  //   (response) => response?.user_id == user?.uid
 
   const { user } = useContext(UserContext);
 
@@ -75,16 +84,25 @@ export const useProfileFunctions = (props: any) => {
   }, [userQuestions]);
 
   const sumReplies = useMemo(() => {
+    const seenQuestionIds = new Set();
     let sum = 0;
+
     response?.response.forEach((resp) => {
       if (resp?.user_id === user?.uid) {
-        if (resp?.response_1 !== 0 || resp?.response_2 !== 0) {
-          sum += 1;
+        const questionId = resp?.question_id;
+
+        if (!seenQuestionIds.has(questionId)) {
+          seenQuestionIds.add(questionId);
+
+          if (resp?.response_1 !== 0 || resp?.response_2 !== 0) {
+            sum += 1;
+          }
         }
       }
     });
     return sum;
   }, [response]);
+
 
   const defaultQuestions = [
     {
@@ -93,21 +111,22 @@ export const useProfileFunctions = (props: any) => {
       answer_2: 0,
       created_at: "2023-03-07T22:03:57.695653+00:00",
       id: "6834fa7a-683b-492c-9297-1c52464a84f2",
-      question: "Sample Question",
+      question: "Example - Your questions will display here.",
       responses_aggregate: {
         __typename: "response_aggregate",
         aggregate: {
           __typename: "response_aggregate_fields",
           sum: {
             __typename: "response_sum_fields",
-            response_1: 51,
-            response_2: 49,
+            response_1: 0,
+            response_2: 0,
           },
         },
       },
       user_id: "HBlSWJoP5dcK1LEJPMqeGio9JXo2",
     },
   ];
+
 
   return {
     onPressBack,
@@ -129,6 +148,6 @@ export const useProfileFunctions = (props: any) => {
     setProfileModalVisible,
     questionToAddOrDelete,
     setIsConfirmationModalVisible,
-    isConfirmationModalVisible
+    isConfirmationModalVisible,
   }
 }
