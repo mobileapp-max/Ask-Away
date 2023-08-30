@@ -2,7 +2,6 @@ import React, { useEffect, useMemo, useState } from "react";
 import { QuestionsContext } from "../../../contexts/questions-context-provider";
 import { useContext } from "react";
 import { UserContext } from "../../../contexts/user-context-provider";
-import { responsiveFontSize } from "../../../scripts/constants";
 
 export const useProfileFunctions = (props: any) => {
 
