@@ -13,10 +13,10 @@
       "backgroundColor": "#ffffff",
       "width": 500,
       "height": 500
-
     },
     "updates": {
-      "fallbackToCacheTimeout": 0
+      "fallbackToCacheTimeout": 0,
+      "url": "https://u.expo.dev/d1b7ca59-99b6-4d60-aa1a-66111078066a"
     },
     "assetBundlePatterns": [
       "**/*"
@@ -56,6 +56,9 @@
           "username": "max_qapp"
         }
       ]
-    ]
+    ],
+    "runtimeVersion": {
+      "policy": "sdkVersion"
+    }
   }
 }
