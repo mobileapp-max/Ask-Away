@@ -49,6 +49,12 @@
             "useFrameworks": "static"
           }
         }
+      ],
+      [
+        "expo-updates",
+        {
+          "username": "max_qapp"
+        }
       ]
     ]
   }
