@@ -1,12 +1,13 @@
 {
   "name": "my-app",
-  "version": "1.5.0",
+  "version": "1.6.0",
   "scripts": {
     "start": "expo start",
     "android": "expo run:android",
     "web": "expo start --web",
     "eject": "expo eject",
     "test": "jest --watchAll",
+    "build": "eas build --platform ios",
     "bpre": "eas build --profile preview --platform all",
     "bpro": "eas build --profile production --platform all",
     "upre": "eas update --branch preview --message 'Updating the Preview/TestFlight/Internal version'",

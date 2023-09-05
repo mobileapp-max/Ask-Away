@@ -180,7 +180,7 @@ export const ProfilePresentation = memo(
               {/* <View> */}
               <TouchableOpacity
                 onPress={() => setAreQuestionsDisplayed(true)}
-                style={{ flexDirection: "column" }}
+                style={{ flexDirection: "column", marginRight: 10 }}
               >
                 <View
                   style={{
@@ -287,7 +287,7 @@ const styles = StyleSheet.create({
     margin: responsiveWidth(0.5),
     backgroundColor: "#ffe6c9",
     borderRadius: responsiveSize(5),
-    width: responsiveSize(65),
+    width: responsiveSize(55),
     height: responsiveSize(40),
     justifyContent: "center",
     shadowColor: "#e32f45",
@@ -303,6 +303,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     top: responsiveSize(8),
+
     // alignItems: "flex-end",
     // alignSelf: "stretch",
     // alignContent: "flex-end",
