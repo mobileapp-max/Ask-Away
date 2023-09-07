@@ -23,7 +23,6 @@ import ModalToAddOrDeleteQuestion from "../../../components/modalToAddOrDeleteQu
 import QuestionReviewModal from "../../../components/questionReviewMondal";
 import { ConfirmatioModal } from "../../../components/confirmationModal";
 import { Ionicons } from "@expo/vector-icons";
-import { colors } from "../../../assets/colors";
 
 export const ProfilePresentation = memo(
   ({
@@ -152,7 +151,6 @@ export const ProfilePresentation = memo(
               <Text
                 style={{
                   ...styles.profileName,
-                  fontSize: responsiveFontSize(30),
                 }}
               >
                 {"Your"}
@@ -163,7 +161,7 @@ export const ProfilePresentation = memo(
                   height: 25,
                   backgroundColor: "#ffe6c9",
                   borderRadius: 25,
-                  top: responsiveSize(7),
+                  top: responsiveSize(10),
                   left: responsiveSize(4),
                   alignItems: "center",
                   justifyContent: "center",
@@ -177,35 +175,49 @@ export const ProfilePresentation = memo(
               </View>
             </TouchableOpacity>
             <View style={styles.cardValueRow}>
-              {/* <View> */}
-              <TouchableOpacity
-                onPress={() => setAreQuestionsDisplayed(true)}
-                style={{ flexDirection: "column", marginRight: 10 }}
-              >
-                <View
-                  style={{
-                    ...styles.cardValues,
-                    backgroundColor: areQuestionsDisplayed
-                      ? "#ffe6c9"
-                      : "#ffcd96",
-                    borderColor: "#ffe6c9",
-                    borderWidth: !areQuestionsDisplayed
-                      ? StyleSheet.hairlineWidth * 2
-                      : 0,
-                    shadowColor: areQuestionsDisplayed ? "#ffe6c9" : "#e32f45",
-                  }}
-                >
-                  <Text style={styles.largeNumbers}>
-                    {userQuestions?.length}
-                  </Text>
-                  <Text style={{ ...styles.regularText }}>{"\nQuestions"}</Text>
-                </View>
-              </TouchableOpacity>
-              <TouchableOpacity
-                onPress={() => setAreQuestionsDisplayed(false)}
-                style={{ flexDirection: "column" }}
-              >
-                <View
+              <>
+                {[
+                  {
+                    text: "Answers",
+                    numberValue: userQuestions?.length,
+                    onPress: () => setAreQuestionsDisplayed(false),
+                    areQuestionsDisplayed: !areQuestionsDisplayed,
+                  },
+                  {
+                    text: "Questions",
+                    numberValue: sumReplies,
+                    onPress: () => setAreQuestionsDisplayed(true),
+                    areQuestionsDisplayed: areQuestionsDisplayed,
+                  },
+                ].map((item, index) => (
+                  <View>
+                    <TouchableOpacity
+                      onPress={item?.onPress}
+                      style={{
+                        ...styles.cardValues,
+                        backgroundColor: item?.areQuestionsDisplayed
+                          ? "#ffe6c9"
+                          : "#ffcd96",
+                        borderColor: "#ffe6c9",
+                        borderWidth: !item?.areQuestionsDisplayed
+                          ? StyleSheet.hairlineWidth * 2
+                          : 0,
+                        shadowColor: item?.areQuestionsDisplayed
+                          ? "#ffe6c9"
+                          : "#e32f45",
+                      }}
+                    >
+                      <Text style={styles.largeNumbers}>
+                        {item?.numberValue}
+                      </Text>
+                    </TouchableOpacity>
+                    <Text style={{ ...styles.regularText }}>{item?.text}</Text>
+                  </View>
+                ))}
+              </>
+              {/* <View>
+                <TouchableOpacity
+                  onPress={() => setAreQuestionsDisplayed(false)}
                   style={{
                     ...styles.cardValues,
                     backgroundColor: !areQuestionsDisplayed
@@ -219,22 +231,9 @@ export const ProfilePresentation = memo(
                   }}
                 >
                   <Text style={styles.largeNumbers}>{sumReplies}</Text>
-                  <Text style={{ ...styles.regularText }}>{"\nAnswers"}</Text>
-                </View>
-                {/* <Text style={styles.regularText}>{'Your'}</Text> */}
-              </TouchableOpacity>
-              {/* <View style={{ flexDirection: "column" }}>
-                <View style={styles.cardValues}>
-                  <Text style={styles.largeNumbers}>{sumAnswers}</Text>
-                </View>
-                <Text style={styles.regularText}>{"Replies"}</Text>
-                <Text
-                  style={{ ...styles.regularText, top: responsiveHeight(-5) }}
-                >
-                  {"\nRecieved"}
-                </Text>
+                </TouchableOpacity>
+                <Text style={{ ...styles.regularText }}>{"Answers"}</Text>
               </View> */}
-              {/* </View> */}
             </View>
           </View>
         </View>
@@ -259,7 +258,7 @@ const styles = StyleSheet.create({
   profileName: {
     ...fonts.note,
     fontWeight: "bold",
-    fontSize: responsiveFontSize(26),
+    fontSize: responsiveFontSize(30),
     color: "#FF6363",
   },
   card: {
@@ -282,14 +281,13 @@ const styles = StyleSheet.create({
   },
   cardValues: {
     flexDirection: "column",
-
+    marginHorizontal: responsiveSize(5),
     alignItems: "center",
     margin: responsiveWidth(0.5),
     backgroundColor: "#ffe6c9",
     borderRadius: responsiveSize(5),
-    width: responsiveSize(55),
-    height: responsiveSize(40),
-    justifyContent: "center",
+    width: responsiveWidth(20),
+    height: responsiveHeight(8),
     shadowColor: "#e32f45",
     shadowOffset: {
       width: 0,
@@ -300,31 +298,28 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   cardValueRow: {
+    flex: 1,
     flexDirection: "row",
     justifyContent: "center",
-    top: responsiveSize(8),
-
-    // alignItems: "flex-end",
-    // alignSelf: "stretch",
-    // alignContent: "flex-end",
+    alignSelf: "center",
+    alignContent: "center",
+    alignItems: "center",
+    // backgroundColor: "red",
   },
   largeNumbers: {
     ...fonts.note,
-    fontSize: responsiveFontSize(35),
+    fontSize: responsiveFontSize(30),
     fontWeight: "bold",
     color: "#FF6363",
-    top: responsiveSize(8),
   },
   regularText: {
     ...fonts.note,
     fontSize: responsiveFontSize(20),
     textAlign: "center",
     color: "#FF6363",
-    top: responsiveSize(-9),
   },
   editButton: {
     flexDirection: "row",
-    bottom: responsiveWidth(-3),
     justifyContent: "center",
     paddingHorizontal: responsiveWidth(5),
   },
