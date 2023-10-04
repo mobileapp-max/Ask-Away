@@ -1,6 +1,6 @@
 {
   "name": "my-app",
-  "version": "1.6.0",
+  "version": "1.6.5",
   "scripts": {
     "start": "expo start",
     "android": "expo run:android",
