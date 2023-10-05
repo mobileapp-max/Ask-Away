@@ -9854,6 +9854,13 @@ qrcode-terminal@0.11.0:
   resolved "https://registry.yarnpkg.com/qrcode-terminal/-/qrcode-terminal-0.11.0.tgz#ffc6c28a2fc0bfb47052b47e23f4f446a5fbdb9e"
   integrity sha512-Uu7ii+FQy4Qf82G4xu7ShHhjhGahEpCWc3x8UavY3CTcWV+ufmmCtwkr7ZKsX42jdL0kr1B5FKUeqJvAn51jzQ==
 
+qs@6.10.3:
+  version "6.10.3"
+  resolved "https://registry.yarnpkg.com/qs/-/qs-6.10.3.tgz#d6cde1b2ffca87b5aa57889816c5f81535e22e8e"
+  integrity sha512-wr7M2E0OFRfIfJZjKGieI8lBKb7fRCH4Fv5KNPEs7gJ8jadvotdsS08PzOKR7opXhZ/Xkjtt3WF9g38drmyRqQ==
+  dependencies:
+    side-channel "^1.0.4"
+
 qs@6.11.0:
   version "6.11.0"
   resolved "https://registry.yarnpkg.com/qs/-/qs-6.11.0.tgz#fd0d963446f7a65e1367e01abd85429453f0c37a"
@@ -10013,6 +10020,13 @@ react-native-duo-toggle-switch@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/react-native-duo-toggle-switch/-/react-native-duo-toggle-switch-1.1.0.tgz#ff41a4b4b8aafe9db401d2f404566214597c385a"
   integrity sha512-1K4O8W8Y3GrZ3M2wSDOoLpKdBUPIUWkBcAjE1xfh3H1TfeOjssyZKCNnD+Pdso7GCFxgcK0daBf1cdLHJak67w==
+
+react-native-email@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/react-native-email/-/react-native-email-2.1.0.tgz#d4af584b9a9e26ef67420e4cfb590e385595b208"
+  integrity sha512-k/J3HrYfkCy6GBjOY8vQWyvrtaYDZBGPV5sWMPiKKPh5tTcJbgUweOBsru5dM8C+fZkBommAOTxwrSg+0wX7gw==
+  dependencies:
+    qs "6.10.3"
 
 react-native-expo-pie-chart@^1.0.0:
   version "1.0.0"

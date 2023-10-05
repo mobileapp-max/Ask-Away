@@ -27,6 +27,7 @@ import ModalToAddOrDeleteQuestion from "./modalToAddOrDeleteQuestion";
 import { removeItem } from "../utils/asyncStorage";
 import { useNavigation } from "@react-navigation/native";
 import { SCREENS } from "../navigation/screenNames";
+import email from "react-native-email";
 
 const ProfileModal = ({
   children,
@@ -66,12 +67,21 @@ const ProfileModal = ({
     });
   };
 
+  const [text, setText] = useState("");
+
   const [logOutModalVisible, setLogOutModalVisible] = useState(false);
+  const [
+    modalToAddOrDeleteQuestionVisible,
+    setModalToAddOrDeleteQuestionVisible,
+  ] = useState(false);
   const [deleteAccountModalVisible, setDeleteAccountModalVisible] =
     useState(false);
 
   const onPressOpenLogOutModal = () => {
     setLogOutModalVisible(!logOutModalVisible);
+  };
+  const onPressOpenSupportModal = () => {
+    setModalToAddOrDeleteQuestionVisible(!modalToAddOrDeleteQuestionVisible);
   };
   const onPressOpenDeleteAccountModal = () => {
     setDeleteAccountModalVisible(!deleteAccountModalVisible);
@@ -96,6 +106,18 @@ const ProfileModal = ({
     }
   };
 
+  const sendEmail = () => {
+    const to = ["m.padverbny@gmail.com"]; // string or array of email addresses
+    email(to, {
+      // Optional additional arguments
+      cc: ["ma9nez@gmail.com"], // string or array of email addresses
+      // bcc: "mee@mee.com", // string or array of email addresses
+      subject: `Ask Away - Support Request - ${Platform.OS} ${Platform.Version}`,
+      body: "Please describe the request below:",
+      // checkCanOpen: false // Call Linking.canOpenURL prior to Linking.openURL
+    }).catch(console.error);
+  };
+
   return (
     <>
       <Modal
@@ -114,6 +136,17 @@ const ProfileModal = ({
           modalToAddOrDeleteQuestionVisible={deleteAccountModalVisible}
           onPressAddOrDeleteQuestionNo={onPressAddOrDeleteQuestionNo}
           onPressAddOrDeleteQuestionYes={onPressAddOrDeleteQuestionYes}
+        />
+        <ModalToAddOrDeleteQuestion
+          titleText={"Contact Support"}
+          questionTextInput={text}
+          modalToAddOrDeleteQuestionVisible={modalToAddOrDeleteQuestionVisible}
+          onPressAddOrDeleteQuestionYes={sendEmail}
+          onPressAddOrDeleteQuestionNo={onPressOpenSupportModal}
+          setText={setText}
+          textInputSetting={true}
+          sendButton={"Send"}
+          cancelButton={"Cancel"}
         />
         <BlurView intensity={8} style={{ flex: 1 }}>
           <Pressable
@@ -254,20 +287,28 @@ const ProfileModal = ({
                   fontSize={responsiveFontSize(20)}
                 />
                 <ButtonQApp
+                  title={"Contact Support"}
+                  onPress={sendEmail}
+                  height={responsiveHeight(4)}
+                  color={"#f79f65"}
+                  color2={"#f79f65"}
+                  fontSize={responsiveFontSize(20)}
+                />
+                <ButtonQApp
                   title={"Delete Account"}
                   onPress={onPressOpenDeleteAccountModal}
                   // () => deleteAuthUser()}
                   height={responsiveHeight(4)}
-                  color={"#f79d65"}
-                  color2={"#f79d65"}
+                  color={"#f79165"}
+                  color2={"#f79165"}
                   fontSize={responsiveFontSize(20)}
                 />
                 <ButtonQApp
                   title={"Log Out"}
                   onPress={onPressOpenLogOutModal}
                   height={responsiveHeight(7)}
-                  color={"#f4845f"}
-                  color2={"#f4845f"}
+                  color={"#f77b65"}
+                  color2={"#f77b65"}
                   fontSize={responsiveFontSize(20)}
                 />
               </View>

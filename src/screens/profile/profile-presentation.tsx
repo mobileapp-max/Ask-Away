@@ -185,13 +185,13 @@ export const ProfilePresentation = memo(
                 {[
                   {
                     text: "Answers",
-                    numberValue: userQuestions?.length,
+                    numberValue: sumReplies,
                     onPress: () => setAreQuestionsDisplayed(false),
                     areQuestionsDisplayed: !areQuestionsDisplayed,
                   },
                   {
                     text: "Questions",
-                    numberValue: sumReplies,
+                    numberValue: userQuestions?.length,
                     onPress: () => setAreQuestionsDisplayed(true),
                     areQuestionsDisplayed: areQuestionsDisplayed,
                   },
