@@ -67,8 +67,6 @@ const ProfileModal = ({
     });
   };
 
-  const [text, setText] = useState("");
-
   const [logOutModalVisible, setLogOutModalVisible] = useState(false);
   const [
     modalToAddOrDeleteQuestionVisible,
@@ -136,17 +134,6 @@ const ProfileModal = ({
           modalToAddOrDeleteQuestionVisible={deleteAccountModalVisible}
           onPressAddOrDeleteQuestionNo={onPressAddOrDeleteQuestionNo}
           onPressAddOrDeleteQuestionYes={onPressAddOrDeleteQuestionYes}
-        />
-        <ModalToAddOrDeleteQuestion
-          titleText={"Contact Support"}
-          questionTextInput={text}
-          modalToAddOrDeleteQuestionVisible={modalToAddOrDeleteQuestionVisible}
-          onPressAddOrDeleteQuestionYes={sendEmail}
-          onPressAddOrDeleteQuestionNo={onPressOpenSupportModal}
-          setText={setText}
-          textInputSetting={true}
-          sendButton={"Send"}
-          cancelButton={"Cancel"}
         />
         <BlurView intensity={8} style={{ flex: 1 }}>
           <Pressable

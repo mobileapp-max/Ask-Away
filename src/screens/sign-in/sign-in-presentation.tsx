@@ -18,6 +18,7 @@ import {
 import fonts from "../../../scripts/fonts";
 import { Screen } from "../../components/screen/screen";
 import { SignInProps } from "./sign-in-interface";
+import ModalToAddOrDeleteQuestion from "../../../components/modalToAddOrDeleteQuestion";
 
 export const SignInPresentation = memo(
   ({
@@ -29,6 +30,8 @@ export const SignInPresentation = memo(
     onPressLogIn,
     onPressSignUp,
     data,
+    signUpDocsReviewVisible,
+    onPressSignUpDocsReview,
   }: SignInProps): JSX.Element => {
     return (
       <Screen onPressBack={onPressBack} title={"SignIn Screen"}>
@@ -116,7 +119,10 @@ export const SignInPresentation = memo(
                     </Text>
                   </View>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.signIn} onPress={onPressSignUp}>
+                <TouchableOpacity
+                  style={styles.signIn}
+                  onPress={onPressSignUpDocsReview}
+                >
                   <View
                     style={[
                       styles.signIn,
@@ -147,6 +153,18 @@ export const SignInPresentation = memo(
                 </Text>
               </View>
             </View>
+            <ModalToAddOrDeleteQuestion
+              titleText={"Policy Review"}
+              modalToAddOrDeleteQuestionVisible={signUpDocsReviewVisible}
+              onPressAddOrDeleteQuestionNo={onPressSignUpDocsReview}
+              onPressAddOrDeleteQuestionYes={onPressSignUp}
+              sendButton={"Accept"}
+              cancelButton={"Decline"}
+              questionText={"Privacy Policy"}
+              link2={"https://padverbny.com/portfolio/ask-away-eula"}
+              questionText2={"End-User Agreement"}
+              link1={"https://padverbny.com/portfolio/ask-away-privacy-policy"}
+            />
           </ScrollView>
         </View>
       </Screen>

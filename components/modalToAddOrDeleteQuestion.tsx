@@ -6,6 +6,8 @@ import {
   StyleSheet,
   Modal,
   TextInput,
+  TouchableWithoutFeedback,
+  Linking,
 } from "react-native";
 import {
   responsiveHeight,
@@ -24,10 +26,11 @@ const ModalToAddOrDeleteQuestion = ({
   onPressAddOrDeleteQuestionNo,
   questionText,
   questionTextInput,
-  setText,
-  textInputSetting,
   sendButton,
   cancelButton,
+  questionText2,
+  link1,
+  link2,
 }) => {
   const [fontSize, setFontSize] = useState(responsiveFontSize(26));
   const handleTextLayout = (event) => {
@@ -36,6 +39,17 @@ const ModalToAddOrDeleteQuestion = ({
     );
     const newFontSize = Math.max(responsiveFontSize(26) - decreaseFactor, 10);
     setFontSize(newFontSize);
+  };
+
+  const handleOpenWebsite1 = () => {
+    Linking.openURL(link1).catch((error) => {
+      console.error("Error opening website:", error);
+    });
+  };
+  const handleOpenWebsite2 = () => {
+    Linking.openURL(link2).catch((error) => {
+      console.error("Error opening website:", error);
+    });
   };
 
   return (
@@ -61,79 +75,68 @@ const ModalToAddOrDeleteQuestion = ({
             {titleText}
           </Text>
           {questionText && (
-            <View
-              style={{
-                borderRadius: 15,
-                backgroundColor: "#f79d65",
-                marginBottom: responsiveSize(3),
-                width: responsiveWidth(70),
-                justifyContent: "center",
-                borderBottomRightRadius: 20,
-                borderTopRightRadius: 8,
-                borderTopLeftRadius: 20,
-                borderBottomLeftRadius: 8,
-              }}
-            >
-              <Text
-                onLayout={handleTextLayout}
+            <TouchableWithoutFeedback onPress={handleOpenWebsite1}>
+              <View
                 style={{
-                  ...styles.modalText,
-                  color: "#fff",
-                  fontSize: fontSize,
-                  marginVertical: responsiveHeight(0.5),
+                  borderRadius: 15,
+                  backgroundColor: "#f79d65",
+                  marginBottom: responsiveSize(3),
+                  width: responsiveWidth(70),
+                  justifyContent: "center",
+                  borderBottomRightRadius: 20,
+                  borderTopRightRadius: 8,
+                  borderTopLeftRadius: 20,
+                  borderBottomLeftRadius: 8,
                 }}
               >
-                {questionText}
-              </Text>
-            </View>
+                <Text
+                  onLayout={handleTextLayout}
+                  style={{
+                    ...styles.modalText,
+                    color: "#fff",
+                    fontSize: fontSize,
+                    marginVertical: responsiveHeight(0.5),
+                  }}
+                >
+                  {questionText}
+                </Text>
+              </View>
+            </TouchableWithoutFeedback>
           )}
-          {textInputSetting && (
-            <View
-              style={{
-                borderRadius: 15,
-                backgroundColor: "#f79d65",
-                marginBottom: responsiveSize(3),
-                width: responsiveWidth(70),
-                justifyContent: "center",
-                borderBottomRightRadius: 20,
-                borderTopRightRadius: 8,
-                borderTopLeftRadius: 20,
-                borderBottomLeftRadius: 8,
-              }}
+          {questionText2 && (
+            <TouchableWithoutFeedback
+              style={{ margintTop: responsiveSize(5) }}
+              onPress={handleOpenWebsite2}
             >
-              <TextInput
-                value={questionTextInput}
-                maxLength={300}
-                multiline={true}
-                placeholder="Describe the issue here"
-                onChangeText={(text) => {
-                  setText(text);
-                }}
-                onLayout={handleTextLayout}
+              <View
                 style={{
-                  ...styles.modalText,
-                  color: "#fff",
-                  fontSize: fontSize,
-                  marginVertical: responsiveHeight(0.5),
+                  borderRadius: 15,
+                  backgroundColor: "#f79d65",
+                  marginBottom: responsiveSize(3),
+
+                  width: responsiveWidth(70),
+                  justifyContent: "center",
+                  borderBottomRightRadius: 20,
+                  borderTopRightRadius: 8,
+                  borderTopLeftRadius: 20,
+                  borderBottomLeftRadius: 8,
                 }}
-              />
-              {
-                questionTextInput?.length >= 150 && (
-                  // <Animated >
-                  <Text
-                    style={{
-                      left: responsiveWidth(5),
-                      color: "red",
-                      marginBottom: responsiveHeight(0.5),
-                    }}
-                  >
-                    Max characters - 300
-                  </Text>
-                )
-                // </Animated>
-              }
-            </View>
+              >
+                <Text
+                  onLayout={handleTextLayout}
+                  style={{
+                    ...styles.modalText,
+                    color: "#fff",
+                    fontSize: fontSize,
+                    marginVertical: responsiveHeight(0.5),
+                  }}
+                >
+                  {questionText2}
+                </Text>
+              </View>
+            </TouchableWithoutFeedback>
           )}
+
           <View
             style={{
               flexDirection: "row",
