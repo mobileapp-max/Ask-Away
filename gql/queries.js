@@ -30,6 +30,7 @@ subscription MySubscription {
     response_1
     response_2
     report
+    added
   }
 }
 `;

@@ -5,6 +5,7 @@ import {
 import { signUpNewUser } from "../../../api/auth-api";
 import { loginUser } from "../../../api/auth-api";
 import { sendEmailWithPassword } from "../../../api/auth-api";
+import { SCREENS } from "../../../navigation/screenNames";
 
 
 export const useSignInFunctions = (props: any) => {
@@ -60,7 +61,9 @@ export const useSignInFunctions = (props: any) => {
     }).then((response) => {
       response?.error && Alert.alert(response?.error);
     });
+    navigation.push(SCREENS.ONBOARDING);
   }, [data]);
+
   const onPressLogIn = useCallback(async () => {
     if (data?.email && data?.password) {
       await loginUser({ email: data?.email, password: data?.password }).then(

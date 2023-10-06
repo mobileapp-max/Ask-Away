@@ -231,8 +231,12 @@ const styles = StyleSheet.create({
   },
   textSign: {
     ...fonts.note,
-    fontSize: responsiveSize(14),
+    fontSize: responsiveFontSize(27),
     fontWeight: "bold",
+    alignItems: "center",
+    alignSelf: "center",
+    textAlign: "center",
+    alignContent: "center",
   },
   textPrivate: {
     flexDirection: "row",

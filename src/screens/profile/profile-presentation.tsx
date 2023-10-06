@@ -288,7 +288,7 @@ const getStyles = (responsive: responsiveType) => {
     },
     cardValues: {
       flexDirection: "column",
-      marginHorizontal: responsive.size(5),
+      marginHorizontal: responsive.size(17),
       alignItems: "center",
       margin: responsive.width(0.5),
       backgroundColor: "#ffe6c9",

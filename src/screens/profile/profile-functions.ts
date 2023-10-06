@@ -66,6 +66,8 @@ export const useProfileFunctions = (props: any) => {
 
   const { user } = useContext(UserContext);
 
+  // console.log('questionsYouRespondedTo', questionsYouRespondedTo[8])
+
   const sumAnswers = useMemo(() => {
     let sum = 0;
     userQuestions?.forEach((question) => {
