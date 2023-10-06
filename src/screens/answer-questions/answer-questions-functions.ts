@@ -14,34 +14,34 @@ export const useAnswerQuestionsFunctions = (props: any) => {
   const { navigation, route } = props
   const { params } = route
 
-    const onPressBack = (): void => {
-      navigation.goBack()
-    }
+  const onPressBack = (): void => {
+    navigation.goBack()
+  }
 
-    const { user } = useContext(UserContext);
-    const {
-      question,
-      onPressAddResponse,
-      answeredQuestion,
-      setAnsweredQuestion,
-      addQuestionIdToListOfViewedIds,
-    } = useContext(QuestionsContext);
-    const [answerWidth, setAnswerWidth] = useState(45);
-    const [buttonPressed, setButtonPressed] = useState(false);
-    const [modalVisible, setModalVisible] = useState(false);
-    const [nextButton, setNextButton] = useState(new Animated.Value(-10));
-    const [isConditionTrue, setIsConditionTrue] = useState(true);
-    const color1 = "#f79d65";
-    const color2 = "#f4845f";
+  const { user } = useContext(UserContext);
+  const {
+    question,
+    onPressAddResponse,
+    answeredQuestion,
+    setAnsweredQuestion,
+    addQuestionIdToListOfViewedIds,
+  } = useContext(QuestionsContext);
+  const [answerWidth, setAnswerWidth] = useState(45);
+  const [buttonPressed, setButtonPressed] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [nextButton, setNextButton] = useState(new Animated.Value(-10));
+  const [isConditionTrue, setIsConditionTrue] = useState(true);
+  const color1 = "#f79d65";
+  const color2 = "#f4845f";
 
-    const questionResult_1 = function () {
+  const questionResult_1 = function () {
     setAnsweredQuestion(question);
     setAnswerWidth(
       ((question?.responses_aggregate?.aggregate?.sum?.response_1 + 1) /
         (question?.responses_aggregate?.aggregate?.sum?.response_1 +
           question?.responses_aggregate?.aggregate?.sum?.response_2 +
           1)) *
-        90
+      90
     );
     setButtonPressed(true);
     onPressAddResponse({
@@ -57,11 +57,11 @@ export const useAnswerQuestionsFunctions = (props: any) => {
     setAnsweredQuestion(question);
     setAnswerWidth(
       90 -
-        ((question?.responses_aggregate?.aggregate?.sum?.response_2 + 1) /
-          (question?.responses_aggregate?.aggregate?.sum?.response_1 +
-            question?.responses_aggregate?.aggregate?.sum?.response_2 +
-            1)) *
-          90
+      ((question?.responses_aggregate?.aggregate?.sum?.response_2 + 1) /
+        (question?.responses_aggregate?.aggregate?.sum?.response_1 +
+          question?.responses_aggregate?.aggregate?.sum?.response_2 +
+          1)) *
+      90
     );
     setButtonPressed(true);
     onPressAddResponse({
@@ -123,23 +123,24 @@ export const useAnswerQuestionsFunctions = (props: any) => {
     ? answeredQuestion?.question
     : question?.question;
 
-    return {
-      onPressBack,
-      isConditionTrue,
-      color1,
-      color2,
-      handleTextLayout,
-      fontSize,
-      checkForAnsweredQuestion,
-      question,
-      onPressReport,
-      nextQuestion,
-      answerWidth,
-      buttonPressed,
-      questionResult_1,
-      questionResult_2,
-      modalVisible,
-      setModalVisible,
-      nextButton,
-    }
+
+  return {
+    onPressBack,
+    isConditionTrue,
+    color1,
+    color2,
+    handleTextLayout,
+    fontSize,
+    checkForAnsweredQuestion,
+    question,
+    onPressReport,
+    nextQuestion,
+    answerWidth,
+    buttonPressed,
+    questionResult_1,
+    questionResult_2,
+    modalVisible,
+    setModalVisible,
+    nextButton,
+  }
 }

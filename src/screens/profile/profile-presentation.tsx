@@ -42,7 +42,6 @@ export const ProfilePresentation = memo(
     defaultQuestions,
     updateQuestionModal,
     onPressTrashCan,
-    sumAnswers,
     user,
     sumReplies,
     questionToAddOrDelete,

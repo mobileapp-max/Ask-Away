@@ -66,17 +66,6 @@ export const useProfileFunctions = (props: any) => {
 
   const { user } = useContext(UserContext);
 
-  // console.log('questionsYouRespondedTo', questionsYouRespondedTo[8])
-
-  const sumAnswers = useMemo(() => {
-    let sum = 0;
-    userQuestions?.forEach((question) => {
-      sum +=
-        question?.responses_aggregate?.aggregate?.sum?.response_1 +
-        question?.responses_aggregate?.aggregate?.sum?.response_2;
-    });
-    return sum;
-  }, [userQuestions]);
 
   const sumReplies = useMemo(() => {
     const seenQuestionIds = new Set();
@@ -158,7 +147,6 @@ export const useProfileFunctions = (props: any) => {
     defaultQuestions,
     updateQuestionModal,
     onPressTrashCan,
-    sumAnswers,
     user,
     sumReplies,
     setProfileModalVisible,
