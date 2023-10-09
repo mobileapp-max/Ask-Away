@@ -123,6 +123,8 @@ export const useAnswerQuestionsFunctions = (props: any) => {
     ? answeredQuestion?.question
     : question?.question;
 
+  // console.log(checkForAnsweredQuestion)
+
 
   return {
     onPressBack,
