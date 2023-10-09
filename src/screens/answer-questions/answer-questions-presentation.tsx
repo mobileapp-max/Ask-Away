@@ -32,7 +32,7 @@ export const AnswerQuestionsPresentation = memo(
     color2,
     handleTextLayout,
     fontSize,
-    checkForAnsweredQuestion,
+    currentQuestionText,
     question,
     onPressReport,
     onPressNextQuestion,
@@ -88,9 +88,7 @@ export const AnswerQuestionsPresentation = memo(
                     fontSize: fontSize,
                   }}
                 >
-                  {question ? (
-                    checkForAnsweredQuestion
-                  ) : (
+                  {currentQuestionText || (
                     <View style={styles.lottie}>
                       <Lottie
                         source={require("../../../assets/animations/elephan_2.json")}

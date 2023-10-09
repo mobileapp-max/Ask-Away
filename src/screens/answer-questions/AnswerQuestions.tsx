@@ -120,15 +120,13 @@ const AnswerQuestionScreen = ({ navigation }) => {
   const [fontSize, setFontSize] = useState(responsiveFontSize(26));
   const handleTextLayout = (event) => {
     const decreaseFactor = question
-      ? Math.floor(checkForAnsweredQuestion.length / 50)
+      ? Math.floor(currentQuestionText.length / 50)
       : "";
     const newFontSize = Math.max(responsiveFontSize(26) - decreaseFactor, 10);
     setFontSize(newFontSize);
   };
 
-  const checkForAnsweredQuestion = answeredQuestion
-    ? answeredQuestion?.question
-    : question?.question;
+  const currentQuestionText = answeredQuestion?.question || question?.question;
 
   return (
     <View style={styles.container}>
@@ -174,7 +172,7 @@ const AnswerQuestionScreen = ({ navigation }) => {
               }}
             >
               {question ? (
-                checkForAnsweredQuestion
+                currentQuestionText
               ) : (
                 <ActivityIndicator size="large" color={"#fff"} />
               )}

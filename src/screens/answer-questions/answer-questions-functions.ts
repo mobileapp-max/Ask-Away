@@ -31,6 +31,7 @@ export const useAnswerQuestionsFunctions = (props: any) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [nextButton, setNextButton] = useState(new Animated.Value(-10));
   const [isConditionTrue, setIsConditionTrue] = useState(true);
+  const [fontSize, setFontSize] = useState(responsiveFontSize(26));
   const color1 = "#f79d65";
   const color2 = "#f4845f";
 
@@ -110,19 +111,17 @@ export const useAnswerQuestionsFunctions = (props: any) => {
     }
   };
 
-  const [fontSize, setFontSize] = useState(responsiveFontSize(26));
+  const currentQuestionText = answeredQuestion
+    ? answeredQuestion?.question
+    : question?.question;
+
   const handleTextLayout = (event) => {
     const decreaseFactor = question
-      ? Math.floor(checkForAnsweredQuestion.length / 50)
+      ? Math.floor(currentQuestionText.length / 50)
       : "";
     const newFontSize = Math.max(responsiveFontSize(26) - decreaseFactor, 10);
     setFontSize(newFontSize);
   };
-
-  const checkForAnsweredQuestion = answeredQuestion
-    ? answeredQuestion?.question
-    : question?.question;
-
 
   return {
     onPressBack,
@@ -131,7 +130,7 @@ export const useAnswerQuestionsFunctions = (props: any) => {
     color2,
     handleTextLayout,
     fontSize,
-    checkForAnsweredQuestion,
+    currentQuestionText,
     question,
     onPressReport,
     onPressNextQuestion,
