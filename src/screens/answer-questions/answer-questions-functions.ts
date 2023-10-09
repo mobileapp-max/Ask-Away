@@ -111,11 +111,9 @@ export const useAnswerQuestionsFunctions = (props: any) => {
     }
   };
 
-  const currentQuestionText = answeredQuestion
-    ? answeredQuestion?.question
-    : question?.question;
+  const currentQuestionText = answeredQuestion?.question || question?.question || '';
 
-  const handleTextLayout = (event) => {
+  const handleTextLayout = () => {
     const decreaseFactor = question
       ? Math.floor(currentQuestionText.length / 50)
       : "";
