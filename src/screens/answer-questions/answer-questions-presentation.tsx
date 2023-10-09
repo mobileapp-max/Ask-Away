@@ -35,7 +35,7 @@ export const AnswerQuestionsPresentation = memo(
     checkForAnsweredQuestion,
     question,
     onPressReport,
-    nextQuestion,
+    onPressNextQuestion,
     answerWidth,
     buttonPressed,
     questionResult_1,
@@ -136,7 +136,7 @@ export const AnswerQuestionsPresentation = memo(
                     />
                     <Text style={styles.textForButtons}>{"Report"}</Text>
                   </TouchableOpacity>
-                  <TouchableOpacity onPress={() => nextQuestion()}>
+                  <TouchableOpacity onPress={() => onPressNextQuestion()}>
                     <Animated.View
                       style={{
                         left: nextButton,

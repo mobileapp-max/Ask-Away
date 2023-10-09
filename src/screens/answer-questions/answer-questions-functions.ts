@@ -92,7 +92,7 @@ export const useAnswerQuestionsFunctions = (props: any) => {
     }, 1500);
   };
 
-  const nextQuestion = function () {
+  const onPressNextQuestion = function () {
     addQuestionIdToListOfViewedIds({ questionId: question?.id });
     setIsConditionTrue(!isConditionTrue);
     if (buttonPressed) {
@@ -136,7 +136,7 @@ export const useAnswerQuestionsFunctions = (props: any) => {
     checkForAnsweredQuestion,
     question,
     onPressReport,
-    nextQuestion,
+    onPressNextQuestion,
     answerWidth,
     buttonPressed,
     questionResult_1,
