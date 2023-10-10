@@ -209,7 +209,7 @@ export const AnswerQuestionsPresentation = memo(
                   flexDirection: "row",
                   borderRadius: 10,
                   width: responsiveWidth(90),
-                  overflow: "allow",
+                  overflow: "visible",
                   marginTop: 30,
                 }}
               >

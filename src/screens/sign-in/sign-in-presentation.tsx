@@ -215,7 +215,7 @@ const styles = StyleSheet.create({
     marginTop: Platform.OS === "ios" ? 0 : -12,
     paddingLeft: 5,
     color: "white",
-    fontSize: "17",
+    fontSize: 17,
   },
   button: {
     alignItems: "center",
@@ -254,7 +254,7 @@ const styles = StyleSheet.create({
     fontStyle: "italic",
     textDecorationLine: "underline",
     color: "#fff",
-    fontSize: "14",
+    fontSize: 14,
     ...fonts.note,
   },
 });

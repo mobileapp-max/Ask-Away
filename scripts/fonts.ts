@@ -11,7 +11,7 @@ const iosFonts = {
 
 const androidFonts = {
     default: 'Roboto',
-    note: 'XXX',
+    note: 'Roboto',
     serif: 'Roboto',
     sansSerif: 'Roboto',
     monospace: 'monospace',
