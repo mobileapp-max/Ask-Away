@@ -6,6 +6,7 @@ import {
   StyleSheet,
   Dimensions,
   TouchableOpacity,
+  Platform,
 } from "react-native";
 import React, { memo } from "react";
 import Onboarding from "react-native-onboarding-swiper";
@@ -20,6 +21,18 @@ import {
 } from "../../../scripts/constants";
 
 const { width, height } = Dimensions.get("window");
+const image_1 =
+  Platform.OS === "ios"
+    ? require("../../../assets/animations/animation_1_ios.json")
+    : require("../../../assets/animations/animation_1.json");
+const image_2 =
+  Platform.OS === "ios"
+    ? require("../../../assets/animations/animation_2_ios.json")
+    : require("../../../assets/animations/animation_2.json");
+const image_3 =
+  Platform.OS === "ios"
+    ? require("../../../assets/animations/animation_3_ios.json")
+    : require("../../../assets/animations/animation_3.json");
 
 export const OnboardingPresentation = memo(
   ({ onPressBack, handleDone }: OnboardingProps): JSX.Element => {
@@ -66,11 +79,7 @@ export const OnboardingPresentation = memo(
                 backgroundColor: "#f79d65",
                 image: (
                   <View style={styles.lottie}>
-                    <Lottie
-                      source={require("../../../assets/animations/animation_1.json")}
-                      autoPlay
-                      loop
-                    />
+                    <Lottie source={image_1} autoPlay loop />
                   </View>
                 ),
                 title: "Ask Yes-No Questions",
@@ -81,11 +90,7 @@ export const OnboardingPresentation = memo(
                 backgroundColor: "#52b788",
                 image: (
                   <View style={styles.lottie}>
-                    <Lottie
-                      source={require("../../../assets/animations/animation_2.json")}
-                      autoPlay
-                      loop
-                    />
+                    <Lottie source={image_2} autoPlay loop />
                   </View>
                 ),
                 title: "Express Your Opinion",
@@ -96,11 +101,7 @@ export const OnboardingPresentation = memo(
                 backgroundColor: "#f25c54",
                 image: (
                   <View style={styles.lottie}>
-                    <Lottie
-                      source={require("../../../assets/animations/animation_3_2.json")}
-                      autoPlay
-                      loop
-                    />
+                    <Lottie source={image_3} autoPlay loop />
                   </View>
                 ),
                 title: "Monitor Replies",
