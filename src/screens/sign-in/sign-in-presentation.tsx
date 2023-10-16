@@ -34,7 +34,7 @@ export const SignInPresentation = memo(
     onPressSignUpDocsReview,
   }: SignInProps): JSX.Element => {
     return (
-      <Screen onPressBack={onPressBack} title={"SignIn Screen"}>
+      <Screen>
         <View style={styles.container}>
           <View style={styles.header}>
             <Text
@@ -42,7 +42,6 @@ export const SignInPresentation = memo(
                 ...fonts.note,
                 color: "white",
                 fontSize: responsiveFontSize(60),
-                fontWeight: "bold",
                 marginBottom: 0,
                 top: responsiveSize(4),
               }}
@@ -181,7 +180,6 @@ const styles = StyleSheet.create({
     flex: 0.19,
     justifyContent: "flex-end",
     paddingHorizontal: 20,
-    // paddingBottom: 10
   },
   footer: {
     flex: 3,
@@ -191,16 +189,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingVertical: 30,
   },
-  text_header: {
-    color: "#fff",
-    fontWeight: "bold",
-    fontSize: 30,
-  },
   text_footer: {
     ...fonts.note,
     color: "white",
     fontSize: 20,
-    fontWeight: "bold",
   },
   action: {
     flexDirection: "row",
@@ -232,7 +224,6 @@ const styles = StyleSheet.create({
   textSign: {
     ...fonts.note,
     fontSize: responsiveFontSize(27),
-    fontWeight: "bold",
     alignItems: "center",
     alignSelf: "center",
     textAlign: "center",

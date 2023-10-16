@@ -76,7 +76,6 @@ export const Answer = (props) => {
                     <Text style={{
                         position: "absolute",
                         color: 'white',
-                        fontWeight: 'bold',
                         bottom: -0.5
                     }}>{answer?.like}</Text> */}
         </View>
@@ -95,7 +94,6 @@ export const Answer = (props) => {
                     <Text style={{
                         position: "absolute",
                         color: 'white',
-                        fontWeight: 'bold',
                         bottom: 7
                     }}>{answer?.dislike}</Text> */}
         </View>
@@ -122,7 +120,6 @@ export const Answer = (props) => {
                     color: 'black',
                     right: 23,
                     bottom: -10,
-                    fontWeight: 'bold',
                 }}>
                     {answer.replies_aggregate.aggregate.count}
                 </Text> */}

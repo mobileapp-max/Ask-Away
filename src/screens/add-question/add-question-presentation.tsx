@@ -16,6 +16,7 @@ import {
 import {
   responsiveFontSize,
   responsiveHeight,
+  responsiveSize,
   responsiveWidth,
 } from "../../../scripts/constants";
 import { CharacterLimit } from "../../../components/character-limit/character-limit";
@@ -50,7 +51,7 @@ export const AddQuestionPresentation = memo(
     return (
       <Screen onPressBack={onPressBack} title={"AddQuestion Screen"}>
         <View style={styles.container}>
-          <StatusBar backgroundColor="#e32f45" barStyle="light-content" />
+          {/* <StatusBar backgroundColor="#e32f45" barStyle="light-content" /> */}
           <View style={styles.header}>
             <Text style={styles.text_header}>{"Ask"}</Text>
             <Text
@@ -93,15 +94,22 @@ export const AddQuestionPresentation = memo(
                   height: responsiveHeight(40),
                   width: responsiveWidth(90),
                   marginTop: responsiveHeight(6),
-                  justifyContent: "center",
-                  alignSelf: "center",
-                  alignItems: "center",
-                  alignContent: "center",
+                  // marginBottom: responsiveHeight(6),
+                  // justifyContent: "center",
+                  // alignSelf: "center",
+                  // alignItems: "center",
+                  // alignContent: "center",
                 }}
               >
                 <TextInput
                   selectionColor={"#FFFFFF"}
-                  textAlign={text ? "center" : "right"}
+                  textAlign={
+                    Platform.OS === "ios"
+                      ? text
+                        ? "center"
+                        : "right"
+                      : "center"
+                  }
                   onKeyPress={handleKeyPress}
                   onSubmitEditing={handleOnSubmitEditing}
                   ref={inputRef}
@@ -115,7 +123,7 @@ export const AddQuestionPresentation = memo(
                     ...fonts.note,
                     color: "white",
                     fontSize: fontSize,
-                    fontWeight: "bold",
+                    // textAlign: "center",
                   }}
                   autoCapitalize="sentences"
                   onChangeText={handleChangeText}
@@ -189,7 +197,6 @@ const styles = StyleSheet.create({
   text_header: {
     ...fonts.note,
     color: "white",
-    fontWeight: "bold",
     fontSize: responsiveFontSize(50),
     paddingTop: responsiveHeight(6),
     top: responsiveHeight(1.5),
@@ -235,7 +242,6 @@ const styles = StyleSheet.create({
   modalText: {
     ...fonts.note,
     textAlign: "center",
-    fontWeight: "bold",
     fontSize: responsiveFontSize(30),
     color: "white",
   },
@@ -243,11 +249,12 @@ const styles = StyleSheet.create({
     height: responsiveHeight(60),
     width: responsiveWidth(70),
     alignSelf: "center",
-    alignItems: "center",
+    alignItems: Platform.OS === "ios" ? "center" : "stretch",
     alignContent: "center",
     justifyContent: "center",
     padding: 8,
-    margin: 10,
+    // margin: responsiveSize(5),
+    // marginBottom: responsiveHeight(10),
     color: "#e32f45",
     borderColor: "#FA7465",
     backgroundColor: "#f79d65",
@@ -256,14 +263,15 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 8,
     borderTopLeftRadius: 20,
     borderBottomLeftRadius: 8,
+    // backgroundColor: "#fff",
     overflow: "visible",
-    shadowColor: "#e32f45",
+    shadowColor: Platform.OS === "ios" ? "#e32f45" : "#780614",
     shadowOffset: {
       width: 0,
       height: 10,
     },
     shadowOpacity: 0.5,
     shadowRadius: 3.5,
-    elevation: 5,
+    elevation: 11,
   },
 });

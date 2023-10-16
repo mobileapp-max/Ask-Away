@@ -11,6 +11,7 @@ import {
   Modal,
   Animated,
   ActivityIndicator,
+  Platform,
 } from "react-native";
 import {
   responsiveFontSize,
@@ -43,12 +44,17 @@ export const AnswerQuestionsPresentation = memo(
     modalVisible,
     nextButton,
     setModalVisible,
+    elephant,
   }: AnswerQuestionsProps): JSX.Element => {
     return (
-      <Screen onPressBack={onPressBack} title={"AnswerQuestions Screen"}>
+      <Screen
+        style={{ overflow: "visible" }}
+        onPressBack={onPressBack}
+        title={"AnswerQuestions Screen"}
+      >
         <View style={styles.container}>
           <View style={styles.header}>
-            <StatusBar backgroundColor="#e32f45" barStyle="light-content" />
+            <StatusBar backgroundColor="#f25c54" barStyle="light-content" />
             <View style={{ top: responsiveSize(6) }}>
               <Text style={styles.text_header}>{"Answer"}</Text>
               <Text
@@ -90,11 +96,7 @@ export const AnswerQuestionsPresentation = memo(
                 >
                   {currentQuestionText || (
                     <View style={styles.lottie}>
-                      <Lottie
-                        source={require("../../../assets/animations/elephan_2.json")}
-                        autoPlay
-                        loop
-                      />
+                      <Lottie source={elephant} autoPlay loop />
                       <Text
                         style={{
                           ...styles.textForButtons,
@@ -175,7 +177,6 @@ export const AnswerQuestionsPresentation = memo(
                             style={{
                               ...fonts.note,
                               color: "#fff",
-                              fontWeight: "bold",
                               fontSize: responsiveFontSize(20),
                             }}
                           >
@@ -192,82 +193,81 @@ export const AnswerQuestionsPresentation = memo(
             <View
               style={{
                 alignSelf: "center",
+                marginTop: responsiveSize(8),
                 flexDirection: "row",
-                width: responsiveWidth(90),
-                shadowOffset: {
-                  width: 0,
-                  height: 5,
-                },
-                shadowOpacity: 0.25,
-                shadowRadius: 3.5,
-                elevation: 5,
+                overflow: "visible",
+                marginBottom: 15,
               }}
             >
-              <View
+              <TouchableOpacity
+                onPress={() => {
+                  if (buttonPressed === false) questionResult_1();
+                }}
                 style={{
-                  alignSelf: "center",
-                  flexDirection: "row",
-                  borderRadius: 10,
-                  width: responsiveWidth(90),
                   overflow: "visible",
-                  marginTop: 30,
+                  backgroundColor: "#52b788",
+                  height: responsiveHeight(10),
+                  width: responsiveWidth(answerWidth),
+                  justifyContent: "center",
+                  alignItems: "center",
+                  alignContent: "center",
+                  borderRadius: 10,
+                  overflow: "visible",
+                  shadowOffset: {
+                    width: 0,
+                    height: 5,
+                  },
+                  shadowOpacity: 0.25,
+                  shadowRadius: 3.5,
+                  elevation: 5,
                 }}
               >
-                <TouchableOpacity
-                  onPress={() => {
-                    if (buttonPressed === false) questionResult_1();
-                  }}
+                <Text
                   style={{
-                    backgroundColor: "#52b788",
-                    height: responsiveHeight(10),
-                    width: responsiveWidth(answerWidth),
-                    justifyContent: "center",
-                    alignItems: "center",
-                    alignContent: "center",
-                    borderRadius: 10,
+                    ...fonts.note,
+                    color: "white",
+                    fontSize: responsiveFontSize(24),
                   }}
                 >
-                  <Text
-                    style={{
-                      ...fonts.note,
-                      fontWeight: "bold",
-                      color: "white",
-                      fontSize: responsiveFontSize(24),
-                    }}
-                  >
-                    {buttonPressed
-                      ? `Yes, ${Math.round(answerWidth * 1.11111)}%`
-                      : `Yes`}
-                  </Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  onPress={() => {
-                    if (buttonPressed === false) questionResult_2();
-                  }}
+                  {buttonPressed
+                    ? `Yes, ${Math.round(answerWidth * 1.11111)}%`
+                    : `Yes`}
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => {
+                  if (buttonPressed === false) questionResult_2();
+                }}
+                style={{
+                  backgroundColor: "#f38375",
+                  height: responsiveHeight(10),
+                  width: responsiveWidth(90 - answerWidth),
+                  justifyContent: "center",
+                  alignItems: "center",
+                  alignContent: "center",
+                  borderRadius: 10,
+                  overflow: "visible",
+                  shadowOffset: {
+                    width: 0,
+                    height: 5,
+                  },
+                  shadowOpacity: 0.25,
+                  shadowRadius: 3.5,
+                  elevation: 5,
+                }}
+              >
+                <Text
                   style={{
-                    backgroundColor: "#f38375",
-                    height: responsiveHeight(10),
-                    width: responsiveWidth(90 - answerWidth),
-                    justifyContent: "center",
-                    alignItems: "center",
-                    alignContent: "center",
-                    borderRadius: 10,
+                    ...fonts.note,
+                    color: "white",
+                    fontSize: responsiveFontSize(24),
                   }}
                 >
-                  <Text
-                    style={{
-                      ...fonts.note,
-                      fontWeight: "bold",
-                      color: "white",
-                      fontSize: responsiveFontSize(24),
-                    }}
-                  >
-                    {buttonPressed
-                      ? `No, ${Math.round(100 - answerWidth * 1.11111)}%`
-                      : `No`}
-                  </Text>
-                </TouchableOpacity>
-              </View>
+                  {buttonPressed
+                    ? `No, ${Math.round(100 - answerWidth * 1.11111)}%`
+                    : `No`}
+                </Text>
+              </TouchableOpacity>
             </View>
             <Modal
               animationType="fade"
@@ -296,6 +296,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#f7b267",
+    overflow: "visible",
   },
   header: {
     backgroundColor: "#f25c54",
@@ -304,7 +305,6 @@ const styles = StyleSheet.create({
   text_header: {
     ...fonts.note,
     color: "white",
-    fontWeight: "bold",
     fontSize: responsiveFontSize(30),
     paddingTop: responsiveHeight(1),
     top: responsiveHeight(2),
@@ -321,12 +321,12 @@ const styles = StyleSheet.create({
   },
   textSign: {
     fontSize: 18,
-    fontWeight: "bold",
   },
   inputTextContainer: {
     height: responsiveHeight(45),
     width: responsiveWidth(90),
     marginTop: responsiveWidth(10),
+    marginBottom: responsiveWidth(5),
     alignSelf: "center",
     padding: responsiveWidth(3),
     color: "#e32f45",
@@ -336,16 +336,17 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 8,
     borderTopLeftRadius: 20,
     borderBottomLeftRadius: 8,
-    shadowColor: "#e32f45",
+    // backgroundColor: "#fff",
+    overflow: "visible",
+    shadowColor: Platform.OS === "ios" ? "#e32f45" : "#780614",
     shadowOffset: {
       width: 0,
       height: 10,
     },
     shadowOpacity: 0.5,
     shadowRadius: 3.5,
-    elevation: 5,
+    elevation: 11,
   },
-
   centeredView: {
     flex: 1,
     justifyContent: "center",
@@ -367,7 +368,6 @@ const styles = StyleSheet.create({
   },
   modalText: {
     textAlign: "center",
-    fontWeight: "bold",
     fontSize: responsiveFontSize(70),
     color: "#e32f45",
     transform: [{ rotate: "335deg" }],
@@ -383,7 +383,6 @@ const styles = StyleSheet.create({
   },
   textForButtons: {
     ...fonts.note,
-    fontWeight: "bold",
     padding: 7,
     fontSize: responsiveFontSize(20),
     color: "#fff",

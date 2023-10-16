@@ -165,7 +165,6 @@ const ProfileModal = ({
                       styles.text_footer,
                       {
                         ...fonts.note,
-                        fontWeight: "bold",
                         alignSelf: "center",
                         fontSize: responsiveFontSize(29),
                       },
@@ -351,14 +350,12 @@ const styles = StyleSheet.create({
   },
   text_header: {
     color: "#fff",
-    fontWeight: "bold",
     fontSize: 30,
   },
   text_footer: {
     ...fonts.note,
     color: "white",
     fontSize: 18,
-    fontWeight: "bold",
     marginTop: responsiveHeight(2),
   },
   action: {

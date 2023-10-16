@@ -5,7 +5,6 @@ import { AnswerQuestions } from "../src/screens/answer-questions/answer-question
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Octicons, Entypo } from "@expo/vector-icons";
 import { responsiveFontSize, responsiveSize } from "../scripts/constants";
-import { UserContext } from "../contexts/user-context-provider";
 import { Profile } from "../src/screens/profile/profile";
 import { useNavigation } from "@react-navigation/native";
 import { removeItem } from "../utils/asyncStorage";
@@ -15,8 +14,8 @@ const Tab = createBottomTabNavigator();
 
 const AuthenticatedStack = (props) => {
   const navigation = useNavigation();
+
   const CustomTabButton = (props) => {
-    const { user } = useContext(UserContext);
     const children = props?.children;
     const onPress = props?.onPress;
     const currentScreen = props?.currentScreen;
@@ -34,8 +33,8 @@ const AuthenticatedStack = (props) => {
       }, 500);
     };
     const onPressPlusSign = () => {
-      rotatePlusSign();
       onPress();
+      rotatePlusSign();
     };
 
     return (
@@ -45,15 +44,18 @@ const AuthenticatedStack = (props) => {
           justifyContent: "center",
           alignItems: "center",
           ...style.shadow,
+          overflow: "visible",
         }}
         onPress={onPressPlusSign}
       >
         <Animated.View
           style={{
+            overflow: "visible",
             width: 80,
             height: 80,
             borderRadius: 50,
             borderColor: "#f7b267",
+
             backgroundColor:
               currentScreen === "Profile2" ? "#f7b267" : "#f25c54",
             transform: [
@@ -75,11 +77,12 @@ const AuthenticatedStack = (props) => {
   return (
     <Tab.Navigator
       screenOptions={{
-        activeTintColor: "#f7b267",
+        // activeTintColor: "#f7b267",
         tabBarShowLabel: false,
         headerShown: false,
         tabBarStyle: {
           backgroundColor: "#f25c54",
+          overflow: "visible",
           justifyContent: "center",
           alignItems: "center",
           alignSelf: "center",
@@ -106,6 +109,7 @@ const AuthenticatedStack = (props) => {
                 justifyContent: "center",
                 top: responsiveSize(3),
                 position: "absolute",
+                overflow: "visible",
               }}
             >
               <Octicons
@@ -122,8 +126,17 @@ const AuthenticatedStack = (props) => {
         component={AddQuestion}
         options={{
           tabBarIcon: ({ focused }) => (
-            <View style={{ alignItems: "center", justifyContent: "center" }}>
+            <View
+              style={{
+                alignItems: "center",
+                justifyContent: "center",
+                overflow: "visible",
+              }}
+            >
               <Entypo
+                style={{
+                  overflow: "visible",
+                }}
                 name="plus"
                 size={80}
                 color={focused ? "white" : "#f7b267"}
@@ -164,13 +177,15 @@ const AuthenticatedStack = (props) => {
 export default AuthenticatedStack;
 const style = StyleSheet.create({
   shadow: {
+    // overflow: "visible",
+    // zIndex: 100,
     shadowColor: "#f7b267",
     shadowOffset: {
       width: 0,
       height: 10,
     },
-    shadowOpacity: 1,
+    shadowOpacity: 10,
     shadowRadius: 10,
-    elevation: 5,
+    elevation: 100,
   },
 });

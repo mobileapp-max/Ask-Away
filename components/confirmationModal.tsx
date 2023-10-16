@@ -66,7 +66,6 @@ const styles = StyleSheet.create({
   modalText: {
     ...fonts.note,
     textAlign: "center",
-    fontWeight: "bold",
     fontSize: responsiveFontSize(30),
     color: "white",
   },

@@ -67,7 +67,6 @@ const ModalToAddOrDeleteQuestion = ({
               ...styles.modalText,
               marginVertical: responsiveHeight(1),
               fontSize: responsiveFontSize(38),
-              fontWeight: "bold",
               // marginTop: responsiveHeight(0),
               // marginBottom: responsiveHeight(2),
             }}
@@ -204,7 +203,6 @@ const styles = StyleSheet.create({
   modalText: {
     ...fonts.note,
     textAlign: "center",
-    // fontWeight: "bold",
     color: "white",
     // marginVertical: responsiveHeight(1),
     paddingHorizontal: responsiveSize(5),
@@ -224,7 +222,6 @@ const styles = StyleSheet.create({
   buttonTitle: {
     ...fonts.note,
     color: "white",
-    fontWeight: "bold",
     fontSize: responsiveFontSize(20),
   },
 });

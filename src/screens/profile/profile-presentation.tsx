@@ -11,6 +11,7 @@ import {
   TouchableOpacity,
   StyleSheet,
   Pressable,
+  Platform,
 } from "react-native";
 import {
   responsiveHeight,
@@ -166,7 +167,10 @@ export const ProfilePresentation = memo(
                   height: 25,
                   backgroundColor: "#ffe6c9",
                   borderRadius: 25,
-                  top: responsiveSize(10),
+                  top:
+                    Platform.OS === "ios"
+                      ? responsiveSize(10)
+                      : responsiveSize(7),
                   left: responsiveSize(4),
                   alignItems: "center",
                   justifyContent: "center",
@@ -204,12 +208,13 @@ export const ProfilePresentation = memo(
                           ? "#ffe6c9"
                           : "#ffcd96",
                         borderColor: "#ffe6c9",
-                        borderWidth: !item?.areQuestionsDisplayed
-                          ? StyleSheet.hairlineWidth * 2
-                          : 0,
+                        // borderWidth: !item?.areQuestionsDisplayed
+                        //   ? StyleSheet.hairlineWidth * 2
+                        //   : 0,
                         shadowColor: item?.areQuestionsDisplayed
                           ? "#ffe6c9"
                           : "#e32f45",
+                        // elevation: item?.areQuestionsDisplayed ? 5 : 0,
                       }}
                     >
                       <Text style={styles.largeNumbers}>
@@ -263,7 +268,6 @@ const getStyles = (responsive: responsiveType) => {
     },
     profileName: {
       ...fonts.note,
-      fontWeight: "bold",
       fontSize: responsive.fontSize(30),
       color: "#FF6363",
     },
@@ -301,7 +305,8 @@ const getStyles = (responsive: responsiveType) => {
       },
       shadowOpacity: 0.25,
       shadowRadius: 3.5,
-      elevation: 5,
+      elevation: 50,
+      justifyContent: "center",
     },
     cardValueRow: {
       flex: 1,
@@ -315,7 +320,6 @@ const getStyles = (responsive: responsiveType) => {
     largeNumbers: {
       ...fonts.note,
       fontSize: responsive.fontSize(30),
-      fontWeight: "bold",
       color: "#FF6363",
     },
     regularText: {

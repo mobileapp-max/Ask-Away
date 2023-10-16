@@ -131,7 +131,6 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 17,
     paddingVertical: 20,
-    fontWeight: "bold",
     color: "white",
     paddingHorizontal: 10,
   },

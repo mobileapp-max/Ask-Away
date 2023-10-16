@@ -47,7 +47,6 @@ export const OnboardingPresentation = memo(
                   style={{
                     ...fonts.note,
                     color: "#fff",
-                    fontWeight: "bold",
                     fontSize: responsiveFontSize(20),
                   }}
                 >
@@ -128,7 +127,6 @@ const styles = StyleSheet.create({
   doneButton: {
     ...fonts.note,
     color: "#fff",
-    fontWeight: "bold",
     fontSize: responsiveFontSize(25),
     marginRight: responsiveWidth(6),
   },

@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useContext } from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { Onboarding } from "../src/screens/onboarding/onboarding.tsx";
+import { Onboarding } from "../src/screens/onboarding/onboarding";
 import AuthenticatedStack from "./authenticatedStack";
-import { UserContext } from "../contexts/user-context-provider.tsx";
+import { UserContext } from "../contexts/user-context-provider";
 import { useOnboardingFunctions } from "../src/screens/onboarding/onboarding-functions";
 import { SCREENS } from "./screenNames";
 import { LoadingScreen } from "../src/components/loading-screen/loading-screen";
@@ -10,11 +10,6 @@ import { LoadingScreen } from "../src/components/loading-screen/loading-screen";
 const Stack = createNativeStackNavigator();
 
 export default function AppNavigation({ showOnboarding }) {
-  if (showOnboarding == null) {
-    return null;
-    // return <LoadingScreen />;
-  }
-
   if (showOnboarding) {
     return (
       <Stack.Navigator initialRouteName={SCREENS.ONBOARDING}>

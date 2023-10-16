@@ -72,7 +72,7 @@ export const ResultsScale = (props) => {
                         justifyContent: 'center',
                         alignItems: 'center',
                         alignContent: 'center',
-                    }}><Text style={{ fontWeight: 'bold', color: "white" }}>{buttonPressed ? `Yes, ${Math.round(answerWidth * 1.11111)}%` : `Yes`}</Text></TouchableOpacity>
+                    }}><Text style={{ color: "white" }}>{buttonPressed ? `Yes, ${Math.round(answerWidth * 1.11111)}%` : `Yes`}</Text></TouchableOpacity>
                 <TouchableOpacity
                     onPress={() => { if (buttonPressed === false) questionResult_2() }}
                     style={{
@@ -82,7 +82,7 @@ export const ResultsScale = (props) => {
                         justifyContent: 'center',
                         alignItems: 'center',
                         alignContent: 'center'
-                    }}><Text style={{ fontWeight: 'bold', color: "white" }}>{buttonPressed ? `No, ${Math.round(100 - answerWidth * 1.11111)}%` : `No`}</Text></TouchableOpacity>
+                    }}><Text style={{  color: "white" }}>{buttonPressed ? `No, ${Math.round(100 - answerWidth * 1.11111)}%` : `No`}</Text></TouchableOpacity>
 
             </View>
 

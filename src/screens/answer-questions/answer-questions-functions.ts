@@ -1,6 +1,6 @@
 import { useState } from "react";
 import {
-  Animated,
+  Animated, Platform,
 } from "react-native";
 import { useContext } from "react";
 import { QuestionsContext } from "../../../contexts/questions-context-provider";
@@ -34,6 +34,9 @@ export const useAnswerQuestionsFunctions = (props: any) => {
   const [fontSize, setFontSize] = useState(responsiveFontSize(26));
   const color1 = "#f79d65";
   const color2 = "#f4845f";
+  const elephant = Platform.OS === 'ios' ?
+    require("../../../assets/animations/elephan_2_ios.json")
+    : require("../../../assets/animations/elephan_2.json")
 
   const questionResult_1 = function () {
     setAnsweredQuestion(question);
@@ -139,5 +142,6 @@ export const useAnswerQuestionsFunctions = (props: any) => {
     modalVisible,
     setModalVisible,
     nextButton,
+    elephant
   }
 }

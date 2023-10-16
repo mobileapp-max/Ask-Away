@@ -3,18 +3,17 @@ import { Platform, StyleSheet } from 'react-native';
 const iosFonts = {
     default: 'Helvetica',
     note: 'Noteworthy-Bold',
-    // noteBold: 'Noteworthy-bold',
     serif: 'Times New Roman',
     sansSerif: 'Helvetica',
     monospace: 'Courier',
 };
 
 const androidFonts = {
-    default: 'Roboto',
-    note: 'Roboto',
-    serif: 'Roboto',
-    sansSerif: 'Roboto',
-    monospace: 'monospace',
+    default: 'IndieFlower',
+    note: 'NotoSansDisplay',
+    serif: 'IndieFlower',
+    sansSerif: 'IndieFlower',
+    monospace: 'IndieFlower',
 };
 
 const getFontFamily = (fontFamily) => {

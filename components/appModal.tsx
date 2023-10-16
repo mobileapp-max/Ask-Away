@@ -80,7 +80,6 @@ const styles = StyleSheet.create({
   },
   text_header: {
     color: "#fff",
-    fontWeight: "bold",
     fontSize: responsiveFontSize(25),
     alignSelf: "center",
     justifyContent: "center",
@@ -90,7 +89,6 @@ const styles = StyleSheet.create({
   text_footer: {
     color: "#05375a",
     fontSize: 23,
-    fontWeight: "bold",
   },
   question_style: {
     flexDirection: "row",
@@ -130,7 +128,6 @@ const styles = StyleSheet.create({
   },
   textStyle: {
     color: "white",
-    fontWeight: "bold",
     textAlign: "center",
   },
 });
