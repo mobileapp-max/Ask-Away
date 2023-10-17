@@ -59,9 +59,14 @@ export const useSignInFunctions = (props: any) => {
       email: data?.email,
       password: data?.password,
     }).then((response) => {
-      response?.error && Alert.alert(response?.error);
+      if (response?.error) {
+        Alert.alert(response?.error);
+        setSignUpDocsReviewVisible(false)
+      }
+      else {
+        navigation.push(SCREENS.ONBOARDING);
+      }
     });
-    navigation.push(SCREENS.ONBOARDING);
   }, [data]);
 
   const onPressLogIn = useCallback(async () => {
