@@ -61,7 +61,7 @@ export const useProfileFunctions = (props: any) => {
     setSelectedQuestionModal(incomingModalData);
     setQuestionVisible(!modalVisible);
   };
-  const { questions, response, onPressDeleteQuestion, userQuestions, userResponses, questionsYouRespondedTo, respondedQuestionIds } =
+  const { questions, response, onPressDeleteQuestion, userQuestions, questionsYouRespondedTo } =
     useContext(QuestionsContext);
 
   const { user } = useContext(UserContext);

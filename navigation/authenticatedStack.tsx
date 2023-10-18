@@ -4,7 +4,11 @@ import { AddQuestion } from "../src/screens/add-question/add-question";
 import { AnswerQuestions } from "../src/screens/answer-questions/answer-questions";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Octicons, Entypo } from "@expo/vector-icons";
-import { responsiveFontSize, responsiveSize } from "../scripts/constants";
+import {
+  responsiveFontSize,
+  responsiveHeight,
+  responsiveSize,
+} from "../scripts/constants";
 import { Profile } from "../src/screens/profile/profile";
 import { useNavigation } from "@react-navigation/native";
 import { removeItem } from "../utils/asyncStorage";
@@ -40,7 +44,8 @@ const AuthenticatedStack = (props) => {
     return (
       <Pressable
         style={{
-          top: -responsiveSize(15),
+          top:
+            Platform.OS === "ios" ? -responsiveHeight(2) : -responsiveHeight(3),
           justifyContent: "center",
           alignItems: "center",
           ...style.shadow,
