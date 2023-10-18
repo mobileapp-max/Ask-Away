@@ -10,6 +10,7 @@ import {
   responsiveHeight,
   responsiveWidth,
   responsiveFontSize,
+  responsiveSize,
 } from "../../scripts/constants";
 import { calculateResults } from "../../scripts/calculateResults";
 import UseOnLayout from "../../scripts/use-on-layout";
@@ -29,7 +30,6 @@ export const QuestionRow = ({
       width: responsiveWidth(69),
       padding: 10,
       color: "#e32f45",
-      // borderWidth: 0.5,
       borderColor: "#FA7465",
       backgroundColor: color,
       borderRadius: 20,
@@ -47,6 +47,7 @@ export const QuestionRow = ({
       shadowOpacity: 0.5,
       shadowRadius: 3.5,
       elevation: 5,
+      marginRight: responsiveSize(1),
     },
   });
 
@@ -146,6 +147,7 @@ export const QuestionRow = ({
                 justifyContent: "center",
                 alignItems: "center",
                 alignContent: "center",
+                marginRight: responsiveSize(0.1),
               }}
             >
               <Text style={{ color: "white" }}>
@@ -178,7 +180,6 @@ export const QuestionRow = ({
             </View>
             <View
               style={{
-                // backgroundColor: "#f25c54",
                 backgroundColor: colorNo,
                 height: currentHeightOfView,
                 width:

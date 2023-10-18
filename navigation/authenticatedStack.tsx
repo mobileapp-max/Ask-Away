@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { StyleSheet, View, Animated, Pressable } from "react-native";
+import { StyleSheet, View, Animated, Pressable, Platform } from "react-native";
 import { AddQuestion } from "../src/screens/add-question/add-question";
 import { AnswerQuestions } from "../src/screens/answer-questions/answer-questions";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -40,11 +40,12 @@ const AuthenticatedStack = (props) => {
     return (
       <Pressable
         style={{
-          top: -responsiveFontSize(17),
+          top: -responsiveSize(15),
           justifyContent: "center",
           alignItems: "center",
           ...style.shadow,
           overflow: "visible",
+          alignContent: "center",
         }}
         onPress={onPressPlusSign}
       >
@@ -54,10 +55,8 @@ const AuthenticatedStack = (props) => {
             width: 80,
             height: 80,
             borderRadius: 50,
-            borderColor: "#f7b267",
-
-            backgroundColor:
-              currentScreen === "Profile2" ? "#f7b267" : "#f25c54",
+            backgroundColor: "#f25c54",
+            alignContent: "center",
             transform: [
               {
                 rotate: plusSign.interpolate({
@@ -77,7 +76,6 @@ const AuthenticatedStack = (props) => {
   return (
     <Tab.Navigator
       screenOptions={{
-        // activeTintColor: "#f7b267",
         tabBarShowLabel: false,
         headerShown: false,
         tabBarStyle: {
@@ -87,14 +85,6 @@ const AuthenticatedStack = (props) => {
           alignItems: "center",
           alignSelf: "center",
           height: responsiveSize(30),
-          // shadowColor: "#f25c54",
-          // shadowOffset: {
-          //     width: 0,
-          //     height: 5,
-          // },
-          // shadowOpacity: 0.25,
-          // shadowRadius: 3.5,
-          // elevation: 5
         },
       }}
     >
@@ -125,24 +115,36 @@ const AuthenticatedStack = (props) => {
         name={SCREENS.ADD_QUESTIONS}
         component={AddQuestion}
         options={{
-          tabBarIcon: ({ focused }) => (
-            <View
-              style={{
-                alignItems: "center",
-                justifyContent: "center",
-                overflow: "visible",
-              }}
-            >
+          tabBarIcon: ({ focused }) =>
+            Platform.OS === "ios" ? (
               <Entypo
                 style={{
                   overflow: "visible",
+                  alignItems: "center",
+                  justifyContent: "center",
                 }}
                 name="plus"
                 size={80}
                 color={focused ? "white" : "#f7b267"}
               />
-            </View>
-          ),
+            ) : (
+              <Entypo
+                style={{
+                  overflow: "visible",
+                  width: 80,
+                  height: 80,
+                  borderRadius: 50,
+                  borderColor: "#f7b267",
+                  backgroundColor: "#f25c54",
+                  borderWidth: responsiveSize(1),
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+                name="plus"
+                size={80}
+                color={focused ? "white" : "#f7b267"}
+              />
+            ),
           tabBarButton: (props) => {
             return <CustomTabButton {...props} />;
           },
