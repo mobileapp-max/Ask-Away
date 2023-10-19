@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { StyleSheet, View, Animated, Pressable, Platform } from "react-native";
 import { AddQuestion } from "../src/screens/add-question/add-question";
 import { AnswerQuestions } from "../src/screens/answer-questions/answer-questions";
@@ -13,11 +13,36 @@ import { Profile } from "../src/screens/profile/profile";
 import { useNavigation } from "@react-navigation/native";
 import { removeItem } from "../utils/asyncStorage";
 import { SCREENS } from "./screenNames";
+import { Keyboard } from "react-native";
+import { QuestionsContext } from "../contexts/questions-context-provider";
 
 const Tab = createBottomTabNavigator();
 
 const AuthenticatedStack = (props) => {
+  const { keyBoardOn } = useContext(QuestionsContext);
+
   const navigation = useNavigation();
+  // const [hidePlusButton, setHidePlusButton] = useState(false);
+
+  // useEffect(() => {
+  //   const keyboardDidShowListener = Keyboard.addListener(
+  //     "keyboardDidShow",
+  //     () => {
+  //       setHidePlusButton(true);
+  //     }
+  //   );
+
+  //   const keyboardDidHideListener = Keyboard.addListener(
+  //     "keyboardDidHide",
+  //     () => {
+  //       setHidePlusButton(false);
+  //     }
+  //   );
+  //   return () => {
+  //     keyboardDidShowListener.remove();
+  //     keyboardDidHideListener.remove();
+  //   };
+  // }, []);
 
   const CustomTabButton = (props) => {
     const children = props?.children;
@@ -45,7 +70,11 @@ const AuthenticatedStack = (props) => {
       <Pressable
         style={{
           top:
-            Platform.OS === "ios" ? -responsiveHeight(2) : -responsiveHeight(3),
+            Platform.OS === "ios"
+              ? -responsiveHeight(2)
+              : !keyBoardOn
+              ? -responsiveHeight(3)
+              : responsiveHeight(3),
           justifyContent: "center",
           alignItems: "center",
           ...style.shadow,
@@ -81,6 +110,7 @@ const AuthenticatedStack = (props) => {
   return (
     <Tab.Navigator
       screenOptions={{
+        tabBarHideOnKeyboard: Platform.OS === "android" ? true : false,
         tabBarShowLabel: false,
         headerShown: false,
         tabBarStyle: {

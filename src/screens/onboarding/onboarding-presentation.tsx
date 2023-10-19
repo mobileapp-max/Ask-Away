@@ -7,8 +7,9 @@ import {
   Dimensions,
   TouchableOpacity,
   Platform,
+  StatusBar,
 } from "react-native";
-import React, { memo } from "react";
+import React, { memo, useState } from "react";
 import Onboarding from "react-native-onboarding-swiper";
 import Lottie from "lottie-react-native";
 import { useNavigation } from "@react-navigation/native";
@@ -19,6 +20,7 @@ import {
   responsiveSize,
   responsiveWidth,
 } from "../../../scripts/constants";
+import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 
 const { width, height } = Dimensions.get("window");
 const image_1 =
@@ -38,8 +40,10 @@ export const OnboardingPresentation = memo(
   ({ onPressBack, handleDone }: OnboardingProps): JSX.Element => {
     return (
       <Screen onPressBack={onPressBack} title={"Onboarding Screen"}>
+        <StatusBar backgroundColor="black" barStyle="light-content" />
         <View style={styles.container}>
           <Onboarding
+            controlStatusBar={true}
             onDone={handleDone}
             nextLabel={
               <>
@@ -127,7 +131,7 @@ const styles = StyleSheet.create({
   doneButton: {
     ...fonts.note,
     color: "#fff",
-    fontSize: responsiveFontSize(25),
-    marginRight: responsiveWidth(6),
+    fontSize: responsiveFontSize(20),
+    marginRight: responsiveWidth(5),
   },
 });

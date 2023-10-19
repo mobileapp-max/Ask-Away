@@ -3,6 +3,7 @@ import { QuestionsContext } from "../../../contexts/questions-context-provider";
 import { useContext } from "react";
 import { UserContext } from "../../../contexts/user-context-provider";
 
+
 export const useProfileFunctions = (props: any) => {
 
   const { navigation, route } = props
@@ -11,7 +12,7 @@ export const useProfileFunctions = (props: any) => {
   const onPressBack = (): void => {
     navigation.goBack()
   }
-
+  const { keyBoardOn } = useContext(QuestionsContext);
   const [modalToAddOrDeleteQuestionVisible, setDeleteModalVisible] = useState(false);
   const [QuestionReviewModalVisible, setQuestionVisible] = useState(false);
   const [questionToAddOrDelete, setQuestionToDelete] = useState(null)
@@ -156,6 +157,8 @@ export const useProfileFunctions = (props: any) => {
     questionsYouRespondedTo,
     setAreQuestionsDisplayed,
     areQuestionsDisplayed,
-    defaultAnswer
+    defaultAnswer,
+    keyBoardOn
+
   }
 }

@@ -1,26 +1,23 @@
 import { Screen } from "../../components/screen/screen";
 import { AddQuestionProps } from "./add-question-interface";
-import React, { memo } from "react";
+import React, { memo, useEffect, useState } from "react";
 import {
   View,
   Text,
   TextInput,
   Platform,
   StyleSheet,
-  StatusBar,
   ScrollView,
-  Modal,
   Pressable,
   TouchableOpacity,
+  KeyboardAvoidingView,
 } from "react-native";
 import {
   responsiveFontSize,
   responsiveHeight,
-  responsiveSize,
   responsiveWidth,
 } from "../../../scripts/constants";
 import { CharacterLimit } from "../../../components/character-limit/character-limit";
-import { BlurView } from "expo-blur";
 import ButtonQApp from "../../../components/buttonQApp";
 import fonts from "../../../scripts/fonts";
 import { Ionicons } from "@expo/vector-icons";
@@ -47,13 +44,18 @@ export const AddQuestionPresentation = memo(
     handleChangeText,
     handleClearText,
     questionText,
+    keyBoardOn,
+    textInputSelected,
   }: AddQuestionProps): JSX.Element => {
     return (
       <Screen onPressBack={onPressBack} title={"AddQuestion Screen"}>
-        <View style={styles.container}>
-          {/* <StatusBar backgroundColor="#e32f45" barStyle="light-content" /> */}
+        <KeyboardAvoidingView
+          style={styles.container}
+          behavior={Platform.OS === "ios" ? "padding" : "height"}
+          keyboardVerticalOffset={Platform.OS === "ios" ? 0 : 0}
+        >
           <View style={styles.header}>
-            <Text style={styles.text_header}>{"Ask"}</Text>
+            {<Text style={styles.text_header}>{"Ask"}</Text>}
             <Text
               style={{
                 ...styles.text_header,
@@ -81,12 +83,7 @@ export const AddQuestionPresentation = memo(
               messageToDisplay={"Added"}
               tintColor={"light"}
             />
-            <ScrollView
-              keyboardDismissMode="on-drag"
-              style={styles.scrollView}
-              behavior={Platform.OS === "ios" ? "height" : "height"}
-              keyboardVerticalOffset={responsiveWidth(400)}
-            >
+            <ScrollView keyboardDismissMode="on-drag" style={styles.scrollView}>
               <Pressable
                 onPress={handleButtonPress}
                 style={{
@@ -96,7 +93,6 @@ export const AddQuestionPresentation = memo(
                   marginTop: responsiveHeight(6),
                   // marginBottom: responsiveHeight(6),
                   // justifyContent: "center",
-                  // alignSelf: "center",
                   // alignItems: "center",
                   // alignContent: "center",
                 }}
@@ -167,7 +163,7 @@ export const AddQuestionPresentation = memo(
               </View>
             </ScrollView>
           </View>
-        </View>
+        </KeyboardAvoidingView>
       </Screen>
     );
   }

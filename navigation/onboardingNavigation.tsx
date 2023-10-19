@@ -6,6 +6,7 @@ import { UserContext } from "../contexts/user-context-provider";
 import { useOnboardingFunctions } from "../src/screens/onboarding/onboarding-functions";
 import { SCREENS } from "./screenNames";
 import { LoadingScreen } from "../src/components/loading-screen/loading-screen";
+import { StatusBar } from "react-native";
 
 const Stack = createNativeStackNavigator();
 

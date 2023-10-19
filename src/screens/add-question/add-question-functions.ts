@@ -3,15 +3,17 @@ import {
   Keyboard,
 } from "react-native";
 import { useContext } from "react";
-import { QuestionsContext } from "../../../contexts/questions-context-provider";
 import {
   responsiveFontSize,
 } from "../../../scripts/constants";
 import { UserContext } from "../../../contexts/user-context-provider";
+import { QuestionsContext } from "../../../contexts/questions-context-provider";
+
 
 export const useAddQuestionFunctions = (props: any) => {
 
   const { navigation, route } = props
+  const [textInputSelected, setTextInputSelected] = useState(false);
 
   const onPressBack = (): void => {
     navigation.goBack()
@@ -19,12 +21,14 @@ export const useAddQuestionFunctions = (props: any) => {
   const inputRef = useRef(null);
   const handleButtonPress = () => {
     inputRef.current.focus();
+    setTextInputSelected(true)
+
   };
   const { user } = useContext(UserContext);
   const [text, setText] = useState("");
   const [disableButton, setDisableButton] = useState(true);
   const [modalVisible, setModalVisible] = useState(false);
-  const { onPressAddQuestion } = useContext(QuestionsContext);
+  const { onPressAddQuestion, keyBoardOn } = useContext(QuestionsContext);
   const onPressInitiateAddQuestin = () => {
     setText("");
     onPressAddQuestion({
@@ -111,5 +115,7 @@ export const useAddQuestionFunctions = (props: any) => {
     fontSize,
     handleChangeText,
     handleClearText,
+    keyBoardOn,
+    textInputSelected
   }
 }

@@ -52,6 +52,7 @@ export const ProfilePresentation = memo(
     setAreQuestionsDisplayed,
     areQuestionsDisplayed,
     defaultAnswer,
+    keyBoardOn,
   }: ProfileProps): JSX.Element => {
     const responsive = useResponsiveSizes();
     const styles = getStyles(responsive);
