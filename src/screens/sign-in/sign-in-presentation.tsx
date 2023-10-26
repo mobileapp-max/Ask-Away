@@ -7,6 +7,7 @@ import {
   Platform,
   StyleSheet,
   ScrollView,
+  StatusBar,
 } from "react-native";
 import Feather from "react-native-vector-icons/Feather";
 import { MaterialIcons } from "@expo/vector-icons";
@@ -36,6 +37,11 @@ export const SignInPresentation = memo(
     return (
       <Screen>
         <View style={styles.container}>
+          {/* <StatusBar
+            backgroundColor="#f25c54"
+            barStyle="light-content"
+            translucent={false}
+          /> */}
           <View style={styles.header}>
             <Text
               style={{

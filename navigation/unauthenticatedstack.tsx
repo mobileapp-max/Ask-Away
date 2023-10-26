@@ -9,7 +9,11 @@ const LogInStack = createStackNavigator();
 export const UnauthenticatedStack = (props: any) => {
   const { user } = useContext(UserContext);
   return (
-    <LogInStack.Navigator screenOptions={{ headerShown: false }}>
+    <LogInStack.Navigator
+      screenOptions={{
+        headerShown: false,
+      }}
+    >
       <LogInStack.Screen name={SCREENS.LOGIN} component={SignIn} />
     </LogInStack.Navigator>
   );
