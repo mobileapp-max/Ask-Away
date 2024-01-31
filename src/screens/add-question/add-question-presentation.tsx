@@ -18,7 +18,7 @@ import {
   responsiveWidth,
 } from "../../../scripts/constants";
 import { CharacterLimit } from "../../../components/character-limit/character-limit";
-import ButtonQApp from "../../../components/buttonQApp";
+import CustomButton from "../../../components/customButton";
 import fonts from "../../../scripts/fonts";
 import { Ionicons } from "@expo/vector-icons";
 import ModalToAddOrDeleteQuestion from "../../../components/modalToAddOrDeleteQuestion";
@@ -150,7 +150,7 @@ export const AddQuestionPresentation = memo(
               )}
               <View style={styles.button}>
                 {disableButton === true ? null : (
-                  <ButtonQApp
+                  <CustomButton
                     fontSize={responsiveFontSize(35)}
                     disabled={disableButton}
                     title={"Ask Away"}

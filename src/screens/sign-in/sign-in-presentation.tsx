@@ -7,7 +7,6 @@ import {
   Platform,
   StyleSheet,
   ScrollView,
-  StatusBar,
 } from "react-native";
 import Feather from "react-native-vector-icons/Feather";
 import { MaterialIcons } from "@expo/vector-icons";
@@ -20,10 +19,10 @@ import fonts from "../../../scripts/fonts";
 import { Screen } from "../../components/screen/screen";
 import { SignInProps } from "./sign-in-interface";
 import ModalToAddOrDeleteQuestion from "../../../components/modalToAddOrDeleteQuestion";
+import CustomButton from "../../../components/customButton";
 
 export const SignInPresentation = memo(
   ({
-    onPressBack,
     handleEmailChange,
     handlePasswordChange,
     updateSecureTextEntry,
@@ -37,126 +36,65 @@ export const SignInPresentation = memo(
     return (
       <Screen>
         <View style={styles.container}>
-          {/* <StatusBar
-            backgroundColor="#f25c54"
-            barStyle="light-content"
-            translucent={false}
-          /> */}
           <View style={styles.header}>
-            <Text
-              style={{
-                ...fonts.note,
-                color: "white",
-                fontSize: responsiveFontSize(60),
-                marginBottom: 0,
-                top: responsiveSize(4),
-              }}
-            >
-              {"Join In"}
-            </Text>
+            <Text style={styles.headerText}>{"Join In"}</Text>
           </View>
           <ScrollView style={styles.footer}>
-            <View style={{}}>
-              <Text style={styles.text_footer}>{"Email"}</Text>
-              <View style={styles.action}>
-                <MaterialIcons
-                  name="alternate-email"
-                  size={30}
-                  color="#f25c54"
-                />
-                <TextInput
-                  placeholder="Enter Email"
-                  style={styles.textInput}
-                  autoCapitalize="none"
-                  placeholderTextColor={"#f5e2c9"}
-                  onChangeText={(val) => handleEmailChange(val)}
-                />
-              </View>
-              <Text style={[styles.text_footer, { marginTop: 35 }]}>
-                {"Password"}
-              </Text>
-              <View style={styles.action}>
-                <Feather name="lock" color="#f25c54" size={28} />
-                <TextInput
-                  placeholder="Enter Password"
-                  secureTextEntry={data.secureTextEntry ? true : false}
-                  style={styles.textInput}
-                  autoCapitalize="none"
-                  placeholderTextColor={"#f5e2c9"}
-                  onChangeText={(val) => handlePasswordChange(val)}
-                />
-                <TouchableOpacity onPress={updateSecureTextEntry}>
-                  {data.secureTextEntry ? (
-                    <Feather name="eye-off" color="#f25c54" size={20} />
-                  ) : (
-                    <Feather name="eye" color="white" size={20} />
-                  )}
-                </TouchableOpacity>
-              </View>
-              <TouchableOpacity
-                style={{
-                  marginTop: responsiveHeight(1),
-                }}
-                onPress={onPressResetPassword}
-              >
-                <Text style={styles.resetPassword}>{"Forgot Password"}</Text>
+            <Text style={styles.text_footer}>{"Email"}</Text>
+            <View style={styles.action}>
+              <MaterialIcons name="alternate-email" size={30} color="#f25c54" />
+              <TextInput
+                placeholder="Enter Email"
+                style={styles.textInput}
+                autoCapitalize="none"
+                placeholderTextColor={"#f5e2c9"}
+                onChangeText={(val) => handleEmailChange(val)}
+              />
+            </View>
+            <Text style={styles.text_footer}>{"Password"}</Text>
+            <View style={styles.action}>
+              <Feather name="lock" color="#f25c54" size={28} />
+              <TextInput
+                placeholder="Enter Password"
+                secureTextEntry={data?.secureTextEntry ? true : false}
+                style={styles.textInput}
+                autoCapitalize="none"
+                placeholderTextColor={"#f5e2c9"}
+                onChangeText={(val) => handlePasswordChange(val)}
+              />
+              <TouchableOpacity onPress={updateSecureTextEntry}>
+                {data?.secureTextEntry ? (
+                  <Feather name="eye-off" color="#f25c54" size={20} />
+                ) : (
+                  <Feather name="eye" color="white" size={20} />
+                )}
               </TouchableOpacity>
-              <View style={styles.button}>
-                <TouchableOpacity style={styles.signIn} onPress={onPressLogIn}>
-                  <View
-                    style={[
-                      styles.signIn,
-                      {
-                        backgroundColor:
-                          data?.email && data?.password ? "#52b788" : "#52b788",
-                      },
-                    ]}
-                  >
-                    <Text
-                      style={[
-                        styles.textSign,
-                        {
-                          color: "#fff",
-                        },
-                      ]}
-                    >
-                      {"Log In"}
-                    </Text>
-                  </View>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  style={styles.signIn}
-                  onPress={onPressSignUpDocsReview}
-                >
-                  <View
-                    style={[
-                      styles.signIn,
-                      {
-                        backgroundColor:
-                          data?.email && data?.password ? "#f38375" : "#f38375",
-                      },
-                    ]}
-                  >
-                    <Text
-                      style={[
-                        styles.textSign,
-                        {
-                          color: "#fff",
-                        },
-                      ]}
-                    >
-                      {"Sign Up"}
-                    </Text>
-                  </View>
-                </TouchableOpacity>
-              </View>
-              <View style={styles.textPrivate}>
-                <Text style={styles.color_textPrivate}>
-                  {
-                    "By signing up you agree to our Terms of Service and Privacy Policy."
-                  }
-                </Text>
-              </View>
+            </View>
+            <TouchableOpacity onPress={onPressResetPassword}>
+              <Text style={styles.resetPassword}>{"Forgot Password"}</Text>
+            </TouchableOpacity>
+            <View style={styles.button}>
+              <CustomButton
+                title={"Log In"}
+                onPress={onPressLogIn}
+                height={responsiveHeight(5.5)}
+                color={"#52b788"}
+                fontSize={responsiveFontSize(27)}
+              />
+              <CustomButton
+                title={"Sign Up"}
+                onPress={onPressSignUpDocsReview}
+                height={responsiveHeight(5.5)}
+                color={"#f38375"}
+                fontSize={responsiveFontSize(27)}
+              />
+            </View>
+            <View style={styles.textPrivate}>
+              <Text style={styles.color_textPrivate}>
+                {
+                  "By signing up you agree to our Terms of Service and Privacy Policy."
+                }
+              </Text>
             </View>
             <ModalToAddOrDeleteQuestion
               titleText={"Policy Review"}
@@ -187,18 +125,25 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end",
     paddingHorizontal: 20,
   },
+  headerText: {
+    ...fonts.note,
+    color: "white",
+    fontSize: responsiveFontSize(60),
+    marginBottom: 0,
+    top: responsiveSize(4),
+  },
   footer: {
     flex: 3,
     backgroundColor: "#f7b267",
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,
     paddingHorizontal: 20,
-    paddingVertical: 30,
   },
   text_footer: {
     ...fonts.note,
     color: "white",
     fontSize: 20,
+    marginTop: 35,
   },
   action: {
     flexDirection: "row",
@@ -219,22 +164,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginTop: responsiveHeight(3),
   },
-  signIn: {
-    width: "100%",
-    height: 50,
-    justifyContent: "center",
-    alignItems: "center",
-    borderRadius: 10,
-    margin: 5,
-  },
-  textSign: {
-    ...fonts.note,
-    fontSize: responsiveFontSize(27),
-    alignItems: "center",
-    alignSelf: "center",
-    textAlign: "center",
-    alignContent: "center",
-  },
   textPrivate: {
     flexDirection: "row",
     flexWrap: "wrap",
@@ -250,8 +179,9 @@ const styles = StyleSheet.create({
     fontWeight: "700",
     fontStyle: "italic",
     textDecorationLine: "underline",
-    color: "#fff",
+    color: "#ffffff",
     fontSize: 14,
     ...fonts.note,
+    marginTop: responsiveHeight(1),
   },
 });

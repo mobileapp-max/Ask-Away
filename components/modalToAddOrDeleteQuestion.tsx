@@ -5,7 +5,6 @@ import {
   TouchableOpacity,
   StyleSheet,
   Modal,
-  TextInput,
   TouchableWithoutFeedback,
   Linking,
 } from "react-native";
@@ -31,9 +30,22 @@ const ModalToAddOrDeleteQuestion = ({
   questionText2,
   link1,
   link2,
+}: {
+  children?: any;
+  titleText: string;
+  modalToAddOrDeleteQuestionVisible: boolean;
+  onPressAddOrDeleteQuestionYes: () => void;
+  onPressAddOrDeleteQuestionNo: () => void;
+  questionText?: string;
+  questionTextInput?: string;
+  sendButton?: string;
+  cancelButton?: string;
+  questionText2?: string;
+  link1?: string;
+  link2?: string;
 }) => {
   const [fontSize, setFontSize] = useState(responsiveFontSize(26));
-  const handleTextLayout = (event) => {
+  const handleTextLayout = () => {
     const decreaseFactor = Math.floor(
       questionText?.length / 50 || questionTextInput?.length / 50
     );
@@ -67,8 +79,6 @@ const ModalToAddOrDeleteQuestion = ({
               ...styles.modalText,
               marginVertical: responsiveHeight(1),
               fontSize: responsiveFontSize(38),
-              // marginTop: responsiveHeight(0),
-              // marginBottom: responsiveHeight(2),
             }}
           >
             {titleText}
@@ -142,8 +152,6 @@ const ModalToAddOrDeleteQuestion = ({
               alignItems: "flex-end",
               justifyContent: "flex-end",
               alignContent: "flex-end",
-              justifyContent: "center",
-              alignItems: "center",
             }}
           >
             <TouchableOpacity
@@ -180,7 +188,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignContent: "center",
     padding: responsiveSize(2),
-    // margin: 10,
     color: "#e32f45",
     borderColor: "#FA7465",
     backgroundColor: "#f7b267",
@@ -204,7 +211,6 @@ const styles = StyleSheet.create({
     ...fonts.note,
     textAlign: "center",
     color: "white",
-    // marginVertical: responsiveHeight(1),
     paddingHorizontal: responsiveSize(5),
     borderRadius: 20,
   },

@@ -15,7 +15,7 @@ import {
   responsiveFontSize,
 } from "../scripts/constants";
 import { BlurView } from "expo-blur";
-import ButtonQApp from "./buttonQApp";
+import CustomButton from "./customButton";
 import {
   deleteAuthUser,
   logoutUser,
@@ -253,7 +253,7 @@ const ProfileModal = ({
                                         </TouchableOpacity>
                                     </View> */}
                 </View>
-                {/* <ButtonQApp
+                {/* <CustomButton
                                     title={'Update Password'}
                                     onPress={() => updateUsersPassword({
                                         currentPassword: data?.currentPassword,
@@ -264,7 +264,7 @@ const ProfileModal = ({
                                     color2={'#52b788'}
                                     fontSize={responsiveFontSize(20)}
                                 /> */}
-                <ButtonQApp
+                <CustomButton
                   title={"Tutorial"}
                   onPress={onPressOpenTutorial}
                   height={responsiveHeight(4)}
@@ -272,7 +272,7 @@ const ProfileModal = ({
                   color2={"#e6d387"}
                   fontSize={responsiveFontSize(20)}
                 />
-                <ButtonQApp
+                <CustomButton
                   title={"Contact Support"}
                   onPress={sendEmail}
                   height={responsiveHeight(4)}
@@ -280,7 +280,7 @@ const ProfileModal = ({
                   color2={"#f79f65"}
                   fontSize={responsiveFontSize(20)}
                 />
-                <ButtonQApp
+                <CustomButton
                   title={"Delete Account"}
                   onPress={onPressOpenDeleteAccountModal}
                   // () => deleteAuthUser()}
@@ -289,7 +289,7 @@ const ProfileModal = ({
                   color2={"#f79165"}
                   fontSize={responsiveFontSize(20)}
                 />
-                <ButtonQApp
+                <CustomButton
                   title={"Log Out"}
                   onPress={onPressOpenLogOutModal}
                   height={responsiveHeight(7)}

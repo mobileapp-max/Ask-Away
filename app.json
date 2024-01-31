@@ -26,12 +26,12 @@
       "bundleIdentifier": "com.padverbny.qapp"
     },
     "android": {
+      "versionCode": 168,
+      "package": "com.padverbny.qapp",
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
-        "backgroundColor": "#ffffff",
-        "versionCode": 2 
-      },
-      "package": "com.padverbny.qapp"
+        "backgroundColor": "#f25c54"
+      }
     },
     "web": {
       "favicon": "./assets/images/favicon.png"

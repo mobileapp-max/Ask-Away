@@ -10,13 +10,7 @@ import { SCREENS } from "../../../navigation/screenNames";
 
 export const useSignInFunctions = (props: any) => {
 
-  const { navigation, route } = props
-  const { params } = route
-
-
-  const onPressBack = (): void => {
-    navigation.goBack()
-  }
+  const { navigation } = props
 
   const [data, setData] = useState({
     email: "",
@@ -80,6 +74,7 @@ export const useSignInFunctions = (props: any) => {
       Alert.alert("Missing email or password.");
     }
   }, [data]);
+
   const onPressResetPassword = async () => {
     if (data?.email) {
       const response = await sendEmailWithPassword(data?.email);
@@ -96,7 +91,6 @@ export const useSignInFunctions = (props: any) => {
   };
 
   return {
-    onPressBack,
     handleEmailChange,
     handlePasswordChange,
     updateSecureTextEntry,

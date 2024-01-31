@@ -7,22 +7,27 @@ import {
   Platform,
   StyleSheet,
 } from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
-import { responsiveFontSize } from "../scripts/constants";
 import fonts from "../scripts/fonts";
 
-const ButtonQApp = ({
+const CustomButton = ({
   title,
   onPress,
   height,
   disabled,
   color,
-  color2,
   fontSize,
+}: {
+  title: string;
+  onPress: () => void;
+  height: number;
+  disabled?: boolean;
+  color: string;
+  fontSize: number;
 }) => {
   const styles = useMemo(() => {
     return StyleSheet.create({
       signIn: {
+        backgroundColor: color,
         width: "100%",
         height: height,
         justifyContent: "center",
@@ -38,6 +43,7 @@ const ButtonQApp = ({
       textSign: {
         ...fonts.note,
         fontSize: fontSize,
+        color: "#fff",
       },
     });
   }, [height]);
@@ -48,19 +54,10 @@ const ButtonQApp = ({
       onPress={onPress}
       disabled={disabled}
     >
-      <LinearGradient colors={[color, color2]} style={styles.signIn}>
-        <Text
-          style={[
-            styles.textSign,
-            {
-              color: "#fff",
-            },
-          ]}
-        >
-          {title}
-        </Text>
-      </LinearGradient>
+      <View style={styles.signIn}>
+        <Text style={styles.textSign}>{title}</Text>
+      </View>
     </TouchableOpacity>
   );
 };
-export default ButtonQApp;
+export default CustomButton;
