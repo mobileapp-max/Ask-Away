@@ -13,20 +13,20 @@ import {
   responsiveHeight,
   responsiveWidth,
   responsiveFontSize,
-} from "../scripts/constants";
+} from "../../scripts/constants";
 import { BlurView } from "expo-blur";
 import CustomButton from "./customButton";
 import {
   deleteAuthUser,
   logoutUser,
   updateUsersPassword,
-} from "../api/auth-api";
+} from "../../api/auth-api";
 import { Ionicons } from "@expo/vector-icons";
-import fonts from "../scripts/fonts";
+import fonts from "../../scripts/fonts";
 import ModalToAddOrDeleteQuestion from "./modalToAddOrDeleteQuestion";
-import { removeItem } from "../utils/asyncStorage";
+import { removeItem } from "../../utils/asyncStorage";
 import { useNavigation } from "@react-navigation/native";
-import { SCREENS } from "../navigation/screenNames";
+import { SCREENS } from "../../navigation/screenNames";
 import email from "react-native-email";
 
 const ProfileModal = ({

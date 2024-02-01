@@ -17,12 +17,12 @@ import {
   responsiveHeight,
   responsiveWidth,
 } from "../../../scripts/constants";
-import { CharacterLimit } from "../../../components/character-limit/character-limit";
-import CustomButton from "../../../components/customButton";
+import { CharacterLimit } from "../../components/character-limit/character-limit";
+import CustomButton from "../../components/customButton";
 import fonts from "../../../scripts/fonts";
 import { Ionicons } from "@expo/vector-icons";
-import ModalToAddOrDeleteQuestion from "../../../components/modalToAddOrDeleteQuestion";
-import { ConfirmatioModal } from "../../../components/confirmationModal";
+import ModalToAddOrDeleteQuestion from "../../components/modalToAddOrDeleteQuestion";
+import { ConfirmatioModal } from "../../components/confirmationModal";
 
 export const AddQuestionPresentation = memo(
   ({

@@ -13,16 +13,16 @@ import {
   responsiveWidth,
   responsiveFontSize,
   responsiveSize,
-} from "../scripts/constants";
-import { QuestionsContext } from "../contexts/questions-context-provider";
+} from "../../scripts/constants";
+import { QuestionsContext } from "../../contexts/questions-context-provider";
 import { useContext } from "react";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { QuestionRow } from "./question-row/question-row";
 import { BlurView } from "expo-blur";
-import { calculateResults } from "../scripts/calculateResults";
+import { calculateResults } from "../../scripts/calculateResults";
 import { AntDesign } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
-import fonts from "../scripts/fonts";
+import fonts from "../../scripts/fonts";
 
 const QuestionReviewModal = ({
   children,

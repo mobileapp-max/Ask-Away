@@ -14,9 +14,9 @@ import {
   responsiveFontSize,
   responsiveHeight,
   responsiveWidth,
-} from "../scripts/constants";
+} from "../../scripts/constants";
 import { FontAwesome } from "@expo/vector-icons";
-import UseOnLayout from "../scripts/use-on-layout";
+import UseOnLayout from "../../scripts/use-on-layout";
 import { TextInputter } from "./text-inputter/text-inputter";
 import { FlatList } from "react-native-gesture-handler";
 

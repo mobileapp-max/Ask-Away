@@ -13,9 +13,9 @@ import {
   responsiveWidth,
   responsiveFontSize,
   responsiveSize,
-} from "../scripts/constants";
+} from "../../scripts/constants";
 import { BlurView } from "expo-blur";
-import fonts from "../scripts/fonts";
+import fonts from "../../scripts/fonts";
 
 const ModalToAddOrDeleteQuestion = ({
   children,

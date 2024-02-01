@@ -1,8 +1,8 @@
 import { BlurView } from "expo-blur";
 import React, { memo } from "react";
 import { View, Text, StyleSheet, Modal } from "react-native";
-import { responsiveWidth, responsiveFontSize } from "../scripts/constants";
-import fonts from "../scripts/fonts";
+import { responsiveWidth, responsiveFontSize } from "../../scripts/constants";
+import fonts from "../../scripts/fonts";
 
 export const ConfirmatioModal = ({
   modalVisible,

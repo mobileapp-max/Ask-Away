@@ -14,10 +14,10 @@ import {
   responsiveFontSize,
   responsiveHeight,
   responsiveWidth,
-} from "../../scripts/constants";
+} from "../../../scripts/constants";
 import { Entypo } from "@expo/vector-icons";
 import { TextInputterProps } from "./text-inputter-interface";
-import { QuestionsContext } from "../../contexts/questions-context-provider";
+import { QuestionsContext } from "../../../contexts/questions-context-provider";
 
 /**
  * Describe your new component here...

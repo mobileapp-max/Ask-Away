@@ -4,10 +4,10 @@ import {
   responsiveWidth,
   responsiveFontSize,
   responsiveSize,
-} from "../../scripts/constants";
-import { calculateResults } from "../../scripts/calculateResults";
-import UseOnLayout from "../../scripts/use-on-layout";
-import fonts from "../../scripts/fonts";
+} from "../../../scripts/constants";
+import { calculateResults } from "../../../scripts/calculateResults";
+import UseOnLayout from "../../../scripts/use-on-layout";
+import fonts from "../../../scripts/fonts";
 
 export const QuestionRow = ({
   question: incomingQuestion,

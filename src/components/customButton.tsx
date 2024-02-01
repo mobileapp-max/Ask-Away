@@ -7,7 +7,7 @@ import {
   Platform,
   StyleSheet,
 } from "react-native";
-import fonts from "../scripts/fonts";
+import fonts from "../../scripts/fonts";
 
 const CustomButton = ({
   title,

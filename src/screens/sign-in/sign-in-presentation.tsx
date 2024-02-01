@@ -18,8 +18,9 @@ import {
 import fonts from "../../../scripts/fonts";
 import { Screen } from "../../components/screen/screen";
 import { SignInProps } from "./sign-in-interface";
-import ModalToAddOrDeleteQuestion from "../../../components/modalToAddOrDeleteQuestion";
-import CustomButton from "../../../components/customButton";
+import ModalToAddOrDeleteQuestion from "../../components/modalToAddOrDeleteQuestion";
+import CustomButton from "../../components/customButton";
+import { CharacterLimit } from "../../components/character-limit/character-limit";
 
 export const SignInPresentation = memo(
   ({

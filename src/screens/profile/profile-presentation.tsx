@@ -19,13 +19,13 @@ import {
   responsiveSize,
 } from "../../../scripts/constants";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { QuestionRow } from "../../../components/question-row/question-row";
+import { QuestionRow } from "../../components/question-row/question-row";
 import { SwipeListView } from "react-native-swipe-list-view";
-import ProfileModal from "../../../components/profileModal";
+import ProfileModal from "../../components/profileModal";
 import fonts from "../../../scripts/fonts";
-import ModalToAddOrDeleteQuestion from "../../../components/modalToAddOrDeleteQuestion";
-import QuestionReviewModal from "../../../components/questionReviewMondal";
-import { ConfirmatioModal } from "../../../components/confirmationModal";
+import ModalToAddOrDeleteQuestion from "../../components/modalToAddOrDeleteQuestion";
+import QuestionReviewModal from "../../components/questionReviewMondal";
+import { ConfirmatioModal } from "../../components/confirmationModal";
 import { Ionicons } from "@expo/vector-icons";
 
 export const ProfilePresentation = memo(

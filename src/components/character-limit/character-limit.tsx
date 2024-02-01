@@ -9,7 +9,7 @@ import { Image, Text, View, TouchableOpacity, StyleSheet } from "react-native";
 import { CharacterLimitProps } from "./character-limit-interface";
 import { CharacterLimitPresets } from "./character-limit-presets";
 import * as Animatable from "react-native-animatable";
-import { responsiveFontSize } from "../../scripts/constants";
+import { responsiveFontSize } from "../../../scripts/constants";
 
 /**
  * Describe your new component here...
