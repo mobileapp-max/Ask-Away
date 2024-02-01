@@ -50,7 +50,8 @@
             "useFrameworks": "static"
           }
         }
-      ]
+      ],
+      "expo-font"
     ],
     "runtimeVersion": {
       "policy": "sdkVersion"

@@ -23,7 +23,7 @@ import { AntDesign } from "@expo/vector-icons";
 import { BlurView } from "expo-blur";
 import * as Animatable from "react-native-animatable";
 import fonts from "../../../scripts/fonts";
-import Lottie from "lottie-react-native";
+import LottieView from "lottie-react-native";
 
 export const AnswerQuestionsPresentation = memo(
   ({
@@ -95,16 +95,22 @@ export const AnswerQuestionsPresentation = memo(
                   }}
                 >
                   {currentQuestionText || (
-                    <View style={styles.lottie}>
-                      <Lottie source={elephant} autoPlay loop />
-                      <Text
-                        style={{
-                          ...styles.textForButtons,
-                          top: responsiveSize(30),
-                        }}
+                    <View style={styles.lottieContainer}>
+                      <LottieView
+                        source={elephant}
+                        autoPlay
+                        loop
+                        style={styles.lottie}
                       >
-                        {"Loading"}
-                      </Text>
+                        <Text
+                          style={{
+                            ...styles.textForButtons,
+                            top: responsiveSize(30),
+                          }}
+                        >
+                          {"Loading"}
+                        </Text>
+                      </LottieView>
                     </View>
                   )}
                 </Text>
@@ -375,6 +381,13 @@ const styles = StyleSheet.create({
   lottie: {
     width: responsiveSize(100),
     height: responsiveSize(100),
+    flex: 1,
+    alignContent: "center",
+    justifyContent: "center",
+    alignSelf: "center",
+    alignItems: "center",
+  },
+  lottieContainer: {
     flex: 1,
     alignContent: "center",
     justifyContent: "center",

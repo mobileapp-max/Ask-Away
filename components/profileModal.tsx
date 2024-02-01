@@ -151,7 +151,7 @@ const ProfileModal = ({
                     zIndex: 1,
                   }}
                 >
-                  <Ionicons name="ios-close-circle" size={40} color="#ffff" />
+                  <Ionicons name="close-circle" size={40} color="#ffff" />
                 </TouchableOpacity>
                 {/* {children} */}
                 <View

@@ -133,15 +133,7 @@ export const AddQuestionPresentation = memo(
                     }}
                     onPress={handleClearText}
                   >
-                    <Ionicons
-                      name={
-                        Platform.OS === "ios"
-                          ? "ios-close-circle"
-                          : "md-close-circle"
-                      }
-                      size={30}
-                      color="#fff"
-                    />
+                    <Ionicons name={"close-circle"} size={30} color="#fff" />
                   </TouchableOpacity>
                 )}
               </Pressable>

@@ -177,11 +177,7 @@ export const ProfilePresentation = memo(
                   justifyContent: "center",
                 }}
               >
-                <Ionicons
-                  name="md-chevron-down-sharp"
-                  size={25}
-                  color="#f25c54"
-                />
+                <Ionicons name="chevron-down-sharp" size={25} color="#f25c54" />
               </View>
             </TouchableOpacity>
             <View style={styles.cardValueRow}>

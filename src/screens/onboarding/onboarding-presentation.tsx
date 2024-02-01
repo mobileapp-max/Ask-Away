@@ -11,7 +11,7 @@ import {
 } from "react-native";
 import React, { memo, useState } from "react";
 import Onboarding from "react-native-onboarding-swiper";
-import Lottie from "lottie-react-native";
+import LottieView from "lottie-react-native";
 import { useNavigation } from "@react-navigation/native";
 import { setItem } from "../../../utils/asyncStorage";
 import fonts from "../../../scripts/fonts";
@@ -81,9 +81,12 @@ export const OnboardingPresentation = memo(
               {
                 backgroundColor: "#f79d65",
                 image: (
-                  <View style={styles.lottie}>
-                    <Lottie source={image_1} autoPlay loop />
-                  </View>
+                  <LottieView
+                    style={styles.lottie}
+                    source={image_1}
+                    autoPlay
+                    loop
+                  />
                 ),
                 title: "Ask Yes-No Questions",
                 subtitle:
@@ -92,9 +95,12 @@ export const OnboardingPresentation = memo(
               {
                 backgroundColor: "#52b788",
                 image: (
-                  <View style={styles.lottie}>
-                    <Lottie source={image_2} autoPlay loop />
-                  </View>
+                  <LottieView
+                    source={image_2}
+                    autoPlay
+                    loop
+                    style={styles.lottie}
+                  />
                 ),
                 title: "Express Your Opinion",
                 subtitle:
@@ -103,9 +109,12 @@ export const OnboardingPresentation = memo(
               {
                 backgroundColor: "#f25c54",
                 image: (
-                  <View style={styles.lottie}>
-                    <Lottie source={image_3} autoPlay loop />
-                  </View>
+                  <LottieView
+                    style={styles.lottie}
+                    source={image_3}
+                    autoPlay
+                    loop
+                  />
                 ),
                 title: "Monitor Replies",
                 subtitle:
