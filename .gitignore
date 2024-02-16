@@ -76,3 +76,4 @@ dist/
 # @end expo-cli
 
 constants/apollo.js
+apollo.ts
