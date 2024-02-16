@@ -1,27 +1,11 @@
-import React, { useEffect, useState, Component } from "react";
+import React, { useEffect, useState } from "react";
+import { View, Text, StyleSheet, Pressable, Modal } from "react-native";
 import {
-  View,
-  Text,
-  TouchableOpacity,
-  StyleSheet,
-  Pressable,
-  Modal,
-} from "react-native";
-import Feather from "react-native-vector-icons/Feather";
-import {
-  responsiveHeight,
   responsiveWidth,
   responsiveFontSize,
   responsiveSize,
 } from "../../scripts/constants";
-import { QuestionsContext } from "../../contexts/questions-context-provider";
-import { useContext } from "react";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { QuestionRow } from "./question-row/question-row";
 import { BlurView } from "expo-blur";
-import { calculateResults } from "../../scripts/calculateResults";
-import { AntDesign } from "@expo/vector-icons";
-import { Ionicons } from "@expo/vector-icons";
 import fonts from "../../scripts/fonts";
 
 const QuestionReviewModal = ({
@@ -29,32 +13,12 @@ const QuestionReviewModal = ({
   selectedQuestionForReviewModal,
   QuestionReviewModalVisible,
   onPressDissmissQuestionReviewModal,
+}: {
+  children?: any;
+  selectedQuestionForReviewModal: any;
+  QuestionReviewModalVisible: boolean;
+  onPressDissmissQuestionReviewModal: () => void;
 }) => {
-  const { question, onPressNextQuestion, onPressAddResponse } =
-    useContext(QuestionsContext);
-  const [graphicData, setGraphicData] = useState(defaultGraphicData);
-  const graphicColor = ["red", "green"]; // Colors
-  // const wantedGraphicData = [{ y: 10 }, { y: 50 }, { y: 40 }]; // Data that we want to display
-  const wantedGraphicData = [
-    {
-      x: `${selectedQuestionForReviewModal?.answer_1} - No`,
-      y: selectedQuestionForReviewModal?.answer_2,
-    },
-    {
-      x: `${selectedQuestionForReviewModal?.answer_1} - Yes`,
-      y: selectedQuestionForReviewModal?.answer_1,
-    },
-  ];
-  // const defaultGraphicData = [{ y: 0 }, { y: 0 }, { y: 100 }];
-  const defaultGraphicData = [
-    { x: "No", y: 0 },
-    { x: "Yes", y: 0 },
-  ]; // Data used to make the animate prop work
-
-  useEffect(() => {
-    setGraphicData(wantedGraphicData); // Setting the data that we want to display
-  }, [selectedQuestionForReviewModal]);
-
   return (
     <Modal
       animationType="fade"
@@ -68,53 +32,15 @@ const QuestionReviewModal = ({
         >
           <View style={styles.inputTextContainer}>
             {children}
-            <View
-              style={{
-                backgroundColor: "#ffe6c9",
-                borderRadius: 15,
-                minWidth: responsiveSize(3),
-                minHeight: responsiveSize(5),
-                marginBottom: responsiveSize(7),
-                borderBottomRightRadius: 20,
-                borderTopRightRadius: 8,
-                borderTopLeftRadius: 20,
-                borderBottomLeftRadius: 8,
-              }}
-            >
-              <Text
-                style={{
-                  ...fonts.note,
-                  color: "#f25c54",
-                  padding: 10,
-                  width: responsiveWidth(75),
-                  textAlign: "center",
-                  fontSize: responsiveFontSize(20),
-                }}
-              >
+            <View style={styles.questionContainer}>
+              <Text style={styles.questionText}>
                 {selectedQuestionForReviewModal?.question}
               </Text>
             </View>
             <View style={styles.answers}>
-              <View
-                style={{
-                  flexDirection: "column",
-                  justifyContent: "center",
-                  alignContent: "center",
-                  alignItems: "center",
-                }}
-              >
-                <View
-                  style={{
-                    flexDirection: "row",
-                    alignItems: "center",
-                  }}
-                >
-                  <Text
-                    style={{
-                      ...styles.text,
-                      padding: 0,
-                    }}
-                  >
+              <View style={styles.answerSection}>
+                <View style={styles.answerRow}>
+                  <Text style={[styles.text, styles.textPadding]}>
                     {"Yes - "}
                   </Text>
                   <View style={styles.answersColumn}>
@@ -124,26 +50,16 @@ const QuestionReviewModal = ({
                   </View>
                 </View>
               </View>
-              <View
-                style={{
-                  flexDirection: "column",
-                  justifyContent: "center",
-                  alignContent: "center",
-                  alignItems: "center",
-                }}
-              >
-                <View
-                  style={{
-                    flexDirection: "row",
-                    alignItems: "center",
-                  }}
-                >
+              <View style={styles.answerSection}>
+                <View style={styles.answerRow}>
                   <View style={styles.answersColumn}>
                     <Text style={styles.text}>
                       {selectedQuestionForReviewModal?.answer_2 || 0}
                     </Text>
                   </View>
-                  <Text style={{ ...styles.text, padding: 0 }}>{" - No"}</Text>
+                  <Text style={[styles.text, styles.textPadding]}>
+                    {" - No"}
+                  </Text>
                 </View>
               </View>
             </View>
@@ -184,14 +100,11 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.5,
     shadowRadius: 3.5,
     elevation: 5,
-    // paddingVertical: responsiveSize(7),
-    // paddingHorizontal: responsiveSize(6)
   },
   answers: {
     flexDirection: "row",
     alignContent: "space-around",
     justifyContent: "space-around",
-    // paddingHorizontal: responsiveFontSize(8)
   },
   answersColumn: {
     justifyContent: "center",
@@ -209,5 +122,37 @@ const styles = StyleSheet.create({
     padding: responsiveSize(2),
     color: "#f25c54",
     fontSize: responsiveSize(8),
+  },
+  questionContainer: {
+    backgroundColor: "#ffe6c9",
+    borderRadius: 15,
+    minWidth: responsiveSize(3),
+    minHeight: responsiveSize(5),
+    marginBottom: responsiveSize(7),
+    borderBottomRightRadius: 20,
+    borderTopRightRadius: 8,
+    borderTopLeftRadius: 20,
+    borderBottomLeftRadius: 8,
+  },
+  questionText: {
+    ...fonts.note,
+    color: "#f25c54",
+    padding: 10,
+    width: responsiveWidth(75),
+    textAlign: "center",
+    fontSize: responsiveFontSize(20),
+  },
+  answerSection: {
+    flexDirection: "column",
+    justifyContent: "center",
+    alignContent: "center",
+    alignItems: "center",
+  },
+  answerRow: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  textPadding: {
+    padding: 0,
   },
 });

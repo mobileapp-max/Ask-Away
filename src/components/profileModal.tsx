@@ -34,6 +34,11 @@ const ProfileModal = ({
   profileModalVisible,
   onPressDismissProfileModal,
   setProfileModalVisible,
+}: {
+  children?: any;
+  profileModalVisible: boolean;
+  onPressDismissProfileModal: () => void;
+  setProfileModalVisible: (value: boolean) => void;
 }) => {
   const navigation = useNavigation();
   const [data, setData] = useState({
@@ -42,30 +47,6 @@ const ProfileModal = ({
     secureTextEntry1: true,
     secureTextEntry2: true,
   });
-  const handleCurrentPasswordChange = (val) => {
-    setData({
-      ...data,
-      currentPassword: val,
-    });
-  };
-  const handleNewPasswordChange = (val) => {
-    setData({
-      ...data,
-      newPassword: val,
-    });
-  };
-  const updateSecureTextEntry1 = () => {
-    setData({
-      ...data,
-      secureTextEntry1: !data.secureTextEntry1,
-    });
-  };
-  const updateSecureTextEntry2 = () => {
-    setData({
-      ...data,
-      secureTextEntry2: !data.secureTextEntry2,
-    });
-  };
 
   const [logOutModalVisible, setLogOutModalVisible] = useState(false);
   const [
@@ -86,8 +67,7 @@ const ProfileModal = ({
   };
   const onPressOpenTutorial = async () => {
     onPressDismissProfileModal();
-    // await removeItem("onboardedUserIds");
-    navigation.push(SCREENS.ONBOARDING);
+    navigation?.push(SCREENS.ONBOARDING);
   };
   const onPressAddOrDeleteQuestionNo = () => {
     setLogOutModalVisible(false);
@@ -180,96 +160,12 @@ const ProfileModal = ({
                       paddingBottom: responsiveHeight(0.5),
                     }}
                   />
-                  {/* <Text style={[styles.text_footer, {
-                                    }]}>
-                                        {'Current Password'}
-                                    </Text>
-                                    <View style={styles.action}>
-                                        <Feather
-                                            name="lock"
-                                            color='#f25c54'
-                                            size={20}
-                                        />
-                                        <TextInput
-                                            placeholder="Current Password"
-                                            onChangeText={val => handleCurrentPasswordChange(val)}
-                                            secureTextEntry={data.secureTextEntry1 ? true : false}
-                                            style={styles.textInput}
-                                            autoCapitalize="none"
-                                            placeholderTextColor={'#f5e2c9'}
-                                        />
-                                        <TouchableOpacity
-                                            onPress={updateSecureTextEntry1}
-                                        >
-                                            {data.secureTextEntry1 ?
-                                                <Feather
-                                                    name="eye-off"
-                                                    color="#f25c54"
-                                                    size={20}
-                                                />
-                                                :
-                                                <Feather
-                                                    name="eye"
-                                                    color="white"
-                                                    size={20}
-                                                />
-                                            }
-                                        </TouchableOpacity>
-                                    </View>
-                                    <Text style={[styles.text_footer, {
-                                    }]}>
-                                        {'New Password'}
-                                    </Text>
-                                    <View style={styles.action}>
-                                        <Feather
-                                            name="lock"
-                                            color="#f25c54"
-                                            size={20}
-                                        />
-                                        <TextInput
-                                            placeholder="New Password"
-                                            secureTextEntry={data.secureTextEntry2 ? true : false}
-                                            style={styles.textInput}
-                                            autoCapitalize="none"
-                                            placeholderTextColor={'#f5e2c9'}
-                                            onChangeText={(val) => handleNewPasswordChange(val)}
-                                        />
-                                        <TouchableOpacity
-                                            onPress={updateSecureTextEntry2}
-                                        >
-                                            {data.secureTextEntry2 ?
-                                                <Feather
-                                                    name="eye-off"
-                                                    color="#f25c54"
-                                                    size={20}
-                                                />
-                                                :
-                                                <Feather
-                                                    name="eye"
-                                                    color="white"
-                                                    size={20}
-                                                />
-                                            }
-                                        </TouchableOpacity>
-                                    </View> */}
                 </View>
-                {/* <CustomButton
-                                    title={'Update Password'}
-                                    onPress={() => updateUsersPassword({
-                                        currentPassword: data?.currentPassword,
-                                        newPassword: data?.newPassword
-                                    })}
-                                    height={responsiveHeight(5)}
-                                    color={'#52b788'}
-                                    color2={'#52b788'}
-                                    fontSize={responsiveFontSize(20)}
-                                /> */}
                 <CustomButton
                   title={"Tutorial"}
                   onPress={onPressOpenTutorial}
                   height={responsiveHeight(4)}
                   color={"#e6d387"}
-                  color2={"#e6d387"}
                   fontSize={responsiveFontSize(20)}
                 />
                 <CustomButton
@@ -277,16 +173,13 @@ const ProfileModal = ({
                   onPress={sendEmail}
                   height={responsiveHeight(4)}
                   color={"#f79f65"}
-                  color2={"#f79f65"}
                   fontSize={responsiveFontSize(20)}
                 />
                 <CustomButton
                   title={"Delete Account"}
                   onPress={onPressOpenDeleteAccountModal}
-                  // () => deleteAuthUser()}
                   height={responsiveHeight(4)}
                   color={"#f79165"}
-                  color2={"#f79165"}
                   fontSize={responsiveFontSize(20)}
                 />
                 <CustomButton
@@ -294,7 +187,6 @@ const ProfileModal = ({
                   onPress={onPressOpenLogOutModal}
                   height={responsiveHeight(7)}
                   color={"#f77b65"}
-                  color2={"#f77b65"}
                   fontSize={responsiveFontSize(20)}
                 />
               </View>

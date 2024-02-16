@@ -36,13 +36,13 @@ const ModalToAddOrDeleteQuestion = ({
   modalToAddOrDeleteQuestionVisible: boolean;
   onPressAddOrDeleteQuestionYes: () => void;
   onPressAddOrDeleteQuestionNo: () => void;
-  questionText?: string;
-  questionTextInput?: string;
+  questionText?: any;
+  questionTextInput?: any;
   sendButton?: string;
   cancelButton?: string;
   questionText2?: string;
-  link1?: string;
-  link2?: string;
+  link1?: any;
+  link2?: any;
 }) => {
   const [fontSize, setFontSize] = useState(responsiveFontSize(26));
   const handleTextLayout = () => {
@@ -113,22 +113,19 @@ const ModalToAddOrDeleteQuestion = ({
             </TouchableWithoutFeedback>
           )}
           {questionText2 && (
-            <TouchableWithoutFeedback
-              style={{ margintTop: responsiveSize(5) }}
-              onPress={handleOpenWebsite2}
-            >
+            <TouchableWithoutFeedback onPress={handleOpenWebsite2}>
               <View
                 style={{
                   borderRadius: 15,
                   backgroundColor: "#f79d65",
                   marginBottom: responsiveSize(3),
-
                   width: responsiveWidth(70),
                   justifyContent: "center",
                   borderBottomRightRadius: 20,
                   borderTopRightRadius: 8,
                   borderTopLeftRadius: 20,
                   borderBottomLeftRadius: 8,
+                  marginTop: responsiveSize(5),
                 }}
               >
                 <Text
