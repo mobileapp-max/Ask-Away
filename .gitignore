@@ -77,3 +77,4 @@ dist/
 
 constants/apollo.js
 apollo.ts
+constants/firebaseConfig.ts
