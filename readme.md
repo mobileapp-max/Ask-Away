@@ -7,6 +7,17 @@
 
 A playful mobile app for asking strangers short yes/no questions. Ask any question and monitor how others reply, voting yes/no on your question. Reply to questions of others, and help they settle a matter. Track your questions and all the questions you replied to see how the responses change over time. 
 
+## <div align="center">Preview:</div>
+<div align="center">
+<img src="https://d1gvesvnsl1na6.cloudfront.net/u0j0ie%2Fpreview%2F56103859%2Fmain_large.gif?response-content-disposition=inline%3Bfilename%3D%22main_large.gif%22%3B&response-content-type=image%2Fgif&Expires=1708453737&Signature=fSUkwikDCmyB27LVu8gBtSEGwEkm~ixywyquU2FaRamPtJeqBeowBArfzSkqjyDV2sgZAqavxzEOcuJzW2V~K688sZjbnq5i1zLMVdrgqBeLsaqs0cYTnJ5Z27uqSpF~KqaAERWfbykqT87PiBGWzm4el50cuFJMqzXJm6Msm0RzSDf6spq4yh5qEad5lgoo8H9eKpvVLbDyMTt9TKlpNowLSdta5FrpPy8CPNbFzJ1NlRy9i4y4ONZ~KskdXp59JXcVTdZCM7Q2xbTiLDpELW1pkUh0qs1swZxfHak5l1j4AW-tE4WWbzQ~xnp-lt6uNgfdGGh~l8SgZEntz2Y3Yw__&Key-Pair-Id=APKAJT5WQLLEOADKLHBQ">
+    </div>
+    
+> There're three main screens:
+>    1) Answer questions - 
+>    2) Ask questions - 
+>    3) Your dashboard - view the questions you have asked and see their answers, 
+
+
 ## <div align="center">Download it:</div>
 <table align="center" width="100%">
     <tr>
@@ -14,16 +25,6 @@ A playful mobile app for asking strangers short yes/no questions. Ask any questi
         <td align="right">🤖 <a href="https://play.google.com/store/apps/details?id=com.padverbny.qapp">Google Store</a></td>
     </tr>
 </table>
-
-
-## <div align="center">Preview:</div>
-<div align="center">
-<img src="https://d1gvesvnsl1na6.cloudfront.net/u0j0ie%2Fpreview%2F56103859%2Fmain_large.gif?response-content-disposition=inline%3Bfilename%3D%22main_large.gif%22%3B&response-content-type=image%2Fgif&Expires=1708453737&Signature=fSUkwikDCmyB27LVu8gBtSEGwEkm~ixywyquU2FaRamPtJeqBeowBArfzSkqjyDV2sgZAqavxzEOcuJzW2V~K688sZjbnq5i1zLMVdrgqBeLsaqs0cYTnJ5Z27uqSpF~KqaAERWfbykqT87PiBGWzm4el50cuFJMqzXJm6Msm0RzSDf6spq4yh5qEad5lgoo8H9eKpvVLbDyMTt9TKlpNowLSdta5FrpPy8CPNbFzJ1NlRy9i4y4ONZ~KskdXp59JXcVTdZCM7Q2xbTiLDpELW1pkUh0qs1swZxfHak5l1j4AW-tE4WWbzQ~xnp-lt6uNgfdGGh~l8SgZEntz2Y3Yw__&Key-Pair-Id=APKAJT5WQLLEOADKLHBQ"  >
-
-
-
-</div>
-
 
 ## <div align="center">Tech stack:</div>
 
@@ -53,5 +54,17 @@ A playful mobile app for asking strangers short yes/no questions. Ask any questi
     </table>
 </div>
 
-## <div align="center">Funtionality</div>
+## <div align="center">Functionality</div>
 
+- Sign-up & Sign-in
+- Add a question
+- Delete your question
+- Monitor your questions and their replies
+- Reply to a question of others
+- Monitor the questions you have answered and their replies
+- When answering questions of others, you can skip a question (refuse to answer)
+- Report someone's question - mark for admin review
+- Onboarding/Tutorial
+- Contact Support via email
+- Log Out
+- Delete Account
