@@ -1,6 +1,6 @@
 # <div align="center">Ask Away - Yes & No Questions</div> 
 
-<img src="https://is1-ssl.mzstatic.com/image/thumb/Purple126/v4/8a/e4/71/8ae471ca-76a3-4430-5a3e-017690f0cd72/AppIcon-1x_U007emarketing-0-7-0-85-220.png/1200x600wa.png" style=" border-radius: 10px;">
+<img src="https://raw.githubusercontent.com/mobileapp-max/Ask-Away/main/assets/images/logo.png?token=GHSAT0AAAAAACHZXXGIM4XIZ2W34KN645CKZOVJZ7A">
 
 > React Native cross platform mobile app, developed from scratch to 
 > deployment and is currently available on iOS and Android.  
@@ -17,10 +17,10 @@ A playful mobile app for asking strangers short yes/no questions. Ask any questi
 >    2) Ask questions - add your question for others to answer.
 >    3) Your dashboard - view the list of your questions, and the list of questions you have answered. Each question shows how people responded to it.
 >       
->       <img src="https://raw.githubusercontent.com/mobileapp-max/Ask-Away/main/assets/images/Screenshot.png?token=GHSAT0AAAAAACHZXXGIDFLFDZTBUNAKPOXMZOVHNCA">
+>       <img src="https://raw.githubusercontent.com/mobileapp-max/Ask-Away/main/assets/images/Screenshot.png?token=GHSAT0AAAAAACHZXXGIFTGFFLHWTLWIMWNGZOVJZ2A">
 
 
-## <div align="center">Download it</div>
+## <div align="center">Download it now</div>
 <table align="center" width="100%">
     <tr>
         <td align="left"> <a href="https://apps.apple.com/us/app/ask-away-yes-no-questions/id6447141953"><img 
