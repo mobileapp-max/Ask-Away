@@ -15,7 +15,9 @@ A playful mobile app for asking strangers short yes/no questions. Ask any questi
 > There are three main screens
 >    1) Answer questions - the screen desplays a current question for you to answer, you can response either Yes or No, alternatively you can Skip the question or Report it. 
 >    2) Ask questions - add your question for others to answer.
->    3) Your dashboard - view the list of your questions, and the list of questions you have answered. Each question shows how people responded to it. 
+>    3) Your dashboard - view the list of your questions, and the list of questions you have answered. Each question shows how people responded to it.
+>       
+>       <img src="https://raw.githubusercontent.com/mobileapp-max/Ask-Away/main/assets/images/Screenshot.png?token=GHSAT0AAAAAACHZXXGIDFLFDZTBUNAKPOXMZOVHNCA">
 
 
 ## <div align="center">Download it</div>
@@ -69,3 +71,11 @@ A playful mobile app for asking strangers short yes/no questions. Ask any questi
 - Contact Support via email
 - Log Out
 - Delete Account
+
+## Quick Start
+
+`yarn` - Install dependencies 
+
+`yarn start` - Start the server
+
+Run `i` to start Apple or `a` for Android simulator
