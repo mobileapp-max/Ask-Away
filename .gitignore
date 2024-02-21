@@ -79,3 +79,4 @@ constants/apollo.js
 apollo.ts
 constants/firebaseConfig.ts
 GoogleService-Info.plist
+ api/auth-api.tsx
