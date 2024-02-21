@@ -12,10 +12,10 @@ A playful mobile app for asking strangers short yes/no questions. Ask any questi
 <img src="https://d1gvesvnsl1na6.cloudfront.net/u0j0ie%2Fpreview%2F56103859%2Fmain_large.gif?response-content-disposition=inline%3Bfilename%3D%22main_large.gif%22%3B&response-content-type=image%2Fgif&Expires=1708453737&Signature=fSUkwikDCmyB27LVu8gBtSEGwEkm~ixywyquU2FaRamPtJeqBeowBArfzSkqjyDV2sgZAqavxzEOcuJzW2V~K688sZjbnq5i1zLMVdrgqBeLsaqs0cYTnJ5Z27uqSpF~KqaAERWfbykqT87PiBGWzm4el50cuFJMqzXJm6Msm0RzSDf6spq4yh5qEad5lgoo8H9eKpvVLbDyMTt9TKlpNowLSdta5FrpPy8CPNbFzJ1NlRy9i4y4ONZ~KskdXp59JXcVTdZCM7Q2xbTiLDpELW1pkUh0qs1swZxfHak5l1j4AW-tE4WWbzQ~xnp-lt6uNgfdGGh~l8SgZEntz2Y3Yw__&Key-Pair-Id=APKAJT5WQLLEOADKLHBQ">
  
     
-> There are three main screens
->    1) Answer questions - the screen desplays a current question for you to answer, you can response either Yes or No, alternatively you can Skip the question or Report it. 
->    2) Ask questions - add your question for others to answer.
->    3) Your dashboard - view the list of your questions, and the list of questions you have answered. Each question shows how people responded to it.
+> There are three main screens:
+>    1) Answer questions - answer Yes or No to each new question, Skip question or Report it. 
+>    3) Ask question - Ask Away a question for others to answer.
+>    4) Your (dashboard) - toggle here between your questions, and the questions you answered. Monitor how answers to each change overtime.
 >       
 >       <img src="https://raw.githubusercontent.com/mobileapp-max/Ask-Away/main/assets/images/Screenshot.png?token=GHSAT0AAAAAACHZXXGIFTGFFLHWTLWIMWNGZOVJZ2A">
 
@@ -31,7 +31,7 @@ A playful mobile app for asking strangers short yes/no questions. Ask any questi
 
 ## Tech stack
 
-<div>
+<div >
     <table>
         <tr>
             <td align="center"> React Native</td>
