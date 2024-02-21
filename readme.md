@@ -1,6 +1,6 @@
 # <div align="center">Ask Away - Yes & No Questions</div> 
 
-<img src="https://raw.githubusercontent.com/mobileapp-max/Ask-Away/main/assets/images/logo.png?token=GHSAT0AAAAAACHZXXGIM4XIZ2W34KN645CKZOVJZ7A">
+![Ask Away](assets/images/logo.png)
 
 > React Native cross platform mobile app, developed from scratch to 
 > deployment and is currently available on iOS and Android.  
@@ -16,8 +16,9 @@ A playful mobile app for asking strangers short yes/no questions. Ask any questi
 >    1) Answer questions - answer Yes or No to each new question, Skip question or Report it. 
 >    3) Ask question - Ask Away a question for others to answer.
 >    4) Your (dashboard) - toggle here between your questions, and the questions you answered. Monitor how answers to each change overtime.
->       
->       <img src="https://raw.githubusercontent.com/mobileapp-max/Ask-Away/main/assets/images/Screenshot.png?token=GHSAT0AAAAAACHZXXGIFTGFFLHWTLWIMWNGZOVJZ2A">
+>
+> ![Screenshot](assets/images/Screenshot.png) 
+
 
 
 ## <div align="center">Download it now</div>
