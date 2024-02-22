@@ -22,9 +22,11 @@ export interface CharacterLimitProps {
   * @default is a string "default"
   */
   preset?: CharacterLimitPresetNames;
+  errorMessage?: string;
 }
 
 export type CharacterLimitData = {
   title: string;
   text: string;
+  errorMessage?: string;
 }

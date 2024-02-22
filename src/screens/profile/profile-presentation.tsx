@@ -196,7 +196,7 @@ export const ProfilePresentation = memo(
                     areQuestionsDisplayed: areQuestionsDisplayed,
                   },
                 ].map((item, index) => (
-                  <View>
+                  <View key={index}>
                     <TouchableOpacity
                       onPress={item?.onPress}
                       style={{
@@ -205,13 +205,9 @@ export const ProfilePresentation = memo(
                           ? "#ffe6c9"
                           : "#ffcd96",
                         borderColor: "#ffe6c9",
-                        // borderWidth: !item?.areQuestionsDisplayed
-                        //   ? StyleSheet.hairlineWidth * 2
-                        //   : 0,
                         shadowColor: item?.areQuestionsDisplayed
                           ? "#ffe6c9"
                           : "#e32f45",
-                        // elevation: item?.areQuestionsDisplayed ? 5 : 0,
                       }}
                     >
                       <Text style={styles.largeNumbers}>
@@ -222,25 +218,6 @@ export const ProfilePresentation = memo(
                   </View>
                 ))}
               </>
-              {/* <View>
-                <TouchableOpacity
-                  onPress={() => setAreQuestionsDisplayed(false)}
-                  style={{
-                    ...styles.cardValues,
-                    backgroundColor: !areQuestionsDisplayed
-                      ? "#ffe6c9"
-                      : "#ffcd96",
-                    borderColor: "#ffe6c9",
-                    borderWidth: areQuestionsDisplayed
-                      ? StyleSheet.hairlineWidth * 2
-                      : 0,
-                    shadowColor: !areQuestionsDisplayed ? "#ffe6c9" : "#e32f45",
-                  }}
-                >
-                  <Text style={styles.largeNumbers}>{sumReplies}</Text>
-                </TouchableOpacity>
-                <Text style={{ ...styles.regularText }}>{"Answers"}</Text>
-              </View> */}
             </View>
           </View>
         </View>
@@ -312,7 +289,6 @@ const getStyles = (responsive: responsiveType) => {
       alignSelf: "center",
       alignContent: "center",
       alignItems: "center",
-      // backgroundColor: "red",
     },
     largeNumbers: {
       ...fonts.note,

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import {
   Keyboard,
 } from "react-native";
@@ -20,7 +20,7 @@ export const useAddQuestionFunctions = (props: any) => {
   }
   const inputRef = useRef(null);
   const handleButtonPress = () => {
-    inputRef.current.focus();
+    inputRef?.current.focus();
     setTextInputSelected(true)
 
   };
@@ -28,7 +28,7 @@ export const useAddQuestionFunctions = (props: any) => {
   const [text, setText] = useState("");
   const [disableButton, setDisableButton] = useState(true);
   const [modalVisible, setModalVisible] = useState(false);
-  const { onPressAddQuestion, keyBoardOn } = useContext(QuestionsContext);
+  const { onPressAddQuestion } = useContext(QuestionsContext);
   const onPressInitiateAddQuestin = () => {
     setText("");
     onPressAddQuestion({
@@ -48,19 +48,19 @@ export const useAddQuestionFunctions = (props: any) => {
     } else setDisableButton(true);
   }, [text]);
 
-  function handleKeyPress(e) {
+  function handleKeyPress(e: any) {
     if (e.nativeEvent.key === "Return") {
       e.preventDefault();
     }
   }
 
-  function removeLineBreaks(str) {
+  function removeLineBreaks(str: string) {
     return str.replace(/\n/g, " ").replace(/\s+/g, " ");
   }
   const newString = removeLineBreaks(text);
 
   useEffect(() => {
-    function removeLineBreaks(text) {
+    function removeLineBreaks(text: string) {
       return;
     }
   }, [text]);
@@ -89,13 +89,28 @@ export const useAddQuestionFunctions = (props: any) => {
 
   const [fontSize, setFontSize] = useState(responsiveFontSize(30)); // Default font size
 
-  const handleChangeText = (text) => {
+  const handleChangeText = (text: string) => {
     setText(text);
     const newTextLength = text.length;
     const decreaseFactor = Math.floor(newTextLength / 20); // Decrease font size for every 60 characters
     const newFontSize = Math.max(responsiveFontSize(35) - decreaseFactor, 10); // Minimum font size of 10
     setFontSize(newFontSize);
   };
+  const initialH = useRef(null);
+  const [currentHeight, setCurrentHeight] = useState(null);
+
+  const onLayout = useCallback(
+    (event: any) => {
+      const { height } = event.nativeEvent.layout;
+
+      if (initialH.current === null) {
+        initialH.current = height;
+        setCurrentHeight(height); // Always update current height
+      }
+      setCurrentHeight(height); // Always update current height
+    },
+    [initialH]
+  );
 
   return {
     onPressBack,
@@ -115,7 +130,9 @@ export const useAddQuestionFunctions = (props: any) => {
     fontSize,
     handleChangeText,
     handleClearText,
-    keyBoardOn,
-    textInputSelected
+    textInputSelected,
+    initialH,
+    currentHeight,
+    onLayout
   }
 }

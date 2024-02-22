@@ -10,5 +10,7 @@ export interface ScreenProps {
   * @optional
   */
   style?: ViewStyle;
+  onPressBack?: () => void;
+  title?: string;
 }
 

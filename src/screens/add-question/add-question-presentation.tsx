@@ -1,6 +1,6 @@
 import { Screen } from "../../components/screen/screen";
 import { AddQuestionProps } from "./add-question-interface";
-import React, { memo, useEffect, useState } from "react";
+import React, { memo } from "react";
 import {
   View,
   Text,
@@ -43,33 +43,41 @@ export const AddQuestionPresentation = memo(
     fontSize,
     handleChangeText,
     handleClearText,
-    questionText,
-    keyBoardOn,
-    textInputSelected,
+    initialH,
+    currentHeight,
+    onLayout,
   }: AddQuestionProps): JSX.Element => {
     return (
-      <Screen onPressBack={onPressBack} title={"AddQuestion Screen"}>
+      <Screen
+        style={styles.container}
+        onPressBack={onPressBack}
+        title={"AddQuestion Screen"}
+      >
+        <View style={styles.header} onLayout={onLayout}>
+          {currentHeight < initialH.current ? null : (
+            <Text style={styles.text_header}>{"Ask"}</Text>
+          )}
+          <Text
+            style={{
+              ...styles.text_header,
+              paddingTop: 0,
+              fontSize: responsiveFontSize(30),
+              top: responsiveHeight(0),
+            }}
+          >
+            {currentHeight < initialH.current
+              ? "Ask Yes-No Question"
+              : "Yes-No Question"}
+          </Text>
+        </View>
         <KeyboardAvoidingView
-          style={styles.container}
+          style={styles.footer}
           behavior={Platform.OS === "ios" ? "padding" : "height"}
           keyboardVerticalOffset={Platform.OS === "ios" ? 0 : 0}
         >
-          <View style={styles.header}>
-            {<Text style={styles.text_header}>{"Ask"}</Text>}
-            <Text
-              style={{
-                ...styles.text_header,
-                paddingTop: 0,
-                fontSize: responsiveFontSize(30),
-                top: responsiveHeight(0),
-              }}
-            >
-              {"Yes-No Question"}
-            </Text>
-          </View>
           <View style={styles.footer}>
             <ModalToAddOrDeleteQuestion
-              titleText={"Add this Question?"}
+              titleText={"Ask Question?"}
               questionText={text}
               modalToAddOrDeleteQuestionVisible={
                 modalToAddOrDeleteQuestionVisible
@@ -91,10 +99,6 @@ export const AddQuestionPresentation = memo(
                   height: responsiveHeight(40),
                   width: responsiveWidth(90),
                   marginTop: responsiveHeight(6),
-                  // marginBottom: responsiveHeight(6),
-                  // justifyContent: "center",
-                  // alignItems: "center",
-                  // alignContent: "center",
                 }}
               >
                 <TextInput
@@ -119,7 +123,6 @@ export const AddQuestionPresentation = memo(
                     ...fonts.note,
                     color: "white",
                     fontSize: fontSize,
-                    // textAlign: "center",
                   }}
                   autoCapitalize="sentences"
                   onChangeText={handleChangeText}
@@ -128,7 +131,7 @@ export const AddQuestionPresentation = memo(
                   <TouchableOpacity
                     style={{
                       position: "absolute",
-                      top: responsiveHeight(34),
+                      top: responsiveHeight(2),
                       left: responsiveWidth(80),
                     }}
                     onPress={handleClearText}
@@ -149,7 +152,6 @@ export const AddQuestionPresentation = memo(
                     onPress={onPressTrashCan}
                     height={responsiveHeight(8)}
                     color="#52b788"
-                    color2="#52b788"
                   />
                 )}
               </View>

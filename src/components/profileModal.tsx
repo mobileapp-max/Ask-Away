@@ -24,7 +24,6 @@ import {
 import { Ionicons } from "@expo/vector-icons";
 import fonts from "../../scripts/fonts";
 import ModalToAddOrDeleteQuestion from "./modalToAddOrDeleteQuestion";
-import { removeItem } from "../../utils/asyncStorage";
 import { useNavigation } from "@react-navigation/native";
 import { SCREENS } from "../../navigation/screenNames";
 import email from "react-native-email";
@@ -36,17 +35,11 @@ const ProfileModal = ({
   setProfileModalVisible,
 }: {
   children?: any;
-  profileModalVisible: boolean;
-  onPressDismissProfileModal: () => void;
-  setProfileModalVisible: (value: boolean) => void;
+  profileModalVisible?: boolean;
+  onPressDismissProfileModal?: () => void;
+  setProfileModalVisible?: (value: boolean) => void;
 }) => {
   const navigation = useNavigation();
-  const [data, setData] = useState({
-    currentPassword: "",
-    newPassword: "",
-    secureTextEntry1: true,
-    secureTextEntry2: true,
-  });
 
   const [logOutModalVisible, setLogOutModalVisible] = useState(false);
   const [
@@ -59,9 +52,7 @@ const ProfileModal = ({
   const onPressOpenLogOutModal = () => {
     setLogOutModalVisible(!logOutModalVisible);
   };
-  const onPressOpenSupportModal = () => {
-    setModalToAddOrDeleteQuestionVisible(!modalToAddOrDeleteQuestionVisible);
-  };
+
   const onPressOpenDeleteAccountModal = () => {
     setDeleteAccountModalVisible(!deleteAccountModalVisible);
   };
@@ -137,7 +128,6 @@ const ProfileModal = ({
                 <View
                   style={{
                     marginBottom: responsiveHeight(3),
-                    // marginTop: responsiveHeight(3)
                   }}
                 >
                   <Text
@@ -156,7 +146,6 @@ const ProfileModal = ({
                     style={{
                       borderBottomWidth: 1,
                       borderBottomColor: "#fff",
-                      // marginBottom: responsiveHeight(1),
                       paddingBottom: responsiveHeight(0.5),
                     }}
                   />

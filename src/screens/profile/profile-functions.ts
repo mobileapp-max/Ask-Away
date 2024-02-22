@@ -67,7 +67,6 @@ export const useProfileFunctions = (props: any) => {
 
   const { user } = useContext(UserContext);
 
-
   const sumReplies = useMemo(() => {
     const seenQuestionIds = new Set();
     let sum = 0;
